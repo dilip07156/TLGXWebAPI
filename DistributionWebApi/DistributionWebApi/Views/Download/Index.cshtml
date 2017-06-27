@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Downloads";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Static Data Downloads</h1>
+
+
+
+<div class="container">
+
+    <div class="row">
+        <table class="table">
+            <tr>
+                <td class="col-md-7">
+                    <strong>Countries</strong>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()" target="_parent" class="btn btn-default">
+                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>CSV</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_JSON"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>JSON</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_XML"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>XML</strong>
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-7">
+                    <strong>Cities</strong>
+                    @*<div class="input-group">
+                        <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                        <select id="ddlCityByCountry" class="form-control"></select>
+                    </div>*@
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>CSV</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>JSON</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>XML</strong>
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-7">
+                    <div class="input-group">
+                        <label class="control-label input-group-addon"><strong>Hotels By Country</strong></label>
+                        <select id="ddlHotelByCountry" class="form-control"></select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <a href="#" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>CSV</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="#" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>JSON</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="#" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>XML</strong>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+                $.ajax({
+                    url: "@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()",
+                    type: "get",
+                    Accept: "application/json",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    data: {},
+                    success: function (result) {
+                        $('#ddlHotelByCountry').append($('<option></option>').val('').html('-- All --'));
+                        $('#ddlCityByCountry').append($('<option></option>').val('').html('-- All --'));
+                        $.each(result, function (i) {
+                            $('#ddlHotelByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                            $('#ddlCityByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        });
+                        //$("#ddlHotelByCountry").prepend("<option></option>").val('');
+
+                    },
+
+                    failure: function () {
+                        alert("Error");
+                    }
+
+                });
+            });
+    </script>
+}
+

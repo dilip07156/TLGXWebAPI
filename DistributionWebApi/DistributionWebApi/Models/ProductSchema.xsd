@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ProductSchema"
+    targetNamespace="http://tempuri.org/ProductSchema.xsd"
+    elementFormDefault="qualified"
+    attributeFormDefault="qualified"
+    xmlns="http://tempuri.org/ProductSchema.xsd"
+    xmlns:mstns="http://tempuri.org/ProductSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Hotels">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Hotel">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StarRating">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:byte" name="Level" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Address">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="address" />
+                      <xs:attribute type="xs:string" name="city" />
+                      <xs:attribute type="xs:string" name="state" />
+                      <xs:attribute type="xs:string" name="country" />
+                      <xs:attribute type="xs:string" name="pincode" />
+                      <xs:attribute type="xs:string" name="location" />
+                      <xs:attribute type="xs:string" name="phone" />
+                      <xs:attribute type="xs:string" name="fax" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="image" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:anyURI" name="path" use="optional" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="video" />
+              <xs:element name="HotelFacility">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Facility" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="name" use="optional" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="HotelAmenity">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:byte" name="Restaurant" />
+                      <xs:attribute type="xs:byte" name="conference" />
+                      <xs:attribute type="xs:byte" name="fitness" />
+                      <xs:attribute type="xs:byte" name="travel" />
+                      <xs:attribute type="xs:byte" name="forex" />
+                      <xs:attribute type="xs:byte" name="shopping" />
+                      <xs:attribute type="xs:byte" name="banquet" />
+                      <xs:attribute type="xs:byte" name="games" />
+                      <xs:attribute type="xs:byte" name="Bar" />
+                      <xs:attribute type="xs:byte" name="Coffee_Shop" />
+                      <xs:attribute type="xs:byte" name="Room_Service" />
+                      <xs:attribute type="xs:byte" name="Internet_Access" />
+                      <xs:attribute type="xs:byte" name="Business_Centre" />
+                      <xs:attribute type="xs:byte" name="Swimming_Pool" />
+                      <xs:attribute type="xs:byte" name="Pets" />
+                      <xs:attribute type="xs:byte" name="Tennis_Court" />
+                      <xs:attribute type="xs:byte" name="Golf" />
+                      <xs:attribute type="xs:byte" name="Air_Conditioning" />
+                      <xs:attribute type="xs:byte" name="Parking" />
+                      <xs:attribute type="xs:byte" name="Wheel_Chair" />
+                      <xs:attribute type="xs:byte" name="Health_Club" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="HotelDistance">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:float" name="DistancefromAirport" />
+                      <xs:attribute type="xs:string" name="DistancefromStation" />
+                      <xs:attribute type="xs:string" name="DistancefromBus" />
+                      <xs:attribute type="xs:string" name="DistancefromCityCenter" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:int" name="SupplierHotelID" />
+            <xs:attribute type="xs:short" name="HotelId" />
+            <xs:attribute type="xs:string" name="name" />
+            <xs:attribute type="xs:string" name="credicards" />
+            <xs:attribute type="xs:string" name="areatransportation" />
+            <xs:attribute type="xs:string" name="restaurants" />
+            <xs:attribute type="xs:string" name="meetingfacility" />
+            <xs:attribute type="xs:string" name="description" />
+            <xs:attribute type="xs:string" name="highlight" />
+            <xs:attribute type="xs:string" name="overview" />
+            <xs:attribute type="xs:string" name="checkintime" />
+            <xs:attribute type="xs:string" name="checkouttime" />
+            <xs:attribute type="xs:string" name="email" />
+            <xs:attribute type="xs:anyURI" name="website" />
+            <xs:attribute type="xs:float" name="rooms" />
+            <xs:attribute type="xs:string" name="LandmarkCategory" />
+            <xs:attribute type="xs:string" name="Landmark" />
+            <xs:attribute type="xs:string" name="theme" />
+            <xs:attribute type="xs:string" name="HotelChain" />
+            <xs:attribute type="xs:string" name="BrandName" />
+            <xs:attribute type="xs:string" name="recommends" />
+            <xs:attribute type="xs:float" name="latitude" />
+            <xs:attribute type="xs:float" name="longitude" />
+            <xs:attribute type="xs:string" name="LandmarkDescription" />
+            <xs:attribute type="xs:anyURI" name="thumb" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
