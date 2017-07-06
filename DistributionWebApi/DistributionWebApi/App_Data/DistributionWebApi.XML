@@ -755,7 +755,7 @@
             API can handle single / multiple supplier and single / multiple property requests at a time. 
             </summary>
             <param name="RQ"></param>
-            <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result.</returns>
+            <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetBulkProductMappingLite(System.Collections.Generic.List{DistributionWebApi.Models.ProductMappingLite_RQ})">
             <summary>
@@ -763,7 +763,7 @@
             API can handle single / multiple supplier and single / multiple property requests at a time. 
             </summary>
             <param name="RQ"></param>
-            <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result.</returns>
+            <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.SupplierMasterController">
             <summary>

@@ -39,7 +39,7 @@ namespace DistributionWebApi.Controllers
         /// API can handle single / multiple supplier and single / multiple property requests at a time. 
         /// </summary>
         /// <param name="RQ"></param>
-        /// <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result.</returns>
+        /// <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         [HttpPost]
         [Route("ProductMapping")]
         [ResponseType(typeof(List<ProductMapping_RS>))]
@@ -248,7 +248,7 @@ namespace DistributionWebApi.Controllers
         /// API can handle single / multiple supplier and single / multiple property requests at a time. 
         /// </summary>
         /// <param name="RQ"></param>
-        /// <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result.</returns>
+        /// <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         [HttpPost]
         [Route("ProductMappingLite")]
         [ResponseType(typeof(List<ProductMappingLite_RS>))]

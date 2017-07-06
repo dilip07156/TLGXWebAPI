@@ -16,6 +16,7 @@ using Newtonsoft.Json.Converters;
 using System.Web;
 using System.Text;
 using System.Xml.Serialization;
+using NLog.Targets;
 
 namespace DistributionWebApi
 {
@@ -483,6 +484,8 @@ namespace DistributionWebApi
             //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
 
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
+
+            Target.Register("ELK", typeof(DistributionWebApi.App_Start.NLogELKTargetWithProxy));
         }
     }
 }
