@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using System.Collections.Generic;
 
 namespace DistributionWebApi.Models
 {
@@ -463,4 +466,81 @@ namespace DistributionWebApi.Models
         /// </summary>
         public int MapId { get; set; }
     }
+
+    [BsonIgnoreExtraElements]
+    public class ProductMappingLite
+    {
+        [BsonId]
+        public ObjectId _id { get; set; }
+        [BsonElement]
+        public string SupplierCode { get; set; }
+        [BsonElement]
+        public string SupplierProductCode { get; set; }
+        [BsonElement]
+        public int MapId { get; set; }
+        [BsonElement]
+        public string SystemProductCode { get; set; }
+    }
+
+    //public class MyListProductMappingLiteSerializer : SerializerBase<List<ProductMappingLite>>
+    //{
+    //    public override void Serialize(MongoDB.Bson.Serialization.BsonSerializationContext context, MongoDB.Bson.Serialization.BsonSerializationArgs args, List<ProductMappingLite> value)
+    //    {
+    //        context.Writer.WriteStartDocument();
+    //        context.Writer.WriteName("SupplierCode");
+    //        context.Writer.WriteString(value.GetType().);
+    //        context.Writer.WriteName("_t");
+    //        context.Writer.WriteString(value.GetType().Name);
+    //        context.Writer.WriteName("Name");
+    //        context.Writer.WriteString(value.Name);
+    //        context.Writer.WriteEndDocument();
+    //    }
+
+    //    public override List<Animals> Deserialize(MongoDB.Bson.Serialization.BsonDeserializationContext context, MongoDB.Bson.Serialization.BsonDeserializationArgs args)
+    //    {
+    //        context.Reader.ReadStartArray();
+
+    //        List<Animals> result = new List<Animals>();
+
+    //        while (true)
+    //        {
+    //            try
+    //            {
+    //                //this catch block only need to identify the end of the Array
+    //                context.Reader.ReadStartDocument();
+    //            }
+    //            catch (Exception exp)
+    //            {
+    //                context.Reader.ReadEndArray();
+    //                break;
+    //            }
+
+    //            var type = context.Reader.ReadString();
+    //            var _id = context.Reader.ReadObjectId();
+    //            var name = context.Reader.ReadString();
+    //            if (type == "Tiger")
+    //            {
+    //                double tiger_height = context.Reader.ReadDouble();
+    //                result.Add(new Tiger()
+    //                {
+    //                    Id = id,
+    //                    Name = animal_name,
+    //                    Height = tiger_height
+    //                });
+    //            }
+    //            else
+    //            {
+    //                long zebra_stripes = context.Reader.ReadInt64();
+    //                result.Add(return new Zebra()
+    //                {
+    //                    Id = id,
+    //                    Name = animal_name,
+    //                    StripesAmount = zebra_stripes
+    //                });
+    //            }
+    //            context.Reader.ReadEndDocument();
+    //        }
+    //        return result;
+    //    }
+    //}
 }

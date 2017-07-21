@@ -336,6 +336,7 @@
     </None>
     <None Include="Properties\PublishProfiles\DEV_SERVER.pubxml" />
     <None Include="Properties\PublishProfiles\DIST_SVC_UAT.pubxml" />
+    <None Include="Properties\PublishProfiles\TLGX_DEV_DIST_WAPI_CI.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

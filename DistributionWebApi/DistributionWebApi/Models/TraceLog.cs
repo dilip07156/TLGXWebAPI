@@ -22,6 +22,7 @@ namespace DistributionWebApi.Models
         public string TraceId { get; set; }
         public string Application { get; set; }
         public string HostIp { get; set; }
+        //public long? Length { get; set; }
 
     }
 }
