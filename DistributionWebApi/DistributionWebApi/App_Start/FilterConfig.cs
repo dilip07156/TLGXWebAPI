@@ -10,6 +10,7 @@ using System.Web.Http;
 using NLog;
 using System.Net.Http;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace DistributionWebApi
 {
@@ -19,15 +20,14 @@ namespace DistributionWebApi
         private static Logger _logger = LogManager.GetLogger("Trace");
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
+            DateTime RequestDatetime = DateTime.Now;
+
             LogEventInfo request = new LogEventInfo(LogLevel.Trace, "Trace", string.Empty);
             Models.TraceLog nlog = new Models.TraceLog();
-            
 
-            filterContext.Request.Properties[filterContext.ActionDescriptor.ActionName] = Stopwatch.StartNew();
+            filterContext.Request.Properties[filterContext.ActionDescriptor.ActionName] = RequestDatetime;
 
-            Stopwatch stopwatch = (Stopwatch)filterContext.Request.Properties[filterContext.ActionDescriptor.ActionName];
-
-            nlog.LogDate = DateTime.Now;
+            nlog.LogDate = RequestDatetime;
 
             var ctx = filterContext.Request.Properties["MS_HttpContext"] as HttpContextWrapper;
             if (ctx != null)
@@ -47,7 +47,25 @@ namespace DistributionWebApi
             nlog.TraceId = filterContext.Request.GetCorrelationId().ToString();
             nlog.Application = "TLGX_WEBAPI";
             nlog.HostIp = filterContext.Request.RequestUri.Authority;
-            //nlog.Length = filterContext.Request.Content.Headers.ContentLength;
+
+
+            if (nlog.Method.ToUpper() == "POST")
+            {
+                try
+                {
+                    var token = JToken.Parse(nlog.Parameter);
+                    nlog.TotalRecords = token.SelectTokens("$.RQ.[*]").Count();
+                }
+                catch
+                {
+                    nlog.TotalRecords = 0;
+                }
+            }
+            else
+            {
+                nlog.TotalRecords = 0;
+            }
+
 
             request.Message = Newtonsoft.Json.JsonConvert.SerializeObject(nlog);
             _logger.Log(request);
@@ -56,14 +74,13 @@ namespace DistributionWebApi
 
         public override void OnActionExecuted(HttpActionExecutedContext filterContext)
         {
-            Stopwatch stopwatch = (Stopwatch)filterContext.Request.Properties[filterContext.ActionContext.ActionDescriptor.ActionName];
-            stopwatch.Stop();
-            stopwatch = null;
+            DateTime ResponseDatetime = DateTime.Now;
+            DateTime RequestDatetime = (DateTime)filterContext.Request.Properties[filterContext.ActionContext.ActionDescriptor.ActionName];
 
             LogEventInfo request = new LogEventInfo(LogLevel.Trace, "Trace", string.Empty);
             Models.TraceLog nlog = new Models.TraceLog();
 
-            nlog.LogDate = DateTime.Now;
+            nlog.LogDate = ResponseDatetime;
             var ctx = filterContext.Request.Properties["MS_HttpContext"] as HttpContextWrapper;
             if (ctx != null)
             {
@@ -82,9 +99,18 @@ namespace DistributionWebApi
             nlog.TraceId = filterContext.Request.GetCorrelationId().ToString();
             nlog.Application = "TLGX_WEBAPI";
             nlog.HostIp = filterContext.Request.RequestUri.Authority;
+            nlog.TotalRecords = 0;
+            nlog.ResponseTime = (ResponseDatetime - RequestDatetime).Milliseconds;
 
-            
-            //nlog.Length = resContent.
+            try
+            {
+                var token = JToken.Parse(nlog.Parameter);
+                nlog.TotalRecords = token.SelectTokens("$.[*]").Count();
+            }
+            catch
+            {
+                nlog.TotalRecords = 0;
+            }
 
             request.Message = Newtonsoft.Json.JsonConvert.SerializeObject(nlog);
             _logger.Log(request);
