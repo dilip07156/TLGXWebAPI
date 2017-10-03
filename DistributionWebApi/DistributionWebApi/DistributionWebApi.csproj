@@ -265,6 +265,7 @@
     <Compile Include="Controllers\GeographyMasterController.cs" />
     <Compile Include="Controllers\LegacyProductDetailsController.cs" />
     <Compile Include="Controllers\ProductMappingController.cs" />
+    <Compile Include="Controllers\RoomTypeMappingController.cs" />
     <Compile Include="Controllers\SupplierMasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,6 +276,7 @@
     <Compile Include="Models\MappingModels.cs" />
     <Compile Include="Models\MasterModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\RoomTypeMappingModel.cs" />
     <Compile Include="Models\TraceLog.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />

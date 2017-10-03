@@ -765,6 +765,24 @@
             <param name="RQ"></param>
             <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         </member>
+        <member name="T:DistributionWebApi.Controllers.RoomTypeMappingController">
+            <summary>
+            Used to retrieve TLGX Mapping data for Room Type. 
+            </summary>
+        </member>
+        <member name="F:DistributionWebApi.Controllers.RoomTypeMappingController._database">
+            <summary>
+            Mongo database handler
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.RoomTypeMappingController.GetBulkRoomTypeMapping(System.Collections.Generic.List{DistributionWebApi.Models.RoomTypeMapping_RQ})">
+            <summary>
+            Retrieves TLGX Room Type Info for Supplier Code(s), Supplier Hotel Code (s) and Supplier Room Code/Name.
+            API can handle single / multiple supplier and single / multiple property requests at a time. 
+            </summary>
+            <param name="RQ"></param>
+            <returns>Original Mapping request with TLGX Room Info details and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.SupplierMasterController">
             <summary>
             Used to retrieve Master Supplier Data for use in conjunction with all mapping services. TLGX Supplier Codes should always be used when making a mapping request.
