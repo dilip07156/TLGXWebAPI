@@ -23,11 +23,11 @@ namespace DistributionWebApi.App_Start
         public string Host { get; set; }
         public NLogELKTargetWithProxy()
         {
-            this.Host = System.Configuration.ConfigurationManager.AppSettings["elklogindex"];
+            Host = System.Configuration.ConfigurationManager.AppSettings["elklogindex"];
         }
-        protected override void Write(LogEventInfo logEvent)
+        protected async override void Write(LogEventInfo logEvent)
         {
-            SendTheMessageToRemoteHost(this.Host, logEvent.Message);
+            await SendTheMessageToRemoteHost(Host, logEvent.Message);
         }
 
         async Task SendTheMessageToRemoteHost(string host, string message)

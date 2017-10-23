@@ -339,6 +339,7 @@
     </None>
     <None Include="Properties\PublishProfiles\DEV_SERVER.pubxml" />
     <None Include="Properties\PublishProfiles\DIST_SVC_UAT.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalFileSystem.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_DEV_DIST_WAPI_CI.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_PREPROD_DIST_WAPI_CI.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_QAS_DIST_WAPI_CI.pubxml" />
