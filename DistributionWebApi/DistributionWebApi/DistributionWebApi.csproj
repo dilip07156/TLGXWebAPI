@@ -265,16 +265,19 @@
     <Compile Include="Controllers\GeographyMasterController.cs" />
     <Compile Include="Controllers\LegacyProductDetailsController.cs" />
     <Compile Include="Controllers\ProductMappingController.cs" />
+    <Compile Include="Controllers\RoomTypeMappingController.cs" />
     <Compile Include="Controllers\SupplierMasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActivityDefinition.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MappingModels.cs" />
     <Compile Include="Models\MasterModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\RoomTypeMappingModel.cs" />
     <Compile Include="Models\TraceLog.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />
@@ -336,6 +339,7 @@
     </None>
     <None Include="Properties\PublishProfiles\DEV_SERVER.pubxml" />
     <None Include="Properties\PublishProfiles\DIST_SVC_UAT.pubxml" />
+    <None Include="Properties\PublishProfiles\LocalFileSystem.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_DEV_DIST_WAPI_CI.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_PREPROD_DIST_WAPI_CI.pubxml" />
     <None Include="Properties\PublishProfiles\TLGX_QAS_DIST_WAPI_CI.pubxml" />
