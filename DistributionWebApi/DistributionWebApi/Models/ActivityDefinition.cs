@@ -36,7 +36,7 @@ namespace DistributionWebApi.Models.Activity
         //public string Activity_Flavour_Id { get; set; }
 
         [BsonId]
-        public long TLGXActivityCode { get; set; }
+        public int TLGXActivityCode { get; set; }
         public string SupplierCompanyCode { get; set; }
         public string SupplierProductCode { get; set; }
         public string Category { get; set; }
@@ -86,6 +86,7 @@ namespace DistributionWebApi.Models.Activity
         public int PageSize { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPage { get; set; }
+        public string Message { get; set; }
         public List<Activities> Activities { get; set; }
 
     }

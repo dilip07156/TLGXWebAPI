@@ -32,6 +32,16 @@ namespace DistributionWebApi.Controllers
         {
             try
             {
+                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
+                if (param.PageSize == 0)
+                {
+                    resultList.Message = "Page Size should be greater than Zero.";
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                }
+
                 _database = MongoDBHandler.mDatabase();
 
                 //Get System Country Codes from Supplier Codes
@@ -56,11 +66,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
-
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
-
-                resultList.PageSize = param.PageSize;
-
+                
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
                 if (remainder > 0)
@@ -99,8 +105,7 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                          }).ToList();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-                return response;
+                return Request.CreateResponse(HttpStatusCode.OK, resultList);
 
             }
             catch (Exception ex)
@@ -118,6 +123,16 @@ namespace DistributionWebApi.Controllers
         {
             try
             {
+                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
+                if (param.PageSize == 0)
+                {
+                    resultList.Message = "Page Size should be greater than Zero.";
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                }
+
                 _database = MongoDBHandler.mDatabase();
 
                 //Get System City Codes from Supplier Codes
@@ -143,9 +158,6 @@ namespace DistributionWebApi.Controllers
 
                 List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
 
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
-
-                resultList.PageSize = param.PageSize;
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
                 if (remainder > 0)
@@ -184,9 +196,7 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                          }).ToList();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-                return response;
-
+               return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
             catch (Exception ex)
             {
@@ -203,6 +213,16 @@ namespace DistributionWebApi.Controllers
         {
             try
             {
+                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
+                if (param.PageSize == 0)
+                {
+                    resultList.Message = "Page Size should be greater than Zero.";
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                }
+
                 _database = MongoDBHandler.mDatabase();
 
                 //get Activities
@@ -215,10 +235,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
-
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
-
-                resultList.PageSize = param.PageSize;
+                
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
                 if (remainder > 0)
@@ -257,9 +274,7 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                          }).ToList();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-                return response;
-
+                return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
             catch (Exception ex)
             {
@@ -280,7 +295,7 @@ namespace DistributionWebApi.Controllers
         [Route("Details/Code/{Code}")]
         [HttpGet]
         [ResponseType(typeof(ActivityDefinition_PDP))]
-        public async Task<HttpResponseMessage> GetActivityDetailsByCode(long Code)
+        public async Task<HttpResponseMessage> GetActivityDetailsByCode(int Code)
         {
             try
             {

@@ -353,9 +353,9 @@ namespace DistributionWebApi.Controllers
         /// <param name="SystemProductCode"></param>
         /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code sent in request</returns>
         [HttpPost]
-        [Route("TlgxProductMapping")]
+        [Route("TLGX/Product/SystemProductCode/{ProductCode}")]
         [ResponseType(typeof(List<TlgxProductMapping_RS>))]
-        public async Task<HttpResponseMessage> GetAllTlgxProductMapping(string SystemProductCode)
+        public async Task<HttpResponseMessage> GetAllTlgxProductMapping(string ProductCode)
         {
             try
             {
@@ -365,7 +365,7 @@ namespace DistributionWebApi.Controllers
 
                 FilterDefinition<ProductMappingLite> filter;
                 filter = Builders<ProductMappingLite>.Filter.Empty;
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(SystemProductCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(ProductCode, RegexOptions.IgnoreCase)));
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new TlgxProductMapping_RS
