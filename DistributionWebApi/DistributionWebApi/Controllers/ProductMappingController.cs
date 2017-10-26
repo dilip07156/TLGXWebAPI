@@ -346,6 +346,50 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// Retrieves all Hotel Property Code for Supplier Code(s), Supplier Hotel Code (s) for System product code.
+        /// </summary>
+        /// <param name="SystemProductCode"></param>
+        /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code sent in request</returns>
+        [HttpPost]
+        [Route("TlgxProductMapping")]
+        [ResponseType(typeof(List<TlgxProductMapping_RS>))]
+        public async Task<HttpResponseMessage> GetAllTlgxProductMapping(string SystemProductCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+
+                FilterDefinition<ProductMappingLite> filter;
+                filter = Builders<ProductMappingLite>.Filter.Empty;
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(SystemProductCode, RegexOptions.IgnoreCase)));
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new TlgxProductMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierProductCode = x.SupplierProductCode,
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+
+
         //public async Task<HttpResponseMessage> GetBulkProductMappingLite(List<Models.ProductMappingLite_RQ> RQ)
         //{
         //    try

@@ -120,6 +120,47 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Retrieves All Supplier code and Country code for TLGX Country Code
+        /// </summary>
+        /// <param name="CountryCode">TLGX Country Code</param>
+        /// <returns>All TLGX Supplier Country Mapping</returns>
+        [HttpGet]
+        [Route("TLGX/Country/CountryCode/{CountryCode}")]
+        [ResponseType(typeof(TlgxCountryMapping_RS))]
+        public async Task<HttpResponseMessage> GetAllSupplierCountryMappingByCode(string CountryCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+                FilterDefinition<CountryMapping> filter;
+                filter = Builders<CountryMapping>.Filter.Empty;
+
+                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
+
+                var searchResult = await collection.Find(filter)
+                                    .Project(x => new TlgxCountryMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        MapId = x.MapId
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+
         /// <summary>
         /// Retrieves TLGX System Country Code and Name against Supplier country code
         /// </summary>

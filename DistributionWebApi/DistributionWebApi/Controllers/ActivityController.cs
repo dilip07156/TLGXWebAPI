@@ -280,7 +280,7 @@ namespace DistributionWebApi.Controllers
         [Route("Details/Code/{Code}")]
         [HttpGet]
         [ResponseType(typeof(ActivityDefinition_PDP))]
-        public async Task<HttpResponseMessage> GetActivityDetailsByCode(string Code)
+        public async Task<HttpResponseMessage> GetActivityDetailsByCode(long Code)
         {
             try
             {
@@ -291,7 +291,7 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<ActivityDefinition_PDP> filter;
                 filter = Builders<ActivityDefinition_PDP>.Filter.Empty;
 
-                filter = filter & Builders<ActivityDefinition_PDP>.Filter.Eq(x => x.Activity_Flavour_Id, Code);
+                filter = filter & Builders<ActivityDefinition_PDP>.Filter.Eq(x => x.TLGXActivityCode, Code);
 
                 var searchResult = collectionActivity.Find(filter).FirstOrDefaultAsync();
 
