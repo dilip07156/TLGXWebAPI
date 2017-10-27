@@ -36,6 +36,7 @@ namespace DistributionWebApi.Models.Activity
         //public string Activity_Flavour_Id { get; set; }
 
         [BsonId]
+        [Newtonsoft.Json.JsonProperty("_id")]
         public int TLGXActivityCode { get; set; }
         public string SupplierCompanyCode { get; set; }
         public string SupplierProductCode { get; set; }
