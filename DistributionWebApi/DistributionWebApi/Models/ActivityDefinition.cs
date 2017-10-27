@@ -141,6 +141,7 @@ namespace DistributionWebApi.Models.Activity
     public class Media
     {
         public string MediaType { get; set; }
+        public string MediaSubType { get; set; }
         public string FullUrl { get; set; }
         public string ThumbUrl { get; set; }
         public string SortOrder { get; set; }
