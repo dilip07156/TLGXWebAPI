@@ -68,7 +68,7 @@ namespace DistributionWebApi.Controllers
         [HttpGet]
         [Route("TLGX/City/CityCode/{CityCode}")]
         [ResponseType(typeof(TlgxCityMapping_RS))]
-        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CityCode)
+        public async Task<HttpResponseMessage> GetAllSupplierCityMappingByCode(string CityCode)
         {
             try
             {

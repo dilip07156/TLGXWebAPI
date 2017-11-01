@@ -348,14 +348,14 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves all Hotel Property Code for Supplier Code(s), Supplier Hotel Code (s) for System product code.
+        /// Retrieves all Supplier Hotel Code for System product code.
         /// </summary>
-        /// <param name="SystemProductCode"></param>
-        /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code sent in request</returns>
+        /// <param name="ProductCode"></param>
+        /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code which is sent in request</returns>
         [HttpPost]
-        [Route("TLGX/Product/SystemProductCode/{ProductCode}")]
+        [Route("TLGX/Product/ProductCode/{ProductCode}")]
         [ResponseType(typeof(List<TlgxProductMapping_RS>))]
-        public async Task<HttpResponseMessage> GetAllTlgxProductMapping(string ProductCode)
+        public async Task<HttpResponseMessage> GetAllSupplierProductMappingByCode(string ProductCode)
         {
             try
             {
@@ -387,9 +387,7 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
-
-
-
+        
         //public async Task<HttpResponseMessage> GetBulkProductMappingLite(List<Models.ProductMappingLite_RQ> RQ)
         //{
         //    try
