@@ -59,6 +59,46 @@ namespace DistributionWebApi.Controllers
             return await GetCityMapping(string.Empty, CountryCode, CityName, string.Empty, string.Empty, SupplierCode, string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
+
+        /// <summary>
+        /// Retrieves All Supplier City Mapping for TLGX City Code
+        /// </summary>
+        /// <param name="CityCode">TLGX City Code</param>
+        /// <returns>All TLGX Supplier City Mapping</returns>
+        [HttpGet]
+        [Route("TLGX/City/CityCode/{CityCode}")]
+        [ResponseType(typeof(TlgxCityMapping_RS))]
+        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CityCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<CityMapping>("CityMapping");
+                FilterDefinition<CityMapping> filter;
+                filter = Builders<CityMapping>.Filter.Empty;
+
+                filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode, RegexOptions.IgnoreCase)));
+
+                var searchResult = await collection.Find(filter)
+                                    .Project(x => new TlgxCityMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
         /// <summary>
         /// Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Code
         /// </summary>

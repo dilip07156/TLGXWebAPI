@@ -537,6 +537,13 @@
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>TLGX Supplier City Mapping</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSupplierCityMappingByCode(System.String)">
+            <summary>
+            Retrieves All Supplier City Mapping for TLGX City Code
+            </summary>
+            <param name="CityCode">TLGX City Code</param>
+            <returns>All TLGX Supplier City Mapping</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSystemCityMappingByCode(System.String,System.String,System.String)">
             <summary>
             Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Code
@@ -603,6 +610,13 @@
             <param name="CountryCode">TLGX Country Code</param>
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>TLGX Supplier Country Mapping</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetAllSupplierCountryMappingByCode(System.String)">
+            <summary>
+            Retrieves All Supplier code and Country code for TLGX Country Code
+            </summary>
+            <param name="CountryCode">TLGX Country Code</param>
+            <returns>All TLGX Supplier Country Mapping</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetSystemCountryMappingByCode(System.String,System.String)">
             <summary>
@@ -765,6 +779,13 @@
             <param name="RQ"></param>
             <returns>Original Mapping request with TLGX Hotel Code and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetAllTlgxProductMapping(System.String)">
+            <summary>
+            Retrieves all Hotel Property Code for Supplier Code(s), Supplier Hotel Code (s) for System product code.
+            </summary>
+            <param name="SystemProductCode"></param>
+            <returns>A list of Supplier Code and Supplier Product code mapped to System product code sent in request</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.RoomTypeMappingController">
             <summary>
             Used to retrieve TLGX Mapping data for Room Type. 
@@ -913,6 +934,21 @@
             TLGX Mapping Id
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.SupplierCode">
+            <summary>
+            TLGX Supplier Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.SupplierCountryCode">
+            <summary>
+            Supplier-specific Country Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.MapId">
+            <summary>
+            TLGX Mapping Id
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.CityMapping_RS">
             <summary>
             TLGX City Mapping Response. This universal format is used for both mapping and reverse mapping against TLGX / Supplier specific cities.
@@ -971,6 +1007,21 @@
         <member name="P:DistributionWebApi.Models.CityMapping_RS.MapId">
             <summary>
             TLGX Supplier City Mapping Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.SupplierCode">
+            <summary>
+            TLGX Supplier Code. This field should always be defined.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.SupplierCityCode">
+            <summary>
+            Supplier-specific City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.MapId">
+            <summary>
+            TLGX Mapping Id
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.CrossSupplierCityMapping_RQ">
@@ -1166,6 +1217,21 @@
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.MapId">
+            <summary>
+            TLGX Mapping Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.SupplierCode">
+            <summary>
+            Original value submitted in Request
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.SupplierProductCode">
+            <summary>
+            Original value submitted in Request
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.MapId">
             <summary>
             TLGX Mapping Id
             </summary>

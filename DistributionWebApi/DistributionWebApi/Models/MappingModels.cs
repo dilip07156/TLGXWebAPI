@@ -119,6 +119,22 @@ namespace DistributionWebApi.Models
 
     }
 
+    public class TlgxCountryMapping_RS
+    {
+        /// <summary>
+        /// TLGX Supplier Code
+        /// </summary>
+        public string SupplierCode { get; set; }
+        /// <summary>
+        /// Supplier-specific Country Code
+        /// </summary>
+        public string SupplierCountryCode { get; set; }
+        /// <summary>
+        /// TLGX Mapping Id
+        /// </summary>
+        public int MapId { get; set; }
+    }
+
     public class CityMapping
     {
         public ObjectId Id { get; set; }
@@ -184,6 +200,22 @@ namespace DistributionWebApi.Models
         public string SupplierCityCode { get; set; }
         /// <summary>
         /// TLGX Supplier City Mapping Id
+        /// </summary>
+        public int MapId { get; set; }
+    }
+
+    public class TlgxCityMapping_RS
+    {
+        /// <summary>
+        /// TLGX Supplier Code. This field should always be defined.
+        /// </summary>
+        public string SupplierCode { get; set; }
+        /// <summary>
+        /// Supplier-specific City Name
+        /// </summary>
+        public string SupplierCityCode { get; set; }
+        /// <summary>
+        /// TLGX Mapping Id
         /// </summary>
         public int MapId { get; set; }
     }
@@ -390,6 +422,22 @@ namespace DistributionWebApi.Models
         /// Values should be "Mapped" to indicate a successful Product Mapping, "No results found" for unsuccessful Product Mapping 
         /// </summary>
         public string Status { get; set; }
+        /// <summary>
+        /// TLGX Mapping Id
+        /// </summary>
+        public int MapId { get; set; }
+    }
+
+    public class TlgxProductMapping_RS
+    {
+        /// <summary>
+        /// Original value submitted in Request
+        /// </summary>
+        public string SupplierCode { get; set; }
+        /// <summary>
+        /// Original value submitted in Request
+        /// </summary>
+        public string SupplierProductCode { get; set; }
         /// <summary>
         /// TLGX Mapping Id
         /// </summary>
