@@ -1,13 +1,43 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DistributionWebApi.Models
+namespace DistributionWebApi.Models.Activity
 {
-    public class ActivityDefinition
+    public class ActivitySearchByCountry_RQ
     {
-        public string TLGXActivityCode { get; set; }
+        public int PageSize { get; set; }
+        public int PageNo { get; set; }
+        public string RequestingSupplierCode { get; set; }
+        public string[] CountryCodes { get; set; }
+    }
+
+    public class ActivitySearchByCity_RQ
+    {
+        public int PageSize { get; set; }
+        public int PageNo { get; set; }
+        public string RequestingSupplierCode { get; set; }
+        public string[] CityCodes { get; set; }
+    }
+
+    public class ActivitySearchByTypes_RQ
+    {
+        public int PageSize { get; set; }
+        public int PageNo { get; set; }
+        public string RequestingSupplierCode { get; set; }
+        public string[] ActivityTypes { get; set; }
+    }
+
+    public class ActivityDefinition_PDP
+    {
+
+        //public string Activity_Flavour_Id { get; set; }
+
+        [BsonId]
+        [Newtonsoft.Json.JsonProperty("_id")]
+        public int TLGXActivityCode { get; set; }
         public string SupplierCompanyCode { get; set; }
         public string SupplierProductCode { get; set; }
         public string Category { get; set; }
@@ -18,6 +48,8 @@ namespace DistributionWebApi.Models
         public string Session { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public string DeparturePoint { get; set; }
+        public string ReturnDetails { get; set; }
         public string DaysOfTheWeek { get; set; }
         public string PhysicalIntensity { get; set; }
         public string Overview { get; set; }
@@ -27,17 +59,15 @@ namespace DistributionWebApi.Models
         public string CityName { get; set; }
         public string CityCode { get; set; }
         public string StarRating { get; set; }
-        public int NumberOfPassengers { get; set; }
-        public int NumberOfReviews { get; set; }
-        public int NumberOfLikes { get; set; }
-        public int NumberOfViews { get; set; }
+        public string NumberOfPassengers { get; set; }
+        public string NumberOfReviews { get; set; }
+        public string NumberOfLikes { get; set; }
+        public string NumberOfViews { get; set; }
         public string[] ActivityInterests { get; set; }
-        
+        public List<Inclusions> Inclusions { get; set; }
+        public List<Exclusions> Exclusions { get; set; }
         public string[] Highlights { get; set; }
         public string[] TermsAndConditions { get; set; }
-
-        public List<Inclusions> Inclusions { get; set; }
-        public List<Inclusions> Exclusions { get; set; }
         public List<ImportantInfoAndBookingPolicies> BookingPolicies { get; set; }
         public List<Media> ActivityMedia { get; set; }
         public ActivityDuration Duration { get; set; }
@@ -51,10 +81,58 @@ namespace DistributionWebApi.Models
         public List<Deals> Deals { get; set; }
         public List<Prices> Prices { get; set; }
         public SystemMapping SystemMapping { get; set; }
-        public List<SupplierAttributes> SupplierAttributes { get; set; }
+    }
+
+    public class ActivityDefinition_SRP
+    {
+        public long TotalNumberOfActivities { get; set; }
+        public int PageSize { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPage { get; set; }
+        public string Message { get; set; }
+        public List<Activities> Activities { get; set; }
+
+    }
+
+    public class Activities
+    {
+        public long TLGXActivityCode { get; set; }
+        public string SupplierCompanyCode { get; set; }
+        public string SupplierProductCode { get; set; }
+        public string Category { get; set; }
+        public string Type { get; set; }
+        public string SubType { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Session { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public string DeparturePoint { get; set; }
+        public string ReturnDetails { get; set; }
+        public string DaysOfTheWeek { get; set; }
+        public string PhysicalIntensity { get; set; }
+        public string Overview { get; set; }
+        public string Recommended { get; set; }
+        public string CountryName { get; set; }
+        public string CountryCode { get; set; }
+        public string CityName { get; set; }
+        public string CityCode { get; set; }
+        public string StarRating { get; set; }
+        public string NumberOfReviews { get; set; }
+        public string NumberOfLikes { get; set; }
+        public string NumberOfViews { get; set; }
+        public List<Media> ActivityMedia { get; set; }
+        public ActivityDuration Duration { get; set; }
+        public List<SimliarProducts> SimliarProducts { get; set; }
     }
 
     public class Inclusions
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class Exclusions
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -69,6 +147,7 @@ namespace DistributionWebApi.Models
     public class Media
     {
         public string MediaType { get; set; }
+        public string MediaSubType { get; set; }
         public string FullUrl { get; set; }
         public string ThumbUrl { get; set; }
         public string SortOrder { get; set; }
@@ -90,23 +169,24 @@ namespace DistributionWebApi.Models
     {
         public string Source { get; set; }
         public string Type { get; set; }
-        public double Score { get; set; }
+        public decimal? Score { get; set; }
     }
 
     public class CustomerReviews
     {
         public string Source { get; set; }
         public string Type { get; set; }
-        public double Score { get; set; }
+        public decimal? Score { get; set; }
         public string Author { get; set; }
         public string Date { get; set; }
+        public string Title { get; set; }
         public string Comment { get; set; }
     }
 
     public class ActivityLocation
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
         public string Address { get; set; }
         public string Location { get; set; }
         public string Area { get; set; }
@@ -143,11 +223,12 @@ namespace DistributionWebApi.Models
 
     public class SimliarProducts
     {
-        public string TLGXActivityCode { get; set; }
+        public string TLGXActivityOptionCode { get; set; }
+        public string OptionCode { get; set; }
         public string DealText { get; set; }
-        public string[] Options { get; set; }
-        public string[] ActivityTypes { get; set; }
-        public List<Prices> TotalNetPrice { get; set; }
+        public string Options { get; set; }
+        public string ActivityType { get; set; }
+        public string TotalNetPrice { get; set; }
 
     }
 
@@ -160,7 +241,7 @@ namespace DistributionWebApi.Models
 
     public class Deals
     {
-        public decimal DealPrice { get; set; }
+        public decimal? DealPrice { get; set; }
         public string Currency { get; set; }
         public string DealText { get; set; }
         public string OfferTermsAndConditions { get; set; }
@@ -170,7 +251,8 @@ namespace DistributionWebApi.Models
     public class Prices
     {
         public string SupplierCurrency { get; set; }
-        public decimal NetPrice { get; set; }
+        public decimal? Price { get; set; }
+        public string PriceType { get; set; }
         public string PriceBasis { get; set; }
         public string PriceId { get; set; }
     }
@@ -179,13 +261,5 @@ namespace DistributionWebApi.Models
     {
         public string SystemName { get; set; }
         public string SystemID { get; set; }
-    }
-
-    public class SupplierAttributes
-    {
-        public string Group { get; set; }
-        public string Key { get; set; }
-        public string Value { get; set; }
-        public string Supplier { get; set; }
     }
 }
