@@ -103,6 +103,9 @@ namespace DistributionWebApi.Controllers
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
                                              Duration = a.Duration,
+                                             DeparturePoint = a.DeparturePoint,
+                                             ReturnDetails = a.ReturnDetails,
+                                             SimliarProducts = a.SimliarProducts
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -194,6 +197,9 @@ namespace DistributionWebApi.Controllers
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
                                              Duration = a.Duration,
+                                             DeparturePoint = a.DeparturePoint,
+                                             ReturnDetails = a.ReturnDetails,
+                                             SimliarProducts = a.SimliarProducts
                                          }).ToList();
 
                return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -272,6 +278,9 @@ namespace DistributionWebApi.Controllers
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
                                              Duration = a.Duration,
+                                             DeparturePoint = a.DeparturePoint,
+                                             ReturnDetails = a.ReturnDetails,
+                                             SimliarProducts = a.SimliarProducts
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -287,6 +296,7 @@ namespace DistributionWebApi.Controllers
         [Route("ByFacets")]
         [HttpPost]
         [ResponseType(typeof(void))]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<HttpResponseMessage> GetActivityByFacets(string[] param)
         {
             throw new NotImplementedException();

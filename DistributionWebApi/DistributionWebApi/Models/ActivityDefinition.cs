@@ -48,6 +48,8 @@ namespace DistributionWebApi.Models.Activity
         public string Session { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public string DeparturePoint { get; set; }
+        public string ReturnDetails { get; set; }
         public string DaysOfTheWeek { get; set; }
         public string PhysicalIntensity { get; set; }
         public string Overview { get; set; }
@@ -105,6 +107,8 @@ namespace DistributionWebApi.Models.Activity
         public string Session { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
+        public string DeparturePoint { get; set; }
+        public string ReturnDetails { get; set; }
         public string DaysOfTheWeek { get; set; }
         public string PhysicalIntensity { get; set; }
         public string Overview { get; set; }
@@ -119,6 +123,7 @@ namespace DistributionWebApi.Models.Activity
         public string NumberOfViews { get; set; }
         public List<Media> ActivityMedia { get; set; }
         public ActivityDuration Duration { get; set; }
+        public List<SimliarProducts> SimliarProducts { get; set; }
     }
 
     public class Inclusions
@@ -218,7 +223,8 @@ namespace DistributionWebApi.Models.Activity
 
     public class SimliarProducts
     {
-        public string TLGXActivityCode { get; set; }
+        public string TLGXActivityOptionCode { get; set; }
+        public string OptionCode { get; set; }
         public string DealText { get; set; }
         public string Options { get; set; }
         public string ActivityType { get; set; }
@@ -245,7 +251,8 @@ namespace DistributionWebApi.Models.Activity
     public class Prices
     {
         public string SupplierCurrency { get; set; }
-        public decimal? NetPrice { get; set; }
+        public decimal? Price { get; set; }
+        public string PriceType { get; set; }
         public string PriceBasis { get; set; }
         public string PriceId { get; set; }
     }
