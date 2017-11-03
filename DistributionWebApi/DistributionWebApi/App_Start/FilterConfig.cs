@@ -92,7 +92,7 @@ namespace DistributionWebApi
             nlog.URL = filterContext.Request.RequestUri.OriginalString;
             nlog.Controller = filterContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerType.FullName;
             nlog.Action = ((System.Web.Http.Controllers.ReflectedHttpActionDescriptor)filterContext.ActionContext.ActionDescriptor).ActionName;
-            //nlog.Parameter = Newtonsoft.Json.JsonConvert.SerializeObject(((System.Net.Http.ObjectContent)filterContext.Response.Content).Value);
+            nlog.Parameter = Newtonsoft.Json.JsonConvert.SerializeObject(((System.Net.Http.ObjectContent)filterContext.Response.Content).Value);
             nlog.MessageType = "Response";
             nlog.Username = string.Empty;
             nlog.Token = filterContext.Request.Headers.Contains("Token") ? filterContext.Request.Headers.GetValues("Token").FirstOrDefault() : string.Empty;
