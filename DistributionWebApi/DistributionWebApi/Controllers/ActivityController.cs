@@ -17,22 +17,34 @@ using System.Web.Http.Description;
 
 namespace DistributionWebApi.Controllers
 {
-    [RoutePrefix("Activity/Get")]
-    public class ActivityController : ApiController
+    /// <summary>
+    /// Contains a collection of APIs to allow the search and dislay of a range of Activity Supplier Static Data. Each individual Suppliers' static data has been
+    /// standardised into the formats contained within the API. In addition to the Standardisation of the Format of the Data, the Content of the data is also Standardised 
+    /// against a range of Classification attributes.
+    /// </summary>
+    [RoutePrefix("ActivityMapping/Get")]
+    public class ActivityMappingController : ApiController
     {
 
         protected static IMongoDatabase _database;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-
+        /// <summary>
+        /// Retrieves a Search Result List of based on a Collection of Country Ids combined with a System Code. The Country ID should be the calling system's Code 
+        /// as the mapping to Activity Destination is handled by the API
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
+        /// by using the GetActivityDefinition Service
+        /// </returns>
         [Route("ByCountries")]
         [HttpPost]
-        [ResponseType(typeof(ActivityDefinition_SRP))]
+        [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByCountries(ActivitySearchByCountry_RQ param)
         {
             try
             {
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+                ActivitySearchResult resultList = new ActivitySearchResult();
 
                 resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
@@ -65,7 +77,7 @@ namespace DistributionWebApi.Controllers
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
-                List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
+                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
                 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
@@ -76,9 +88,9 @@ namespace DistributionWebApi.Controllers
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
-                                         select new Activities
+                                         select new Activity
                                          {
-                                             TLGXActivityCode = a.TLGXActivityCode,
+                                             ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
                                              Category = a.Category,
@@ -119,14 +131,22 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves a Search Result List of based on a Collection of City Ids combined with a System Code.   The City ID should be the calling system's Code 
+        /// as the mapping to Activity Destination is handled by the API
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
+        /// by using the GetActivityDefinition Service
+        /// </returns>
         [Route("ByCities")]
         [HttpPost]
-        [ResponseType(typeof(ActivityDefinition_SRP))]
+        [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByCities(ActivitySearchByCity_RQ param)
         {
             try
             {
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+                ActivitySearchResult resultList = new ActivitySearchResult();
 
                 resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
@@ -159,7 +179,7 @@ namespace DistributionWebApi.Controllers
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
-                List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
+                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
@@ -170,9 +190,9 @@ namespace DistributionWebApi.Controllers
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
-                                         select new Activities
+                                         select new Activity
                                          {
-                                             TLGXActivityCode = a.TLGXActivityCode,
+                                             ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
                                              Category = a.Category,
@@ -212,14 +232,21 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves a Search Result List of based on a Collection of Activity Classifications Ids combined with a System Code.   The classification types can be retrieved using the GetClassificationAttributeStructureService
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
+        /// by using the GetActivityDefinition Service
+        /// </returns>
         [Route("ByTypes")]
         [HttpPost]
-        [ResponseType(typeof(ActivityDefinition_SRP))]
+        [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByActivityTypes(ActivitySearchByTypes_RQ param)
         {
             try
             {
-                ActivityDefinition_SRP resultList = new ActivityDefinition_SRP();
+                ActivitySearchResult resultList = new ActivitySearchResult();
 
                 resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
@@ -240,7 +267,7 @@ namespace DistributionWebApi.Controllers
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
-                List<ActivityDefinition_PDP> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition_PDP>>(searchResult.ToJson());
+                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
                 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
@@ -251,9 +278,9 @@ namespace DistributionWebApi.Controllers
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
-                                         select new Activities
+                                         select new Activity
                                          {
-                                             TLGXActivityCode = a.TLGXActivityCode,
+                                             ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
                                              Category = a.Category,
@@ -293,30 +320,44 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This will be included in Second Release
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         [Route("ByFacets")]
         [HttpPost]
         [ResponseType(typeof(void))]
-        [ApiExplorerSettings(IgnoreApi = true)]
+        [ApiExplorerSettings(IgnoreApi = false)]
         public async Task<HttpResponseMessage> GetActivityByFacets(string[] param)
         {
             throw new NotImplementedException();
         }
 
+
+        /// <summary>
+        /// Retrieves the Full Activity Product Static Definition based on the MappingSystemCode returned in the GetActivity Search services
+        /// </summary>
+        /// <param name="Code">Mapping System Activity Code</param>
+        /// <returns>Full Activity Static Data Definition for use on a Product Detail Page. 
+        /// The data is constructed of Supplier static data and the quality may vary dependent on the information provided by the Supplier. 
+        /// Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
+        /// Realtime when calling this Service as additional information may be returned then.</returns>
         [Route("Details/Code/{Code}")]
         [HttpGet]
-        [ResponseType(typeof(ActivityDefinition_PDP))]
+        [ResponseType(typeof(ActivityDefinition))]
         public async Task<HttpResponseMessage> GetActivityDetailsByCode(int Code)
         {
             try
             {
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ActivityDefinition_PDP> collectionActivity = _database.GetCollection<ActivityDefinition_PDP>("ActivityDefinitions");
+                IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
 
-                FilterDefinition<ActivityDefinition_PDP> filter;
-                filter = Builders<ActivityDefinition_PDP>.Filter.Empty;
+                FilterDefinition<ActivityDefinition> filter;
+                filter = Builders<ActivityDefinition>.Filter.Empty;
 
-                filter = filter & Builders<ActivityDefinition_PDP>.Filter.Eq(x => x.TLGXActivityCode, Code);
+                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SystemActivityCode, Code);
 
                 var searchResult = collectionActivity.Find(filter).FirstOrDefaultAsync();
 
