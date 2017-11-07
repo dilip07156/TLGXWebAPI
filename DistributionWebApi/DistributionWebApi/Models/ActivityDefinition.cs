@@ -427,6 +427,10 @@ namespace DistributionWebApi.Models.Activity
         /// A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
         /// </summary>
         public List<SimliarProducts> SimliarProducts { get; set; }
+        /// <summary>
+        /// A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
+        /// </summary>
+        public List<Prices> Prices { get; set; }
     }
 
     /// <summary>

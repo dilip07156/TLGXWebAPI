@@ -640,7 +640,7 @@
         </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
-            Used to retrieve TLGX Mapping data for specific Country and Supplier pairs. 
+            Used to retrieve Supplier Country Mapping Data. 
             </summary>
         </member>
         <member name="F:DistributionWebApi.Controllers.CountryMappingController._database">
@@ -650,46 +650,47 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetSupplierCountryMappingByName(System.String,System.String)">
             <summary>
-            Retrieves Supplier Country Mapping for TLGX Country Name and Supplier Name
+            Retrieves Supplier Country Mapping for Mapping System Country Name and Supplier System Name.
             </summary>
-            <param name="CountryName">TLGX Country Name</param>
-            <param name="SupplierName">TLGX Supplier Name</param>
-            <returns>TLGX Supplier Country Mapping</returns>
+            <param name="CountryName">Mapping System Country Name</param>
+            <param name="SupplierName">Supplier System Name</param>
+            <returns>Supplier Country Mapping for System Country Name</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetSupplierCountryMappingByCode(System.String,System.String)">
             <summary>
-            Retrieves Supplier Country Master for TLGX Country Code
+            Retrieves Supplier Country Mapping for using Mapping System Country Code
             </summary>
-            <param name="CountryCode">TLGX Country Code</param>
-            <param name="SupplierCode">TLGX Supplier Code</param>
-            <returns>TLGX Supplier Country Mapping</returns>
+            <param name="CountryCode">Mapping System Country Code</param>
+            <param name="SupplierCode">Mapping System End Supplier Code</param>
+            <returns>Mapping System Supplier Country Mapping for Supplier Country Code</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetAllSupplierCountryMappingByCode(System.String)">
             <summary>
-            Retrieves All Supplier code and Country code for TLGX Country Code
+            Retrieves All Supplier Countries mapped in the Mapping System for a specific Mapping System Country
             </summary>
-            <param name="CountryCode">TLGX Country Code</param>
-            <returns>All TLGX Supplier Country Mapping</returns>
+            <param name="CountryCode">Mapping System Country Code</param>
+            <returns>All Supplier Country Mapping</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetSystemCountryMappingByCode(System.String,System.String)">
             <summary>
-            Retrieves TLGX System Country Code and Name against Supplier country code
+            Retrieves Mapping System Country Code and Name for Supplier using Country Code
             </summary>
             <param name="CountryCode">Supplier-specific Country Code</param>
-            <param name="SupplierCode">TLGX Supplier Code</param>
+            <param name="SupplierCode">Mapping System Supplier System Code</param>
             <returns>TLGX Country Master</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetSystemCountryMappingByName(System.String,System.String)">
             <summary>
-            Retrieves TLGX System Country Code and Name against Supplier Country Name and Supplier Name
+            Retrieves Mapping System Country Code and Name using Supplier Country Name
             </summary>
             <param name="CountryName">Supplier-specific Country Name</param>
-            <param name="SupplierName">TLGX Supplier Name</param>
+            <param name="SupplierName">Mapping System Supplier Name</param>
             <returns>TLGX Country Master</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CountryMappingController.GetCrossSupplierCountryMapping(System.Collections.Generic.List{DistributionWebApi.Models.CrossSupplierCountryMapping_RQ})">
             <summary>
-            Retrieves Country Mapping for a Supplier against a specific supplier
+            Retrieves cross-supplier and system mapping for Country. 
+            This would be used where you would want to convert a GTA Country into a Hotel Beds Country
             </summary>
             <param name="RQ"></param>
             <returns>Target supplier Country Name and Country Code</returns>
@@ -1377,6 +1378,11 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.SimliarProducts">
             <summary>
             A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.Prices">
+            <summary>
+            A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.Inclusions">
