@@ -1727,11 +1727,6 @@
             The Type of the Activity Option
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.TotalNetPrice">
-            <summary>
-            The Total NET PRICE for the activity Option
-            </summary>
-        </member>
         <member name="T:DistributionWebApi.Models.Activity.ClassificationAttrributes">
             <summary>
             This will contain all classification attribute of Sub Type INTERNAL.
@@ -1793,6 +1788,16 @@
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceId">
             <summary>
             The End Supplier Price Code 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.OptionCode">
+            <summary>
+            If it is the Option code for Similar Products
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PriceFor">
+            <summary>
+            Whether the price is for Product or Option (Similar Product)
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">

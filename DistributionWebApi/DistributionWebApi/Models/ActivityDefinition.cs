@@ -741,11 +741,6 @@ namespace DistributionWebApi.Models.Activity
         /// The Type of the Activity Option
         /// </summary>
         public string ActivityType { get; set; }
-        /// <summary>
-        /// The Total NET PRICE for the activity Option
-        /// </summary>
-        public string TotalNetPrice { get; set; }
-
     }
 
     /// <summary>
@@ -812,6 +807,14 @@ namespace DistributionWebApi.Models.Activity
         /// The End Supplier Price Code 
         /// </summary>
         public string PriceId { get; set; }
+        /// <summary>
+        /// If it is the Option code for Similar Products
+        /// </summary>
+        public string OptionCode { get; set; }
+        /// <summary>
+        /// Whether the price is for Product or Option (Similar Product)
+        /// </summary>
+        public string PriceFor { get; set; }
     }
 
     /// <summary>
