@@ -427,6 +427,10 @@ namespace DistributionWebApi.Models.Activity
         /// A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
         /// </summary>
         public List<SimliarProducts> SimliarProducts { get; set; }
+        /// <summary>
+        /// A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
+        /// </summary>
+        public List<Prices> Prices { get; set; }
     }
 
     /// <summary>
@@ -737,11 +741,6 @@ namespace DistributionWebApi.Models.Activity
         /// The Type of the Activity Option
         /// </summary>
         public string ActivityType { get; set; }
-        /// <summary>
-        /// The Total NET PRICE for the activity Option
-        /// </summary>
-        public string TotalNetPrice { get; set; }
-
     }
 
     /// <summary>
@@ -808,6 +807,14 @@ namespace DistributionWebApi.Models.Activity
         /// The End Supplier Price Code 
         /// </summary>
         public string PriceId { get; set; }
+        /// <summary>
+        /// If it is the Option code for Similar Products
+        /// </summary>
+        public string OptionCode { get; set; }
+        /// <summary>
+        /// Whether the price is for Product or Option (Similar Product)
+        /// </summary>
+        public string PriceFor { get; set; }
     }
 
     /// <summary>
