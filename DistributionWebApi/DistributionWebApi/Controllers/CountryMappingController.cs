@@ -18,7 +18,7 @@ using System.Web.Http.Description;
 namespace DistributionWebApi.Controllers
 {
     /// <summary>
-    /// Used to retrieve TLGX Mapping data for specific Country and Supplier pairs. 
+    /// Used to retrieve Supplier Country Mapping Data. 
     /// </summary>
 
     [RoutePrefix("Mapping")]
@@ -30,13 +30,13 @@ namespace DistributionWebApi.Controllers
         protected static IMongoDatabase _database;
 
         /// <summary>
-        /// Retrieves Supplier Country Mapping for TLGX Country Name and Supplier Name
+        /// Retrieves Supplier Country Mapping for Mapping System Country Name and Supplier System Name.
         /// </summary>
-        /// <param name="CountryName">TLGX Country Name</param>
-        /// <param name="SupplierName">TLGX Supplier Name</param>
-        /// <returns>TLGX Supplier Country Mapping</returns>
+        /// <param name="CountryName">Mapping System Country Name</param>
+        /// <param name="SupplierName">Supplier System Name</param>
+        /// <returns>Supplier Country Mapping for System Country Name</returns>
         [HttpGet]
-        [Route("TLGX/Country/CountryName/{CountryName}/SupplierName/{SupplierName}")]
+        [Route("System/Country/CountryName/{CountryName}/SupplierName/{SupplierName}")]
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSupplierCountryMappingByName(string CountryName, string SupplierName)
         {
@@ -76,13 +76,13 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves Supplier Country Master for TLGX Country Code
+        /// Retrieves Supplier Country Mapping for using Mapping System Country Code
         /// </summary>
-        /// <param name="CountryCode">TLGX Country Code</param>
-        /// <param name="SupplierCode">TLGX Supplier Code</param>
-        /// <returns>TLGX Supplier Country Mapping</returns>
+        /// <param name="CountryCode">Mapping System Country Code</param>
+        /// <param name="SupplierCode">Mapping System End Supplier Code</param>
+        /// <returns>Mapping System Supplier Country Mapping for Supplier Country Code</returns>
         [HttpGet]
-        [Route("TLGX/Country/CountryCode/{CountryCode}/SupplierCode/{SupplierCode}")]
+        [Route("System/Country/CountryCode/{CountryCode}/SupplierCode/{SupplierCode}")]
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSupplierCountryMappingByCode(string CountryCode, string SupplierCode)
         {
@@ -122,12 +122,12 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// Retrieves All Supplier code and Country code for TLGX Country Code
+        /// Retrieves All Supplier Countries mapped in the Mapping System for a specific Mapping System Country
         /// </summary>
-        /// <param name="CountryCode">TLGX Country Code</param>
-        /// <returns>All TLGX Supplier Country Mapping</returns>
+        /// <param name="CountryCode">Mapping System Country Code</param>
+        /// <returns>All Supplier Country Mapping</returns>
         [HttpGet]
-        [Route("TLGX/Country/CountryCode/{CountryCode}")]
+        [Route("System/Country/CountryCode/{CountryCode}")]
         [ResponseType(typeof(TlgxCountryMapping_RS))]
         public async Task<HttpResponseMessage> GetAllSupplierCountryMappingByCode(string CountryCode)
         {
@@ -162,10 +162,10 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// Retrieves TLGX System Country Code and Name against Supplier country code
+        /// Retrieves Mapping System Country Code and Name for Supplier using Country Code
         /// </summary>
         /// <param name="CountryCode">Supplier-specific Country Code</param>
-        /// <param name="SupplierCode">TLGX Supplier Code</param>
+        /// <param name="SupplierCode">Mapping System Supplier System Code</param>
         /// <returns>TLGX Country Master</returns>
         [HttpGet]
         [Route("Supplier/Country/SupplierCountryCode/{CountryCode}/SupplierCode/{SupplierCode}")]
@@ -207,10 +207,10 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves TLGX System Country Code and Name against Supplier Country Name and Supplier Name
+        /// Retrieves Mapping System Country Code and Name using Supplier Country Name
         /// </summary>
         /// <param name="CountryName">Supplier-specific Country Name</param>
-        /// <param name="SupplierName">TLGX Supplier Name</param>
+        /// <param name="SupplierName">Mapping System Supplier Name</param>
         /// <returns>TLGX Country Master</returns>
         [HttpGet]
         [Route("Supplier/Country/SupplierCountryName/{CountryName}/SupplierName/{SupplierName}")]
@@ -252,12 +252,13 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves Country Mapping for a Supplier against a specific supplier
+        /// Retrieves cross-supplier and system mapping for Country. 
+        /// This would be used where you would want to convert a GTA Country into a Hotel Beds Country
         /// </summary>
         /// <param name="RQ"></param>
         /// <returns>Target supplier Country Name and Country Code</returns>
         [HttpPost]
-        [Route("Country/CrossSupplierMapping")]
+        [Route("CrossSupplier/Country")]
         [ResponseType(typeof(List<CrossSupplierCountryMapping_RS>))]
         public async Task<HttpResponseMessage> GetCrossSupplierCountryMapping(List<CrossSupplierCountryMapping_RQ> RQ)
         {
@@ -283,7 +284,7 @@ namespace DistributionWebApi.Controllers
                     {
                         if (iRQ.SourceSupplierCode.ToUpper() == iRQ.TargetSupplierCode.ToUpper())
                         {
-                            if (iRQ.SourceSupplierCode.ToUpper() == "TLGX")
+                            if (iRQ.SourceSupplierCode.ToUpper() == "TLGX")// change me to SYSTEM
                             {
                                 var res = await collection.Find(x => (x.CountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
                                 if (res != null)

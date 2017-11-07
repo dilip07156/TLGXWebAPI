@@ -117,7 +117,9 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts
+                                             SimliarProducts = a.SimliarProducts,
+                                             NumberOfPassengers = a.NumberOfPassengers,
+                                             Prices = a.Prices
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -219,7 +221,9 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts
+                                             SimliarProducts = a.SimliarProducts,
+                                             NumberOfPassengers = a.NumberOfPassengers,
+                                             Prices = a.Prices
                                          }).ToList();
 
                return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -307,7 +311,9 @@ namespace DistributionWebApi.Controllers
                                              Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts
+                                             SimliarProducts = a.SimliarProducts,
+                                             NumberOfPassengers = a.NumberOfPassengers,
+                                             Prices = a.Prices
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
