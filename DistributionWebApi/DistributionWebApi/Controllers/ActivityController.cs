@@ -69,13 +69,17 @@ namespace DistributionWebApi.Controllers
                 var arrayOfStrings = searchCountryResult.Select(s => s["CountryCode"].AsString).ToArray();
 
                 //get Activities
-                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
+                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitionsNew");
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CountryCode", arrayOfStrings);
 
+
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price"); //Filter.Eq("Prices.PriceFor", "Product").
+
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
                 
@@ -179,7 +183,11 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CityCode", arrayOfStrings);
 
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
+
+                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
@@ -268,8 +276,11 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("Type", param.ActivityTypes);
 
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
+
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
                 
@@ -378,5 +389,35 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// This will return all master key value pair related to activity
+        /// </summary>
+        /// <returns>A key value pair of activity master attribute type and attribute values</returns>
+        [Route("Masters")]
+        [HttpGet]
+        [ResponseType(typeof(List<ActivityMasters>))]
+        public async Task<HttpResponseMessage> GetActivityMastes()
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ActivityMasters> collectionActivity = _database.GetCollection<ActivityMasters>("ActivityMasters");
+
+                var searchResult = await collectionActivity.Find(s => true).SortBy(s => s.Type).ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
     }
 }
