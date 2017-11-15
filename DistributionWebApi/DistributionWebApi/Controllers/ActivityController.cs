@@ -397,7 +397,7 @@ namespace DistributionWebApi.Controllers
         [Route("Masters")]
         [HttpGet]
         [ResponseType(typeof(List<ActivityMasters>))]
-        public async Task<HttpResponseMessage> GetActivityMastes()
+        public async Task<HttpResponseMessage> GetActivityMasters()
         {
             try
             {
