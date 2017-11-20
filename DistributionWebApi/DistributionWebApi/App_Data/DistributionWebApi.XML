@@ -562,7 +562,7 @@
             Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
             Realtime when calling this Service as additional information may be returned then.</returns>
         </member>
-        <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityMastes">
+        <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityMasters">
             <summary>
             This will return all master key value pair related to activity
             </summary>
@@ -750,6 +750,32 @@
             </summary>
             <param name="CountryName"></param>
             <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllStates">
+            <summary>
+            Retrieve all TLGX System States
+            </summary>
+            <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetStateByCountryCode(System.String)">
+            <summary>
+            Retrieve all TLGX System States with StartsWith Filter on TLGX Country Code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllPorts">
+            <summary>
+            Retrieve all TLGX System Ports
+            </summary>
+            <returns>List of TLGX Port Masters.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetPortByCountryCode(System.String)">
+            <summary>
+            Retrieve all TLGX System Ports with StartsWith Filter on TLGX Country Code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>List of TLGX Port Masters.</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.LegacyProductDetailsController">
             <summary>
@@ -2412,6 +2438,66 @@
         <member name="P:DistributionWebApi.Models.Supplier.SupplierType">
             <summary>
             Type of Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.StateName">
+            <summary>
+            The name of the State. This field is optional and is derived from ISO3166-2 where possible.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.StateCode">
+            <summary>
+            The Code for the State. This field is optional and is derived from ISO3166-2 where possible.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.CountryName">
+            <summary>
+            TLGX Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.CountryCode">
+            <summary>
+            TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CountryName">
+            <summary>
+            TLGX Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CountryCode">
+            <summary>
+            TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CityName">
+            <summary>
+            TLGX City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CityCode">
+            <summary>
+            TLGX City Code. This value should be unique and consists of TLGX Country Code and alphanumeric identifier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.PortName">
+            <summary>
+            Airport Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.PortCode">
+            <summary>
+            IATA Airport code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.Latitude">
+            <summary>
+            Latitude
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.Longitude">
+            <summary>
+            Longitude
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.RoomTypeMapping_Attributes">
