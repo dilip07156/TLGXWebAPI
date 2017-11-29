@@ -48,15 +48,15 @@ namespace DistributionWebApi.Controllers
         /// Retrieves Supplier City Mapping for TLGX Country Code, City Name and Supplier Code
         /// </summary>
         /// <param name="CountryCode">TLGX Country Code</param>
-        /// <param name="CityName">TLGX City Name</param>
+        /// <param name="CityCode">TLGX City Code</param>
         /// <param name="SupplierCode">TLGX Supplier Code</param>
         /// <returns>TLGX Supplier City Mapping</returns>
         [HttpGet]
-        [Route("TLGX/City/CountryCode/{CountryCode}/CityName/{CityName}/SupplierCode/{SupplierCode}")]
+        [Route("TLGX/City/CountryCode/{CountryCode}/CityCode/{CityCode}/SupplierCode/{SupplierCode}")]
         [ResponseType(typeof(CityMapping_RS))]
-        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CountryCode, string CityName, string SupplierCode)
+        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CountryCode, string CityCode, string SupplierCode)
         {
-            return await GetCityMapping(string.Empty, CountryCode, CityName, string.Empty, string.Empty, SupplierCode, string.Empty, string.Empty, string.Empty, string.Empty);
+            return await GetCityMapping(string.Empty, CountryCode, string.Empty, CityCode, string.Empty, SupplierCode, string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
 
