@@ -66,6 +66,62 @@
 
             <tr>
                 <td class="col-md-7">
+                    <strong>States</strong>
+                    @*<div class="input-group">
+                    <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                    <select id="ddlCityByCountry" class="form-control"></select>
+                </div>*@
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>CSV</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>JSON</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>XML</strong>
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-7">
+                    <strong>Ports</strong>
+                    @*<div class="input-group">
+                    <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                    <select id="ddlCityByCountry" class="form-control"></select>
+                </div>*@
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>CSV</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>JSON</strong>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()" target="_parent" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                        <strong>XML</strong>
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-7">
                     <div class="input-group">
                         <label class="control-label input-group-addon"><strong>Hotels By Country</strong></label>
                         <select id="ddlHotelByCountry" class="form-control"></select>

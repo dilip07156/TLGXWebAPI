@@ -123,9 +123,9 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// Mapping System Activity Category for Product Session. 
         /// THis classification is designed to group products into time-bands. 
-        /// It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
+        /// It may not be defined automatically due to inconsistencies in Supplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
-        public string Session { get; set; }
+        public Session Session { get; set; }
         /// <summary>
         /// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
         /// </summary>
@@ -150,6 +150,10 @@ namespace DistributionWebApi.Models.Activity
         /// The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
         public string PhysicalIntensity { get; set; }
+        /// <summary>
+        /// This field specifies for whom this activity is suitable.
+        /// </summary>
+        public string SuitableFor { get; set; }
         /// <summary>
         /// This is a Longer description of the Activity.
         /// </summary>
@@ -346,7 +350,7 @@ namespace DistributionWebApi.Models.Activity
         /// THis classification is designed to group products into time-bands. 
         /// It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
-        public string Session { get; set; }
+        public Session Session { get; set; }
         /// <summary>
         /// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
         /// </summary>
@@ -371,6 +375,10 @@ namespace DistributionWebApi.Models.Activity
         /// The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
         public string PhysicalIntensity { get; set; }
+        /// <summary>
+        /// This field specifies for whom this activity is suitable.
+        /// </summary>
+        public string SuitableFor { get; set; }
         /// <summary>
         /// This is a Longer description of the Activity.
         /// </summary>
@@ -431,6 +439,21 @@ namespace DistributionWebApi.Models.Activity
         /// A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
         /// </summary>
         public List<Prices> Prices { get; set; }
+    }
+
+    /// <summary>
+    /// In which session this activity falls in.
+    /// </summary>
+    public class Session
+    {
+        /// <summary>
+        /// Supplier provided start time / departure time / commencement time
+        /// </summary>
+        public string SupplierValue { get; set; }
+        /// <summary>
+        /// extracted session value
+        /// </summary>
+        public string MappedValue { get; set; }
     }
 
     /// <summary>
@@ -789,7 +812,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// The Price for the value
         /// </summary>
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
         /// <summary>
         /// What sort of price is this? 
         /// MERCHANT NET PRICE - 

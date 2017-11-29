@@ -562,6 +562,12 @@
             Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
             Realtime when calling this Service as additional information may be returned then.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityMasters">
+            <summary>
+            This will return all master key value pair related to activity
+            </summary>
+            <returns>A key value pair of activity master attribute type and attribute values</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CityMappingController">
             <summary>
             Used to retrieve TLGX Mapping data for specific City and Supplier pairs. 
@@ -586,7 +592,7 @@
             Retrieves Supplier City Mapping for TLGX Country Code, City Name and Supplier Code
             </summary>
             <param name="CountryCode">TLGX Country Code</param>
-            <param name="CityName">TLGX City Name</param>
+            <param name="CityCode">TLGX City Code</param>
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>TLGX Supplier City Mapping</returns>
         </member>
@@ -744,6 +750,32 @@
             </summary>
             <param name="CountryName"></param>
             <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllStates">
+            <summary>
+            Retrieve all TLGX System States
+            </summary>
+            <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetStateByCountryCode(System.String)">
+            <summary>
+            Retrieve all TLGX System States with StartsWith Filter on TLGX Country Code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllPorts">
+            <summary>
+            Retrieve all TLGX System Ports
+            </summary>
+            <returns>List of TLGX Port Masters.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetPortByCountryCode(System.String)">
+            <summary>
+            Retrieve all TLGX System Ports with StartsWith Filter on TLGX Country Code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>List of TLGX Port Masters.</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.LegacyProductDetailsController">
             <summary>
@@ -1012,7 +1044,7 @@
             <summary>
             Mapping System Activity Category for Product Session. 
             THis classification is designed to group products into time-bands. 
-            It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
+            It may not be defined automatically due to inconsistencies in Supplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.StartTime">
@@ -1043,6 +1075,11 @@
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.PhysicalIntensity">
             <summary>
             The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.SuitableFor">
+            <summary>
+            This field specifies for whom this activity is suitable.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Overview">
@@ -1310,6 +1347,11 @@
             The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.SuitableFor">
+            <summary>
+            This field specifies for whom this activity is suitable.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Overview">
             <summary>
             This is a Longer description of the Activity.
@@ -1383,6 +1425,21 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.Prices">
             <summary>
             A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Activity.Session">
+            <summary>
+            In which session this activity falls in.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Session.SupplierValue">
+            <summary>
+            Supplier provided start time / departure time / commencement time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Session.MappedValue">
+            <summary>
+            extracted session value
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.Inclusions">
@@ -1813,6 +1870,41 @@
         <member name="P:DistributionWebApi.Models.Activity.SystemMapping.SystemID">
             <summary>
             What is the System Code for this Activity
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ActivityMasters">
+            <summary>
+            Activity related masters
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ActivityMasters.Type">
+            <summary>
+            attribute type master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ActivityMasters.ParentType">
+            <summary>
+            parent attribute type master if exists
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ActivityMasters.Values">
+            <summary>
+            values of the attribute master
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ActivityMasterValues">
+            <summary>
+            structure for values of the attribute master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ActivityMasterValues.Value">
+            <summary>
+            attribute value
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ActivityMasterValues.ParentValue">
+            <summary>
+            parent attribute value if exists
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.CountryMapping">
@@ -2346,6 +2438,66 @@
         <member name="P:DistributionWebApi.Models.Supplier.SupplierType">
             <summary>
             Type of Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.StateName">
+            <summary>
+            The name of the State. This field is optional and is derived from ISO3166-2 where possible.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.StateCode">
+            <summary>
+            The Code for the State. This field is optional and is derived from ISO3166-2 where possible.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.CountryName">
+            <summary>
+            TLGX Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.State.CountryCode">
+            <summary>
+            TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CountryName">
+            <summary>
+            TLGX Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CountryCode">
+            <summary>
+            TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CityName">
+            <summary>
+            TLGX City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.CityCode">
+            <summary>
+            TLGX City Code. This value should be unique and consists of TLGX Country Code and alphanumeric identifier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.PortName">
+            <summary>
+            Airport Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.PortCode">
+            <summary>
+            IATA Airport code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.Latitude">
+            <summary>
+            Latitude
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Port.Longitude">
+            <summary>
+            Longitude
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.RoomTypeMapping_Attributes">

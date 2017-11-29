@@ -180,5 +180,109 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+
+        /// <summary>
+        /// Retrieve all TLGX System States
+        /// </summary>
+        /// <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("States")]
+        [HttpGet]
+        [ResponseType(typeof(List<State>))]
+        public async Task<HttpResponseMessage> GetAllStates()
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<State>("StateMaster");
+                var result = await collection.Find(c => true).SortBy(s => s.StateName).ToListAsync();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX System States with StartsWith Filter on TLGX Country Code
+        /// </summary>
+        /// <param name="CountryCode"></param>
+        /// <returns>List of TLGX State Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("States/CountryCode/{CountryCode}")]
+        [HttpGet]
+        [ResponseType(typeof(List<State>))]
+        public async Task<HttpResponseMessage> GetStateByCountryCode(string CountryCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<State>("StateMaster");
+                var result = await collection.Find(c => c.CountryCode.ToLower().StartsWith(CountryCode.ToLower())).SortBy(s => s.StateName).ToListAsync();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        
+        /// <summary>
+        /// Retrieve all TLGX System Ports
+        /// </summary>
+        /// <returns>List of TLGX Port Masters.</returns>
+        [Route("Ports")]
+        [HttpGet]
+        [ResponseType(typeof(List<Port>))]
+        public async Task<HttpResponseMessage> GetAllPorts()
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<Port>("PortMaster");
+                var result = await collection.Find(c => true).SortBy(s => s.PortName).ToListAsync();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX System Ports with StartsWith Filter on TLGX Country Code
+        /// </summary>
+        /// <param name="CountryCode"></param>
+        /// <returns>List of TLGX Port Masters.</returns>
+        [Route("Ports/CountryCode/{CountryCode}")]
+        [HttpGet]
+        [ResponseType(typeof(List<Port>))]
+        public async Task<HttpResponseMessage> GetPortByCountryCode(string CountryCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<Port>("PortMaster");
+                var result = await collection.Find(c => c.CountryCode.ToLower().StartsWith(CountryCode.ToLower())).SortBy(s => s.PortName).ToListAsync();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
     }
 }
