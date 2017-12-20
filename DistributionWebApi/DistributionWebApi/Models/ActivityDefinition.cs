@@ -120,20 +120,23 @@ namespace DistributionWebApi.Models.Activity
         /// The Main Description of the Activity from the End Supplier.
         /// </summary>
         public string Description { get; set; }
-        /// <summary>
-        /// Mapping System Activity Category for Product Session. 
-        /// THis classification is designed to group products into time-bands. 
-        /// It may not be defined automatically due to inconsistencies in Supplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
-        /// </summary>
-        public Session Session { get; set; }
-        /// <summary>
-        /// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-        /// </summary>
-        public string StartTime { get; set; }
-        /// <summary>
-        /// The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-        /// </summary>
-        public string EndTime { get; set; }
+        
+        ///// <summary>
+        ///// Mapping System Activity Category for Product Session. 
+        ///// THis classification is designed to group products into time-bands. 
+        ///// It may not be defined automatically due to inconsistencies in Supplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
+        ///// </summary>
+        //public Session Session { get; set; }
+        ///// <summary>
+        ///// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
+        ///// </summary>
+        //public string StartTime { get; set; }
+        ///// <summary>
+        ///// The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
+        ///// </summary>
+        //public string EndTime { get; set; }
+
+
         /// <summary>
         /// Where does the Activity Depart from? This may not be defined due to variance in Supplier Static Data.
         /// </summary>
@@ -145,7 +148,8 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// What days of the week does this Activity Operate? Values should be in MTWTFSS format.
         /// </summary>
-        public string DaysOfTheWeek { get; set; }
+        public List<DaysOfWeek> DaysOfTheWeek { get; set; }
+
         /// <summary>
         /// The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
@@ -198,10 +202,12 @@ namespace DistributionWebApi.Models.Activity
         /// HOw many views does this Activity have? This value may be populated by Supplier Data, where it is provided.
         /// </summary>
         public string NumberOfViews { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
         public string[] ActivityInterests { get; set; }
+
         /// <summary>
         /// A list of things included in this Activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
@@ -226,10 +232,12 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        /// <summary>
-        /// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
-        /// </summary>
-        public ActivityDuration Duration { get; set; }
+        
+        ///// <summary>
+        ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
+        ///// </summary>
+        //public ActivityDuration Duration { get; set; }
+
         /// <summary>
         /// A list containing a type of review and the number of reviews. For example, it may contain NUmber of 5,4,3,2,1 Star Reviews.
         /// </summary>
@@ -345,20 +353,23 @@ namespace DistributionWebApi.Models.Activity
         /// The Main Description of the Activity from the End Supplier.
         /// </summary>
         public string Description { get; set; }
-        /// <summary>
-        /// Mapping System Activity Category for Product Session. 
-        /// THis classification is designed to group products into time-bands. 
-        /// It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
-        /// </summary>
-        public Session Session { get; set; }
-        /// <summary>
-        /// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-        /// </summary>
-        public string StartTime { get; set; }
-        /// <summary>
-        /// The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-        /// </summary>
-        public string EndTime { get; set; }
+
+        ///// <summary>
+        ///// Mapping System Activity Category for Product Session. 
+        ///// THis classification is designed to group products into time-bands. 
+        ///// It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
+        ///// </summary>
+        //public Session Session { get; set; }
+        ///// <summary>
+        ///// The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
+        ///// </summary>
+        //public string StartTime { get; set; }
+        ///// <summary>
+        ///// The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
+        ///// </summary>
+        //public string EndTime { get; set; }
+
+
         /// <summary>
         /// Where does the Activity Depart from? This may not be defined due to variance in Supplier Static Data.
         /// </summary>
@@ -370,7 +381,8 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// What days of the week does this Activity Operate? Values should be in MTWTFSS format.
         /// </summary>
-        public string DaysOfTheWeek { get; set; }
+        public List<DaysOfWeek> DaysOfTheWeek { get; set; }
+
         /// <summary>
         /// The Physical Intensity Level of the Activity. Most End Suppliers do not carry a specific value for this attribute so it is inferred from Product Classification. Master Values can be retrieved from GetActivityClassificationStructure.
         /// </summary>
@@ -427,10 +439,13 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        /// <summary>
-        /// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
-        /// </summary>
-        public ActivityDuration Duration { get; set; }
+        
+        
+        ///// <summary>
+        ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
+        ///// </summary>
+        //public ActivityDuration Duration { get; set; }
+
         /// <summary>
         /// A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
         /// </summary>
@@ -853,5 +868,30 @@ namespace DistributionWebApi.Models.Activity
         /// What is the System Code for this Activity
         /// </summary>
         public string SystemID { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DaysOfWeek
+    {
+        public string SupplierFrequency { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public bool Sunday { get; set; }
+        public string SupplierStartTime { get; set; }
+        public string StartTime { get; set; }
+        public string SupplierEndTime { get; set; }
+        public string EndTime { get; set; }
+        public string SupplierDuration { get; set; }
+        public string Duration { get; set; }
+        public string SupplierSession { get; set; }
+        public string Session { get; set; }
+        public string OperatingFromDate { get; set; }
+        public string OperatingToDate { get; set; }
     }
 }
