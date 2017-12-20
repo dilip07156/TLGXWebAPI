@@ -102,9 +102,9 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             Session = a.Session,
-                                             StartTime = a.StartTime,
-                                             EndTime = a.EndTime,
+                                             //Session = a.Session,
+                                             //StartTime = a.StartTime,
+                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -118,12 +118,13 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             Duration = a.Duration,
+                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
                                              SimliarProducts = a.SimliarProducts,
                                              NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices
+                                             Prices = a.Prices,
+                                             SuitableFor = a.SuitableFor
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -210,9 +211,9 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             Session = a.Session,
-                                             StartTime = a.StartTime,
-                                             EndTime = a.EndTime,
+                                             //Session = a.Session,
+                                             //StartTime = a.StartTime,
+                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -226,12 +227,13 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             Duration = a.Duration,
+                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
                                              SimliarProducts = a.SimliarProducts,
                                              NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices
+                                             Prices = a.Prices,
+                                             SuitableFor = a.SuitableFor
                                          }).ToList();
 
                return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -303,9 +305,9 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             Session = a.Session,
-                                             StartTime = a.StartTime,
-                                             EndTime = a.EndTime,
+                                             //Session = a.Session,
+                                             //StartTime = a.StartTime,
+                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -319,12 +321,13 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             Duration = a.Duration,
+                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
                                              SimliarProducts = a.SimliarProducts,
                                              NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices
+                                             Prices = a.Prices,
+                                             SuitableFor = a.SuitableFor
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);

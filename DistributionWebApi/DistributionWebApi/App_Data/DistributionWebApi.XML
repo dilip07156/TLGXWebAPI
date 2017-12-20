@@ -1040,23 +1040,6 @@
             The Main Description of the Activity from the End Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Session">
-            <summary>
-            Mapping System Activity Category for Product Session. 
-            THis classification is designed to group products into time-bands. 
-            It may not be defined automatically due to inconsistencies in Supplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.StartTime">
-            <summary>
-            The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.EndTime">
-            <summary>
-            The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.DeparturePoint">
             <summary>
             Where does the Activity Depart from? This may not be defined due to variance in Supplier Static Data.
@@ -1170,11 +1153,6 @@
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.ActivityMedia">
             <summary>
             A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Duration">
-            <summary>
-            The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.ReviewScores">
@@ -1310,23 +1288,6 @@
             The Main Description of the Activity from the End Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.Activity.Session">
-            <summary>
-            Mapping System Activity Category for Product Session. 
-            THis classification is designed to group products into time-bands. 
-            It may not be defined automatically due to inconsistencies in SUpplier Static Data. Master Values can be retrieved from GetActivityClassificationStructure.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.Activity.StartTime">
-            <summary>
-            The Start Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.Activity.EndTime">
-            <summary>
-            The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.DeparturePoint">
             <summary>
             Where does the Activity Depart from? This may not be defined due to variance in Supplier Static Data.
@@ -1410,11 +1371,6 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.ActivityMedia">
             <summary>
             A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.Activity.Activity.Duration">
-            <summary>
-            The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.SimliarProducts">
@@ -1870,6 +1826,11 @@
         <member name="P:DistributionWebApi.Models.Activity.SystemMapping.SystemID">
             <summary>
             What is the System Code for this Activity
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Activity.DaysOfWeek">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ActivityMasters">
