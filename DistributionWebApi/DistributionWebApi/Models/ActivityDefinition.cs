@@ -24,7 +24,7 @@ namespace DistributionWebApi.Models.Activity
         [Required]
         public int PageNo { get; set; }
         /// <summary>
-        /// Your System Identification Code as given by Mapping Team
+        /// Your System Identification Code as given by Mapping Team. (Don't send this if you are using system country codes)
         /// </summary>
         public string RequestingSupplierCode { get; set; }
         /// <summary>
@@ -47,7 +47,7 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public int PageNo { get; set; }
         /// <summary>
-        /// Your System Identification Code as given by Mapping Team
+        /// Your System Identification Code as given by Mapping Team (Don't send this if you are using system city codes)
         /// </summary>
         public string RequestingSupplierCode { get; set; }
         /// <summary>

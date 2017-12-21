@@ -937,7 +937,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ.RequestingSupplierCode">
             <summary>
-            Your System Identification Code as given by Mapping Team
+            Your System Identification Code as given by Mapping Team. (Don't send this if you are using system country codes)
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ.CountryCodes">
@@ -962,7 +962,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCity_RQ.RequestingSupplierCode">
             <summary>
-            Your System Identification Code as given by Mapping Team
+            Your System Identification Code as given by Mapping Team (Don't send this if you are using system city codes)
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCity_RQ.CityCodes">
