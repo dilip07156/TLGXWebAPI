@@ -56,20 +56,30 @@ namespace DistributionWebApi.Controllers
 
                 _database = MongoDBHandler.mDatabase();
 
-                //Get System Country Codes from Supplier Codes
-                var collection = _database.GetCollection<BsonDocument>("CountryMapping");
-                FilterDefinition<BsonDocument> filterCountry;
-                filterCountry = Builders<BsonDocument>.Filter.Empty;
+                string[] arrayOfStrings;
 
-                filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Distinct());
-                filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
-                ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CountryCode").Exclude("_id");
+                if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
+                {
+                    //Get System Country Codes from Supplier Codes
+                    var collection = _database.GetCollection<BsonDocument>("CountryMapping");
+                    FilterDefinition<BsonDocument> filterCountry;
+                    filterCountry = Builders<BsonDocument>.Filter.Empty;
 
-                var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
-                var arrayOfStrings = searchCountryResult.Select(s => s["CountryCode"].AsString).ToArray();
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Distinct());
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
+                    ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CountryCode").Exclude("_id");
+
+                    var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
+                    arrayOfStrings = searchCountryResult.Select(s => s["CountryCode"].AsString).ToArray();
+                }
+                else
+                {
+                    arrayOfStrings = param.CountryCodes;
+                }
+
 
                 //get Activities
-                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitionsNew");
+                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CountryCode", arrayOfStrings);
@@ -82,7 +92,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
-                
+
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
                 if (remainder > 0)
@@ -165,17 +175,27 @@ namespace DistributionWebApi.Controllers
 
                 _database = MongoDBHandler.mDatabase();
 
-                //Get System City Codes from Supplier Codes
-                var collection = _database.GetCollection<BsonDocument>("CityMapping");
-                FilterDefinition<BsonDocument> filterCountry;
-                filterCountry = Builders<BsonDocument>.Filter.Empty;
+                string[] arrayOfStrings;
 
-                filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Distinct());
-                filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
-                ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CityCode").Exclude("_id");
+                if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
+                {
+                    //Get System City Codes from Supplier Codes
+                    var collection = _database.GetCollection<BsonDocument>("CityMapping");
+                    FilterDefinition<BsonDocument> filterCountry;
+                    filterCountry = Builders<BsonDocument>.Filter.Empty;
 
-                var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
-                var arrayOfStrings = searchCountryResult.Select(s => s["CityCode"].AsString).ToArray();
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Distinct());
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
+                    ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CityCode").Exclude("_id");
+
+                    var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
+                    arrayOfStrings = searchCountryResult.Select(s => s["CityCode"].AsString).ToArray();
+                }
+                else
+                {
+                    arrayOfStrings = param.CityCodes;
+                }
+
 
                 //get Activities
                 IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
@@ -236,7 +256,7 @@ namespace DistributionWebApi.Controllers
                                              SuitableFor = a.SuitableFor
                                          }).ToList();
 
-               return Request.CreateResponse(HttpStatusCode.OK, resultList);
+                return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
             catch (Exception ex)
             {
@@ -285,7 +305,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
-                
+
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
                 if (remainder > 0)
