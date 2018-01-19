@@ -62,7 +62,7 @@ namespace DistributionWebApi.Controllers
 
                 ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Exclude("_id");
 
-                var searchBsonResult = collection.Find(filter).Project(project).ToList();
+                var searchBsonResult = await collection.Find(filter).Project(project).ToListAsync();
 
                 List<RoomTypeMappingModel> searchResult = Newtonsoft.Json.JsonConvert.DeserializeObject<List<RoomTypeMappingModel>>(searchBsonResult.ToJson());
 

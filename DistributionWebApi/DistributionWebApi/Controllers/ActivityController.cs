@@ -25,7 +25,9 @@ namespace DistributionWebApi.Controllers
     [RoutePrefix("ActivityMapping/Get")]
     public class ActivityMappingController : ApiController
     {
-
+        /// <summary>
+        /// static object of Mongo DB Class
+        /// </summary>
         protected static IMongoDatabase _database;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -369,9 +371,10 @@ namespace DistributionWebApi.Controllers
         [HttpPost]
         [ResponseType(typeof(void))]
         [ApiExplorerSettings(IgnoreApi = false)]
-        public async Task<HttpResponseMessage> GetActivityByFacets(string[] param)
+        public HttpResponseMessage GetActivityByFacets(string[] param)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.NoContent, "This functionality is not yet implemented.");
+            return response;
         }
 
 
@@ -399,7 +402,7 @@ namespace DistributionWebApi.Controllers
 
                 filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SystemActivityCode, Code);
 
-                var searchResult = collectionActivity.Find(filter).FirstOrDefaultAsync();
+                var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
                 return response;
