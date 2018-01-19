@@ -14,10 +14,17 @@ using Newtonsoft.Json.Linq;
 
 namespace DistributionWebApi
 {
+    /// <summary>
+    /// This class will be handle all incoming and outgoing message filter
+    /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class LoggingFilterAttribute : System.Web.Http.Filters.ActionFilterAttribute
     {
         private static Logger _logger = LogManager.GetLogger("Trace");
+        /// <summary>
+        /// This method executed after a request is done.
+        /// </summary>
+        /// <param name="filterContext"></param>
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
             DateTime RequestDatetime = DateTime.Now;
@@ -72,6 +79,10 @@ namespace DistributionWebApi
 
         }
 
+        /// <summary>
+        /// This method is executed after the request is processed and ready for the response
+        /// </summary>
+        /// <param name="filterContext"></param>
         public override void OnActionExecuted(HttpActionExecutedContext filterContext)
         {
             DateTime ResponseDatetime = DateTime.Now;
@@ -127,8 +138,15 @@ namespace DistributionWebApi
         //}
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class FilterConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filters"></param>
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());

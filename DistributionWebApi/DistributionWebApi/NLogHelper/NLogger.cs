@@ -48,7 +48,7 @@ namespace DistributionWebApi.NLogHelper
             {
                 if (traceAction != null && traceAction.Target != null)
                 {
-                    category = category + "|" +  Newtonsoft.Json.JsonConvert.SerializeObject(traceAction.Target);
+                    category = category + "|" + Newtonsoft.Json.JsonConvert.SerializeObject(traceAction.Target);
                 }
                 var record = new TraceRecord(request, category, level);
                 if (traceAction != null) traceAction(record);
@@ -89,9 +89,6 @@ namespace DistributionWebApi.NLogHelper
 
             //GlobalDiagnosticsContext.Set("IpAddress", HttpContext.Current.Request.UserHostAddress);
             Logger[record.Level](Convert.ToString(message));
-           
-
-
 
         }
         #endregion

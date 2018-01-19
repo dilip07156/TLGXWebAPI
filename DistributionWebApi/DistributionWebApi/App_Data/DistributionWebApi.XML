@@ -4,6 +4,55 @@
         <name>DistributionWebApi</name>
     </assembly>
     <members>
+        <member name="T:DistributionWebApi.LoggingFilterAttribute">
+            <summary>
+            This class will be handle all incoming and outgoing message filter
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.LoggingFilterAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            This method executed after a request is done.
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:DistributionWebApi.LoggingFilterAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            This method is executed after the request is processed and ready for the response
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="T:DistributionWebApi.FilterConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)">
+            <summary>
+            
+            </summary>
+            <param name="filters"></param>
+        </member>
+        <member name="T:DistributionWebApi.App_Start.NLogELKTargetWithProxy">
+            <summary>
+            This is a custom NLogger class which logs the message to a network address.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Host">
+            <summary>
+            Target URL
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.#ctor">
+            <summary>
+            Constructor ElkTargetNlog
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Write(NLog.LogEventInfo)">
+            <summary>
+            write method to send the message to network
+            </summary>
+            <param name="logEvent"></param>
+        </member>
         <member name="P:DistributionWebApi.WebApiConfig.JsonpFormatter.JsonpParameterName">
             <summary>
              Name of the query string parameter to look for
@@ -514,6 +563,11 @@
             Contains a collection of APIs to allow the search and dislay of a range of Activity Supplier Static Data. Each individual Suppliers' static data has been
             standardised into the formats contained within the API. In addition to the Standardisation of the Format of the Data, the Content of the data is also Standardised 
             against a range of Classification attributes.
+            </summary>
+        </member>
+        <member name="F:DistributionWebApi.Controllers.ActivityMappingController._database">
+            <summary>
+            static object of Mongo DB Class
             </summary>
         </member>
         <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityByCountries(DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ)">
@@ -2621,6 +2675,31 @@
             Logs info/Error to Log file
             </summary>
             <param name="record"></param>
+        </member>
+        <member name="T:DistributionWebApi.NLogHelper.Nlogger_LogError">
+            <summary>
+            Class to log error message
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.NLogHelper.Nlogger_LogError.LogError(System.Exception,System.String,System.String,System.String)">
+            <summary>
+            Method which logs the error message
+            </summary>
+            <param name="ex"></param>
+            <param name="Controller"></param>
+            <param name="ActionName"></param>
+            <param name="Uri"></param>
+        </member>
+        <member name="T:DistributionWebApi.NLogHelper.Nlogger_LogTrace">
+            <summary>
+            Class to log the traces when network tracing log fails
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.NLogHelper.Nlogger_LogTrace.LogTrace(System.String)">
+            <summary>
+            method which logs the json trace message to a file.
+            </summary>
+            <param name="JsonMessage"></param>
         </member>
     </members>
 </doc>
