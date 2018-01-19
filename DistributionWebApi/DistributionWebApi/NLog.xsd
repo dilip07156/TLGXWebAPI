@@ -1350,6 +1350,13 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ELK">
+    <xs:complexContent>
+      <xs:extension base="Target">
+
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:simpleType name="NLog.Targets.ArchiveNumberingMode">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Sequence" />

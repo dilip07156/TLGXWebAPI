@@ -277,7 +277,7 @@ namespace DistributionWebApi.Controllers
                 project = project.Include("SystemProductCode");
                 project = project.Include("MapId");
 
-                var searchResult = collectionProductMapping.Find(filter).Project(project).ToList();
+                var searchResult = await collectionProductMapping.Find(filter).Project(project).ToListAsync();
 
                 List<ProductMappingLite>  searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
 

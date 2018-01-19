@@ -242,8 +242,8 @@ namespace DistributionWebApi.Controllers
                 var accomodationsList = _database.GetCollection<HotelsHotel>("Accommodations");
                 var productMappingList = _database.GetCollection<ProductMapping>("ProductMapping");
 
-                FilterDefinition<HotelsHotel> filterAcco;
-                FilterDefinition<ProductMapping> filterPM;
+                //FilterDefinition<HotelsHotel> filterAcco;
+                //FilterDefinition<ProductMapping> filterPM;
                 var idList = id.Split(',');
 
                 XDocument doc = new XDocument();
@@ -299,8 +299,8 @@ namespace DistributionWebApi.Controllers
                 var accomodationsList = _database.GetCollection<HotelsHotel>("Accommodations");
                 var productMappingList = _database.GetCollection<ProductMapping>("ProductMapping");
 
-                FilterDefinition<HotelsHotel> filterAcco;
-                FilterDefinition<ProductMapping> filterPM;
+                //FilterDefinition<HotelsHotel> filterAcco;
+                //FilterDefinition<ProductMapping> filterPM;
                 var idList = id.Split(',');
 
                 XDocument doc = new XDocument();

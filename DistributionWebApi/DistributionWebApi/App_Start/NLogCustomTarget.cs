@@ -16,15 +16,30 @@ using System.Threading.Tasks;
 
 namespace DistributionWebApi.App_Start
 {
+    /// <summary>
+    /// This is a custom NLogger class which logs the message to a network address.
+    /// </summary>
     [Target("ELK")]
     public sealed class NLogELKTargetWithProxy : TargetWithLayout
     {
+        /// <summary>
+        /// Target URL
+        /// </summary>
         [RequiredParameter]
         public string Host { get; set; }
+        
+        /// <summary>
+        /// Constructor ElkTargetNlog
+        /// </summary>
         public NLogELKTargetWithProxy()
         {
             Host = System.Configuration.ConfigurationManager.AppSettings["elklogindex"];
         }
+
+        /// <summary>
+        /// write method to send the message to network
+        /// </summary>
+        /// <param name="logEvent"></param>
         protected async override void Write(LogEventInfo logEvent)
         {
             await SendTheMessageToRemoteHost(Host, logEvent.Message);
@@ -32,28 +47,36 @@ namespace DistributionWebApi.App_Start
 
         async Task SendTheMessageToRemoteHost(string host, string message)
         {
-            string proxy = System.Configuration.ConfigurationManager.AppSettings["ProxyUri"];
-            HttpClient client;
-            HttpClientHandler httpClientHandler;
-            if (!string.IsNullOrWhiteSpace(proxy))
+            try
             {
-                httpClientHandler = new HttpClientHandler
+                string proxy = System.Configuration.ConfigurationManager.AppSettings["ProxyUri"];
+                HttpClient client;
+                HttpClientHandler httpClientHandler;
+                if (!string.IsNullOrWhiteSpace(proxy))
                 {
-                    Proxy = new WebProxy(proxy, false),
-                    UseProxy = true
-                };
-                client = new HttpClient(httpClientHandler);
-            }
-            else
-            {
-                client = new HttpClient();
-            }
-            
-            StringContent json = new StringContent(message);
-            await client.PostAsync(new Uri(host), json);
+                    httpClientHandler = new HttpClientHandler
+                    {
+                        Proxy = new WebProxy(proxy, false),
+                        UseProxy = true
+                    };
+                    client = new HttpClient(httpClientHandler);
+                }
+                else
+                {
+                    client = new HttpClient();
+                }
 
-            json.Dispose();
-            client.Dispose();
+                StringContent json = new StringContent(message);
+                await client.PostAsync(new Uri(host), json);
+
+                json.Dispose();
+                client.Dispose();
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, "ELK - TraceLog", host);
+                NLogHelper.Nlogger_LogTrace.LogTrace(message);
+            }
         }
     }
 }
