@@ -135,8 +135,6 @@ namespace DistributionWebApi.Models.Activity
         ///// The End Time of the Activity. This may not be defined due to variance in Supplier Static Data.
         ///// </summary>
         //public string EndTime { get; set; }
-
-
         /// <summary>
         /// Where does the Activity Depart from? This may not be defined due to variance in Supplier Static Data.
         /// </summary>
@@ -261,7 +259,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
         /// </summary>
-        public List<SimliarProducts> SimliarProducts { get; set; }
+        public List<ProductOptions> ProductOptions { get; set; }
         /// <summary>
         /// A List of Additional Classification Attributes for the Product
         /// </summary>
@@ -279,6 +277,16 @@ namespace DistributionWebApi.Models.Activity
         /// For future Use.
         /// </summary>
         public SystemMapping SystemMapping { get; set; }
+
+        /// <summary>
+        /// IF the activity is tagged under special category
+        /// </summary>
+        public List<string> Specials { get; set; }
+
+        /// <summary>
+        /// Internal Use
+        /// </summary>
+        public List<string> ProductSubTypeId { get; set; }
     }
 
     /// <summary>
@@ -440,7 +448,6 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
         
-        
         ///// <summary>
         ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
         ///// </summary>
@@ -449,11 +456,23 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// A list of "options" for an Activity. This data may need to be used when making specific Booking requests with End Suppliers. Not all Suppliers provide this information as part of their static data.
         /// </summary>
+        public List<ProductOptions> ProductOptions { get; set; }
+
+        /// <summary>
+        /// A list of "Similar Products" for an Activity. This will match as per Activity City and Product Sub Type
+        /// </summary>
         public List<SimliarProducts> SimliarProducts { get; set; }
+
         /// <summary>
         /// A list of Prices for the Activity. The data here is retrieved for the product is contained ONLY in the static data and it is advised that a formal Pricing / Availability request is made to retrieve the actual price before booking.
         /// </summary>
         public List<Prices> Prices { get; set; }
+
+        /// <summary>
+        /// IF the activity is tagged under special category
+        /// </summary>
+        public List<string> Specials { get; set; }
+
     }
 
     /// <summary>
@@ -757,7 +776,7 @@ namespace DistributionWebApi.Models.Activity
     /// Contains information relating to bifurcations of a Product. For example, Tour of Taj Mahal may have options for different durations or Guide types. 
     /// Not all Suppliers Provide this information
     /// </summary>
-    public class SimliarProducts
+    public class ProductOptions
     {
         /// <summary>
         /// The Mapping System Code for the Activity Option 
@@ -893,5 +912,17 @@ namespace DistributionWebApi.Models.Activity
         public string Session { get; set; }
         public string OperatingFromDate { get; set; }
         public string OperatingToDate { get; set; }
+    }
+
+    /// <summary>
+    /// list of products similar to returned product as per city and product sub type
+    /// </summary>
+    public class SimliarProducts
+    {
+        public string SystemActivityCode { get; set; }
+        public string SystemActivityName { get; set; }
+        //public string DealText { get; set; }
+        //public List<ProductOptions> Options { get; set; }
+        public string ActivityType { get; set; }
     }
 }
