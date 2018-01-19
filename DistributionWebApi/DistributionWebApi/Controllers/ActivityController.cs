@@ -114,9 +114,6 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             //Session = a.Session,
-                                             //StartTime = a.StartTime,
-                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -130,14 +127,45 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts,
+                                             ProductOptions = a.ProductOptions,
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor
+                                             SuitableFor = a.SuitableFor,
+                                             Specials = a.Specials
                                          }).ToList();
+
+                foreach(var activity in searchedData)
+                {
+                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+                    
+                    FilterDefinition<BsonDocument> filterForSimilarProducts;
+                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+
+                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+
+                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                    project = project.Include("Name");
+                    project = project.Include("SubType");
+
+                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+
+                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                    if(SimilarProdSearchResultObj != null)
+                    {
+                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
+                        {
+                            SystemActivityCode = s.SystemActivityCode.ToString(),
+                            SystemActivityName = s.Name,
+                            ActivityType = s.SubType
+                        }).ToList();
+                    }
+
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
 
@@ -233,9 +261,6 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             //Session = a.Session,
-                                             //StartTime = a.StartTime,
-                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -249,13 +274,13 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts,
+                                             ProductOptions = a.ProductOptions,
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor
+                                             SuitableFor = a.SuitableFor,
+                                             Specials = a.Specials
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -327,9 +352,6 @@ namespace DistributionWebApi.Controllers
                                              SubType = a.SubType,
                                              Name = a.Name,
                                              Description = a.Description,
-                                             //Session = a.Session,
-                                             //StartTime = a.StartTime,
-                                             //EndTime = a.EndTime,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
                                              PhysicalIntensity = a.PhysicalIntensity,
                                              Overview = a.Overview,
@@ -343,13 +365,13 @@ namespace DistributionWebApi.Controllers
                                              NumberOfLikes = a.NumberOfLikes,
                                              NumberOfViews = a.NumberOfViews,
                                              ActivityMedia = a.ActivityMedia,
-                                             //Duration = a.Duration,
                                              DeparturePoint = a.DeparturePoint,
                                              ReturnDetails = a.ReturnDetails,
-                                             SimliarProducts = a.SimliarProducts,
+                                             ProductOptions = a.ProductOptions,
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor
+                                             SuitableFor = a.SuitableFor,
+                                             Specials = a.Specials
                                          }).ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
