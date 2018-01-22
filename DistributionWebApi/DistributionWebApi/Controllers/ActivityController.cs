@@ -136,10 +136,10 @@ namespace DistributionWebApi.Controllers
                                              Specials = a.Specials
                                          }).ToList();
 
-                foreach(var activity in searchedData)
+                foreach (var activity in searchedData)
                 {
                     var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
-                    
+
                     FilterDefinition<BsonDocument> filterForSimilarProducts;
                     filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
@@ -150,18 +150,22 @@ namespace DistributionWebApi.Controllers
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
                     project = project.Include("SubType");
+                    project = project.Include("Prices");
+                    project = project.Include("ProductOptions");
 
                     var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
 
                     List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
 
-                    if(SimilarProdSearchResultObj != null)
+                    if (SimilarProdSearchResultObj != null)
                     {
                         loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
                         {
                             SystemActivityCode = s.SystemActivityCode.ToString(),
                             SystemActivityName = s.Name,
-                            ActivityType = s.SubType
+                            ActivityType = s.SubType,
+                            Options = s.ProductOptions,
+                            Prices = s.Prices
                         }).ToList();
                     }
 
@@ -283,6 +287,41 @@ namespace DistributionWebApi.Controllers
                                              Specials = a.Specials
                                          }).ToList();
 
+                foreach (var activity in searchedData)
+                {
+                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+
+                    FilterDefinition<BsonDocument> filterForSimilarProducts;
+                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+
+                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+
+                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                    project = project.Include("Name");
+                    project = project.Include("SubType");
+                    project = project.Include("Prices");
+                    project = project.Include("ProductOptions");
+
+                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+
+                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                    if (SimilarProdSearchResultObj != null)
+                    {
+                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
+                        {
+                            SystemActivityCode = s.SystemActivityCode.ToString(),
+                            SystemActivityName = s.Name,
+                            ActivityType = s.SubType,
+                            Options = s.ProductOptions,
+                            Prices = s.Prices
+                        }).ToList();
+                    }
+
+                }
+
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
             catch (Exception ex)
@@ -373,6 +412,41 @@ namespace DistributionWebApi.Controllers
                                              SuitableFor = a.SuitableFor,
                                              Specials = a.Specials
                                          }).ToList();
+
+                foreach (var activity in searchedData)
+                {
+                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+
+                    FilterDefinition<BsonDocument> filterForSimilarProducts;
+                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+
+                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+
+                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                    project = project.Include("Name");
+                    project = project.Include("SubType");
+                    project = project.Include("Prices");
+                    project = project.Include("ProductOptions");
+
+                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+
+                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                    if (SimilarProdSearchResultObj != null)
+                    {
+                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
+                        {
+                            SystemActivityCode = s.SystemActivityCode.ToString(),
+                            SystemActivityName = s.Name,
+                            ActivityType = s.SubType,
+                            Options = s.ProductOptions,
+                            Prices = s.Prices
+                        }).ToList();
+                    }
+
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
