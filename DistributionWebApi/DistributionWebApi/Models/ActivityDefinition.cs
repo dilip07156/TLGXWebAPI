@@ -921,8 +921,8 @@ namespace DistributionWebApi.Models.Activity
     {
         public string SystemActivityCode { get; set; }
         public string SystemActivityName { get; set; }
-        //public string DealText { get; set; }
-        //public List<ProductOptions> Options { get; set; }
         public string ActivityType { get; set; }
+        public List<ProductOptions> Options { get; set; }
+        public List<Prices> Prices { get; set; }
     }
 }
