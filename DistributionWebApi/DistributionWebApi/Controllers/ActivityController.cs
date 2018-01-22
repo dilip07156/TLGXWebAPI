@@ -143,9 +143,9 @@ namespace DistributionWebApi.Controllers
                     FilterDefinition<BsonDocument> filterForSimilarProducts;
                     filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
-                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
@@ -153,7 +153,7 @@ namespace DistributionWebApi.Controllers
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
-                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
 
                     List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
 
@@ -294,9 +294,9 @@ namespace DistributionWebApi.Controllers
                     FilterDefinition<BsonDocument> filterForSimilarProducts;
                     filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
-                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
@@ -304,7 +304,7 @@ namespace DistributionWebApi.Controllers
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
-                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
 
                     List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
 
@@ -420,9 +420,9 @@ namespace DistributionWebApi.Controllers
                     FilterDefinition<BsonDocument> filterForSimilarProducts;
                     filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
-                    filter = filter & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
@@ -430,7 +430,7 @@ namespace DistributionWebApi.Controllers
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
-                    var SimilarProdSearchResult = await collectionActivity.Find(filter).Project(project).ToListAsync();
+                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
 
                     List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
 
