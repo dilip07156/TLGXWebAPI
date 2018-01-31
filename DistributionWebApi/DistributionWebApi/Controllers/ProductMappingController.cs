@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Http.Description;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace DistributionWebApi.Controllers
 {
@@ -257,6 +258,8 @@ namespace DistributionWebApi.Controllers
         {
             try
             {
+                //Stopwatch sp = new Stopwatch();
+                //sp.Start();
                 _database = MongoDBHandler.mDatabase();
 
                 IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
@@ -276,66 +279,77 @@ namespace DistributionWebApi.Controllers
                 project = project.Include("SupplierProductCode");
                 project = project.Include("SystemProductCode");
                 project = project.Include("MapId");
+                //sp.Stop();
 
+                //sp.Restart();
                 var searchResult = await collectionProductMapping.Find(filter).Project(project).ToListAsync();
+                //sp.Stop();
 
-                List<ProductMappingLite>  searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
+                //sp.Restart();
+                List<ProductMappingLite> searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
 
                 List<ProductMappingLite_RS> resultList = new List<ProductMappingLite_RS>();
-
-                //resultList = (from rq in RQ
-                //              from sd in searchedData.Where(w => w.SupplierCode == rq.SupplierCode.ToUpper() && w.SupplierProductCode == rq.SupplierProductCode.ToUpper()).DefaultIfEmpty()
-                //              select new ProductMappingLite_RS
-                //              {
-                //                  MapId = sd.MapId,
-                //                  SupplierProductCode = rq.SupplierProductCode,
-                //                  SupplierCode = rq.SupplierCode,
-                //                  ProductType = rq.ProductType,
-                //                  SequenceNumber = rq.SequenceNumber,
-                //                  SessionId = rq.SessionId,
-                //                  SystemProductCode = sd.SystemProductCode
-                //              }).ToList();
+                //sp.Stop();
 
 
-                foreach (var item in RQ)
-                {
-                    var result = new ProductMappingLite_RS();
 
-                    result.SessionId = item.SessionId;
-                    result.SequenceNumber = item.SequenceNumber;
-                    result.SupplierCode = item.SupplierCode;
-                    result.SupplierProductCode = item.SupplierProductCode;
-                    result.ProductType = item.ProductType;
-                    result.SystemProductCode = string.Empty;
+                //sp.Restart();
 
-                    if (string.IsNullOrWhiteSpace(item.SupplierCode) || string.IsNullOrWhiteSpace(item.SupplierProductCode))
-                    {
-                        result.SystemProductCode = string.Empty;
-                        resultList.Add(result);
-                        result = null;
-                        continue;
-                    }
-                    else
-                    {
-                        var searchMapResult = searchedData.Where(w => w.SupplierCode == item.SupplierCode.ToUpper() && w.SupplierProductCode == item.SupplierProductCode.ToUpper()).Select(s => s).FirstOrDefault();
-                        if (searchMapResult != null)
-                        {
-                            result.SystemProductCode = searchMapResult.SystemProductCode;
-                            result.MapId = searchMapResult.MapId;
-                            resultList.Add(result);
-                            result = null;
-                        }
-                        else
-                        {
-                            result.SystemProductCode = string.Empty;
-                            resultList.Add(result);
-                            result = null;
-                        }
-                    }
+                resultList = (from rq in RQ
+                              join sd in searchedData on new { SupplierCode = rq.SupplierCode.ToUpper(), SupplierProductCode = rq.SupplierProductCode.ToUpper() } equals new { SupplierCode = sd.SupplierCode, SupplierProductCode = sd.SupplierProductCode } into sdtemp
+                              from sdlj in sdtemp.DefaultIfEmpty()
+                              select new ProductMappingLite_RS
+                              {
+                                  MapId = (sdlj == null ? 0 : sdlj.MapId),
+                                  SupplierProductCode = rq.SupplierProductCode,
+                                  SupplierCode = rq.SupplierCode,
+                                  ProductType = rq.ProductType,
+                                  SequenceNumber = rq.SequenceNumber,
+                                  SessionId = rq.SessionId,
+                                  SystemProductCode = (sdlj == null ? string.Empty : sdlj.SystemProductCode),
+                              }).ToList();
 
-                }
+                //int mapCount = resultList.Where(w => w.MapId != 0).Count();
+                //foreach (var item in RQ)
+                //{
+                //    var result = new ProductMappingLite_RS();
+
+                //    result.SessionId = item.SessionId;
+                //    result.SequenceNumber = item.SequenceNumber;
+                //    result.SupplierCode = item.SupplierCode;
+                //    result.SupplierProductCode = item.SupplierProductCode;
+                //    result.ProductType = item.ProductType;
+                //    result.SystemProductCode = string.Empty;
+
+                //    if (string.IsNullOrWhiteSpace(item.SupplierCode) || string.IsNullOrWhiteSpace(item.SupplierProductCode))
+                //    {
+                //        result.SystemProductCode = string.Empty;
+                //        resultList.Add(result);
+                //        result = null;
+                //        continue;
+                //    }
+                //    else
+                //    {
+                //        var searchMapResult = searchedData.Where(w => w.SupplierCode == item.SupplierCode.ToUpper() && w.SupplierProductCode == item.SupplierProductCode.ToUpper()).Select(s => s).FirstOrDefault();
+                //        if (searchMapResult != null)
+                //        {
+                //            result.SystemProductCode = searchMapResult.SystemProductCode;
+                //            result.MapId = searchMapResult.MapId;
+                //            resultList.Add(result);
+                //            result = null;
+                //        }
+                //        else
+                //        {
+                //            result.SystemProductCode = string.Empty;
+                //            resultList.Add(result);
+                //            result = null;
+                //        }
+                //    }
+
+                //}
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
+                //sp.Stop();
                 return response;
 
             }
@@ -387,7 +401,7 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
-        
+
         //public async Task<HttpResponseMessage> GetBulkProductMappingLite(List<Models.ProductMappingLite_RQ> RQ)
         //{
         //    try
