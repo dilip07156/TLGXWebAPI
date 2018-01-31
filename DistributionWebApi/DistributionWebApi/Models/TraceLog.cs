@@ -23,7 +23,7 @@ namespace DistributionWebApi.Models
         public string Application { get; set; }
         public string HostIp { get; set; }
         public int TotalRecords { get; set; }
-        public int ResponseTime { get; set; }
+        public double ResponseTime { get; set; }
 
     }
 }
