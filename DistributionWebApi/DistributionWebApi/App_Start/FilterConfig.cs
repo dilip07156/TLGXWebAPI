@@ -111,7 +111,7 @@ namespace DistributionWebApi
             nlog.Application = "TLGX_WEBAPI";
             nlog.HostIp = filterContext.Request.RequestUri.Authority;
             nlog.TotalRecords = 0;
-            nlog.ResponseTime = (ResponseDatetime - RequestDatetime).Milliseconds;
+            nlog.ResponseTime = (ResponseDatetime - RequestDatetime).TotalMilliseconds;
 
             try
             {
