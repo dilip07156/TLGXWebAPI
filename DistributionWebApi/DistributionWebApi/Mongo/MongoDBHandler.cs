@@ -33,8 +33,7 @@ namespace DistributionWebApi.Mongo
 
                 if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
                 {
-                    var credential = MongoCredential.CreateCredential(MongoDBServerAuthenticationDatabase, MongoDBServerUser, MongoDBServerPassword);
-                    mcs.Credentials = new[] { credential };
+                    mcs.Credential = MongoCredential.CreateCredential(MongoDBServerAuthenticationDatabase, MongoDBServerUser, MongoDBServerPassword);
                 }
 
                 _client = new MongoClient(mcs);
