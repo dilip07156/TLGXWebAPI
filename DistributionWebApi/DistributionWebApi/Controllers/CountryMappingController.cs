@@ -128,7 +128,7 @@ namespace DistributionWebApi.Controllers
         /// <returns>All Supplier Country Mapping</returns>
         [HttpGet]
         [Route("System/Country/CountryCode/{CountryCode}")]
-        [ResponseType(typeof(TlgxCountryMapping_RS))]
+        [ResponseType(typeof(SystemCountryMapping_RS))]
         public async Task<HttpResponseMessage> GetAllSupplierCountryMappingByCode(string CountryCode)
         {
             try
@@ -141,7 +141,7 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
 
                 var searchResult = await collection.Find(filter)
-                                    .Project(x => new TlgxCountryMapping_RS
+                                    .Project(x => new SystemCountryMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         SupplierCountryCode = x.SupplierCountryCode,
