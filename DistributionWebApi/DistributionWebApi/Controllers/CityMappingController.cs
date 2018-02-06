@@ -18,7 +18,7 @@ using System.Web.Http.Description;
 namespace DistributionWebApi.Controllers
 {
     /// <summary>
-    /// Used to retrieve TLGX Mapping data for specific City and Supplier pairs. 
+    /// Used to retrieve System City Mapping data for specific City and Supplier pairs. 
     /// </summary>
 
     [RoutePrefix("Mapping")]
@@ -30,14 +30,14 @@ namespace DistributionWebApi.Controllers
         protected static IMongoDatabase _database;
 
         /// <summary>
-        /// Retrieves Supplier City Mapping for TLGX Country Name, City Name and Supplier Name
+        /// Retrieves Supplier City Mapping for System Country Name, City Name and Supplier Name
         /// </summary>
-        /// <param name="CountryName">TLGX Country Name</param>
-        /// <param name="CityName">TLGX City Name</param>
-        /// <param name="SupplierName">TLGX Supplier Name</param>
-        /// <returns>TLGX Supplier City Mapping</returns>
+        /// <param name="CountryName">System Country Name</param>
+        /// <param name="CityName">System City Name</param>
+        /// <param name="SupplierName">System Supplier Name</param>
+        /// <returns>Supplier City Mapping</returns>
         [HttpGet]
-        [Route("TLGX/City/CountryName/{CountryName}/CityName/{CityName}/SupplierName/{SupplierName}")]
+        [Route("System/City/CountryName/{CountryName}/CityName/{CityName}/SupplierName/{SupplierName}")]
         [ResponseType(typeof(CityMapping_RS))]
         public async Task<HttpResponseMessage> GetSupplierCityMappingByName(string CountryName, string CityName, string SupplierName)
         {
@@ -45,29 +45,28 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves Supplier City Mapping for TLGX Country Code, City Name and Supplier Code
+        /// Retrieves System City Mapping for System City Code and Supplier Code
         /// </summary>
-        /// <param name="CountryCode">TLGX Country Code</param>
-        /// <param name="CityCode">TLGX City Code</param>
-        /// <param name="SupplierCode">TLGX Supplier Code</param>
-        /// <returns>TLGX Supplier City Mapping</returns>
+        /// <param name="CityCode">System City Code</param>
+        /// <param name="SupplierCode">Supplier Code</param>
+        /// <returns>System City Mapping</returns>
         [HttpGet]
-        [Route("TLGX/City/CountryCode/{CountryCode}/CityCode/{CityCode}/SupplierCode/{SupplierCode}")]
+        [Route("System/City/CityCode/{CityCode}/SupplierCode/{SupplierCode}")]
         [ResponseType(typeof(CityMapping_RS))]
-        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CountryCode, string CityCode, string SupplierCode)
+        public async Task<HttpResponseMessage> GetSupplierCityMappingByCode(string CityCode, string SupplierCode)
         {
-            return await GetCityMapping(string.Empty, CountryCode, string.Empty, CityCode, string.Empty, SupplierCode, string.Empty, string.Empty, string.Empty, string.Empty);
+            return await GetCityMapping(string.Empty, string.Empty, string.Empty, CityCode, string.Empty, SupplierCode, string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
 
         /// <summary>
-        /// Retrieves All Supplier City Mapping for TLGX City Code
+        /// Retrieves All Supplier City Mapping for System City Code
         /// </summary>
-        /// <param name="CityCode">TLGX City Code</param>
-        /// <returns>All TLGX Supplier City Mapping</returns>
+        /// <param name="CityCode">System City Code</param>
+        /// <returns>All Supplier City Mapping</returns>
         [HttpGet]
-        [Route("TLGX/City/CityCode/{CityCode}")]
-        [ResponseType(typeof(TlgxCityMapping_RS))]
+        [Route("System/City/CityCode/{CityCode}")]
+        [ResponseType(typeof(SystemCityMapping_RS))]
         public async Task<HttpResponseMessage> GetAllSupplierCityMappingByCode(string CityCode)
         {
             try
@@ -80,7 +79,7 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode, RegexOptions.IgnoreCase)));
 
                 var searchResult = await collection.Find(filter)
-                                    .Project(x => new TlgxCityMapping_RS
+                                    .Project(x => new SystemCityMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
@@ -100,16 +99,15 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Code
+        /// Retrieves System City Mapping for Supplier City Code and Supplier Code
         /// </summary>
-        /// <param name="CountryCode">Supplier Country Code</param>
         /// <param name="CityCode">Supplier City Code</param>
-        /// <param name="SupplierCode">TLGX Supplier Code</param>
-        /// <returns>TLGX City Master</returns>
+        /// <param name="SupplierCode">Supplier Code</param>
+        /// <returns>System City Mapping</returns>
         [HttpGet]
-        [Route("Supplier/City/SupplierCountryCode/{CountryCode}/SupplierCityCode/{CityCode}/SupplierCode/{SupplierCode}")]
+        [Route("Supplier/City/SupplierCityCode/{CityCode}/SupplierCode/{SupplierCode}")]
         [ResponseType(typeof(CityMapping_RS))]
-        public async Task<HttpResponseMessage> GetSystemCityMappingByCode(string CountryCode, string CityCode, string SupplierCode)
+        public async Task<HttpResponseMessage> GetSystemCityMappingByCode(string CityCode, string SupplierCode)
         {
             return await GetCityMapping(string.Empty,
                 string.Empty,
@@ -118,18 +116,18 @@ namespace DistributionWebApi.Controllers
                 string.Empty,
                 SupplierCode,
                 string.Empty,
-                CountryCode,
+                string.Empty,
                 string.Empty,
                 CityCode);
         }
 
         /// <summary>
-        /// Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Name
+        /// Retrieves System City Mapping for Supplier Country Code, City Code and Supplier Name
         /// </summary>
         /// <param name="CountryName">Supplier Country Name</param>
         /// <param name="CityName">Supplier City Name</param>
-        /// <param name="SupplierName">TLGX Supplier Name</param>
-        /// <returns>TLGX City Master</returns>
+        /// <param name="SupplierName">Supplier Name</param>
+        /// <returns>System City Mapping</returns>
         [HttpGet]
         [Route("Supplier/City/SupplierCountryName/{CountryName}/SupplierCityName/{CityName}/SupplierCode/{SupplierName}")]
         [ResponseType(typeof(CityMapping_RS))]

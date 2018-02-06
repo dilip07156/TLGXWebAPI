@@ -366,9 +366,9 @@ namespace DistributionWebApi.Controllers
         /// </summary>
         /// <param name="ProductCode"></param>
         /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code which is sent in request</returns>
-        [HttpPost]
-        [Route("TLGX/Product/ProductCode/{ProductCode}")]
-        [ResponseType(typeof(List<TlgxProductMapping_RS>))]
+        [HttpGet]
+        [Route("System/Product/ProductCode/{ProductCode}")]
+        [ResponseType(typeof(List<SystemProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetAllSupplierProductMappingByCode(string ProductCode)
         {
             try
@@ -382,11 +382,12 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(ProductCode, RegexOptions.IgnoreCase)));
 
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new TlgxProductMapping_RS
+                                    .Project(x => new SystemProductMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
+                                        SystemProductCode = x.SystemProductCode
                                     })
                                     .ToListAsync();
 
@@ -401,6 +402,95 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// Retrieves System Hotel Mapping for System Product Code and Supplier Code
+        /// </summary>
+        /// <param name="ProductCode">System Product Code</param>
+        /// <param name="SupplierCode">TLGX Supplier Code</param>
+        /// <returns>System Hotel Mapping</returns>
+        [HttpGet]
+        [Route("System/Product/ProductCode/{ProductCode}/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        public async Task<HttpResponseMessage> GetSupplierProductMappingByCode(string ProductCode, string SupplierCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+
+                FilterDefinition<ProductMappingLite> filter;
+                filter = Builders<ProductMappingLite>.Filter.Empty;
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(ProductCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new SystemProductMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierProductCode = x.SupplierProductCode,
+                                        SystemProductCode = x.SystemProductCode
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves System Hotel Mapping for Supplier ProductCode and Supplier Code
+        /// </summary>
+        /// <param name="SupplierProductCode">Supplier Product Code</param>
+        /// <param name="SupplierCode">TLGX Supplier Code</param>
+        /// <returns>System Hotel Mapping</returns>
+        [HttpGet]
+        [Route("Supplier/Product/SupplierProductCode/{SupplierProductCode}/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        public async Task<HttpResponseMessage> GetSystemProductMappingByCode(string SupplierProductCode, string SupplierCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+
+                FilterDefinition<ProductMappingLite> filter;
+                filter = Builders<ProductMappingLite>.Filter.Empty;
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierProductCode, new BsonRegularExpression(new Regex(SupplierProductCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new SystemProductMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierProductCode = x.SupplierProductCode,
+                                        SystemProductCode = x.SystemProductCode
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
 
         //public async Task<HttpResponseMessage> GetBulkProductMappingLite(List<Models.ProductMappingLite_RQ> RQ)
         //{
