@@ -119,7 +119,7 @@ namespace DistributionWebApi.Models
 
     }
 
-    public class TlgxCountryMapping_RS
+    public class SystemCountryMapping_RS
     {
         /// <summary>
         /// TLGX Supplier Code
@@ -204,7 +204,7 @@ namespace DistributionWebApi.Models
         public int MapId { get; set; }
     }
 
-    public class TlgxCityMapping_RS
+    public class SystemCityMapping_RS
     {
         /// <summary>
         /// TLGX Supplier Code. This field should always be defined.
@@ -428,18 +428,22 @@ namespace DistributionWebApi.Models
         public int MapId { get; set; }
     }
 
-    public class TlgxProductMapping_RS
+    public class SystemProductMapping_RS
     {
         /// <summary>
-        /// Original value submitted in Request
+        /// Supplier Code
         /// </summary>
         public string SupplierCode { get; set; }
         /// <summary>
-        /// Original value submitted in Request
+        /// Supplier Specific Product Code
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System Product Code
+        /// </summary>
+        public string SystemProductCode { get; set; }
+        /// <summary>
+        /// System Mapping Id
         /// </summary>
         public int MapId { get; set; }
     }

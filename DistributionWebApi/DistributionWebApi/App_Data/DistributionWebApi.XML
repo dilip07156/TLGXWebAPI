@@ -624,7 +624,7 @@
         </member>
         <member name="T:DistributionWebApi.Controllers.CityMappingController">
             <summary>
-            Used to retrieve TLGX Mapping data for specific City and Supplier pairs. 
+            Used to retrieve System City Mapping data for specific City and Supplier pairs. 
             </summary>
         </member>
         <member name="F:DistributionWebApi.Controllers.CityMappingController._database">
@@ -634,46 +634,44 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSupplierCityMappingByName(System.String,System.String,System.String)">
             <summary>
-            Retrieves Supplier City Mapping for TLGX Country Name, City Name and Supplier Name
+            Retrieves Supplier City Mapping for System Country Name, City Name and Supplier Name
             </summary>
-            <param name="CountryName">TLGX Country Name</param>
-            <param name="CityName">TLGX City Name</param>
-            <param name="SupplierName">TLGX Supplier Name</param>
-            <returns>TLGX Supplier City Mapping</returns>
+            <param name="CountryName">System Country Name</param>
+            <param name="CityName">System City Name</param>
+            <param name="SupplierName">System Supplier Name</param>
+            <returns>Supplier City Mapping</returns>
         </member>
-        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSupplierCityMappingByCode(System.String,System.String,System.String)">
+        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSupplierCityMappingByCode(System.String,System.String)">
             <summary>
-            Retrieves Supplier City Mapping for TLGX Country Code, City Name and Supplier Code
+            Retrieves System City Mapping for System City Code and Supplier Code
             </summary>
-            <param name="CountryCode">TLGX Country Code</param>
-            <param name="CityCode">TLGX City Code</param>
-            <param name="SupplierCode">TLGX Supplier Code</param>
-            <returns>TLGX Supplier City Mapping</returns>
+            <param name="CityCode">System City Code</param>
+            <param name="SupplierCode">Supplier Code</param>
+            <returns>System City Mapping</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CityMappingController.GetAllSupplierCityMappingByCode(System.String)">
             <summary>
-            Retrieves All Supplier City Mapping for TLGX City Code
+            Retrieves All Supplier City Mapping for System City Code
             </summary>
-            <param name="CityCode">TLGX City Code</param>
-            <returns>All TLGX Supplier City Mapping</returns>
+            <param name="CityCode">System City Code</param>
+            <returns>All Supplier City Mapping</returns>
         </member>
-        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSystemCityMappingByCode(System.String,System.String,System.String)">
+        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSystemCityMappingByCode(System.String,System.String)">
             <summary>
-            Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Code
+            Retrieves System City Mapping for Supplier City Code and Supplier Code
             </summary>
-            <param name="CountryCode">Supplier Country Code</param>
             <param name="CityCode">Supplier City Code</param>
-            <param name="SupplierCode">TLGX Supplier Code</param>
-            <returns>TLGX City Master</returns>
+            <param name="SupplierCode">Supplier Code</param>
+            <returns>System City Mapping</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CityMappingController.GetSystemCityMappingByName(System.String,System.String,System.String)">
             <summary>
-            Retrieves TLGX City Master for Supplier Country Code, City Code and Supplier Name
+            Retrieves System City Mapping for Supplier Country Code, City Code and Supplier Name
             </summary>
             <param name="CountryName">Supplier Country Name</param>
             <param name="CityName">Supplier City Name</param>
-            <param name="SupplierName">TLGX Supplier Name</param>
-            <returns>TLGX City Master</returns>
+            <param name="SupplierName">Supplier Name</param>
+            <returns>System City Mapping</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.CityMappingController.GetCityMapping(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
@@ -925,6 +923,22 @@
             </summary>
             <param name="ProductCode"></param>
             <returns>A list of Supplier Code and Supplier Product code mapped to System product code which is sent in request</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSupplierProductMappingByCode(System.String,System.String)">
+            <summary>
+            Retrieves System Hotel Mapping for System Product Code and Supplier Code
+            </summary>
+            <param name="ProductCode">System Product Code</param>
+            <param name="SupplierCode">TLGX Supplier Code</param>
+            <returns>System Hotel Mapping</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSystemProductMappingByCode(System.String,System.String)">
+            <summary>
+            Retrieves System Hotel Mapping for Supplier ProductCode and Supplier Code
+            </summary>
+            <param name="SupplierProductCode">Supplier Product Code</param>
+            <param name="SupplierCode">TLGX Supplier Code</param>
+            <returns>System Hotel Mapping</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.RoomTypeMappingController">
             <summary>
@@ -2047,17 +2061,17 @@
             TLGX Mapping Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.SupplierCode">
+        <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.SupplierCode">
             <summary>
             TLGX Supplier Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.SupplierCountryCode">
+        <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.SupplierCountryCode">
             <summary>
             Supplier-specific Country Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCountryMapping_RS.MapId">
+        <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.MapId">
             <summary>
             TLGX Mapping Id
             </summary>
@@ -2122,17 +2136,17 @@
             TLGX Supplier City Mapping Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.SupplierCode">
+        <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.SupplierCode">
             <summary>
             TLGX Supplier Code. This field should always be defined.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.SupplierCityCode">
+        <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.SupplierCityCode">
             <summary>
             Supplier-specific City Name
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxCityMapping_RS.MapId">
+        <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.MapId">
             <summary>
             TLGX Mapping Id
             </summary>
@@ -2334,19 +2348,24 @@
             TLGX Mapping Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.SupplierCode">
+        <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.SupplierCode">
             <summary>
-            Original value submitted in Request
+            Supplier Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.SupplierProductCode">
+        <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.SupplierProductCode">
             <summary>
-            Original value submitted in Request
+            Supplier Specific Product Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TlgxProductMapping_RS.MapId">
+        <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.SystemProductCode">
             <summary>
-            TLGX Mapping Id
+            System Product Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.MapId">
+            <summary>
+            System Mapping Id
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ProductMappingLite_RQ">
