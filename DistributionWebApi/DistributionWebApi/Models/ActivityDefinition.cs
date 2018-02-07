@@ -155,7 +155,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// This field specifies for whom this activity is suitable.
         /// </summary>
-        public string SuitableFor { get; set; }
+        public string[] SuitableFor { get; set; }
         /// <summary>
         /// This is a Longer description of the Activity.
         /// </summary>
@@ -398,7 +398,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// This field specifies for whom this activity is suitable.
         /// </summary>
-        public string SuitableFor { get; set; }
+        public string[] SuitableFor { get; set; }
         /// <summary>
         /// This is a Longer description of the Activity.
         /// </summary>
