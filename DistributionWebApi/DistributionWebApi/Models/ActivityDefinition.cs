@@ -26,11 +26,17 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// Your System Identification Code as given by Mapping Team. (Don't send this if you are using system country codes)
         /// </summary>
+        [Required]
         public string RequestingSupplierCode { get; set; }
         /// <summary>
         /// A collection of Country Codes to serarch for. The values should be your system Country Codes.
         /// </summary>
+        [Required]
         public string[] CountryCodes { get; set; }
+        /// <summary>
+        /// This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
+        /// </summary>
+        public string[] FilterBySuppliers { get; set; }
     }
 
     /// <summary>
@@ -41,19 +47,27 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// How many Search Results do you wish to receive per request?
         /// </summary>
+        [Required]
         public int PageSize { get; set; }
         /// <summary>
         /// Which Page Number you wish to retrieve from the Search Results set
         /// </summary>
+        [Required]
         public int PageNo { get; set; }
         /// <summary>
         /// Your System Identification Code as given by Mapping Team (Don't send this if you are using system city codes)
         /// </summary>
+        [Required]
         public string RequestingSupplierCode { get; set; }
         /// <summary>
         /// A collection of City Codes to serarch for. The values should be your system Country Codes.
         /// </summary>
+        [Required]
         public string[] CityCodes { get; set; }
+        /// <summary>
+        /// This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
+        /// </summary>
+        public string[] FilterBySuppliers { get; set; }
     }
 
     /// <summary>
@@ -64,19 +78,27 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// How many Search Results do you wish to receive per request?
         /// </summary>
+        [Required]
         public int PageSize { get; set; }
         /// <summary>
         /// Which Page Number you wish to retrieve from the Search Results set
         /// </summary>
+        [Required]
         public int PageNo { get; set; }
         /// <summary>
         /// Your System Identification Code as given by Mapping Team
         /// </summary>
+        [Required]
         public string RequestingSupplierCode { get; set; }
         /// <summary>
         /// A collection of Activity Typesto serarch for. The values should be our Activity Codes, which can be retrieved from the Service GetActivityClassificationStructure.
         /// </summary>
+        [Required]
         public string[] ActivityTypes { get; set; }
+        /// <summary>
+        /// This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
+        /// </summary>
+        public string[] FilterBySuppliers { get; set; }
     }
 
     /// <summary>

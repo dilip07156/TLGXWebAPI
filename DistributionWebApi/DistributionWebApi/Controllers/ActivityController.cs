@@ -85,7 +85,13 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CountryCode", arrayOfStrings);
-
+                if (param.FilterBySuppliers != null)
+                {
+                    if (param.FilterBySuppliers.Length > 0)
+                    {
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.ToLower()));
+                    }
+                }
 
                 SortDefinition<BsonDocument> sortByPrices;
                 sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price"); //Filter.Eq("Prices.PriceFor", "Product").
@@ -237,6 +243,14 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CityCode", arrayOfStrings);
 
+                if(param.FilterBySuppliers != null)
+                {
+                    if (param.FilterBySuppliers.Length > 0)
+                    {
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.ToLower()));
+                    }
+                }
+
                 var TotalRecords = await collectionActivity.Find(filter).CountAsync();
 
                 SortDefinition<BsonDocument> sortByPrices;
@@ -363,6 +377,13 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("Type", param.ActivityTypes);
+                if (param.FilterBySuppliers != null)
+                {
+                    if (param.FilterBySuppliers.Length > 0)
+                    {
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers);
+                    }
+                }
 
                 SortDefinition<BsonDocument> sortByPrices;
                 sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
