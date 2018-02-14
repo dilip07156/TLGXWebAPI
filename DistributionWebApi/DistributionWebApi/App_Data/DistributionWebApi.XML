@@ -1013,6 +1013,11 @@
             A collection of Country Codes to serarch for. The values should be your system Country Codes.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ.FilterBySuppliers">
+            <summary>
+            This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByCity_RQ">
              <summary>
             This is the request format for City-based Activity Mapping Searches. It is a paged request/response service.
@@ -1038,6 +1043,11 @@
             A collection of City Codes to serarch for. The values should be your system Country Codes.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByCity_RQ.FilterBySuppliers">
+            <summary>
+            This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByTypes_RQ">
             <summary>
             This Service allows the Activity Static Data to be queried based on the Type of Activity. System Masters can be retrieved from 
@@ -1061,6 +1071,11 @@
         <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByTypes_RQ.ActivityTypes">
             <summary>
             A collection of Activity Typesto serarch for. The values should be our Activity Codes, which can be retrieved from the Service GetActivityClassificationStructure.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivitySearchByTypes_RQ.FilterBySuppliers">
+            <summary>
+            This is Array of System Supplier Codes. If specified, records will be filtered by mentioned supplier codes
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivityDefinition">
