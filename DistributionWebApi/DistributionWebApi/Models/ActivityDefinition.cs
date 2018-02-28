@@ -820,6 +820,14 @@ namespace DistributionWebApi.Models.Activity
         /// The Type of the Activity Option
         /// </summary>
         public string ActivityType { get; set; }
+        /// <summary>
+        /// Activity Language Code
+        /// </summary>
+        public string LanguageCode { get; set; }
+        /// <summary>
+        /// Activity Language
+        /// </summary>
+        public string Language { get; set; }
     }
 
     /// <summary>
@@ -912,7 +920,7 @@ namespace DistributionWebApi.Models.Activity
     }
 
     /// <summary>
-    /// 
+    /// Days of Week with Operating Days
     /// </summary>
     public class DaysOfWeek
     {
@@ -934,6 +942,14 @@ namespace DistributionWebApi.Models.Activity
         public string Session { get; set; }
         public string OperatingFromDate { get; set; }
         public string OperatingToDate { get; set; }
+        /// <summary>
+        /// Departure Code based on Operating Day and time (Not all supplier provides this)
+        /// </summary>
+        public string DepartureCode { get; set; }
+        /// <summary>
+        /// Departure Point based on Operating Day and time (Not all supplier provides this)
+        /// </summary>
+        public string DeparturePoint { get; set; }
     }
 
     /// <summary>

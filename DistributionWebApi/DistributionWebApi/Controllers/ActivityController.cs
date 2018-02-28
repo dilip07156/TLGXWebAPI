@@ -534,6 +534,46 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
+        /// Retrieves the Full Activity Product Static Definition based on the Supplier Code and Supplier Product Code
+        /// </summary>
+        /// <param name="SupplierCode">Supplier Code</param>
+        /// <param name="ProductCode">Supplier Product Code</param>
+        /// <returns>Full Activity Static Data Definition for use on a Product Detail Page. 
+        /// The data is constructed of Supplier static data and the quality may vary dependent on the information provided by the Supplier. 
+        /// Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
+        /// Realtime when calling this Service as additional information may be returned then.</returns>
+        [Route("Details/SupplierCode/{SupplierCode}/SupplierProductCode/{ProductCode}")]
+        [HttpGet]
+        [ResponseType(typeof(ActivityDefinition))]
+        public async Task<HttpResponseMessage> GetActivityDetailsBySupplierAndProductCode(string SupplierCode,string ProductCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
+
+                FilterDefinition<ActivityDefinition> filter;
+                filter = Builders<ActivityDefinition>.Filter.Empty;
+
+                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierCompanyCode, SupplierCode.Trim().ToLower());
+                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierProductCode, ProductCode.Trim().ToUpper());
+
+                var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
         /// This will return all master key value pair related to activity
         /// </summary>
         /// <returns>A key value pair of activity master attribute type and attribute values</returns>

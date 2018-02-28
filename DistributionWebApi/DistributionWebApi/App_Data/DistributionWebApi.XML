@@ -616,6 +616,17 @@
             Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
             Realtime when calling this Service as additional information may be returned then.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityDetailsBySupplierAndProductCode(System.String,System.String)">
+            <summary>
+            Retrieves the Full Activity Product Static Definition based on the Supplier Code and Supplier Product Code
+            </summary>
+            <param name="SupplierCode">Supplier Code</param>
+            <param name="ProductCode">Supplier Product Code</param>
+            <returns>Full Activity Static Data Definition for use on a Product Detail Page. 
+            The data is constructed of Supplier static data and the quality may vary dependent on the information provided by the Supplier. 
+            Whilst Price information may be contained within the Product Definition, it is recommended that a formal Availability or Pricing Request be made to the Supplier in
+            Realtime when calling this Service as additional information may be returned then.</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.ActivityMappingController.GetActivityMasters">
             <summary>
             This will return all master key value pair related to activity
@@ -1843,6 +1854,16 @@
             The Type of the Activity Option
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ProductOptions.LanguageCode">
+            <summary>
+            Activity Language Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ProductOptions.Language">
+            <summary>
+            Activity Language
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ClassificationAttrributes">
             <summary>
             This will contain all classification attribute of Sub Type INTERNAL.
@@ -1933,7 +1954,17 @@
         </member>
         <member name="T:DistributionWebApi.Models.Activity.DaysOfWeek">
             <summary>
-            
+            Days of Week with Operating Days
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DepartureCode">
+            <summary>
+            Departure Code based on Operating Day and time (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DeparturePoint">
+            <summary>
+            Departure Point based on Operating Day and time (Not all supplier provides this)
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.SimliarProducts">
