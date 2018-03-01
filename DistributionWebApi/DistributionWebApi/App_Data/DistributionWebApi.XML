@@ -951,6 +951,24 @@
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>System Hotel Mapping</returns>
         </member>
+        <member name="T:DistributionWebApi.Controllers.ProductStaticController">
+            <summary>
+            This Controls to fetch Static Data for Accommodation
+            </summary>
+        </member>
+        <member name="F:DistributionWebApi.Controllers.ProductStaticController._database">
+            <summary>
+            static object of Mongo DB Class
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.ProductStaticController.GetProductStaticData(System.Collections.Generic.List{DistributionWebApi.Models.Static.StaticData_RQ})">
+            <summary>
+            Retrieves a Search Result Accommodation Static Data List of based on a Collection of Supplier Code combined with a Supplier Product Code.
+            </summary>
+            <param name="param"></param>
+            <returns>Returns a Collection of Search Results. Search response will contain requested data and a result field againt each request.
+            </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.RoomTypeMappingController">
             <summary>
             Used to retrieve TLGX Mapping data for Room Type. 
