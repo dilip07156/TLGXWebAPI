@@ -30,7 +30,7 @@ namespace DistributionWebApi.Controllers
         /// <summary>
         /// Retrieves a Search Result Accommodation Static Data List of based on a Collection of Supplier Code combined with a Supplier Product Code.
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="param">Collection of multiple requests</param>
         /// <returns>Returns a Collection of Search Results. Search response will contain requested data and a result field againt each request.
         /// </returns>
         [Route("Accommodation/Get")]

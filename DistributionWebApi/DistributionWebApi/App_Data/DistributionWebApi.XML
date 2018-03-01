@@ -965,7 +965,7 @@
             <summary>
             Retrieves a Search Result Accommodation Static Data List of based on a Collection of Supplier Code combined with a Supplier Product Code.
             </summary>
-            <param name="param"></param>
+            <param name="param">Collection of multiple requests</param>
             <returns>Returns a Collection of Search Results. Search response will contain requested data and a result field againt each request.
             </returns>
         </member>
@@ -1016,6 +1016,732 @@
             </summary>
             <param name="Name">TLGX Supplier Name. This can be retrieved using Supplier Master Service.</param>
             <returns>List of Supplier</returns>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.StaticData_RQ">
+            <summary>
+            product static data request format. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticData_RQ.SupplierCode">
+            <summary>
+            Supplier company code as mapped against system
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticData_RQ.SupplierProductCode">
+            <summary>
+            Supplier specific product code (not a mapping system specific product code)
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.StaticData_RS">
+            <summary>
+            response containing a collection of requested product details
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticData_RS.SupplierCode">
+            <summary>
+            Supplier company code as mapped against system as received in request
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticData_RS.SupplierProductCode">
+            <summary>
+            Supplier specific product code (not a mapping system specific product code)  as received in request
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticData_RS.Result">
+            <summary>
+            Product static information. If the search result is not successfull then a null value will be returned.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Accomodation">
+            <summary>
+            Contains the base info for all accommodation products
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.RoomIds">
+            <summary>
+            A collection of room ids
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.AccomodationInfo">
+            <summary>
+            Key information about the product (Includes Address, Description, Contact info etc)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Overview">
+            <summary>
+            Classification info about the product includes usp, recommendations about the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.StaffContactInfo">
+            <summary>
+            future use for home stay
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Facility">
+            <summary>
+            Product facilities and amenities information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.PassengerOccupancy">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Directions">
+            <summary>
+            how to get to the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.InAndAround">
+            <summary>
+            near by places includes attractions, musuems etc
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Landmark">
+            <summary>
+            near by famous landmarks
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Rule">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Media">
+            <summary>
+            Images/ Videos of the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Updates">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.SafetyRegulations">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Ancillary">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.ProductStatus">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.AccomodationInfo">
+            <summary>
+            Classification info for Accommodation product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyId">
+            <summary>
+             Supplier Company Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyName">
+            <summary>
+            Supplier Company Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ProductCatSubType">
+            <summary>
+            Accommodation Type : Including Hotel, Motel, Apartment, HomeStay, Caravan Park
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsMysteryProduct">
+            <summary>
+            Is this a mystery product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CommonProductId">
+            <summary>
+            System Product Id, if mapped to system master product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyProductId">
+            <summary>
+            Supplier Product code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Name">
+            <summary>
+            Accommodation Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.FinanceControlId">
+            <summary>
+            Not specified (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Chain">
+            <summary>
+            Chain of the accommodation product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Brand">
+            <summary>
+            Brand of the accommodation product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Affiliations">
+            <summary>
+            Not specified (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Rating">
+            <summary>
+            Product star rating
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyRating">
+            <summary>
+            Internal Product star rating
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.RatingDatedOn">
+            <summary>
+            Internal Product star rating reviewed on
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.NoOfFloors">
+            <summary>
+            How many floor does the product have
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.NoOfRooms">
+            <summary>
+            How many room does the product have
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.RecommendedFor">
+            <summary>
+            Is this a recommended product ?
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.DisplayName">
+            <summary>
+            The display name for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsTwentyFourHourCheckout">
+            <summary>
+            Does the accommodation offer 24hr checkout (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CheckInTime">
+            <summary>
+            What is the check in time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CheckOutTime">
+            <summary>
+            What is the check out time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.FamilyDetails">
+            <summary>
+            (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ResortType">
+            <summary>
+            (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Address">
+            <summary>
+            Contains the address information for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ContactDetails">
+            <summary>
+            Contains the contact information for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.General">
+            <summary>
+            Contains general descriptive information about the product
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Address">
+            <summary>
+            Holds the address information for a product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.HouseNumber">
+            <summary>
+            Flat /  House / Building Block Number
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Street">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Street2">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Street3">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Street4">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Street5">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Zone">
+            <summary>
+            (for future use)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.PostalCode">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Country">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.State">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.City">
+            <summary>
+            Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Area">
+            <summary>
+            Address detailing - First level below the city
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Location">
+            <summary>
+            Address detailing - Second level below the city 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Geometry">
+            <summary>
+            Address detailing (Latitude and Longitude)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Geometry.Coordinates">
+            <summary>
+            Latitude, Longitude
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.ContactDetails">
+            <summary>
+            Specifies the contact information for a product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.ContactDetails.Phone">
+            <summary>
+            Telephone number
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.ContactDetails.Fax">
+            <summary>
+            Fax number
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.ContactDetails.Website">
+            <summary>
+            Website URL for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.ContactDetails.EmailAddress">
+            <summary>
+            general email address of the product
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.TelephoneFormat">
+            <summary>
+            Structure of the telephone / fax format
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.TelephoneFormat.CountryCode">
+            <summary>
+            international country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.TelephoneFormat.CityCode">
+            <summary>
+            international city code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.TelephoneFormat.Number">
+            <summary>
+            contact number of the product
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.General">
+            <summary>
+            Structure to hold the general information for a product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.Cfp">
+            <summary>
+            Carbon foot print
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.YearBuilt">
+            <summary>
+            When was the product built
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.YearRenovated">
+            <summary>
+            When was the product renovated
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.AwardsReceived">
+            <summary>
+            Awards received by the product 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.Extras">
+            <summary>
+            Contains descriptions 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.InternalRemarks">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.General.CopiedFrom">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Extras">
+            <summary>
+            Sturcuture to hold descriptions information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Extras.Label">
+            <summary>
+            Product description type (e.g. Short / Long)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Extras.Description">
+            <summary>
+            Product description
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Overview">
+            <summary>
+            Holds classification information for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.Duration">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.Interest">
+            <summary>
+            is the product recommended for any particular interest
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.Usp">
+            <summary>
+            unique selling points
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.HashTag">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.Highlights">
+            <summary>
+            any particular highlights for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.SellingTips">
+            <summary>
+            unique selling trips 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Overview.IsCompanyRecommended">
+            <summary>
+            is the product recommended
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Duration">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.StaffContactInfo">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.HostFamilyDetails">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Members">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Childrens">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Pets">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.CertificationDetails">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.LocationDetails">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Facility">
+            <summary>
+            the facilities of the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.Category">
+            <summary>
+            facility category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.Type">
+            <summary>
+            the type of facility
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.Desc">
+            <summary>
+            description of facility
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.OperationalTimeFrom">
+            <summary>
+            starttime of facility (if applicable)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.OperationalTimeTo">
+            <summary>
+            endtime of facility (if applicable)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.Duration">
+            <summary>
+            duration of facility (if applicable)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.IsChargeable">
+            <summary>
+            if the facility is chargable
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.PassengerOccupancy">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Type1">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.AgeFor">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Type2">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Distance">
+            <summary>
+            structure to hold the mesurement information
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Directions">
+            <summary>
+            directions to landmark from the property
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.InAndAround">
+            <summary>
+            near by places of the property includes museums, attractions etc
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.InAndAround.PlaceCategory">
+            <summary>
+            Category of the near by places
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.InAndAround.PlaceName">
+            <summary>
+            Name of the near by places
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.InAndAround.DistanceFromProperty">
+            <summary>
+            Distance From Property
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.InAndAround.LocationHighlights">
+            <summary>
+            any specific highlights about this place
+            </summary>
+            
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.InAndAround.Description">
+            <summary>
+            Description about this place
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Landmark">
+            <summary>
+            near by landmarks of the property
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Landmark.PlaceCategory">
+            <summary>
+            Category of the near by places
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Landmark.PlaceName">
+            <summary>
+            Name of the near by places
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Landmark.DistanceFromProperty">
+            <summary>
+            Distance From Property
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Landmark.Description">
+            <summary>
+            Description about this place
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Rule">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.StaticMedia">
+            <summary>
+            images and videos of the propertys
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.FileCategory">
+            <summary>
+            Media File category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.FileType">
+            <summary>
+            Image / Video
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.FileName">
+            <summary>
+            Path / URL of the media
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.Description">
+            <summary>
+            Description of the media
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.Category">
+            <summary>
+            Media category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.MediaPosition">
+            <summary>
+            Display order of the media
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.From">
+            <summary>
+            Valid from date
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.To">
+            <summary>
+            Valid to date
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Updates">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.DescriptionType">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Display">
+            <summary>
+            c
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.ModeOfCommunication">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.SafetyRegulations">
+            <summary>
+            Safety Regulations for the product
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Ancillary">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.ProductStatus">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Deactivated">
+            <summary>
+            for future use
+            </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ">
             <summary>
