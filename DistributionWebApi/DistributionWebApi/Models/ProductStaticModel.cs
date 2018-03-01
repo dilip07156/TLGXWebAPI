@@ -38,7 +38,7 @@ namespace DistributionWebApi.Models.Static
         public List<InAndAround> InAndAround { get; set; }
         public List<Landmark> Landmark { get; set; }
         public List<Rule> Rule { get; set; }
-        public List<Media> Media { get; set; }
+        public List<StaticMedia> Media { get; set; }
         public List<Updates> Updates { get; set; }
         public List<SafetyRegulations> SafetyRegulations { get; set; }
         public List<Ancillary> Ancillary { get; set; }
@@ -384,7 +384,7 @@ namespace DistributionWebApi.Models.Static
         public string Description { get; set; }
     }
 
-    public class Media
+    public class StaticMedia
     {
         //[JsonProperty(Required = Required.Always)]
         public string MediaId { get; set; }
