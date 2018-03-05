@@ -172,6 +172,7 @@ namespace DistributionWebApi.Controllers
                         filter = Builders<BsonDocument>.Filter.Empty;
                         filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(item.SupplierCode, RegexOptions.IgnoreCase)));
                         filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierProductCode", new BsonRegularExpression(new Regex(item.SupplierProductCode, RegexOptions.IgnoreCase)));
+                        filter = filter & Builders<BsonDocument>.Filter.Eq("MappingStatus", "MAPPED");
 
                         BsonDocument searchResult = null;
                         if (item.ProductType.ToLower() == "hotel")
@@ -242,7 +243,6 @@ namespace DistributionWebApi.Controllers
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
                 return response;
             }
-
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace DistributionWebApi.Controllers
                 //sp.Start();
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
+                IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMapping");
                 //IMongoCollection<BsonDocument> collectionActivityMapping = _database.GetCollection<BsonDocument>("ActivityMappingLite");
 
                 var SupplierCodes = RQ.Select(x => x.SupplierCode.ToUpper()).Distinct().ToArray();
@@ -273,6 +273,7 @@ namespace DistributionWebApi.Controllers
 
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCode", SupplierCodes);
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierProductCode", SupplierProductCodes);
+                filter = filter & Builders<BsonDocument>.Filter.Eq("MappingStatus", "MAPPED");
 
                 ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("SupplierCode");
                 project = project.Exclude("_id");
@@ -375,11 +376,12 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
 
-                FilterDefinition<ProductMappingLite> filter;
-                filter = Builders<ProductMappingLite>.Filter.Empty;
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(ProductCode, RegexOptions.IgnoreCase)));
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
@@ -418,12 +420,13 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
 
-                FilterDefinition<ProductMappingLite> filter;
-                filter = Builders<ProductMappingLite>.Filter.Empty;
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SystemProductCode, new BsonRegularExpression(new Regex(ProductCode, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
@@ -462,12 +465,13 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ProductMappingLite> collectionProductMapping = _database.GetCollection<ProductMappingLite>("ProductMappingLite");
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
 
-                FilterDefinition<ProductMappingLite> filter;
-                filter = Builders<ProductMappingLite>.Filter.Empty;
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierProductCode, new BsonRegularExpression(new Regex(SupplierProductCode, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<ProductMappingLite>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierProductCode, SupplierProductCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
@@ -491,6 +495,47 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves supplier hotel code array by system city code and supplier code
+        /// </summary>
+        /// <param name="SystemCityCode">System City Code</param>
+        /// <param name="SupplierCode">System Supplier Code</param>
+        /// <returns>Array of Supplier Product Codes for provided System City Code and Supplier Code</returns>
+        [HttpGet]
+        [Route("Supplier/Product/SystemCityCode/{SystemCityCode}/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(string[]))]
+        public async Task<HttpResponseMessage> GetListOfSupplierProductCodes(string SystemCityCode, string SupplierCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
+
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemCityCode, SystemCityCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new 
+                                    {
+                                        x.SupplierProductCode
+                                    })
+                                    .ToListAsync();
+                var searchResultArray = searchResult.Select(x => x.SupplierProductCode).Distinct().ToArray();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResultArray);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
 
         //public async Task<HttpResponseMessage> GetBulkProductMappingLite(List<Models.ProductMappingLite_RQ> RQ)
         //{

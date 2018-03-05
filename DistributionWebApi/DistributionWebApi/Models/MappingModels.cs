@@ -289,17 +289,22 @@ namespace DistributionWebApi.Models
     {
         public ObjectId Id { get; set; }
         public string SupplierCode { get; set; }
+
         public string SupplierProductCode { get; set; }
-        public string SystemProductCode { get; set; }
+        public string SupplierProductName { get; set; }
         public string SupplierCountryName { get; set; }
         public string SupplierCountryCode { get; set; }
         public string SupplierCityName { get; set; }
-        public string SupplierCityode { get; set; }
-        public string SystemProductType { get; set; }
-        public string SupplierProductName { get; set; }
+        public string SupplierCityCode { get; set; }
+
+        public string SystemProductCode { get; set; }
         public string SystemProductName { get; set; }
         public string SystemCountryName { get; set; }
         public string SystemCityName { get; set; }
+        public string SystemCountryCode { get; set; }
+        public string SystemCityCode { get; set; }
+        public string SystemProductType { get; set; }
+
         public string MappingStatus { get; set; }
         public int MapId { get; set; }
     }
