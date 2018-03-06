@@ -707,6 +707,13 @@
             <param name="RQ"></param>
             <returns>Target supplier City Name and City Code</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.CityMappingController.GetAllCityMappingsBySupplierCode(System.String)">
+            <summary>
+            Retrieves all city mappings filtered by supplier code
+            </summary>
+            <param name="SupplierCode">System specified supplier code</param>
+            <returns>List of city mapping response that contains supplier city details and mapped to system city details with map id</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -953,11 +960,11 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetListOfSupplierProductCodes(System.String,System.String)">
             <summary>
-            Retrieves supplier hotel code list by system city code and supplier code
+            Retrieves supplier hotel code array by system city code and supplier code
             </summary>
             <param name="SystemCityCode">System City Code</param>
             <param name="SupplierCode">System Supplier Code</param>
-            <returns>List of Supplier Product Codes</returns>
+            <returns>Array of Supplier Product Codes for provided System City Code and Supplier Code</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.ProductStaticController">
             <summary>
@@ -2761,7 +2768,7 @@
         </member>
         <member name="T:DistributionWebApi.Models.CountryMapping">
             <summary>
-            
+            structure of country mapping collection
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.CrossSupplierCountryMapping_RQ">
@@ -2821,27 +2828,27 @@
         </member>
         <member name="T:DistributionWebApi.Models.CountryMapping_RS">
             <summary>
-            TLGX Country Mapping Response. This universal format is used for both mapping and reverse mapping against TLGX / Supplier specific countries.
+            System Country Mapping Response. This universal format is used for both mapping and reverse mapping against System / Supplier specific countries.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.CountryName">
             <summary>
-            TLGX Country Name
+            System Country Name
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.CountryCode">
             <summary>
-            TLGX Country Code
+            System Country Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.SupplierName">
             <summary>
-            TLGX Supplier Name
+            System Supplier Name
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.SupplierCode">
             <summary>
-            TLGX Supplier Code
+            System Supplier Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.SupplierCountryCode">
@@ -2856,12 +2863,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.CountryMapping_RS.MapId">
             <summary>
-            TLGX Mapping Id
+            System Country Mapping Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.SupplierCode">
             <summary>
-            TLGX Supplier Code
+            System Supplier Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.SupplierCountryCode">
@@ -2871,7 +2878,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.SystemCountryMapping_RS.MapId">
             <summary>
-            TLGX Mapping Id
+            System Country Mapping Id
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.CityMapping">
+            <summary>
+            structure of city mapping collection
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.CityMapping_RS">
@@ -2881,32 +2893,32 @@
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.CountryName">
             <summary>
-            TLGX Country Name
+            System Country Name
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.CountryCode">
             <summary>
-            TLGX Country Code
+            System Country Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.CityName">
             <summary>
-            TLGX City Name
+            System City Name
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.CityCode">
             <summary>
-            TLGX City Code
+            System City Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.SupplierName">
             <summary>
-            TLGX Supplier Name
+            System Supplier Name
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.SupplierCode">
             <summary>
-            TLGX Supplier Code. This field should always be defined.
+            System Supplier Code. This field should always be defined.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.SupplierCountryName">
@@ -2931,12 +2943,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.CityMapping_RS.MapId">
             <summary>
-            TLGX Supplier City Mapping Id
+            System Supplier City Mapping Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.SupplierCode">
             <summary>
-            TLGX Supplier Code. This field should always be defined.
+            System Supplier Code. This field should always be defined.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.SupplierCityCode">
@@ -2946,7 +2958,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.SystemCityMapping_RS.MapId">
             <summary>
-            TLGX Mapping Id
+            System City Mapping Id
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.CrossSupplierCityMapping_RQ">
@@ -3012,6 +3024,96 @@
         <member name="P:DistributionWebApi.Models.CrossSupplierCityMapping_RS.Status">
             <summary>
             Mapping status. (If there are results then "Mapped" else "No results found")
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ProductMapping">
+            <summary>
+            product mapping collection structure
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.Id">
+            <summary>
+            Collection unique id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierCode">
+            <summary>
+            System supplier code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierProductCode">
+            <summary>
+            Supplier specific product code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierProductName">
+            <summary>
+            Supplier specific product name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierCountryName">
+            <summary>
+            Supplier specific country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierCountryCode">
+            <summary>
+            Supplier specific country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierCityName">
+            <summary>
+            Supplier specific city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SupplierCityCode">
+            <summary>
+            Supplier specific city code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemProductCode">
+            <summary>
+            system product code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemProductName">
+            <summary>
+            system product name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemCountryName">
+            <summary>
+            system country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemCityName">
+            <summary>
+            system city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemCountryCode">
+            <summary>
+            system country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemCityCode">
+            <summary>
+            system city code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.SystemProductType">
+            <summary>
+            system product type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.MappingStatus">
+            <summary>
+            mapping status of the supplier product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.MapId">
+            <summary>
+            system unique mapping id
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ProductMapping_RQ">
