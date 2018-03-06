@@ -14,7 +14,7 @@ namespace DistributionWebApi.Models
     }
 
     /// <summary>
-    /// 
+    /// structure of country mapping collection
     /// </summary>
     public class CountryMapping
     {
@@ -84,24 +84,24 @@ namespace DistributionWebApi.Models
     }
 
     /// <summary>
-    /// TLGX Country Mapping Response. This universal format is used for both mapping and reverse mapping against TLGX / Supplier specific countries.
+    /// System Country Mapping Response. This universal format is used for both mapping and reverse mapping against System / Supplier specific countries.
     /// </summary>
     public class CountryMapping_RS
     {
         /// <summary>
-        /// TLGX Country Name
+        /// System Country Name
         /// </summary>
         public string CountryName { get; set; }
         /// <summary>
-        /// TLGX Country Code
+        /// System Country Code
         /// </summary>
         public string CountryCode { get; set; }
         /// <summary>
-        /// TLGX Supplier Name
+        /// System Supplier Name
         /// </summary>
         public string SupplierName { get; set; }
         /// <summary>
-        /// TLGX Supplier Code
+        /// System Supplier Code
         /// </summary>
         public string SupplierCode { get; set; }
         /// <summary>
@@ -113,7 +113,7 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierCountryName { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System Country Mapping Id
         /// </summary>
         public int MapId { get; set; }
 
@@ -122,7 +122,7 @@ namespace DistributionWebApi.Models
     public class SystemCountryMapping_RS
     {
         /// <summary>
-        /// TLGX Supplier Code
+        /// System Supplier Code
         /// </summary>
         public string SupplierCode { get; set; }
         /// <summary>
@@ -130,11 +130,14 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierCountryCode { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System Country Mapping Id
         /// </summary>
         public int MapId { get; set; }
     }
 
+    /// <summary>
+    /// structure of city mapping collection
+    /// </summary>
     public class CityMapping
     {
         public ObjectId Id { get; set; }
@@ -159,27 +162,27 @@ namespace DistributionWebApi.Models
     public class CityMapping_RS
     {
         /// <summary>
-        /// TLGX Country Name
+        /// System Country Name
         /// </summary>
         public string CountryName { get; set; }
         /// <summary>
-        /// TLGX Country Code
+        /// System Country Code
         /// </summary>
         public string CountryCode { get; set; }
         /// <summary>
-        /// TLGX City Name
+        /// System City Name
         /// </summary>
         public string CityName { get; set; }
         /// <summary>
-        /// TLGX City Code
+        /// System City Code
         /// </summary>
         public string CityCode { get; set; }
         /// <summary>
-        /// TLGX Supplier Name
+        /// System Supplier Name
         /// </summary>
         public string SupplierName { get; set; }
         /// <summary>
-        /// TLGX Supplier Code. This field should always be defined.
+        /// System Supplier Code. This field should always be defined.
         /// </summary>
         public string SupplierCode { get; set; }
         /// <summary>
@@ -199,7 +202,7 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierCityCode { get; set; }
         /// <summary>
-        /// TLGX Supplier City Mapping Id
+        /// System Supplier City Mapping Id
         /// </summary>
         public int MapId { get; set; }
     }
@@ -207,7 +210,7 @@ namespace DistributionWebApi.Models
     public class SystemCityMapping_RS
     {
         /// <summary>
-        /// TLGX Supplier Code. This field should always be defined.
+        /// System Supplier Code. This field should always be defined.
         /// </summary>
         public string SupplierCode { get; set; }
         /// <summary>
@@ -215,7 +218,7 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierCityCode { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System City Mapping Id
         /// </summary>
         public int MapId { get; set; }
     }
@@ -285,27 +288,78 @@ namespace DistributionWebApi.Models
         public string Status { get; set; }
     }
 
+    /// <summary>
+    /// product mapping collection structure
+    /// </summary>
     public class ProductMapping
     {
+        /// <summary>
+        /// Collection unique id
+        /// </summary>
         public ObjectId Id { get; set; }
+        /// <summary>
+        /// System supplier code
+        /// </summary>
         public string SupplierCode { get; set; }
-
+        /// <summary>
+        /// Supplier specific product code
+        /// </summary>
         public string SupplierProductCode { get; set; }
+        /// <summary>
+        /// Supplier specific product name
+        /// </summary>
         public string SupplierProductName { get; set; }
+        /// <summary>
+        /// Supplier specific country name
+        /// </summary>
         public string SupplierCountryName { get; set; }
+        /// <summary>
+        /// Supplier specific country code
+        /// </summary>
         public string SupplierCountryCode { get; set; }
+        /// <summary>
+        /// Supplier specific city name
+        /// </summary>
         public string SupplierCityName { get; set; }
+        /// <summary>
+        /// Supplier specific city code
+        /// </summary>
         public string SupplierCityCode { get; set; }
-
+        /// <summary>
+        /// system product code
+        /// </summary>
         public string SystemProductCode { get; set; }
+        /// <summary>
+        /// system product name
+        /// </summary>
         public string SystemProductName { get; set; }
+        /// <summary>
+        /// system country name
+        /// </summary>
         public string SystemCountryName { get; set; }
+        /// <summary>
+        /// system city name
+        /// </summary>
         public string SystemCityName { get; set; }
+        /// <summary>
+        /// system country code
+        /// </summary>
         public string SystemCountryCode { get; set; }
+        /// <summary>
+        /// system city code
+        /// </summary>
         public string SystemCityCode { get; set; }
+        /// <summary>
+        /// system product type
+        /// </summary>
         public string SystemProductType { get; set; }
-
+        /// <summary>
+        /// mapping status of the supplier product
+        /// </summary>
         public string MappingStatus { get; set; }
+        /// <summary>
+        /// system unique mapping id
+        /// </summary>
         public int MapId { get; set; }
     }
 
