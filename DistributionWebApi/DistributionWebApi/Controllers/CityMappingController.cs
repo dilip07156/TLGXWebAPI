@@ -160,7 +160,7 @@ namespace DistributionWebApi.Controllers
         /// <param name="SupplierCityCode"></param>
         /// <returns>List of CityMapping</returns>
         [ApiExplorerSettings(IgnoreApi = true)]
-        [ResponseType(typeof(CityMapping_RS))]
+        [ResponseType(typeof(List<CityMapping_RS>))]
         public async Task<HttpResponseMessage> GetCityMapping(string CountryName, string CountryCode, string CityName, string CityCode, string SupplierName, string SupplierCode, string SupplierCountryName, string SupplierCountryCode, string SupplierCityName, string SupplierCityCode)
         {
             try
@@ -171,34 +171,34 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<CityMapping>.Filter.Empty;
 
                 if (!string.IsNullOrWhiteSpace(CountryName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryName, new BsonRegularExpression(new Regex(CountryName, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryName, new BsonRegularExpression(new Regex(CountryName.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(CountryCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(CityName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityName, new BsonRegularExpression(new Regex(CityName, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityName, new BsonRegularExpression(new Regex(CityName.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(CityCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierCountryName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryName, new BsonRegularExpression(new Regex(SupplierCountryName, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryName, new BsonRegularExpression(new Regex(SupplierCountryName.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierCountryCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryCode, new BsonRegularExpression(new Regex(SupplierCountryCode, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryCode, new BsonRegularExpression(new Regex(SupplierCountryCode.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierCityName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityName, new BsonRegularExpression(new Regex(SupplierCityName, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityName, new BsonRegularExpression(new Regex(SupplierCityName.Trim(), RegexOptions.IgnoreCase)));
 
                 if (!string.IsNullOrWhiteSpace(SupplierCityCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityCode, new BsonRegularExpression(new Regex(SupplierCityCode, RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityCode, new BsonRegularExpression(new Regex(SupplierCityCode.Trim(), RegexOptions.IgnoreCase)));
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CityMapping_RS
@@ -369,5 +369,26 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves all city mappings filtered by supplier code
+        /// </summary>
+        /// <param name="SupplierCode">System specified supplier code</param>
+        /// <returns>List of city mapping response that contains supplier city details and mapped to system city details with map id</returns>
+        [HttpPost]
+        [Route("City/GetAllBySupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<CityMapping_RS>))]
+        public async Task<HttpResponseMessage> GetAllCityMappingsBySupplierCode(string SupplierCode)
+        {
+            return await GetCityMapping(string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                SupplierCode,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty);
+        }
     }
 }
