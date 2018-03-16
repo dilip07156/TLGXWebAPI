@@ -64,7 +64,7 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<Supplier>("Supplier");
-                var result = await collection.Find(s => s.SupplierCode.ToLower().StartsWith(Code.ToLower())).SortBy(s => s.SupplierCode).ToListAsync();
+                var result = await collection.Find(s => s.SupplierCode == Code.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
@@ -91,7 +91,7 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<Supplier>("Supplier");
-                var result = await collection.Find(s => s.SupplierCode.ToLower().StartsWith(Name.ToLower())).SortBy(s => s.SupplierCode).ToListAsync();
+                var result = await collection.Find(s => s.SupplierName == Name.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
