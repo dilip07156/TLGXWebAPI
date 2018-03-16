@@ -67,8 +67,8 @@ namespace DistributionWebApi.Controllers
                     FilterDefinition<BsonDocument> filterCountry;
                     filterCountry = Builders<BsonDocument>.Filter.Empty;
 
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Distinct());
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct());
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
                     ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CountryCode").Exclude("_id");
 
                     var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
@@ -76,7 +76,7 @@ namespace DistributionWebApi.Controllers
                 }
                 else
                 {
-                    arrayOfStrings = param.CountryCodes;
+                    arrayOfStrings = param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
                 }
 
 
@@ -89,7 +89,7 @@ namespace DistributionWebApi.Controllers
                 {
                     if (param.FilterBySuppliers.Length > 0)
                     {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.ToLower()));
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                     }
                 }
 
@@ -224,8 +224,8 @@ namespace DistributionWebApi.Controllers
                     FilterDefinition<BsonDocument> filterCountry;
                     filterCountry = Builders<BsonDocument>.Filter.Empty;
 
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Distinct());
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(param.RequestingSupplierCode, RegexOptions.IgnoreCase)));
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct());
+                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
                     ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CityCode").Exclude("_id");
 
                     var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
@@ -233,7 +233,7 @@ namespace DistributionWebApi.Controllers
                 }
                 else
                 {
-                    arrayOfStrings = param.CityCodes;
+                    arrayOfStrings = param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
                 }
 
 
@@ -243,11 +243,11 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<BsonDocument>.Filter.Empty;
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("CityCode", arrayOfStrings);
 
-                if(param.FilterBySuppliers != null)
+                if (param.FilterBySuppliers != null)
                 {
                     if (param.FilterBySuppliers.Length > 0)
                     {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.ToLower()));
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                     }
                 }
 
@@ -381,7 +381,7 @@ namespace DistributionWebApi.Controllers
                 {
                     if (param.FilterBySuppliers.Length > 0)
                     {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers);
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                     }
                 }
 
@@ -545,7 +545,7 @@ namespace DistributionWebApi.Controllers
         [Route("Details/SupplierCode/{SupplierCode}/SupplierProductCode/{ProductCode}")]
         [HttpGet]
         [ResponseType(typeof(ActivityDefinition))]
-        public async Task<HttpResponseMessage> GetActivityDetailsBySupplierAndProductCode(string SupplierCode,string ProductCode)
+        public async Task<HttpResponseMessage> GetActivityDetailsBySupplierAndProductCode(string SupplierCode, string ProductCode)
         {
             try
             {
