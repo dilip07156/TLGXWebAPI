@@ -171,34 +171,64 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<CityMapping>.Filter.Empty;
 
                 if (!string.IsNullOrWhiteSpace(CountryName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryName, new BsonRegularExpression(new Regex(CountryName.Trim(), RegexOptions.IgnoreCase)));
-
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryName, new BsonRegularExpression(new Regex(CountryName.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.CountryName, CountryName.Trim().ToUpper());
+                }
+                    
                 if (!string.IsNullOrWhiteSpace(CountryCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(CityName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityName, new BsonRegularExpression(new Regex(CityName.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityName, new BsonRegularExpression(new Regex(CityName.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.CityName, CityName.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(CityCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.CityCode, new BsonRegularExpression(new Regex(CityCode.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.CityCode, CityCode.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierCountryName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryName, new BsonRegularExpression(new Regex(SupplierCountryName.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryName, new BsonRegularExpression(new Regex(SupplierCountryName.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierCountryName, SupplierCountryName.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierCountryCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryCode, new BsonRegularExpression(new Regex(SupplierCountryCode.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCountryCode, new BsonRegularExpression(new Regex(SupplierCountryCode.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierCountryCode, SupplierCountryCode.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierCityName))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityName, new BsonRegularExpression(new Regex(SupplierCityName.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityName, new BsonRegularExpression(new Regex(SupplierCityName.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierCityName, SupplierCityName.Trim().ToUpper());
+                }
 
                 if (!string.IsNullOrWhiteSpace(SupplierCityCode))
-                    filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityCode, new BsonRegularExpression(new Regex(SupplierCityCode.Trim(), RegexOptions.IgnoreCase)));
+                {
+                    //filter = filter & Builders<CityMapping>.Filter.Regex(x => x.SupplierCityCode, new BsonRegularExpression(new Regex(SupplierCityCode.Trim(), RegexOptions.IgnoreCase)));
+                    filter = filter & Builders<CityMapping>.Filter.Eq(x => x.SupplierCityCode, SupplierCityCode.Trim().ToUpper());
+                }
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CityMapping_RS
