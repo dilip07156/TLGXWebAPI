@@ -47,8 +47,8 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<CountryMapping> filter;
                 filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.CountryName, new BsonRegularExpression(new Regex(CountryName, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryName, CountryName.Trim().ToUpper());
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CountryMapping_RS
@@ -93,8 +93,8 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<CountryMapping> filter;
                 filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CountryMapping_RS
@@ -138,7 +138,7 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<CountryMapping> filter;
                 filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.CountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new SystemCountryMapping_RS
@@ -179,8 +179,8 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<CountryMapping> filter;
                 filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierCountryCode, new BsonRegularExpression(new Regex(CountryCode, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierCode, new BsonRegularExpression(new Regex(SupplierCode, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryCode, CountryCode.Trim().ToUpper());
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CountryMapping_RS
@@ -224,8 +224,8 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<CountryMapping> filter;
                 filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierCountryName, new BsonRegularExpression(new Regex(CountryName, RegexOptions.IgnoreCase)));
-                filter = filter & Builders<CountryMapping>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(SupplierName, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryName, CountryName.Trim().ToUpper());
+                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
 
                 var searchResult = await collection.Find(filter)
                                     .Project(x => new CountryMapping_RS
@@ -286,7 +286,7 @@ namespace DistributionWebApi.Controllers
                         {
                             if (iRQ.SourceSupplierCode.ToUpper() == "TLGX")// change me to SYSTEM
                             {
-                                var res = await collection.Find(x => (x.CountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
+                                var res = await collection.Find(x => (x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                                 if (res != null)
                                 {
                                     iRS.TargetSupplierCountryCode = res.CountryCode;
@@ -302,7 +302,7 @@ namespace DistributionWebApi.Controllers
                             }
                             else
                             {
-                                var res = await collection.Find(x => (x.SupplierCode.ToLower() == iRQ.SourceSupplierCode.ToLower() && x.SupplierCountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
+                                var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                                 if (res != null)
                                 {
                                     iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
@@ -319,7 +319,7 @@ namespace DistributionWebApi.Controllers
                         }
                         else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() == "TLGX")
                         {
-                            var res = await collection.Find(x => (x.SupplierCode.ToLower() == iRQ.TargetSupplierCode && x.CountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
+                            var res = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                             if (res != null)
                             {
                                 iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
@@ -335,7 +335,7 @@ namespace DistributionWebApi.Controllers
                         }
                         else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.TargetSupplierCode.ToUpper() == "TLGX")
                         {
-                            var res = await collection.Find(x => (x.SupplierCode.ToLower() == iRQ.SourceSupplierCode && x.SupplierCountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
+                            var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                             if (res != null)
                             {
                                 iRS.TargetSupplierCountryCode = res.CountryCode;
@@ -351,7 +351,7 @@ namespace DistributionWebApi.Controllers
                         }
                         else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() != "TLGX" && iRQ.TargetSupplierCode.ToUpper() != "TLGX")
                         {
-                            var resultForSource = await collection.Find(x => (x.SupplierCode.ToLower() == iRQ.SourceSupplierCode.ToLower() && x.SupplierCountryCode.ToLower() == iRQ.SourceSupplierCountryCode.ToLower())).FirstOrDefaultAsync();
+                            var resultForSource = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
 
                             if (resultForSource == null)
                             {
@@ -361,7 +361,7 @@ namespace DistributionWebApi.Controllers
                             }
                             else
                             {
-                                var resultForTarget = await collection.Find(x => (x.SupplierCode.ToLower() == iRQ.TargetSupplierCode.ToLower() && x.CountryCode.ToLower() == resultForSource.CountryCode.ToLower())).FirstOrDefaultAsync();
+                                var resultForTarget = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == resultForSource.CountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                                 if (resultForTarget == null)
                                 {
                                     iRS.TargetSupplierCountryCode = string.Empty;
