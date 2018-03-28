@@ -2063,6 +2063,11 @@
             IF the activity is tagged under special category
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.SupplierCityDepartureCodes">
+            <summary>
+            This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.ProductSubTypeId">
             <summary>
             Internal Use
@@ -2254,6 +2259,11 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.Specials">
             <summary>
             IF the activity is tagged under special category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.SupplierCityDepartureCodes">
+            <summary>
+            This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.Session">
@@ -2724,6 +2734,41 @@
         <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DeparturePoint">
             <summary>
             Departure Point based on Operating Day and time (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Activity.SupplierCityDepartureCode">
+            <summary>
+            This structure will hold data for supplier departure codes where actual departure point is Hotel Pickup.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.CityName">
+            <summary>
+            Supplier City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.CityCode">
+            <summary>
+            Supplier City Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.HotelName">
+            <summary>
+            Supplier Hotel Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.HotelCode">
+            <summary>
+            Supplier Hotel Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.DepartureName">
+            <summary>
+            Supplier Departure Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierCityDepartureCode.DepartureCode">
+            <summary>
+            Supplier Departure Code
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.SimliarProducts">

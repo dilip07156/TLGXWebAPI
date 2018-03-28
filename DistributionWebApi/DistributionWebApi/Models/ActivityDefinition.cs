@@ -306,6 +306,11 @@ namespace DistributionWebApi.Models.Activity
         public List<string> Specials { get; set; }
 
         /// <summary>
+        /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
+        /// </summary>
+        public List<SupplierCityDepartureCode> SupplierCityDepartureCodes { get; set; }
+
+        /// <summary>
         /// Internal Use
         /// </summary>
         public List<string> ProductSubTypeId { get; set; }
@@ -495,6 +500,10 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public List<string> Specials { get; set; }
 
+        /// <summary>
+        /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
+        /// </summary>
+        public List<SupplierCityDepartureCode> SupplierCityDepartureCodes { get; set; }
     }
 
     /// <summary>
@@ -950,6 +959,37 @@ namespace DistributionWebApi.Models.Activity
         /// Departure Point based on Operating Day and time (Not all supplier provides this)
         /// </summary>
         public string DeparturePoint { get; set; }
+    }
+
+    /// <summary>
+    /// This structure will hold data for supplier departure codes where actual departure point is Hotel Pickup.
+    /// </summary>
+    public class SupplierCityDepartureCode
+    {
+        /// <summary>
+        /// Supplier City Name
+        /// </summary>
+        public string CityName { get; set; }
+        /// <summary>
+        /// Supplier City Code
+        /// </summary>
+        public string CityCode { get; set; }
+        /// <summary>
+        /// Supplier Hotel Name
+        /// </summary>
+        public string HotelName { get; set; }
+        /// <summary>
+        /// Supplier Hotel Code
+        /// </summary>
+        public string HotelCode { get; set; }
+        /// <summary>
+        /// Supplier Departure Name
+        /// </summary>
+        public string DepartureName { get; set; }
+        /// <summary>
+        /// Supplier Departure Code
+        /// </summary>
+        public string DepartureCode { get; set; }
     }
 
     /// <summary>
