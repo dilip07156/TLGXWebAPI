@@ -139,7 +139,8 @@ namespace DistributionWebApi.Controllers
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
                                              SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials
+                                             Specials = a.Specials,
+                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
                                          }).ToList();
 
                 foreach (var activity in searchedData)
@@ -298,7 +299,8 @@ namespace DistributionWebApi.Controllers
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
                                              SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials
+                                             Specials = a.Specials,
+                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
                                          }).ToList();
 
                 foreach (var activity in searchedData)
@@ -431,7 +433,8 @@ namespace DistributionWebApi.Controllers
                                              NumberOfPassengers = a.NumberOfPassengers,
                                              Prices = a.Prices,
                                              SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials
+                                             Specials = a.Specials,
+                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
                                          }).ToList();
 
                 foreach (var activity in searchedData)
