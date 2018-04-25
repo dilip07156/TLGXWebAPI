@@ -17,22 +17,22 @@
                     <strong>Countries</strong>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()" target="_parent" class="btn btn-default">
-                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <button type="button" id="countrycsv" class="btn btn-default">
+                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_JSON"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="countryjson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_XML"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="countryxml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
-                    </a>
+                    </button>
                 </td>
             </tr>
 
@@ -40,27 +40,27 @@
                 <td class="col-md-7">
                     <strong>Cities</strong>
                     @*<div class="input-group">
-                        <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                        <select id="ddlCityByCountry" class="form-control"></select>
-                    </div>*@
+                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                            <select id="ddlCityByCountry" class="form-control"></select>
+                        </div>*@
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="citycsv" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="cityjson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="cityxml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
-                    </a>
+                    </button>
                 </td>
             </tr>
 
@@ -68,27 +68,27 @@
                 <td class="col-md-7">
                     <strong>States</strong>
                     @*<div class="input-group">
-                    <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                    <select id="ddlCityByCountry" class="form-control"></select>
-                </div>*@
+                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                            <select id="ddlCityByCountry" class="form-control"></select>
+                        </div>*@
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="statecsv" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="statejson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="statexml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
-                    </a>
+                    </button>
                 </td>
             </tr>
 
@@ -96,27 +96,27 @@
                 <td class="col-md-7">
                     <strong>Ports</strong>
                     @*<div class="input-group">
-                    <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                    <select id="ddlCityByCountry" class="form-control"></select>
-                </div>*@
+                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
+                            <select id="ddlCityByCountry" class="form-control"></select>
+                        </div>*@
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="portcsv" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="portjson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()" target="_parent" class="btn btn-default">
+                    <button type="button" id="portxml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
-                    </a>
+                    </button>
                 </td>
             </tr>
 
@@ -128,22 +128,22 @@
                     </div>
                 </td>
                 <td class="text-center">
-                    <a href="#" target="_parent" class="btn btn-default">
+                    <button type="button" id="hotelcsv" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="#" target="_parent" class="btn btn-default">
+                    <button type="button" id="hoteljson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
-                    </a>
+                    </button>
                 </td>
                 <td class="text-center">
-                    <a href="#" target="_parent" class="btn btn-default">
+                    <button type="button" id="hotelxml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
-                    </a>
+                    </button>
                 </td>
             </tr>
         </table>
@@ -153,11 +153,12 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+                var url = '@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()';
                 $.ajax({
-                    url: "@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()",
+                    url: url,
                     type: "get",
                     Accept: "application/json",
-                    contentType: "application/json;charset=utf-8",
+                    contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     data: {},
                     success: function (result) {
@@ -175,8 +176,56 @@
                         alert("Error");
                     }
 
-                });
             });
+
+            $('#countrycsv').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()';;
+            });
+
+            $('#countryjson').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_JSON"].ToString()';;
+            });
+
+            $('#countryxml').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_XML"].ToString()';;
+            });
+
+            $('#citycsv').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()';;
+            });
+
+            $('#cityjson').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()';;
+            });
+
+            $('#cityxml').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()';;
+            });
+
+            $('#statecsv').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()';;
+            });
+
+            $('#statejson').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()';;
+            });
+
+            $('#statexml').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()';;
+            });
+
+            $('#portcsv').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()';;
+            });
+
+            $('#portjson').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';;
+            });
+
+            $('#portxml').click(function () {
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()';;
+            });
+        });
     </script>
 }
 
