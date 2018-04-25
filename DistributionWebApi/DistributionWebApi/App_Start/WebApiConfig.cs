@@ -133,7 +133,11 @@ namespace DistributionWebApi
                             var _val = val.Value.ToString();
 
                             //Check if the value contains a comma and place it in quotes if so
-                            if (_val.Contains(","))
+                            //if (_val.Contains("\""))
+                            //    _val = _val.Replace("\"", "");
+
+                            //Check if the value contains a comma and place it in quotes if so
+                            if (_val.Contains(",") || _val.Contains("\""))
                                 _val = string.Concat("\"", _val, "\"");
 
                             //Replace any \r or \n special characters from a new line with a space
@@ -183,7 +187,7 @@ namespace DistributionWebApi
             /// is wrapped in. Set in GetPerRequestFormatter Instance
             /// </summary>
             private string JsonpCallbackFunction;
-            
+
             public override bool CanWriteType(Type type)
             {
                 return true;
@@ -434,7 +438,7 @@ namespace DistributionWebApi
 
                 var serializer = new XmlSerializer(type);
                 serializer.Serialize(_stringWriter, value);
-                
+
                 //var streamWriter = new StreamWriter(stream, effectiveEncoding));
                 var streamWriter = new StreamWriter(stream);
                 streamWriter.Write(_stringWriter.ToString());
