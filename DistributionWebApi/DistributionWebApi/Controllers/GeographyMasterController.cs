@@ -12,6 +12,7 @@ using MongoDB.Bson;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
 using NLog;
+using System.Text;
 
 namespace DistributionWebApi.Controllers
 {
@@ -169,7 +170,7 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<City>("CityMaster");
-                var result = await collection.Find(c => c.CountryName == CountryName.Trim().ToUpper()).SortBy(s => s.CityName).ToListAsync();
+                var result = await collection.Find(c => c.CountryName.ToUpper() == CountryName.Trim().ToUpper()).SortBy(s => s.CityName).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
@@ -221,7 +222,7 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<State>("StateMaster");
-                var result = await collection.Find(c => c.CountryCode == CountryCode.Trim().ToUpper()).SortBy(s => s.StateName).ToListAsync();
+                var result = await collection.Find(c => c.CountryCode.ToUpper() == CountryCode.Trim().ToUpper()).SortBy(s => s.StateName).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
@@ -273,7 +274,8 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<Port>("PortMaster");
-                var result = await collection.Find(c => c.CountryCode == CountryCode.Trim().ToUpper()).SortBy(s => s.PortName).ToListAsync();
+                var result = await collection.Find(c => c.CountryCode.ToUpper() == CountryCode.Trim().ToUpper()).SortBy(s => s.PortName).ToListAsync();
+               // var result = await collection.Find(c => c.CountryCode == CountryCode).SortBy(s => s.PortName).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
