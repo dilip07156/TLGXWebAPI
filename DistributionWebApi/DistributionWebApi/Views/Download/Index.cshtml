@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Downloads";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -38,11 +37,12 @@
 
             <tr>
                 <td class="col-md-7">
-                    <strong>Cities</strong>
-                    @*<div class="input-group">
-                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                            <select id="ddlCityByCountry" class="form-control"></select>
-                        </div>*@
+                    @*<strong>Cities</strong>*@
+                    <div class="input-group">
+                        <label class="control-label input-group-addon"><strong>Cities By Country&nbsp&nbsp;</strong></label>
+                        <select id="ddlCityByCountry" class="form-control"></select>
+                    </div>
+                   
                 </td>
                 <td class="text-center">
                     <button type="button" id="citycsv" class="btn btn-default">
@@ -66,11 +66,11 @@
 
             <tr>
                 <td class="col-md-7">
-                    <strong>States</strong>
-                    @*<div class="input-group">
-                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                            <select id="ddlCityByCountry" class="form-control"></select>
-                        </div>*@
+                    @*<strong>States</strong>*@
+                    <div class="input-group">
+                            <label class="control-label input-group-addon"><strong>States By Country&nbsp;</strong></label>
+                            <select id="ddlStatesByCountry" class="form-control"></select>
+                        </div>
                 </td>
                 <td class="text-center">
                     <button type="button" id="statecsv" class="btn btn-default">
@@ -94,11 +94,11 @@
 
             <tr>
                 <td class="col-md-7">
-                    <strong>Ports</strong>
-                    @*<div class="input-group">
-                            <label class="control-label input-group-addon"><strong>Cities By Country&nbsp;</strong></label>
-                            <select id="ddlCityByCountry" class="form-control"></select>
-                        </div>*@
+                    @*<strong>Ports</strong>*@
+                    <div class="input-group">
+                            <label class="control-label input-group-addon"><strong>Ports By Country&nbsp&nbsp&nbsp;</strong></label>
+                            <select id="ddlPortByCountry" class="form-control"></select>
+                        </div>
                 </td>
                 <td class="text-center">
                     <button type="button" id="portcsv" class="btn btn-default">
@@ -120,10 +120,10 @@
                 </td>
             </tr>
 
-            <tr>
+            @*<tr>
                 <td class="col-md-7">
                     <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>Hotels By Country</strong></label>
+                        <label class="control-label input-group-addon"><strong>Hotels By Country&nbsp</strong></label>
                         <select id="ddlHotelByCountry" class="form-control"></select>
                     </div>
                 </td>
@@ -145,7 +145,8 @@
                         <strong>XML</strong>
                     </button>
                 </td>
-            </tr>
+            </tr>*@
+
         </table>
     </div>
 </div>
@@ -153,77 +154,163 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-                var url = '@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()';
-                $.ajax({
-                    url: url,
-                    type: "get",
-                    Accept: "application/json",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: {},
-                    success: function (result) {
-                        $('#ddlHotelByCountry').append($('<option></option>').val('').html('-- All --'));
-                        $('#ddlCityByCountry').append($('<option></option>').val('').html('-- All --'));
-                        $.each(result, function (i) {
-                            $('#ddlHotelByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
-                            $('#ddlCityByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
-                        });
+            var url = '@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()';
+            $.ajax({
+                url: url,
+                type: "get",
+                Accept: "application/json",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    $('#ddlHotelByCountry').append($('<option></option>').val('').html('-- All --'));
+                    $('#ddlCityByCountry').append($('<option></option>').val('').html('-- All --'));
+                    $('#ddlStatesByCountry').append($('<option></option>').val('').html('-- All --'));
+                    $('#ddlPortByCountry').append($('<option></option>').val('').html('-- All --'));
+                    
+                    $.each(result, function (i) {
+                        $('#ddlHotelByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        $('#ddlCityByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        $('#ddlStatesByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        $('#ddlPortByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        
+                    });
                         //$("#ddlHotelByCountry").prepend("<option></option>").val('');
+                        //$("#ddlStatesByCountry").prepend("<option></option>").val('');
+                        //$("#ddlPortByCountry").prepend("<option></option>").val('');
+                },
 
-                    },
-
-                    failure: function () {
-                        alert("Error");
-                    }
-
+                failure: function () {
+                    alert("Error");
+                }
             });
 
-            $('#countrycsv').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()';;
-            });
+
+         $('#hotelcsv').click(function () {
+            window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()';;
+        });
+
+
+
+        $('#countrycsv').click(function () {
+            window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_CSV"].ToString()';;
+        });
 
             $('#countryjson').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_JSON"].ToString()';;
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_JSON"].ToString()';
             });
 
             $('#countryxml').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_XML"].ToString()';;
+                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCountries_XML"].ToString()';
             });
 
             $('#citycsv').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()';;
+                //window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()';
+                var countryText = $("#ddlCityByCountry option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_CSV"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '' && countryText != '-- All --') {
+                    url = url.replace('?format=csv', '') + '/CountryName/' + countryText + '?format=csv';
+                }
+
+                window.location.href = url;
             });
 
             $('#cityjson').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()';;
+                //window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()';
+
+                // var countryText = $("#ddlHotelByCountry").val();
+                var countryText = $("#ddlCityByCountry option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_JSON"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '' && countryText != '-- All --') {
+                    url = url.replace('?format=json', '') + '/CountryName/' + countryText + '?format=json';
+                }
+
+                window.location.href = url;
             });
 
             $('#cityxml').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()';;
+                //window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()';;
+
+                //var countryText = $("#ddlHotelByCountry").val();
+                var countryText = $("#ddlCityByCountry option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllCities_XML"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '' && countryText != '-- All --') {
+                    url = url.replace('?format=xml', '') + '/CountryName/' + countryText + '?format=xml';
+                }
+
+                window.location.href = url;
             });
 
             $('#statecsv').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()';;
+               // window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()';
+               
+                var countryText = $("#ddlStatesByCountry").val();
+               // var countryText = $("#ddlHotelByCountry option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_CSV"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=csv', '') + '/CountryCode/' + countryText + '?format=csv';
+                }
+
+                window.location.href = url;
+
             });
 
             $('#statejson').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()';;
+               // window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()';;
+                var countryText = $("#ddlStatesByCountry").val();               
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_JSON"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=json', '') + '/CountryCode/' + countryText + '?format=json';
+                }
+
+                window.location.href = url;
+
             });
 
             $('#statexml').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()';;
+               // window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()';;
+                var countryText = $("#ddlStatesByCountry").val();               
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllStates_XML"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=xml', '') + '/CountryCode/' + countryText + '?format=xml';
+                }
+
+                window.location.href = url;
             });
 
             $('#portcsv').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()';;
+               // window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()';;
+
+                var countryText = $("#ddlPortByCountry").val();               
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_CSV"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=csv', '') + '/CountryCode/' + countryText + '?format=csv';
+                }
+
+                window.location.href = url;
             });
 
             $('#portjson').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';;
+               // window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';;
+
+                var countryText = $("#ddlPortByCountry").val();               
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=json', '') + '/CountryCode/' + countryText + '?format=json';
+                }
+
+                window.location.href = url;
             });
 
             $('#portxml').click(function () {
-                window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()';;
+                //window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()';;
+                var countryText = $("#ddlPortByCountry").val();               
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';
+                if (countryText != undefined && countryText != null && countryText != '') {
+                    url = url.replace('?format=xml', '') + '/CountryCode/' + countryText + '?format=xml';
+                }
+
+                window.location.href = url;
             });
         });
     </script>
