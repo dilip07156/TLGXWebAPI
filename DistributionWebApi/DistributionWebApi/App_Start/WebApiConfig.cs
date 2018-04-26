@@ -479,6 +479,10 @@ namespace DistributionWebApi
             //Key Names are camel cased
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+            //add supported encodings
+            config.Formatters.JsonFormatter.SupportedEncodings.Add(Encoding.UTF8);
+            config.Formatters.XmlFormatter.SupportedEncodings.Add(Encoding.UTF8);
+
             //Remove Xml Formatter (Response will only be in Json format)
             //config.Formatters.Remove(config.Formatters.XmlFormatter);
 
