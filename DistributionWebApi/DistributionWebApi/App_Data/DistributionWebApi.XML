@@ -3525,7 +3525,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Port.oag_state_code">
             <summary>
-            Some countries are divided into states. Two letter state codes are used. Sub-codes are not currently used.
+            Some countries are divided into states. Two letter state codes are used.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Port.oag_state_subcode">
@@ -3644,7 +3644,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Active_Port.oag_state_code">
             <summary>
-            Some countries are divided into states. Two letter state codes are used. Sub-codes are not currently used.
+            Some countries are divided into states. Two letter state codes are used.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Active_Port.oag_state_subcode">
