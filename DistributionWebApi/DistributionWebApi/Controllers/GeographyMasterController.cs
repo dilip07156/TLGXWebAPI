@@ -234,22 +234,50 @@ namespace DistributionWebApi.Controllers
             }
         }
 
-        
+
         /// <summary>
-        /// Retrieve all TLGX System Ports
+        /// Retrieve all active OAG Ports
         /// </summary>
-        /// <returns>List of TLGX Port Masters.</returns>
+        /// <returns>List of active OAG Port Masters.</returns>
         [Route("Ports")]
         [HttpGet]
-        [ResponseType(typeof(List<Port>))]
+        [ResponseType(typeof(List<Active_Port>))]
         public async Task<HttpResponseMessage> GetAllPorts()
         {
             try
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<Port>("PortMaster");
-                var result = await collection.Find(c => true).SortBy(s => s.PortName).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var result = await collection.Find(c => c.oag_inactive_indicator != "I").SortBy(s => s.oag_port_name).ToListAsync();
+
+                var returnResult = (from a in result
+                                    select new Active_Port
+                                    {
+                                        oag_location_code = a.oag_location_code,
+                                        oag_multi_airport_citycode = a.oag_multi_airport_citycode,
+                                        oag_location_type_code = a.oag_location_type_code,
+                                        oag_location_type = a.oag_location_type,
+                                        oag_location_subtype_code = a.oag_location_subtype_code,
+                                        oag_location_subtype = a.oag_location_subtype,
+                                        oag_location_name = a.oag_location_name,
+                                        oag_port_name = a.oag_port_name,
+                                        oag_country_code = a.oag_country_code,
+                                        oag_country_subcode = a.oag_country_subcode,
+                                        oag_country_name = a.oag_country_name,
+                                        oag_state_code = a.oag_state_code,
+                                        oag_state_subcode = a.oag_state_subcode,
+                                        oag_time_division = a.oag_time_division,
+                                        oag_latitiude = a.oag_latitiude,
+                                        oag_longitude = a.oag_longitude,
+                                        tlgx_country_code = a.tlgx_country_code,
+                                        tlgx_country_name = a.tlgx_country_name,
+                                        tlgx_state_code = a.tlgx_state_code,
+                                        tlgx_state_name = a.tlgx_state_name,
+                                        tlgx_city_code = a.tlgx_city_code,
+                                        tlgx_city_name = a.tlgx_city_name
+                                    }).ToList();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
                 return response;
             }
             catch (Exception ex)
@@ -261,22 +289,49 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieve all TLGX System Ports with StartsWith Filter on TLGX Country Code
+        /// Retrieve all active OAG Ports with filter on Country Code
         /// </summary>
         /// <param name="CountryCode"></param>
-        /// <returns>List of TLGX Port Masters.</returns>
+        /// <returns>List of active OAG Port Masters.</returns>
         [Route("Ports/CountryCode/{CountryCode}")]
         [HttpGet]
-        [ResponseType(typeof(List<Port>))]
+        [ResponseType(typeof(List<Active_Port>))]
         public async Task<HttpResponseMessage> GetPortByCountryCode(string CountryCode)
         {
             try
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<Port>("PortMaster");
-                var result = await collection.Find(c => c.CountryCode.ToUpper() == CountryCode.Trim().ToUpper()).SortBy(s => s.PortName).ToListAsync();
-               // var result = await collection.Find(c => c.CountryCode == CountryCode).SortBy(s => s.PortName).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                var result = await collection.Find(c => c.oag_inactive_indicator != "I" && c.oag_country_code.ToUpper() == CountryCode.Trim().ToUpper()).SortBy(s => s.oag_port_name).ToListAsync();
+
+                var returnResult = (from a in result
+                                    select new Active_Port
+                                    {
+                                        oag_location_code = a.oag_location_code,
+                                        oag_multi_airport_citycode = a.oag_multi_airport_citycode,
+                                        oag_location_type_code = a.oag_location_type_code,
+                                        oag_location_type = a.oag_location_type,
+                                        oag_location_subtype_code = a.oag_location_subtype_code,
+                                        oag_location_subtype = a.oag_location_subtype,
+                                        oag_location_name = a.oag_location_name,
+                                        oag_port_name = a.oag_port_name,
+                                        oag_country_code = a.oag_country_code,
+                                        oag_country_subcode = a.oag_country_subcode,
+                                        oag_country_name = a.oag_country_name,
+                                        oag_state_code = a.oag_state_code,
+                                        oag_state_subcode = a.oag_state_subcode,
+                                        oag_time_division = a.oag_time_division,
+                                        oag_latitiude = a.oag_latitiude,
+                                        oag_longitude = a.oag_longitude,
+                                        tlgx_country_code = a.tlgx_country_code,
+                                        tlgx_country_name = a.tlgx_country_name,
+                                        tlgx_state_code = a.tlgx_state_code,
+                                        tlgx_state_name = a.tlgx_state_name,
+                                        tlgx_city_code = a.tlgx_city_code,
+                                        tlgx_city_name = a.tlgx_city_name
+                                    }).ToList();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
                 return response;
             }
             catch (Exception ex)
