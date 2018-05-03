@@ -136,15 +136,15 @@ namespace DistributionWebApi
                             //if (_val.Contains("\""))
                             //    _val = _val.Replace("\"", "");
 
-                            //Check if the value contains a comma and place it in quotes if so
-                            if (_val.Contains(",") || _val.Contains("\""))
-                                _val = string.Concat("\"", _val, "\"");
-
                             //Replace any \r or \n special characters from a new line with a space
                             if (_val.Contains("\r"))
                                 _val = _val.Replace("\r", " ");
                             if (_val.Contains("\n"))
                                 _val = _val.Replace("\n", " ");
+
+                            //Check if the value contains a comma and place it in quotes if so
+                            //if (_val.Contains(",") || _val.Contains("\""))
+                            _val = string.Concat("\"", _val, "\"");
 
                             _valueLine = string.Concat(_valueLine, _val, ",");
                         }
