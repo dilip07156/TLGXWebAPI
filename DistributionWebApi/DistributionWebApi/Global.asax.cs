@@ -36,7 +36,7 @@ namespace DistributionWebApi
 
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
             GlobalConfiguration.Configuration.Filters.Add(new LoggingFilterAttribute());
-            GlobalConfiguration.Configuration.Filters.Add(new CacheFilterConfig());
+            //GlobalConfiguration.Configuration.Filters.Add(new CacheFilterConfig());
         }
     }
 }
