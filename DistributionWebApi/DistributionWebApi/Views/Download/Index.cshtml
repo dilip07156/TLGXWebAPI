@@ -305,7 +305,7 @@
             $('#portxml').click(function () {
                 //window.location.href = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()';;
                 var countryText = $("#ddlPortByCountry").val();               
-                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_JSON"].ToString()';
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllPorts_XML"].ToString()';
                 if (countryText != undefined && countryText != null && countryText != '') {
                     url = url.replace('?format=xml', '') + '/CountryCode/' + countryText + '?format=xml';
                 }
