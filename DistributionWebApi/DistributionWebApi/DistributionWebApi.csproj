@@ -312,6 +312,7 @@
     <Content Include="Content\cnklogo.jpg" />
     <Content Include="Content\ez1logo.jpg" />
     <Content Include="Content\load-aniround.gif" />
+    <Content Include="Content\tlgx logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
