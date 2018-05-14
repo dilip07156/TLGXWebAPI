@@ -946,6 +946,12 @@ namespace DistributionWebApi.Models.Activity
         public string SupplierEndTime { get; set; }
         public string EndTime { get; set; }
         public string SupplierDuration { get; set; }
+        /// <summary>
+        /// Duration format is dd.HH:mm
+        /// dd = days
+        /// HH = hour in 24hr format
+        /// mm = minutes
+        /// </summary>
         public string Duration { get; set; }
         public string SupplierSession { get; set; }
         public string Session { get; set; }
