@@ -169,10 +169,11 @@ namespace DistributionWebApi.Controllers
                     }
                     else
                     {
+                        string[] statusToCheck = { "MAPPED", "AUTOMAPPED" };
                         filter = Builders<BsonDocument>.Filter.Empty;
                         filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(item.SupplierCode, RegexOptions.IgnoreCase)));
                         filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierProductCode", new BsonRegularExpression(new Regex(item.SupplierProductCode, RegexOptions.IgnoreCase)));
-                        filter = filter & Builders<BsonDocument>.Filter.Eq("MappingStatus", "MAPPED");
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("MappingStatus", statusToCheck);
 
                         BsonDocument searchResult = null;
                         if (item.ProductType.ToLower() == "hotel")
@@ -258,11 +259,9 @@ namespace DistributionWebApi.Controllers
         {
             try
             {
-                //Stopwatch sp = new Stopwatch();
-                //sp.Start();
                 _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMapping");
+                IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
                 //IMongoCollection<BsonDocument> collectionActivityMapping = _database.GetCollection<BsonDocument>("ActivityMappingLite");
 
                 var SupplierCodes = RQ.Select(x => x.SupplierCode.ToUpper()).Distinct().ToArray();
@@ -271,31 +270,23 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
 
+                //string[] statusToCheck = { "MAPPED", "AUTOMAPPED" };
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCode", SupplierCodes);
                 filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierProductCode", SupplierProductCodes);
-                filter = filter & Builders<BsonDocument>.Filter.Eq("MappingStatus", "MAPPED");
+                //filter = filter & Builders<BsonDocument>.Filter.AnyIn("MappingStatus", statusToCheck);
 
                 ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("SupplierCode");
                 project = project.Exclude("_id");
                 project = project.Include("SupplierProductCode");
                 project = project.Include("SystemProductCode");
                 project = project.Include("MapId");
-                //sp.Stop();
-
-                //sp.Restart();
+                
                 var searchResult = await collectionProductMapping.Find(filter).Project(project).ToListAsync();
-                //sp.Stop();
-
-                //sp.Restart();
+                
                 List<ProductMappingLite> searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
 
                 List<ProductMappingLite_RS> resultList = new List<ProductMappingLite_RS>();
-                //sp.Stop();
-
-
-
-                //sp.Restart();
-
+                
                 resultList = (from rq in RQ
                               join sd in searchedData on new { SupplierCode = rq.SupplierCode.ToUpper(), SupplierProductCode = rq.SupplierProductCode.ToUpper() } equals new { SupplierCode = sd.SupplierCode, SupplierProductCode = sd.SupplierProductCode } into sdtemp
                               from sdlj in sdtemp.DefaultIfEmpty()
@@ -350,7 +341,6 @@ namespace DistributionWebApi.Controllers
                 //}
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-                //sp.Stop();
                 return response;
 
             }
@@ -381,7 +371,7 @@ namespace DistributionWebApi.Controllers
                 FilterDefinition<ProductMapping> filter;
                 filter = Builders<ProductMapping>.Filter.Empty;
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
-                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
@@ -426,7 +416,7 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<ProductMapping>.Filter.Empty;
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
-                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));  
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
@@ -471,7 +461,7 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<ProductMapping>.Filter.Empty;
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierProductCode, SupplierProductCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
-                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED");
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
 
                 var searchResult = await collectionProductMapping.Find(filter)
                                     .Project(x => new SystemProductMapping_RS
