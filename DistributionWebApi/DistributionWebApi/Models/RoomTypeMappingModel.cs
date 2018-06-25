@@ -8,6 +8,9 @@ using System.Web;
 
 namespace DistributionWebApi.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class RoomTypeMappingModel
     {
         //[BsonId]
@@ -157,4 +160,90 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string Remarks { get; set; }
     }
+
+    public class RoomTypeMapping_SIRQ
+    {
+        public string Mode { get; set; }
+        public string BatchId { get; set; }
+        public List<RoomTypeMapping_SIRQ_HotelRoomTypeMappingRequest> HotelRoomTypeMappingRequests { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRQ_HotelRoomTypeMappingRequest
+    {
+        public string TLGXCommonHotelId { get; set; }
+        public List<RoomTypeMapping_SIRQ_SupplierData> SupplierData { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRQ_SupplierData
+    {
+        public string SupplierId { get; set; }
+        public string SupplierName { get; set; }
+        public string SupplierProductId { get; set; }
+        public string SupplierProductName { get; set; }
+        public List<RoomTypeMapping_SIRQ_SupplierRoomType> SupplierRoomTypes { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRQ_SupplierRoomType
+    {
+        //public string AccommodationSupplierRoomTypeMappingId { get; set; }
+        public string SupplierRoomId { get; set; }
+        public string SupplierRoomTypeCode { get; set; }
+        public string SupplierRoomName { get; set; }
+        public string SupplierRoomCategory { get; set; }
+        public string SupplierRoomCategoryId { get; set; }
+        public string MaxAdults { get; set; }
+        public string MaxChild { get; set; }
+        public string MaxInfants { get; set; }
+        public string MaxGuestOccupancy { get; set; }
+        public string Quantity { get; set; }
+        public string RatePlan { get; set; }
+        public string RatePlanCode { get; set; }
+        public string RoomSize { get; set; }
+        public string BathRoomType { get; set; }
+        public string RoomViewCode { get; set; }
+        public string FloorName { get; set; }
+        public string FloorNumber { get; set; }
+        public string Amenities { get; set; }
+        public string RoomLocationCode { get; set; }
+        public string ChildAge { get; set; }
+        public string ExtraBed { get; set; }
+        public string Bedrooms { get; set; }
+        public string Smoking { get; set; }
+        public string BedType { get; set; }
+        public string MinGuestOccupancy { get; set; }
+        public string PromotionalVendorCode { get; set; }
+        public string BeddingConfig { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRS
+    {
+        public string Mode { get; set; }
+        public string BatchId { get; set; }
+        public List<RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses> HotelRoomTypeMappingResponses { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRS_SupplierRoomType
+    {
+        public string SupplierRoomId { get; set; }
+        public string SupplierRoomName { get; set; }
+        public string SupplierRoomTypeCode { get; set; }
+        public string SupplierRoomCategory { get; set; }
+        public string SupplierRoomCategoryId { get; set; }
+        public string TLGXCommonRoomId { get; set; }
+        public string MapId { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRS_SupplierData
+    {
+        public string SupplierId { get; set; }
+        public string SupplierProductId { get; set; }
+        public List<RoomTypeMapping_SIRS_SupplierRoomType> SupplierRoomTypes { get; set; }
+    }
+
+    public class RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses
+    {
+        public string TLGXCommonHotelId { get; set; }
+        public List<RoomTypeMapping_SIRS_SupplierData> SupplierData { get; set; }
+    }
+
 }
