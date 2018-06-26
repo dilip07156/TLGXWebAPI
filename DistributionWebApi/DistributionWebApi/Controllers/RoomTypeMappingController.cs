@@ -31,11 +31,14 @@ namespace DistributionWebApi.Controllers
         protected static IMongoDatabase _database;
 
         /// <summary>
-        /// Retrieves TLGX Room Type Info for Supplier Code(s), Supplier Hotel Code (s) and Supplier Room Code/Name.
-        /// API can handle single / multiple supplier and single / multiple property requests at a time. 
+        /// Retrieves TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
+        /// API can handle single / multiple TLGX Common Hotel Ids at a time. 
+        /// API can only return room type mappings where accommodation room info rows exists in MDM system and it has been processed. 
+        /// Please note that not all suppliers provide static data for mapping and real time requests into the mapping engine are not permitted.
         /// </summary>
         /// <param name="RQ"></param>
-        /// <returns>Original Mapping request with TLGX Room Info details and Mapped Status result. If there are no mapping record exists, MapId will be returned as Zero.</returns>
+        /// <returns>Original Mapping request with TLGX Accommodation Room Info Id and TLGXCommonRoomId with Nakshatra MapId in result. 
+        /// If there are no mapping record exists, MapId will be returned as 0 and TLGXCommonRoomId will be returned as empty.</returns>
         [HttpPost]
         [Route("RoomTypeMapping")]
         [ResponseType(typeof(List<RoomTypeMapping_SIRS>))]
