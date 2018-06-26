@@ -8,6 +8,9 @@ using System.Web;
 
 namespace DistributionWebApi.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class RoomTypeMappingModel
     {
         //[BsonId]
@@ -157,4 +160,279 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string Remarks { get; set; }
     }
+
+
+    //REQUEST
+    /// <summary>
+    /// This is the main room type mapping request containing mode, tracking information and the collection of TLGX Accommodation room type mapping requests.
+    /// </summary>
+    public class RoomTypeMapping_SIRQ
+    {
+        /// <summary>
+        /// This field specifies the type of room type mapping requests. You should always set this value to "online".
+        /// </summary>
+        [Required]
+        public string Mode { get; set; }
+        /// <summary>
+        /// Please generate a unique Batch / Tracking ID to allow end to end tracebility.
+        /// </summary>
+        [Required]
+        public string BatchId { get; set; }
+        /// <summary>
+        /// Your room type mapping requests for specific TLGX Accommodation CommonHotelId. This service will not work without this value.
+        /// You can include multiple TLGX Accommodations for room type mapping.
+        /// </summary>
+        [Required]
+        public List<RoomTypeMapping_SIRQ_HotelRoomTypeMappingRequest> HotelRoomTypeMappingRequests { get; set; }
+    }
+
+    /// <summary>
+    /// Structure to contain single / multiple accommodation room type mapping requests by TLGX Accommodation CommonHotelId.
+    /// </summary>
+    public class RoomTypeMapping_SIRQ_HotelRoomTypeMappingRequest
+    {
+        /// <summary>
+        /// TLGX Accommodation CommonHotelId - TLGX MDM unique identifier for a hotel property. This value can be retrived by using ProductMappingLite api.
+        /// </summary>
+        [Required]
+        public string TLGXCommonHotelId { get; set; }
+        /// <summary>
+        /// Supplier data for room type mapping requests grouped at TLGX Accommodation CommonHotelId.
+        /// This allows you to perform multiple room type mapping requests for a single TLGX Accommodation CommonHotelId.
+        /// </summary>
+        public List<RoomTypeMapping_SIRQ_SupplierData> SupplierData { get; set; }
+    }
+
+    /// <summary>
+    /// Structure to contain single / multiple supplier room type mapping requests grouped at TLGX Accommodation CommonHotelId.
+    /// </summary>
+    public class RoomTypeMapping_SIRQ_SupplierData
+    {
+        /// <summary>
+        /// Nakshatra mapping system's SupplierCode. This can be retreieved by using SupplierMaster api.
+        /// </summary>
+        [Required]
+        public string SupplierId { get; set; }
+        /// <summary>
+        /// Supplier Product code for accommodation.
+        /// </summary>
+        [Required]
+        public string SupplierProductId { get; set; }
+        /// <summary>
+        /// Collection of supplier room types. Ideally this should be de-duplicated at your end before making the request.
+        /// </summary>
+        [Required]
+        public List<RoomTypeMapping_SIRQ_SupplierRoomType> SupplierRoomTypes { get; set; }
+    }
+
+    /// <summary>
+    /// Structure to contain single / multiple supplier room type.
+    /// </summary>
+    public class RoomTypeMapping_SIRQ_SupplierRoomType
+    {
+        //public string AccommodationSupplierRoomTypeMappingId { get; set; }
+        /// <summary>
+        /// Supplier system room id.
+        /// </summary>
+        [Required]
+        public string SupplierRoomId { get; set; }
+        /// <summary>
+        /// Supplier room type code. Certain suppliers use both id and code values.
+        /// </summary>
+        public string SupplierRoomTypeCode { get; set; }
+        /// <summary>
+        /// Supplier room type name.
+        /// </summary>
+        [Required]
+        public string SupplierRoomName { get; set; }
+        /// <summary>
+        /// Supplier room category name. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategory { get; set; }
+        /// <summary>
+        ///  Supplier room category id. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategoryId { get; set; }
+        /// <summary>
+        /// The maximum number of adults permitted in the room stay.
+        /// </summary>
+        public string MaxAdults { get; set; }
+        /// <summary>
+        /// The maximum number of children permitted in the room stay.
+        /// </summary>
+        public string MaxChild { get; set; }
+        /// <summary>
+        /// The maximum number of infants permitted in the room stay.
+        /// </summary>
+        public string MaxInfants { get; set; }
+        /// <summary>
+        /// The maximum number of total occupancy permitted in the room stay.
+        /// </summary>
+        public string MaxGuestOccupancy { get; set; }
+        /// <summary>
+        /// Quantity of suppier rooms of this type.
+        /// </summary>
+        public string Quantity { get; set; }
+        /// <summary>
+        /// Specific rate plan name for this room stay (For future use).
+        /// </summary>
+        public string RatePlan { get; set; }
+        /// <summary>
+        /// Specific rate plan code for this room stay (For future use).
+        /// </summary>
+        public string RatePlanCode { get; set; }
+        /// <summary>
+        /// The size of the room
+        /// </summary>
+        public string RoomSize { get; set; }
+        /// <summary>
+        /// The type of bathroom in the room stay.
+        /// </summary>
+        public string BathRoomType { get; set; }
+        /// <summary>
+        /// The type of room view. Accepts either code or name.
+        /// </summary>
+        public string RoomView { get; set; }
+        /// <summary>
+        /// The name of the floor if specified by the supplier.
+        /// </summary>
+        public string FloorName { get; set; }
+        /// <summary>
+        /// The number of the floor if specified by the supplier.
+        /// </summary>
+        public string FloorNumber { get; set; }
+        /// <summary>
+        /// Amenities of the room stay if specified by the supplier (For future use).
+        /// </summary>
+        public string[] Amenities { get; set; }
+        /// <summary>
+        /// Any specific room location code if specified by the supplier.
+        /// </summary>
+        public string RoomLocationCode { get; set; }
+        /// <summary>
+        /// Maximum child age for this room stay if specified by the supplier.
+        /// </summary>
+        public string ChildAge { get; set; }
+        /// <summary>
+        /// if extra bed applicable for this room stay if specified by the supplier.
+        /// </summary>
+        public string ExtraBed { get; set; }
+        /// <summary>
+        /// The number of bedrooms for this room stay if specified by the supplier.
+        /// </summary>
+        public string Bedrooms { get; set; }
+        /// <summary>
+        /// Is Smoking permitted in this room stay if specified by the supplier.
+        /// </summary>
+        public string Smoking { get; set; }
+        /// <summary>
+        /// The type of bed for this room stay if specified by the supplier.
+        /// </summary>
+        public string BedType { get; set; }
+        /// <summary>
+        /// The minimum guest occupancy for this room stay if specified by the supplier.
+        /// </summary>
+        public string MinGuestOccupancy { get; set; }
+        /// <summary>
+        /// Any promotional vendor code for this room stay if specified by the supplier (For future use).
+        /// </summary>
+        public string PromotionalVendorCode { get; set; }
+        /// <summary>
+        /// Any specific bedding configuration for this room stay if specified by the supplier.
+        /// </summary>
+        public string BeddingConfig { get; set; }
+    }
+
+
+    //RESPONSE
+    /// <summary>
+    /// This is the main room type mapping response containing mode, tracking information and the collection of TLGX Accommodation room type mapping responses.
+    /// </summary>
+    public class RoomTypeMapping_SIRS
+    {
+        /// <summary>
+        /// Your mode that was submitted in the mapping request.
+        /// </summary>
+        public string Mode { get; set; }
+        /// <summary>
+        /// Your batch id for tracablility that was submitted in the mapping request.
+        /// </summary>
+        public string BatchId { get; set; }
+        /// <summary>
+        /// Room type mapping responses that were submitted in the mapping request.
+        /// </summary>
+        public List<RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses> HotelRoomTypeMappingResponses { get; set; }
+    }
+
+    /// <summary>
+    /// Structure to contain single / multiple supplier room type mapping responses grouped at TLGX Accommodation CommonHotelId.
+    /// </summary>
+    public class RoomTypeMapping_SIRS_SupplierRoomType
+    {
+        /// <summary>
+        /// Original Supplier Room Id that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierRoomId { get; set; }
+        /// <summary>
+        /// original supplier room name that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierRoomName { get; set; }
+        /// <summary>
+        /// Original Supplier room type code that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierRoomTypeCode { get; set; }
+        /// <summary>
+        /// Original Supplier room category that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierRoomCategory { get; set; }
+        /// <summary>
+        /// Original Supplier room category id that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierRoomCategoryId { get; set; }
+        /// <summary>
+        /// TLGX Accommodation Room Info Id.
+        /// If value is empty, there is no map available.
+        /// </summary>
+        public string TLGXCommonRoomId { get; set; }
+        /// <summary>
+        /// Nakshatra room type mapping id.
+        /// If value is 0, there is no map available.
+        /// </summary>
+        public string MapId { get; set; }
+    }
+
+    /// <summary>
+    /// Structure to contain single / multiple supplier room type mapping responses grouped at TLGX Accommodation CommonHotelId. 
+    /// </summary>
+    public class RoomTypeMapping_SIRS_SupplierData
+    {
+        /// <summary>
+        /// Supplier Code that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierId { get; set; }
+        /// <summary>
+        /// Supplier product id that was submitted in the mapping request.
+        /// </summary>
+        public string SupplierProductId { get; set; }
+        /// <summary>
+        /// Collection of supplier room types that was submitted in the mapping request.
+        /// </summary>
+        public List<RoomTypeMapping_SIRS_SupplierRoomType> SupplierRoomTypes { get; set; }
+    }
+
+    /// <summary>
+    /// Structure for Supplier room type mapping response.
+    /// </summary>
+    public class RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses
+    {
+        /// <summary>
+        /// TLGX Accommodation CommonHotelId that was submitted in the mapping request.
+        /// </summary>
+        public string TLGXCommonHotelId { get; set; }
+        /// <summary>
+        /// Collection of Supplier data for room type grouped at TLGX Accommodation CommonHotelId that was submitted in the mapping request.
+        /// </summary>
+        public List<RoomTypeMapping_SIRS_SupplierData> SupplierData { get; set; }
+    }
+
 }
