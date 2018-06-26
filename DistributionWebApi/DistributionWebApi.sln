@@ -1,22 +1,46 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributionWebApi", "DistributionWebApi\DistributionWebApi.csproj", "{11474BAF-2156-4FE6-B470-6D10FD2239BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AWSDEV|Any CPU = AWSDEV|Any CPU
+		AWSPREPROD|Any CPU = AWSPREPROD|Any CPU
+		AWSUAT|Any CPU = AWSUAT|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DEV|Any CPU = DEV|Any CPU
+		PROD|Any CPU = PROD|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SIT|Any CPU = SIT|Any CPU
+		UAT|Any CPU = UAT|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSDEV|Any CPU.ActiveCfg = AWSDEV|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSDEV|Any CPU.Build.0 = AWSDEV|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSPREPROD|Any CPU.ActiveCfg = AWSPREPROD|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSPREPROD|Any CPU.Build.0 = AWSPREPROD|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSUAT|Any CPU.ActiveCfg = AWSUAT|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.AWSUAT|Any CPU.Build.0 = AWSUAT|Any CPU
 		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.DEV|Any CPU.ActiveCfg = DEV|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.DEV|Any CPU.Build.0 = DEV|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.PROD|Any CPU.ActiveCfg = PROD|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.PROD|Any CPU.Build.0 = PROD|Any CPU
 		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.SIT|Any CPU.ActiveCfg = SIT|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.SIT|Any CPU.Build.0 = SIT|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{11474BAF-2156-4FE6-B470-6D10FD2239BB}.UAT|Any CPU.Build.0 = UAT|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C47DBDD0-DC63-486E-88C4-F4EBB9368B38}
 	EndGlobalSection
 EndGlobal
