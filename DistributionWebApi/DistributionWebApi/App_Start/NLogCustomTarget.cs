@@ -67,7 +67,7 @@ namespace DistributionWebApi.App_Start
                 }
 
                 StringContent json = new StringContent(message);
-                await client.PostAsync(new Uri(host), json);
+                await client.PutAsync(new Uri(host), json);
 
                 json.Dispose();
                 client.Dispose();
