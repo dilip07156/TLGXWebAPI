@@ -27,7 +27,7 @@ namespace DistributionWebApi.App_Start
         /// </summary>
         [RequiredParameter]
         public string Host { get; set; }
-        
+
         /// <summary>
         /// Constructor ElkTargetNlog
         /// </summary>
@@ -66,8 +66,8 @@ namespace DistributionWebApi.App_Start
                     client = new HttpClient();
                 }
 
-                StringContent json = new StringContent(message);
-                await client.PutAsync(new Uri(host), json);
+                StringContent json = new StringContent(message, Encoding.UTF8, "application/json");
+                await client.PostAsync(new Uri(host), json);
 
                 json.Dispose();
                 client.Dispose();
