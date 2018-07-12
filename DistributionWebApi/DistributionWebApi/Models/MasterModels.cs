@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace DistributionWebApi.Models
 {
@@ -353,5 +354,117 @@ namespace DistributionWebApi.Models
         /// System's city name
         /// </summary>
         public string tlgx_city_name { get; set; }
+    }
+
+    /// <summary>
+    /// structure of Zone Master
+    /// </summary>
+    [BsonIgnoreExtraElements]
+    public class Zone
+    {
+        /// <summary>
+        /// Type of the Zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Type { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string Zone_SubType { get; set; }
+        /// <summary>
+        /// Name of the zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Name { get; set; }
+        /// <summary>
+        /// Latitude of Zone.This field is mandatory
+        /// </summary>
+        public string Latitude { get; set; }
+        /// <summary>
+        /// Longitude of Zone.This field is mandatory
+        /// </summary>
+        public string Longitude { get; set; }
+        /// <summary>
+        /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+        /// </summary>
+        public decimal? Zone_Radius { get; set; }
+        /// <summary>
+        /// TLGX Country Code .This field is mandatory
+        /// </summary>
+        public string TLGXCountryCode { get; set; }
+        /// <summary>
+        /// List Of TLGX City Codes mapped to Zone
+        /// </summary>
+        public List<Zone_CityMapping> Zone_CityMapping { get; set; }
+        /// <summary>
+        /// List Of Hotels within 10km range from  lat-Long of zone
+        /// </summary>
+        public List<Zone_ProductMapping> Zone_ProductMapping { get; set; }
+
+
+    }
+    /// <summary>
+    /// Structure of City mapped with zone
+    /// </summary>
+    [BsonIgnoreExtraElements]
+    public class Zone_CityMapping
+    {
+        /// <summary>
+        /// TLGX City Code .This field is dependant on TLGX CountryCode of Zone and is optional.
+        /// </summary>
+        public string TLGXCityCode { get; set; }
+    }
+    /// <summary>
+    /// structure of  Hotels within 10 kon of zone
+    /// </summary>
+    [BsonIgnoreExtraElements]
+    public class Zone_ProductMapping
+    {
+        /// <summary>
+        /// Unique Id of TLGX Hotel(TLGX HotelCode)
+        /// </summary>
+        public int? TLGXCompanyHotelID { get; set; }
+        /// <summary>
+        /// TLGX Hotel Name
+        /// </summary>
+        public string TLGXHotelName { get; set; }
+        /// <summary>
+        /// TLGX Hotel Type
+        /// </summary>
+        public string TLGXProductType { get; set; }
+        /// <summary>
+        /// Distance Of Hotel(in Km) from Latitude-Longitude of Zone.
+        /// </summary>
+        public decimal? Distance { get; set; }
+        /// <summary>
+        /// Unit of Distance
+        /// </summary>
+        public string Unit { get; set; }
+        /// <summary>
+        /// If this hotel is Included in Zone or Not.
+        /// </summary>
+        public bool? IsIncluded { get; set; }
+    }
+    /// <summary>
+    /// Structure for Zone Search Rquest Parameters.
+    /// </summary>
+
+    public class ZoneSearchRQ
+    {
+        /// <summary>
+        /// Search by Zone Name.This is mandatory field. Name Should be atleast 3chars.
+        /// </summary>
+        public string Zone_name { get; set; }
+        /// <summary>
+        /// Search Zones by System CountryCode.This is optional field.
+        /// </summary>
+        public string SystemCountryCode { get; set; }
+        /// <summary>
+        /// Search Zone by its Type. This is optional field.To get ZoneTypes use "GetZoneTypes" service
+        /// </summary>
+        public string Zone_Type { get; set; }
+        /// <summary>
+        /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "GetZoneTypes" service
+        /// </summary>
+        public string Zone_SubType { get; set; }
+
     }
 }

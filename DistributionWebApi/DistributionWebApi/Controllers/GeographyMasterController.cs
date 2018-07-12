@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Description;
 using NLog;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DistributionWebApi.Controllers
 {
@@ -333,6 +334,70 @@ namespace DistributionWebApi.Controllers
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Get zones based on  serach parameters
+        /// </summary>
+        /// <param name="RQ"></param>
+        /// <returns>
+        /// returns List of Zones.
+        /// </returns>
+        [Route("Zone/Search")]
+        [HttpPost]
+        [ResponseType(typeof(List<Zone>))]
+        public async Task<HttpResponseMessage> GetZones(ZoneSearchRQ RQ)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<Zone>("ZoneMaster");
+                FilterDefinition<Zone> filterForZone;
+                filterForZone = Builders<Zone>.Filter.Empty;
+               
+                if (!string.IsNullOrWhiteSpace(RQ.Zone_name))
+                {
+                    if(RQ.Zone_name.Length >= 3)
+                    {
+                        filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b=>b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
+                        //like search
+                        //filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b => b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
+                        if (!string.IsNullOrWhiteSpace(RQ.Zone_Type))
+                        {
+                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b=>b.Zone_Type, RQ.Zone_Type.Trim().ToUpper());
+                        }
+                        if (!string.IsNullOrWhiteSpace(RQ.Zone_SubType))
+                        {
+                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b => b.Zone_SubType, RQ.Zone_SubType.Trim().ToUpper());
+                        }
+                        if (!string.IsNullOrWhiteSpace(RQ.SystemCountryCode))
+                        {
+                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b=>b.TLGXCountryCode, RQ.SystemCountryCode.Trim().ToUpper());
+                        }
+                        var result = await collection.Find(filterForZone).ToListAsync();
+
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                        return response;
+                    }
+                    else
+                    {
+                        HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.BadRequest, "ZoneName Should be atleast 3 chars");
+                        return res;
+                    }   
+                }
+                else
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest,"Invalid ZoneName");
+                    return response;
+                }
+
             }
             catch (Exception ex)
             {

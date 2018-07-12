@@ -847,6 +847,15 @@
             <param name="CountryCode"></param>
             <returns>List of active OAG Port Masters.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZones(DistributionWebApi.Models.ZoneSearchRQ)">
+            <summary>
+            Retrive zones based on  serach parameters
+            </summary>
+            <param name="RQ"></param>
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.LegacyProductDetailsController">
             <summary>
             Used to replicate EZ1 Legacy Product Distribution Web Services. 
@@ -3711,6 +3720,126 @@
         <member name="P:DistributionWebApi.Models.Active_Port.tlgx_city_name">
             <summary>
             System's city name
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone">
+            <summary>
+            structure of Zone Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_Type">
+            <summary>
+            Type of the Zone.This field is mandatory.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_SubType">
+            <summary>
+            Sub Type Of the Zone.This field is optional.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_Name">
+            <summary>
+            Name of the zone.This field is mandatory.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Latitude">
+            <summary>
+            Latitude of Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Longitude">
+            <summary>
+            Longitude of Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_Radius">
+            <summary>
+            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.TLGXCountryCode">
+            <summary>
+            TLGX Country Code .This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_CityMapping">
+            <summary>
+            List Of TLGX City Codes mapped to Zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone.Zone_ProductMapping">
+            <summary>
+            List Of Hotels within 10km range from  lat-Long of zone
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone_CityMapping">
+            <summary>
+            Structure of City mapped with zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_CityMapping.TLGXCityCode">
+            <summary>
+            TLGX City Code .This field is dependant on TLGX CountryCode of Zone and is optional.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone_ProductMapping">
+            <summary>
+            structure of  Hotels within 10 kon of zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.TLGXCompanyHotelID">
+            <summary>
+            Unique Id of TLGX Hotel(TLGX HotelCode)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.TLGXHotelName">
+            <summary>
+            TLGX Hotel Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.TLGXProductType">
+            <summary>
+            TLGX Hotel Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.Distance">
+            <summary>
+            Distance Of Hotel(in Km) from Latitude-Longitude of Zone.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.Unit">
+            <summary>
+            Unit of Distance
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_ProductMapping.IsIncluded">
+            <summary>
+            If this hotel is Included in Zone or Not.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ZoneSearchRQ">
+            <summary>
+            Structure for Zone Search Rquest Parameters.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_name">
+            <summary>
+            Search by Zone Name.This is mandatory field. Name Should be atleast 3chars.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneSearchRQ.SystemCountryCode">
+            <summary>
+            Search Zones by System CountryCode.This is optional field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_Type">
+            <summary>
+            Search Zone by its Type. This is optional field
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_SubType">
+            <summary>
+            Zone Sub types are dependant on ZoneTypes. This is optional field.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.RoomTypeMappingModel">
