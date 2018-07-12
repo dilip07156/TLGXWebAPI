@@ -402,7 +402,7 @@ namespace DistributionWebApi.Models
 
     }
     /// <summary>
-    /// Structure of City mapped with zone
+    /// Structure of Cities mapped to zone
     /// </summary>
     [BsonIgnoreExtraElements]
     public class Zone_CityMapping
@@ -413,7 +413,7 @@ namespace DistributionWebApi.Models
         public string TLGXCityCode { get; set; }
     }
     /// <summary>
-    /// structure of  Hotels within 10 kon of zone
+    /// structure of  Hotels within 10 km of zone
     /// </summary>
     [BsonIgnoreExtraElements]
     public class Zone_ProductMapping
@@ -458,13 +458,28 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SystemCountryCode { get; set; }
         /// <summary>
-        /// Search Zone by its Type. This is optional field.To get ZoneTypes use "GetZoneTypes" service
+        /// Search Zone by its Type. This is optional field.To get ZoneTypes use "ZoneTypeMaster" service
         /// </summary>
         public string Zone_Type { get; set; }
         /// <summary>
-        /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "GetZoneTypes" service
+        /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" service
         /// </summary>
         public string Zone_SubType { get; set; }
 
+    }
+    /// <summary>
+    /// ZoneTypes and Subtypes
+    /// </summary>
+    [BsonIgnoreExtraElements]
+    public class ZoneTypeMaster
+    {
+        /// <summary>
+        /// Type of Zone
+        /// </summary>
+        public string Zone_Type { get; set; }
+        /// <summary>
+        /// SubTypes of ZoneType
+        /// </summary>
+        public List<string> Zone_SubTypes { get; set; }
     }
 }

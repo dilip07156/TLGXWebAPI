@@ -344,7 +344,7 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Get zones based on  serach parameters
+        /// Retrive zones based on  serach parameters
         /// </summary>
         /// <param name="RQ"></param>
         /// <returns>
@@ -405,6 +405,31 @@ namespace DistributionWebApi.Controllers
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
                 return response;
             }
+        }
+        /// <summary>
+        /// Retrive all ZoneTypes and SubTypes
+        /// </summary>
+        /// <returns></returns>
+        [Route("ZoneTypeMaster")]
+        [HttpGet]
+        [ResponseType(typeof(List<ZoneTypeMaster>))]
+        public async Task <HttpResponseMessage> GetZoneTypeMaster()
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<ZoneTypeMaster>("ZoneTypeMaster");
+                var result = await collection.Find(bson=>true).SortBy(s => s.Zone_Type).ToListAsync();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
+            }
+            catch(Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+
         }
     }
 }
