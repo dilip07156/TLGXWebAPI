@@ -366,7 +366,7 @@ namespace DistributionWebApi.Controllers
                 {
                     if(RQ.Zone_name.Length >= 3)
                     {
-                        filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b=>b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
+                        filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b=>b.Zone_Name,new Regex("^"+RQ.Zone_name.Trim().ToUpper()));
                         //like search
                         //filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b => b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
                         if (!string.IsNullOrWhiteSpace(RQ.Zone_Type))
