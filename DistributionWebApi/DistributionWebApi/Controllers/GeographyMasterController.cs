@@ -344,7 +344,7 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrive zones based on  serach parameters
+        /// Retrive zones based on  search parameters
         /// </summary>
         /// <param name="RQ"></param>
         /// <returns>

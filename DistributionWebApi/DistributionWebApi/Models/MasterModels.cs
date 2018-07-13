@@ -452,6 +452,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Search by Zone Name.This is mandatory field. Name Should be atleast 3chars.
         /// </summary>
+        [Required]
         public string Zone_name { get; set; }
         /// <summary>
         /// Search Zones by System CountryCode.This is optional field.
