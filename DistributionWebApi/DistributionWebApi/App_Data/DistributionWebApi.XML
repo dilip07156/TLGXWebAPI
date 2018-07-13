@@ -849,7 +849,7 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZones(DistributionWebApi.Models.ZoneSearchRQ)">
             <summary>
-            Retrive zones based on  serach parameters
+            Retrive zones based on  search parameters
             </summary>
             <param name="RQ"></param>
             <returns>
@@ -3858,7 +3858,7 @@
             Type of Zone
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ZoneTypeMaster.Zone_SubTypes">
+        <member name="P:DistributionWebApi.Models.ZoneTypeMaster.Zone_SubType">
             <summary>
             SubTypes of ZoneType
             </summary>

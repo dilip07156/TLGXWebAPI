@@ -481,6 +481,6 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// SubTypes of ZoneType
         /// </summary>
-        public List<string> Zone_SubTypes { get; set; }
+        public List<string> Zone_SubType { get; set; }
     }
 }
