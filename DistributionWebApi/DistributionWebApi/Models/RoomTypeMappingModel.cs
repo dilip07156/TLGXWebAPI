@@ -200,6 +200,7 @@ namespace DistributionWebApi.Models
         /// Supplier data for room type mapping requests grouped at TLGX Accommodation CommonHotelId.
         /// This allows you to perform multiple room type mapping requests for a single TLGX Accommodation CommonHotelId.
         /// </summary>
+        [Required]
         public List<RoomTypeMapping_SIRQ_SupplierData> SupplierData { get; set; }
     }
 

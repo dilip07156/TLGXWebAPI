@@ -41,15 +41,136 @@ namespace DistributionWebApi.Controllers
         /// If there are no mapping record exists, MapId will be returned as 0 and TLGXCommonRoomId will be returned as empty.</returns>
         [HttpPost]
         [Route("RoomTypeMapping")]
-        [ResponseType(typeof(List<RoomTypeMapping_SIRS>))]
-        public async Task<HttpResponseMessage> GetBulkRoomTypeMapping(List<RoomTypeMapping_SIRQ> RQ)
+        [ResponseType(typeof(RoomTypeMapping_SIRS))]
+        public async Task<HttpResponseMessage> GetBulkRoomTypeMapping(RoomTypeMapping_SIRQ RQ)
         {
             try
             {
-                _database = MongoDBHandler.mDatabase();
-                IMongoCollection<BsonDocument> collection = _database.GetCollection<BsonDocument>("RoomTypeMapping");
+                var returnResult = new RoomTypeMapping_SIRS();
+                if (RQ != null)
+                {
+                    _database = MongoDBHandler.mDatabase();
+                    IMongoCollection<BsonDocument> collection = _database.GetCollection<BsonDocument>("RoomTypeMapping");
 
-                var returnResult = new List<RoomTypeMapping_SIRS>();
+                    returnResult.Mode = RQ.Mode;
+                    returnResult.BatchId = RQ.BatchId;
+
+                    if (RQ.HotelRoomTypeMappingRequests != null)
+                    {
+                        var hrtmrsl = new List<RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses>();
+
+                        if (RQ.HotelRoomTypeMappingRequests != null)
+                        {
+                            foreach (var hrtmrq in RQ.HotelRoomTypeMappingRequests)
+                            {
+                                var hrtmrs = new RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses();
+                                hrtmrs.TLGXCommonHotelId = hrtmrq.TLGXCommonHotelId;
+
+                                var hrtmrs_sdl = new List<RoomTypeMapping_SIRS_SupplierData>();
+
+                                if (hrtmrq.SupplierData != null)
+                                {
+                                    foreach (var hrtmrq_sd in hrtmrq.SupplierData)
+                                    {
+                                        var hrtmrs_sd = new RoomTypeMapping_SIRS_SupplierData();
+
+                                        hrtmrs_sd.SupplierId = hrtmrq_sd.SupplierId;
+                                        hrtmrs_sd.SupplierProductId = hrtmrq_sd.SupplierProductId;
+
+                                        var hrtmrs_srtl = new List<RoomTypeMapping_SIRS_SupplierRoomType>();
+
+                                        if (hrtmrq_sd.SupplierRoomTypes != null)
+                                        {
+                                            foreach (var hrtmrq_srt in hrtmrq_sd.SupplierRoomTypes)
+                                            {
+                                                var hrtmrs_srt = new RoomTypeMapping_SIRS_SupplierRoomType();
+
+                                                hrtmrs_srt.SupplierRoomId = hrtmrq_srt.SupplierRoomId;
+                                                hrtmrs_srt.SupplierRoomTypeCode = hrtmrq_srt.SupplierRoomTypeCode;
+                                                hrtmrs_srt.SupplierRoomName = hrtmrq_srt.SupplierRoomName;
+                                                hrtmrs_srt.SupplierRoomCategory = hrtmrq_srt.SupplierRoomCategory;
+                                                hrtmrs_srt.SupplierRoomCategoryId = hrtmrq_srt.SupplierRoomCategoryId;
+
+                                                var iValidCounterCheck = 0;
+                                                var builder = Builders<BsonDocument>.Filter;
+                                                var filter = builder.Empty;
+
+                                                if (!string.IsNullOrWhiteSpace(hrtmrq.TLGXCommonHotelId))
+                                                {
+                                                    filter = filter & builder.Eq("TLGXAccoId", hrtmrq.TLGXCommonHotelId.ToUpper());
+                                                    iValidCounterCheck++;
+                                                }
+
+                                                if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierId))
+                                                {
+                                                    filter = filter & builder.Eq("supplierCode", hrtmrq_sd.SupplierId.ToUpper());
+                                                    iValidCounterCheck++;
+                                                }
+
+                                                if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierProductId))
+                                                {
+                                                    filter = filter & builder.Eq("SupplierProductId", hrtmrq_sd.SupplierProductId.ToUpper());
+                                                    iValidCounterCheck++;
+                                                }
+
+                                                if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomTypeCode))
+                                                {
+                                                    filter = filter & builder.Eq("SupplierRoomTypeCode", hrtmrq_srt.SupplierRoomTypeCode);
+                                                    iValidCounterCheck++;
+                                                }
+                                                else if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomId))
+                                                {
+                                                    filter = filter & builder.Eq("SupplierRoomId", hrtmrq_srt.SupplierRoomId);
+                                                    iValidCounterCheck++;
+                                                }
+
+                                                if (iValidCounterCheck == 4)
+                                                {
+                                                    BsonDocument result = new BsonDocument();
+                                                    try
+                                                    {
+                                                        result = collection.Find(filter).FirstOrDefault();
+
+                                                        if (result != null)
+                                                        {
+                                                            hrtmrs_srt.TLGXCommonRoomId = result["TLGXAccoRoomId"].AsString;
+                                                            hrtmrs_srt.MapId = Convert.ToString(result["SystemRoomTypeMapId"].AsNullableInt32);
+                                                        }
+                                                        else
+                                                        {
+                                                            hrtmrs_srt.TLGXCommonRoomId = string.Empty;
+                                                            hrtmrs_srt.MapId = "0";
+                                                        }
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+                                                        hrtmrs_srt.TLGXCommonRoomId = string.Empty;
+                                                        hrtmrs_srt.MapId = "0";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    hrtmrs_srt.TLGXCommonRoomId = string.Empty;
+                                                    hrtmrs_srt.MapId = "0";
+                                                }
+
+                                                hrtmrs_srtl.Add(hrtmrs_srt);
+                                            }
+                                        }
+
+                                        hrtmrs_sd.SupplierRoomTypes = hrtmrs_srtl;
+                                        hrtmrs_sdl.Add(hrtmrs_sd);
+                                    }
+                                }
+
+                                hrtmrs.SupplierData = hrtmrs_sdl;
+                                hrtmrsl.Add(hrtmrs);
+                            }
+                        }
+
+                        returnResult.HotelRoomTypeMappingResponses = hrtmrsl;
+                    }
+                }
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
                 return response;
