@@ -2610,6 +2610,16 @@
             This value will not be returned by the ActivityDefinition, but is included on request of the Consuming Application.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierDetails.TourType">
+            <summary>
+            Activity Tour Type  like 'Group /Individual'
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SupplierDetails.AreaAddress">
+            <summary>
+            Activity Area Address
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ProductOptions">
             <summary>
             Contains information relating to bifurcations of a Product. For example, Tour of Taj Mahal may have options for different durations or Guide types. 
