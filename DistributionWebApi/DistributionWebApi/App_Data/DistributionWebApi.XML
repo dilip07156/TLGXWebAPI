@@ -1009,7 +1009,7 @@
             Mongo database handler
             </summary>
         </member>
-        <member name="M:DistributionWebApi.Controllers.RoomTypeMappingController.GetBulkRoomTypeMapping(System.Collections.Generic.List{DistributionWebApi.Models.RoomTypeMapping_SIRQ})">
+        <member name="M:DistributionWebApi.Controllers.RoomTypeMappingController.GetBulkRoomTypeMapping(DistributionWebApi.Models.RoomTypeMapping_SIRQ)">
             <summary>
             Retrieves TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
             API can handle single / multiple TLGX Common Hotel Ids at a time. 
