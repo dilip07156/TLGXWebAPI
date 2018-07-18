@@ -2612,12 +2612,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.SupplierDetails.TourType">
             <summary>
-            Activity Tour Type  like 'Group /Individual'
+            The End Suppliers Activity Tour Type  like 'Group /Individual'
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.SupplierDetails.AreaAddress">
             <summary>
-            Activity Area Address
+            The End Suppliers Activity Area Address
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ProductOptions">
