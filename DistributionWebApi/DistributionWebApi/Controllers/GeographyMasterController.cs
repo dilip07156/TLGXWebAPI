@@ -361,7 +361,12 @@ namespace DistributionWebApi.Controllers
                 var collection = _database.GetCollection<Zone>("ZoneMaster");
                 FilterDefinition<Zone> filterForZone;
                 filterForZone = Builders<Zone>.Filter.Empty;
-               
+                //ProjectionDefinition<Zone> project = Builders<Zone>.Projection.Include(x=>x.Zone_Name);
+                //project = project.Include(x=>x.TLGXCountryCode);
+                //project = project.Include(x=>x.Zone_Type);
+                //project = project.Include(x => x.Zone_SubType);
+               // project = project.Include();
+
                 if (!string.IsNullOrWhiteSpace(RQ.Zone_name))
                 {
                     if(RQ.Zone_name.Length >= 3)
