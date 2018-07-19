@@ -804,6 +804,14 @@ namespace DistributionWebApi.Models.Activity
         /// This value will not be returned by the ActivityDefinition, but is included on request of the Consuming Application.
         /// </summary>
         public string TimeSlotCode { get; set; }
+        /// <summary>
+        /// The End Suppliers Activity Tour Type  like 'Group /Individual'
+        /// </summary>
+        public string TourType { get; set; }
+        /// <summary>
+        /// The End Suppliers Activity Area Address
+        /// </summary>
+        public string AreaAddress { get; set; }
 
     }
 
