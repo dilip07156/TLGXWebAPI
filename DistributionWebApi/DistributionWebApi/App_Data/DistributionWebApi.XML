@@ -2066,6 +2066,11 @@
             IF the activity is tagged under special category
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.ActivtyFlavourServices">
+            <summary>
+            List of services details with price provided by the supplier in a single activity
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.SupplierCityDepartureCodes">
             <summary>
             This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
@@ -2737,6 +2742,11 @@
             mm = minutes
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DurationType">
+            <summary>
+            It's calcualte on the basis of duration Half Day,Full Day,Overnight
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DepartureCode">
             <summary>
             Departure Code based on Operating Day and time (Not all supplier provides this)
@@ -2785,6 +2795,11 @@
         <member name="T:DistributionWebApi.Models.Activity.SimliarProducts">
             <summary>
             list of products similar to returned product as per city and product sub type
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Activity.ActivtyFlavourServices">
+            <summary>
+            List of services details with price provided by the supplier in a single activity
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ActivityMasters">

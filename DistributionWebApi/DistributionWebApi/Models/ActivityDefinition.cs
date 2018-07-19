@@ -15,7 +15,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// How many Search Results do you wish to receive per request?
         /// </summary>
-        
+
         [Required]
         public int PageSize { get; set; }
         /// <summary>
@@ -142,7 +142,7 @@ namespace DistributionWebApi.Models.Activity
         /// The Main Description of the Activity from the End Supplier.
         /// </summary>
         public string Description { get; set; }
-        
+
         ///// <summary>
         ///// Mapping System Activity Category for Product Session. 
         ///// THis classification is designed to group products into time-bands. 
@@ -222,7 +222,7 @@ namespace DistributionWebApi.Models.Activity
         /// HOw many views does this Activity have? This value may be populated by Supplier Data, where it is provided.
         /// </summary>
         public string NumberOfViews { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -252,7 +252,7 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        
+
         ///// <summary>
         ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
         ///// </summary>
@@ -304,6 +304,10 @@ namespace DistributionWebApi.Models.Activity
         /// IF the activity is tagged under special category
         /// </summary>
         public List<string> Specials { get; set; }
+        /// <summary>
+        /// List of services details with price provided by the supplier in a single activity
+        /// </summary>
+        public List<ActivtyFlavourServices> ActivtyFlavourServices { get; set; }
 
         /// <summary>
         /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
@@ -474,7 +478,7 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        
+
         ///// <summary>
         ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
         ///// </summary>
@@ -953,6 +957,10 @@ namespace DistributionWebApi.Models.Activity
         /// mm = minutes
         /// </summary>
         public string Duration { get; set; }
+        /// <summary>
+        /// It's calcualte on the basis of duration Half Day,Full Day,Overnight
+        /// </summary>
+        public string DurationType { get; set; }
         public string SupplierSession { get; set; }
         public string Session { get; set; }
         public string OperatingFromDate { get; set; }
@@ -1008,5 +1016,56 @@ namespace DistributionWebApi.Models.Activity
         public string ActivityType { get; set; }
         public List<ProductOptions> Options { get; set; }
         public List<Prices> Prices { get; set; }
+    }
+
+    /// <summary>
+    /// List of services details with price provided by the supplier in a single activity
+    /// </summary>
+    public class ActivtyFlavourServices
+    {
+        public string FlavourServiceType { get; set; }
+        public string Market { get; set; }
+        public string RateMarket { get; set; }
+        public string ServiceType { get; set; }
+        public string ServiceTypeId { get; set; }
+        public string ServiceCategory { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string FromPax { get; set; }
+        public string ToPax { get; set; }
+        public string RateDivision { get; set; }
+        public string RateActive { get; set; }
+        public string RateCurrency { get; set; }
+        public string AdultRate { get; set; }
+        public string ChildRate { get; set; }
+        public string InfantRate { get; set; }
+        public string SeniorCitizenRate { get; set; }
+        public string IncludeType { get; set; }
+        public string CostBasis { get; set; }
+        public string Session { get; set; }
+        public string JourneyType { get; set; }
+        public string Language { get; set; }
+        public string GeneralNotes { get; set; }
+        public string SpecificNotes { get; set; }
+        public string PickupPoint { get; set; }
+        public string DropoffPoint { get; set; }
+        public string PickupTime { get; set; }
+        public string DropoffTime { get; set; }
+        public string Duration { get; set; }
+        public string ServiceSupplier { get; set; }
+        public string VenueType { get; set; }
+        public string VenueName { get; set; }
+        public string Drink { get; set; }
+        public string Attributes { get; set; }
+        public string Menu { get; set; }
+        public string AvailableAtDisposal { get; set; }
+        public string VehicleCategory { get; set; }
+        public string VehicleClass { get; set; }
+        public string VehicleACNONAC { get; set; }
+        public string VehicleName { get; set; }
+        public string Distance { get; set; }
+
     }
 }
