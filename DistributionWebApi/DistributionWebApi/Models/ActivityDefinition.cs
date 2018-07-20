@@ -123,7 +123,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+        /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+        /// </summary>
+        public string InterestType { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification.
         /// </summary>
         public string Category { get; set; }
         /// <summary>
@@ -307,7 +311,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// List of services details with price provided by the supplier in a single activity
         /// </summary>
-        public List<ActivtyFlavourServices> ActivtyFlavourServices { get; set; }
+       public List<ActivtyFlavourServices> ActivtyFlavourServices { get; set; }
 
         /// <summary>
         /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
@@ -373,7 +377,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+        /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+        /// </summary>
+        public string InterestType { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification.
         /// </summary>
         public string Category { get; set; }
         /// <summary>
@@ -1031,48 +1039,177 @@ namespace DistributionWebApi.Models.Activity
     /// </summary>
     public class ActivtyFlavourServices
     {
+        /// <summary>
+        /// Supplier provided What type of sevice it is.
+        /// </summary>
         public string FlavourServiceType { get; set; }
+        /// <summary>
+        /// Supplier provided From Which market it is
+        /// </summary>
         public string Market { get; set; }
+        /// <summary>
+        /// Supplier provided Rate For which makert
+        /// </summary>
         public string RateMarket { get; set; }
+        /// <summary>
+        /// Supplier provided Which type of service
+        /// </summary>
         public string ServiceType { get; set; }
+        /// <summary>
+        /// Service ID
+        /// </summary>
         public string ServiceTypeId { get; set; }
+        /// <summary>
+        /// Which type of service Category it is
+        /// </summary>
         public string ServiceCategory { get; set; }
+        /// <summary>
+        /// What is the service name
+        /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// Description of the services
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// From which date the service will be available
+        /// </summary>
         public DateTime? FromDate { get; set; }
+        /// <summary>
+        /// Till which date the service will be available
+        /// </summary>
         public DateTime? ToDate { get; set; }
+        /// <summary>
+        /// Service will be change if passanger Count from  
+        /// </summary>
         public string FromPax { get; set; }
+        /// <summary>
+        /// Service will be change if passanger Count To  
+        /// </summary>
         public string ToPax { get; set; }
+        /// <summary>
+        /// Supplier provided the Rate Division
+        /// </summary>
         public string RateDivision { get; set; }
+        /// <summary>
+        /// Is Rate Active in services
+        /// </summary>
         public string RateActive { get; set; }
+        /// <summary>
+        /// What pricing currency is the price information returned in
+        /// </summary>
         public string RateCurrency { get; set; }
+        /// <summary>
+        /// Service charge for the Adult
+        /// </summary>
         public string AdultRate { get; set; }
+        /// <summary>
+        ///  Service charge for the Child
+        /// </summary>
         public string ChildRate { get; set; }
+        /// <summary>
+        /// Service charge for the Infant
+        /// </summary>
         public string InfantRate { get; set; }
+        /// <summary>
+        /// Service charge for the SeniorCitizen
+        /// </summary>
         public string SeniorCitizenRate { get; set; }
+        /// <summary>
+        /// Inclusion Type Whethere it is inculded or optoinal
+        /// </summary>
         public string IncludeType { get; set; }
+        /// <summary>
+        /// on which basis service will charge like PP- PER PAX , PV - PER VEHICLE ,PG - PER GROUP ,PR -PER RIDER ,PL -PER PILLION 
+        /// </summary>
         public string CostBasis { get; set; }
+        /// <summary>
+        /// On which session serive will proviced
+        /// </summary>
         public string Session { get; set; }
+        /// <summary>
+        /// If Service is transfer the which type of service it is like Return or single
+        /// </summary>
         public string JourneyType { get; set; }
+        /// <summary>
+        /// If service is Guide, for which language it is
+        /// </summary>
         public string Language { get; set; }
+        /// <summary>
+        /// General Notes of the services
+        /// </summary>
         public string GeneralNotes { get; set; }
+        /// <summary>
+        /// Speecific Notes of the services
+        /// </summary>
         public string SpecificNotes { get; set; }
+        /// <summary>
+        /// From where pickup you for giving services 
+        /// </summary>
         public string PickupPoint { get; set; }
+        /// <summary>
+        /// where will you drop after giving services 
+        /// </summary>
         public string DropoffPoint { get; set; }
+        /// <summary>
+        /// Pickup time
+        /// </summary>
         public string PickupTime { get; set; }
+        /// <summary>
+        /// Dropoff Time
+        /// </summary>
         public string DropoffTime { get; set; }
+        /// <summary>
+        /// For duration for this service will be
+        /// </summary>
         public string Duration { get; set; }
+        /// <summary>
+        /// Service provider supplier name
+        /// </summary>
         public string ServiceSupplier { get; set; }
+        /// <summary>
+        /// If it's meal service, which type of Venue it is
+        /// </summary>
         public string VenueType { get; set; }
+        /// <summary>
+        /// If it's meal service, what is the Venue name
+        /// </summary>
         public string VenueName { get; set; }
+        /// <summary>
+        /// If it's meal service, what type of Drink provided
+        /// </summary>
         public string Drink { get; set; }
+        /// <summary>
+        /// Service attribtes if service is meal
+        /// </summary>
         public string Attributes { get; set; }
+        /// <summary>
+        /// If service is mealservice, Which type of meal provide
+        /// </summary>
         public string Menu { get; set; }
+        /// <summary>
+        /// In Transfers service, it available or not
+        /// </summary>
         public string AvailableAtDisposal { get; set; }
+        /// <summary>
+        /// Which type of vechile provided in TransferServices
+        /// </summary>
         public string VehicleCategory { get; set; }
+        /// <summary>
+        /// Which class of vechile provided
+        /// </summary>
         public string VehicleClass { get; set; }
+        /// <summary>
+        /// Vechile is AC or NON-AC, in transferservice
+        /// </summary>
         public string VehicleACNONAC { get; set; }
+        /// <summary>
+        /// Vechile Name
+        /// </summary>
         public string VehicleName { get; set; }
+        /// <summary>
+        /// Distance in transfre service
+        /// </summary>
         public string Distance { get; set; }
 
     }

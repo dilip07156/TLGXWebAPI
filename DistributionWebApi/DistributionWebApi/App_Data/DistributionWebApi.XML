@@ -1886,9 +1886,14 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Category">
             <summary>
-            Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+            Mapping System Activity Category for Product Classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Type">
@@ -2154,9 +2159,14 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Category">
             <summary>
-            Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+            Mapping System Activity Category for Product Classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Type">
@@ -2825,6 +2835,221 @@
         <member name="T:DistributionWebApi.Models.Activity.ActivtyFlavourServices">
             <summary>
             List of services details with price provided by the supplier in a single activity
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.FlavourServiceType">
+            <summary>
+            Supplier provided What type of sevice it is.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Market">
+            <summary>
+            Supplier provided From Which market it is
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.RateMarket">
+            <summary>
+            Supplier provided Rate For which makert
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ServiceType">
+            <summary>
+            Supplier provided Which type of service
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ServiceTypeId">
+            <summary>
+            Service ID
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ServiceCategory">
+            <summary>
+            Which type of service Category it is
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Title">
+            <summary>
+            What is the service name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Description">
+            <summary>
+            Description of the services
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.FromDate">
+            <summary>
+            From which date the service will be available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ToDate">
+            <summary>
+            Till which date the service will be available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.FromPax">
+            <summary>
+            Service will be change if passanger Count from  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ToPax">
+            <summary>
+            Service will be change if passanger Count To  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.RateDivision">
+            <summary>
+            Supplier provided the Rate Division
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.RateActive">
+            <summary>
+            Is Rate Active in services
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.RateCurrency">
+            <summary>
+            What pricing currency is the price information returned in
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.AdultRate">
+            <summary>
+            Service charge for the Adult
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ChildRate">
+            <summary>
+             Service charge for the Child
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.InfantRate">
+            <summary>
+            Service charge for the Infant
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.SeniorCitizenRate">
+            <summary>
+            Service charge for the SeniorCitizen
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.IncludeType">
+            <summary>
+            Inclusion Type Whethere it is inculded or optoinal
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.CostBasis">
+            <summary>
+            on which basis service will charge like PP- PER PAX , PV - PER VEHICLE ,PG - PER GROUP ,PR -PER RIDER ,PL -PER PILLION 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Session">
+            <summary>
+            On which session serive will proviced
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.JourneyType">
+            <summary>
+            If Service is transfer the which type of service it is like Return or single
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Language">
+            <summary>
+            If service is Guide, for which language it is
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.GeneralNotes">
+            <summary>
+            General Notes of the services
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.SpecificNotes">
+            <summary>
+            Speecific Notes of the services
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.PickupPoint">
+            <summary>
+            From where pickup you for giving services 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.DropoffPoint">
+            <summary>
+            where will you drop after giving services 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.PickupTime">
+            <summary>
+            Pickup time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.DropoffTime">
+            <summary>
+            Dropoff Time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Duration">
+            <summary>
+            For duration for this service will be
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.ServiceSupplier">
+            <summary>
+            Service provider supplier name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VenueType">
+            <summary>
+            If it's meal service, which type of Venue it is
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VenueName">
+            <summary>
+            If it's meal service, what is the Venue name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Drink">
+            <summary>
+            If it's meal service, what type of Drink provided
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Attributes">
+            <summary>
+            Service attribtes if service is meal
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Menu">
+            <summary>
+            If service is mealservice, Which type of meal provide
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.AvailableAtDisposal">
+            <summary>
+            In Transfers service, it available or not
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VehicleCategory">
+            <summary>
+            Which type of vechile provided in TransferServices
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VehicleClass">
+            <summary>
+            Which class of vechile provided
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VehicleACNONAC">
+            <summary>
+            Vechile is AC or NON-AC, in transferservice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.VehicleName">
+            <summary>
+            Vechile Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivtyFlavourServices.Distance">
+            <summary>
+            Distance in transfre service
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ActivityMasters">
