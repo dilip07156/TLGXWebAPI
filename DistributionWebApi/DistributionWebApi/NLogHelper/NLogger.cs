@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Text;
 //using WebApi.ErrorHelper;
 using Newtonsoft.Json;
-using NLog.Web;
 #endregion
 
 namespace DistributionWebApi.NLogHelper
