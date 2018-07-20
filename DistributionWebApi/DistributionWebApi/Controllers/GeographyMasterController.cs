@@ -511,7 +511,7 @@ namespace DistributionWebApi.Controllers
                         else
                         {
                             resultList.TotalPage = 0;
-                            resultList.ZoneHotels = null;
+                            resultList.ZoneHotels = new List<Zone_ProductMapping>();
                         }
                         //End
                         HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
