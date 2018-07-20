@@ -801,11 +801,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string TimeSlotCode { get; set; }
         /// <summary>
-        /// Activity Tour Type  like 'Group /Individual'
+        /// The End Suppliers Activity Tour Type  like 'Group /Individual'
         /// </summary>
         public string TourType { get; set; }
         /// <summary>
-        /// Activity Area Address
+        /// The End Suppliers Activity Area Address
         /// </summary>
         public string AreaAddress { get; set; }
 
