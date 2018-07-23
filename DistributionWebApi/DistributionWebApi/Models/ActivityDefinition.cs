@@ -1074,11 +1074,11 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// From which date the service will be available
         /// </summary>
-        public DateTime? FromDate { get; set; }
+        public string FromDate { get; set; }
         /// <summary>
         /// Till which date the service will be available
         /// </summary>
-        public DateTime? ToDate { get; set; }
+        public string ToDate { get; set; }
         /// <summary>
         /// Service will be change if passanger Count from  
         /// </summary>
