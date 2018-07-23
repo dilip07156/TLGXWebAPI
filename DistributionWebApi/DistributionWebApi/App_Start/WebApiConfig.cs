@@ -448,6 +448,9 @@ namespace DistributionWebApi
 
         public static void Register(HttpConfiguration config)
         {
+            Target.Register("ELK", typeof(DistributionWebApi.App_Start.NLogELKTargetWithProxy)); //dynamic
+
+
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
@@ -492,7 +495,6 @@ namespace DistributionWebApi
 
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
 
-            Target.Register("ELK", typeof(DistributionWebApi.App_Start.NLogELKTargetWithProxy));
         }
     }
 }
