@@ -15,6 +15,8 @@ namespace DistributionWebApi
     {
         protected void Application_Start()
         {
+            NLog.Targets.Target.Register("ELK", typeof(DistributionWebApi.App_Start.NLogELKTargetWithProxy)); //dynamic
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
