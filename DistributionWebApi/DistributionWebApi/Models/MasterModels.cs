@@ -355,13 +355,16 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string tlgx_city_name { get; set; }
     }
-
+    #region ===Zone
     /// <summary>
     /// structure of Zone Master
     /// </summary>
-    [BsonIgnoreExtraElements]
-    public class Zone
+    public class ZoneMaster
     {
+        /// <summary>
+        /// unique id of Zone
+        /// </summary>
+        public string _id { get; set; }
         /// <summary>
         /// Type of the Zone.This field is mandatory.
         /// </summary>
@@ -399,8 +402,120 @@ namespace DistributionWebApi.Models
         /// </summary>
         public List<Zone_ProductMapping> Zone_ProductMapping { get; set; }
 
-
     }
+    /// <summary>
+    /// This is the Response format for ZoneSearch.
+    /// </summary>
+    public class ZoneSearchRS
+    {
+        /// <summary>
+        /// The Total Number of Zones returned by the Search Query
+        /// </summary>
+        public long TotalNumberOfZones { get; set; }
+        /// <summary>
+        /// The Number of hotels included in the response per page
+        /// </summary>
+        public int PageSize { get; set; }
+        /// <summary>
+        /// What is your current Page in the response
+        /// </summary>
+        public int CurrentPage { get; set; }
+        /// <summary>
+        /// What is the total number of pages in the response
+        /// </summary>
+        public int TotalPage { get; set; }
+        /// <summary>
+        /// List of zones
+        /// </summary>
+        public List<ZoneInfo> Zones { get; set; }
+    }
+    /// <summary>
+    /// Format for ZoneInfo.
+    /// </summary>
+    public class ZoneInfo
+    {
+        /// <summary>
+        /// Zone uniqueId.Use This Id to get Detail Information of Zone
+        /// </summary>
+        public string ZoneId { get; set; }
+        /// <summary>
+        /// Type of the Zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Type { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string Zone_SubType { get; set; }
+        /// <summary>
+        /// Name of the zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Name { get; set; }
+        /// <summary>
+        /// TLGX Country Code .This field is mandatory
+        /// </summary>
+        public string TLGXCountryCode { get; set; }
+    }
+
+    /// <summary>
+    ///  Response format for ZoneDetails.
+    /// </summary>
+    public class ZoneDetails
+    {
+        /// <summary>
+        /// Zone uniqueId.
+        /// </summary>
+        public string ZoneId { get; set; }
+        /// <summary>
+        /// Name of the zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Name { get; set; }
+        /// <summary>
+        /// Type of the Zone.This field is mandatory.
+        /// </summary>
+        public string Zone_Type { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string Zone_SubType { get; set; }
+        /// <summary>
+        /// TLGX Country Code .This field is mandatory
+        /// </summary>
+        public string TLGXCountryCode { get; set; }
+        /// <summary>
+        /// Latitude of Zone.This field is mandatory
+        /// </summary>
+        public string Latitude { get; set; }
+        /// <summary>
+        /// Longitude of Zone.This field is mandatory
+        /// </summary>
+        public string Longitude { get; set; }
+        /// <summary>
+        /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+        /// </summary>
+        public decimal? Zone_Radius { get; set; }
+        /// <summary>
+        /// The Total Number of TLGXHotels returned by the Search Query
+        /// </summary>
+        public long TotalNumberOfHotels { get; set; }
+        /// <summary>
+        /// The Number of hotels included in the response per page
+        /// </summary>
+        public int PageSize { get; set; }
+        /// <summary>
+        /// What is your current Page in the response
+        /// </summary>
+        public int CurrentPage { get; set; }
+        /// <summary>
+        /// What is the total number of pages in the response
+        /// </summary>
+        public int TotalPage { get; set; }
+        /// <summary>
+        /// A List containing  Hotels within the Zone matching the Search Request
+        /// </summary>
+        public List<Zone_ProductMapping> ZoneHotels { get; set; }
+       
+    }
+
     /// <summary>
     /// Structure of Cities mapped to zone
     /// </summary>
@@ -412,8 +527,9 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string TLGXCityCode { get; set; }
     }
+
     /// <summary>
-    /// structure of  Hotels within 10 km of zone
+    /// structure of  Hotels within  zone
     /// </summary>
     [BsonIgnoreExtraElements]
     public class Zone_ProductMapping
@@ -443,10 +559,10 @@ namespace DistributionWebApi.Models
         /// </summary>
         public bool? IsIncluded { get; set; }
     }
-    /// <summary>
-    /// Structure for Zone Search Rquest Parameters.
-    /// </summary>
 
+    /// <summary>
+    /// This is the request format for retriving Zones. 
+    /// </summary>
     public class ZoneSearchRQ
     {
         /// <summary>
@@ -454,6 +570,16 @@ namespace DistributionWebApi.Models
         /// </summary>
         [Required]
         public string Zone_name { get; set; }
+        /// <summary>
+        ///  How many Search Results do you wish to receive per request? .This is mandatory field.
+        /// </summary>
+        [Required]
+        public int PageSize { get; set; }
+        /// <summary>
+        /// Which Page Number you wish to retrieve from the Search Results set.Page no. starts From 0.This is mandatory field.
+        /// </summary>
+        [Required]
+        public int PageNo { get; set; }
         /// <summary>
         /// Search Zones by System CountryCode.This is optional field.
         /// </summary>
@@ -466,8 +592,30 @@ namespace DistributionWebApi.Models
         /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" service
         /// </summary>
         public string Zone_SubType { get; set; }
+    }
+    /// <summary>
+    /// This is the request format for retriving ZoneDetails. It is a paged request/response service.
+    /// </summary>
+    public class ZoneDetailRQ
+    {
+        /// <summary>
+        /// Search by ZoneId.This is mandatory field.
+        /// </summary>
+        [Required]
+        public string ZoneId { get; set; }
+        /// <summary>
+        ///  How many Search Results(Hotels) do you wish to receive per request? .This is mandatory field.
+        /// </summary>
+        [Required]
+        public int PageSize { get; set; }
+        /// <summary>
+        /// Which Page Number you wish to retrieve from the Search Results set.Page no. starts From 0.
+        /// </summary>
+        [Required]
+        public int PageNo { get; set; }
 
     }
+
     /// <summary>
     /// ZoneTypes and Subtypes
     /// </summary>
@@ -483,4 +631,5 @@ namespace DistributionWebApi.Models
         /// </summary>
         public List<string> Zone_SubType { get; set; }
     }
+    #endregion
 }

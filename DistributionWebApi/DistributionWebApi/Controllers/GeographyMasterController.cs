@@ -352,54 +352,85 @@ namespace DistributionWebApi.Controllers
         /// </returns>
         [Route("Zone/Search")]
         [HttpPost]
-        [ResponseType(typeof(List<Zone>))]
+        [ResponseType(typeof(List<ZoneInfo>))]
         public async Task<HttpResponseMessage> GetZones(ZoneSearchRQ RQ)
         {
             try
             {
+                ZoneSearchRS zoneResult = new ZoneSearchRS();
+               
+                if (RQ.PageSize == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Page Size should be greater than Zero.");
+                }
+
                 _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<Zone>("ZoneMaster");
-                FilterDefinition<Zone> filterForZone;
-                filterForZone = Builders<Zone>.Filter.Empty;
-                //ProjectionDefinition<Zone> project = Builders<Zone>.Projection.Include(x=>x.Zone_Name);
-                //project = project.Include(x=>x.TLGXCountryCode);
-                //project = project.Include(x=>x.Zone_Type);
-                //project = project.Include(x => x.Zone_SubType);
-               // project = project.Include();
+                var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
+                FilterDefinition<ZoneMaster> filterForZone;
+                filterForZone = Builders<ZoneMaster>.Filter.Empty;
 
                 if (!string.IsNullOrWhiteSpace(RQ.Zone_name))
                 {
-                    if(RQ.Zone_name.Length >= 3)
+                    if (RQ.Zone_name.Length >= 3)
                     {
-                        filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b=>b.Zone_Name,new Regex("^"+RQ.Zone_name.Trim().ToUpper()));
+                        filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Regex(b => b.Zone_Name, new Regex("^" + RQ.Zone_name.Trim().ToUpper()));
                         //like search
-                        //filterForZone = filterForZone & Builders<Zone>.Filter.Regex(b => b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
+                        //filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Regex(b => b.Zone_Name, new BsonRegularExpression(new Regex(RQ.Zone_name.Trim(), RegexOptions.IgnoreCase)));
                         if (!string.IsNullOrWhiteSpace(RQ.Zone_Type))
                         {
-                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b=>b.Zone_Type, RQ.Zone_Type.Trim().ToUpper());
+                            filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.Zone_Type, RQ.Zone_Type.Trim().ToUpper());
                         }
                         if (!string.IsNullOrWhiteSpace(RQ.Zone_SubType))
                         {
-                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b => b.Zone_SubType, RQ.Zone_SubType.Trim().ToUpper());
+                            filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.Zone_SubType, RQ.Zone_SubType.Trim().ToUpper());
                         }
                         if (!string.IsNullOrWhiteSpace(RQ.SystemCountryCode))
                         {
-                            filterForZone = filterForZone & Builders<Zone>.Filter.Eq(b=>b.TLGXCountryCode, RQ.SystemCountryCode.Trim().ToUpper());
+                            filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.TLGXCountryCode, RQ.SystemCountryCode.Trim().ToUpper());
                         }
-                        var result = await collection.Find(filterForZone).ToListAsync();
-
-                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                        return response;
+                        var resultCount = await collection.Find(filterForZone).CountDocumentsAsync();
+                        //TotalResultReturned
+                        int TotalSearchedZone = (int)resultCount;
+                        if (TotalSearchedZone > 0)
+                        {
+                            //for TotalPages in search result
+                            int remainder = TotalSearchedZone % RQ.PageSize;
+                            int quotient = TotalSearchedZone / RQ.PageSize;
+                            if (remainder > 0)
+                                remainder = 1;
+                            //end
+                            zoneResult.PageSize = RQ.PageSize;
+                            zoneResult.CurrentPage = RQ.PageNo;
+                            zoneResult.TotalNumberOfZones = TotalSearchedZone;
+                            zoneResult.TotalPage = quotient + remainder;
+                            var result = await collection.Find(filterForZone).Project(x => new ZoneInfo
+                            {
+                                ZoneId = x._id,
+                                TLGXCountryCode = x.TLGXCountryCode,
+                                Zone_Name = x.Zone_Name,
+                                Zone_SubType = x.Zone_SubType,
+                                Zone_Type = x.Zone_Type,  
+                            }).Skip(RQ.PageNo * RQ.PageSize).Limit(RQ.PageSize).ToListAsync();
+                            zoneResult.Zones = result;
+                            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
+                            return response;
+                        }
+                        else
+                        {
+                            HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.BadRequest, "No zone found for this filter criteria.");
+                            return res;
+                        }
                     }
                     else
                     {
                         HttpResponseMessage res = Request.CreateResponse(HttpStatusCode.BadRequest, "ZoneName Should be atleast 3 chars");
                         return res;
-                    }   
+                    }
                 }
+
                 else
                 {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest,"Invalid ZoneName");
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid ZoneName");
                     return response;
                 }
 
@@ -411,6 +442,102 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// Retrieve Zone Details with filter on ZoneId
+        /// </summary>
+        /// <param name="RQ"></param>
+        /// <returns>Details of Zone and Hotels within Zone</returns>
+        [Route("Zone/ZoneDetail")]
+        [HttpPost]
+        [ResponseType(typeof(List<ZoneDetails>))]
+        public async Task<HttpResponseMessage> GetZoneDetails(ZoneDetailRQ RQ)
+        {
+            try
+            {
+                ZoneDetails resultList = new ZoneDetails();
+                if (RQ.PageSize == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Page Size should be greater than Zero.");
+                }
+                _database = MongoDBHandler.mDatabase();
+                if (!string.IsNullOrWhiteSpace(RQ.ZoneId))
+                {
+                    var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
+                    var searchResult = await collection.Find(x => x._id == RQ.ZoneId.ToUpper()).ToListAsync();
+                    if (searchResult != null && searchResult.Count>0)
+                    {
+                        var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius }).FirstOrDefault();
+                        if (details != null)
+                        {
+
+                            resultList.ZoneId = details._id;
+                            resultList.Zone_Name = details.Zone_Name;
+                            resultList.Zone_Type = details.Zone_Type;
+                            resultList.Zone_SubType = details.Zone_SubType;
+                            resultList.TLGXCountryCode = details.TLGXCountryCode;
+                            resultList.Latitude = details.Latitude;
+                            resultList.Longitude = details.Longitude;
+                            resultList.Zone_Radius = details.Zone_Radius;
+                        }
+                        // For Zone-Hotels 
+                        var SearchZoneProducts = (from m in searchResult select m.Zone_ProductMapping).ToList();
+                        int TotalHotels = SearchZoneProducts[0].Count();
+                        resultList.PageSize = RQ.PageSize;
+                        resultList.CurrentPage = RQ.PageNo;
+                        resultList.TotalNumberOfHotels = TotalHotels;
+
+                        if (TotalHotels > 0)
+                        {
+                            int remainder = TotalHotels % RQ.PageSize;
+                            int quotient = TotalHotels / RQ.PageSize;
+                            if (remainder > 0)
+                            {
+                                remainder = 1;
+                            }
+                            resultList.TotalPage = quotient + remainder;
+
+                            resultList.ZoneHotels = (from ap in SearchZoneProducts[0]
+                                                     select new Zone_ProductMapping
+                                                     {
+                                                         Distance = ap.Distance,
+                                                         IsIncluded = ap.IsIncluded,
+                                                         TLGXCompanyHotelID = ap.TLGXCompanyHotelID,
+                                                         TLGXHotelName = ap.TLGXHotelName,
+                                                         TLGXProductType = ap.TLGXProductType,
+                                                         Unit = ap.Unit
+                                                     }).Skip(RQ.PageSize * RQ.PageNo).Take(RQ.PageSize).ToList();
+                        }
+                        else
+                        {
+                            resultList.TotalPage = 0;
+                            resultList.ZoneHotels = new List<Zone_ProductMapping>();
+                        }
+                        //End
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
+                        return response;
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, "No zone found");
+                    }
+                    
+                }
+                else
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Reuest Parameters");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+
+        }
+
         /// <summary>
         /// Retrive all ZoneTypes and SubTypes
         /// </summary>
@@ -418,17 +545,17 @@ namespace DistributionWebApi.Controllers
         [Route("ZoneTypeMaster")]
         [HttpGet]
         [ResponseType(typeof(List<ZoneTypeMaster>))]
-        public async Task <HttpResponseMessage> GetZoneTypeMaster()
+        public async Task<HttpResponseMessage> GetZoneTypeMaster()
         {
             try
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<ZoneTypeMaster>("ZoneTypeMaster");
-                var result = await collection.Find(bson=>true).SortBy(s => s.Zone_Type).ToListAsync();
+                var result = await collection.Find(bson => true).SortBy(s => s.Zone_Type).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
