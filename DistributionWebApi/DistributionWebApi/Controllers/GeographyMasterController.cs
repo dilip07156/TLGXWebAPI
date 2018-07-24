@@ -344,9 +344,9 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrive zones based on  search parameters
+        /// Retrive list of zones based on search parameters
         /// </summary>
-        /// <param name="RQ"></param>
+        /// <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>
         /// <returns>
         /// returns List of Zones.
         /// </returns>
@@ -444,10 +444,12 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieve Zone Details with filter on ZoneId
+        /// Retrieve Zone Details with filter on System specific ZoneId which is returned from ZoneSearch API.
         /// </summary>
         /// <param name="RQ"></param>
-        /// <returns>Details of Zone and Hotels within Zone</returns>
+        /// <returns>Details of Zone and Hotels within specified ZoneRange.
+        /// As of now we have included hotels within 10Km range. However, this may change in future.
+        /// </returns>
         [Route("Zone/ZoneDetail")]
         [HttpPost]
         [ResponseType(typeof(List<ZoneDetails>))]
@@ -475,7 +477,7 @@ namespace DistributionWebApi.Controllers
                             resultList.Zone_Name = details.Zone_Name;
                             resultList.Zone_Type = details.Zone_Type;
                             resultList.Zone_SubType = details.Zone_SubType;
-                            resultList.TLGXCountryCode = details.TLGXCountryCode;
+                            resultList.SystemCountryCode = details.TLGXCountryCode;
                             resultList.Latitude = details.Latitude;
                             resultList.Longitude = details.Longitude;
                             resultList.Zone_Radius = details.Zone_Radius;
