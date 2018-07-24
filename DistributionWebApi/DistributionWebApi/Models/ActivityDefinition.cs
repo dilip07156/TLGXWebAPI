@@ -309,11 +309,6 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public List<string> Specials { get; set; }
         /// <summary>
-        /// List of services details with price provided by the supplier in a single activity
-        /// </summary>
-       public List<ActivtyFlavourServices> ActivtyFlavourServices { get; set; }
-
-        /// <summary>
         /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
         /// </summary>
         public List<SupplierCityDepartureCode> SupplierCityDepartureCodes { get; set; }
@@ -857,10 +852,16 @@ namespace DistributionWebApi.Models.Activity
         /// Activity Language
         /// </summary>
         public string Language { get; set; }
+        /// <summary>
+        /// Contains all classification attributes of the ProductOption.
+        /// This will provide extra information at option level.
+        /// This may contain supplier specific attribute values and may differ supplier wise.
+        /// </summary>
+        public List<ClassificationAttrributes> ClassificationAttrributes { get; set; }
     }
 
     /// <summary>
-    /// This will contain all classification attribute of Sub Type INTERNAL.
+    /// This will contain all classification attribute of Sub Type INTERNAL at product level.
     /// </summary>
     public class ClassificationAttrributes
     {
@@ -917,6 +918,11 @@ namespace DistributionWebApi.Models.Activity
         /// How is this price constructed? 
         /// ADULT - Per Adult
         /// CHILD - Per Child
+        /// PER PAX -- PP
+        /// PER VEHICLE -- PV
+        /// PER GROUP -- PG
+        /// PER RIDER -- PR
+        /// PER PILLION -- PL
         /// </summary>
         public string PriceBasis { get; set; }
         /// <summary>
@@ -931,6 +937,30 @@ namespace DistributionWebApi.Models.Activity
         /// Whether the price is for Product or Option (Similar Product)
         /// </summary>
         public string PriceFor { get; set; }
+        /// <summary>
+        /// Price is for which market (Not all supplier provides this)
+        /// </summary>
+        public string Market { get; set; }
+        /// <summary>
+        /// Price for minimum Passenger count (Not all supplier provides this)
+        /// </summary>
+        public string FromPax { get; set; }
+        /// <summary>
+        /// Price for maximum Passenger count (Not all supplier provides this)
+        /// </summary>
+        public string ToPax { get; set; }
+        /// <summary>
+        /// Type of passenger like Adult,Child,Infant and Senior Citizen (Not all supplier provides this)
+        /// </summary>
+        public string PersonType { get; set; }
+        /// <summary>
+        /// Price valid from date (Not all supplier provides this)
+        /// </summary>
+        public string ValidFrom { get; set; }
+        /// <summary>
+        /// Price Valid up to date (Not all supplier provides this)
+        /// </summary>
+        public string ValidTo { get; set; }
     }
 
     /// <summary>
@@ -974,7 +1004,10 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string Duration { get; set; }
         /// <summary>
-        /// It's calcualte on the basis of duration Half Day,Full Day,Overnight
+        /// Duration type of the activity and it is defined as per total duration of the activity.
+        /// More than 0 hrs to less than 4 hrs : Half Day
+        /// More than or equal to 4 hrs to less then 8 hrs: Full Day
+        /// More than or equal to 8 hrs : Overnight
         /// </summary>
         public string DurationType { get; set; }
         public string SupplierSession { get; set; }
@@ -1027,190 +1060,27 @@ namespace DistributionWebApi.Models.Activity
     /// </summary>
     public class SimliarProducts
     {
+        /// <summary>
+        /// Mapping system internal activity code
+        /// </summary>
         public string SystemActivityCode { get; set; }
+        /// <summary>
+        /// Mapping system internal activity name
+        /// </summary>
         public string SystemActivityName { get; set; }
+        /// <summary>
+        /// Product category type for this activity
+        /// </summary>
         public string ActivityType { get; set; }
+        /// <summary>
+        /// This field specifies the list of flavour options that are linked with this activity
+        /// </summary>
         public List<ProductOptions> Options { get; set; }
+        /// <summary>
+        /// This field specifies the list of flavour prices at product level or Option level that are linked with this activity
+        /// </summary>
         public List<Prices> Prices { get; set; }
     }
 
-    /// <summary>
-    /// List of services details with price provided by the supplier in a single activity
-    /// </summary>
-    public class ActivtyFlavourServices
-    {
-        /// <summary>
-        /// Supplier provided What type of sevice it is.
-        /// </summary>
-        public string FlavourServiceType { get; set; }
-        /// <summary>
-        /// Supplier provided From Which market it is
-        /// </summary>
-        public string Market { get; set; }
-        /// <summary>
-        /// Supplier provided Rate For which makert
-        /// </summary>
-        public string RateMarket { get; set; }
-        /// <summary>
-        /// Supplier provided Which type of service
-        /// </summary>
-        public string ServiceType { get; set; }
-        /// <summary>
-        /// Service ID
-        /// </summary>
-        public string ServiceTypeId { get; set; }
-        /// <summary>
-        /// Which type of service Category it is
-        /// </summary>
-        public string ServiceCategory { get; set; }
-        /// <summary>
-        /// What is the service name
-        /// </summary>
-        public string Title { get; set; }
-        /// <summary>
-        /// Description of the services
-        /// </summary>
-        public string Description { get; set; }
-        /// <summary>
-        /// From which date the service will be available
-        /// </summary>
-        public string FromDate { get; set; }
-        /// <summary>
-        /// Till which date the service will be available
-        /// </summary>
-        public string ToDate { get; set; }
-        /// <summary>
-        /// Service will be change if passanger Count from  
-        /// </summary>
-        public string FromPax { get; set; }
-        /// <summary>
-        /// Service will be change if passanger Count To  
-        /// </summary>
-        public string ToPax { get; set; }
-        /// <summary>
-        /// Supplier provided the Rate Division
-        /// </summary>
-        public string RateDivision { get; set; }
-        /// <summary>
-        /// Is Rate Active in services
-        /// </summary>
-        public string RateActive { get; set; }
-        /// <summary>
-        /// What pricing currency is the price information returned in
-        /// </summary>
-        public string RateCurrency { get; set; }
-        /// <summary>
-        /// Service charge for the Adult
-        /// </summary>
-        public string AdultRate { get; set; }
-        /// <summary>
-        ///  Service charge for the Child
-        /// </summary>
-        public string ChildRate { get; set; }
-        /// <summary>
-        /// Service charge for the Infant
-        /// </summary>
-        public string InfantRate { get; set; }
-        /// <summary>
-        /// Service charge for the SeniorCitizen
-        /// </summary>
-        public string SeniorCitizenRate { get; set; }
-        /// <summary>
-        /// Inclusion Type Whethere it is inculded or optoinal
-        /// </summary>
-        public string IncludeType { get; set; }
-        /// <summary>
-        /// on which basis service will charge like PP- PER PAX , PV - PER VEHICLE ,PG - PER GROUP ,PR -PER RIDER ,PL -PER PILLION 
-        /// </summary>
-        public string CostBasis { get; set; }
-        /// <summary>
-        /// On which session serive will proviced
-        /// </summary>
-        public string Session { get; set; }
-        /// <summary>
-        /// If Service is transfer the which type of service it is like Return or single
-        /// </summary>
-        public string JourneyType { get; set; }
-        /// <summary>
-        /// If service is Guide, for which language it is
-        /// </summary>
-        public string Language { get; set; }
-        /// <summary>
-        /// General Notes of the services
-        /// </summary>
-        public string GeneralNotes { get; set; }
-        /// <summary>
-        /// Speecific Notes of the services
-        /// </summary>
-        public string SpecificNotes { get; set; }
-        /// <summary>
-        /// From where pickup you for giving services 
-        /// </summary>
-        public string PickupPoint { get; set; }
-        /// <summary>
-        /// where will you drop after giving services 
-        /// </summary>
-        public string DropoffPoint { get; set; }
-        /// <summary>
-        /// Pickup time
-        /// </summary>
-        public string PickupTime { get; set; }
-        /// <summary>
-        /// Dropoff Time
-        /// </summary>
-        public string DropoffTime { get; set; }
-        /// <summary>
-        /// For duration for this service will be
-        /// </summary>
-        public string Duration { get; set; }
-        /// <summary>
-        /// Service provider supplier name
-        /// </summary>
-        public string ServiceSupplier { get; set; }
-        /// <summary>
-        /// If it's meal service, which type of Venue it is
-        /// </summary>
-        public string VenueType { get; set; }
-        /// <summary>
-        /// If it's meal service, what is the Venue name
-        /// </summary>
-        public string VenueName { get; set; }
-        /// <summary>
-        /// If it's meal service, what type of Drink provided
-        /// </summary>
-        public string Drink { get; set; }
-        /// <summary>
-        /// Service attribtes if service is meal
-        /// </summary>
-        public string Attributes { get; set; }
-        /// <summary>
-        /// If service is mealservice, Which type of meal provide
-        /// </summary>
-        public string Menu { get; set; }
-        /// <summary>
-        /// In Transfers service, it available or not
-        /// </summary>
-        public string AvailableAtDisposal { get; set; }
-        /// <summary>
-        /// Which type of vechile provided in TransferServices
-        /// </summary>
-        public string VehicleCategory { get; set; }
-        /// <summary>
-        /// Which class of vechile provided
-        /// </summary>
-        public string VehicleClass { get; set; }
-        /// <summary>
-        /// Vechile is AC or NON-AC, in transferservice
-        /// </summary>
-        public string VehicleACNONAC { get; set; }
-        /// <summary>
-        /// Vechile Name
-        /// </summary>
-        public string VehicleName { get; set; }
-        /// <summary>
-        /// Distance in transfre service
-        /// </summary>
-        public string Distance { get; set; }
 
-    }
 }
