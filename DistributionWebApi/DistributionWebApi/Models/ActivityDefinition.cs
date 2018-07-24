@@ -861,16 +861,16 @@ namespace DistributionWebApi.Models.Activity
     }
 
     /// <summary>
-    /// This will contain all classification attribute of Sub Type INTERNAL at product level.
+    /// This will contain all classification attributes of Sub Type INTERNAL at product level or all classification attributes at option level.
     /// </summary>
     public class ClassificationAttrributes
     {
         /// <summary>
-        /// Classification Attribute SubType
+        /// Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
         /// </summary>
         public string Group { get; set; }
         /// <summary>
-        /// Classification Attribute Type
+        /// Classification Attribute Type eg: Product or ProductOption or Policies
         /// </summary>
         public string Type { get; set; }
         /// <summary>

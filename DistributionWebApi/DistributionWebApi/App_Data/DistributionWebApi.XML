@@ -2689,17 +2689,17 @@
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ClassificationAttrributes">
             <summary>
-            This will contain all classification attribute of Sub Type INTERNAL at product level.
+            This will contain all classification attributes of Sub Type INTERNAL at product level or all classification attributes at option level.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Group">
             <summary>
-            Classification Attribute SubType
+            Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Type">
             <summary>
-            Classification Attribute Type
+            Classification Attribute Type eg: Product or ProductOption or Policies
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Value">
