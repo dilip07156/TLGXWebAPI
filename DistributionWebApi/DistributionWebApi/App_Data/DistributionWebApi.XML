@@ -2680,9 +2680,16 @@
             Activity Language
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ProductOptions.ClassificationAttrributes">
+            <summary>
+            Contains all classification attributes of the ProductOption.
+            This will provide extra information at option level.
+            This may contain supplier specific attribute values and may differ supplier wise.
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ClassificationAttrributes">
             <summary>
-            This will contain all classification attribute of Sub Type INTERNAL.
+            This will contain all classification attribute of Sub Type INTERNAL at product level.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Group">
@@ -2736,6 +2743,11 @@
             How is this price constructed? 
             ADULT - Per Adult
             CHILD - Per Child
+            PER PAX -- PP
+            PER VEHICLE -- PV
+            PER GROUP -- PG
+            PER RIDER -- PR
+            PER PILLION -- PL
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceId">
@@ -2751,6 +2763,36 @@
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceFor">
             <summary>
             Whether the price is for Product or Option (Similar Product)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.Market">
+            <summary>
+            Price is for which market (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.FromPax">
+            <summary>
+            Price for minimum Passenger count (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ToPax">
+            <summary>
+            Price for maximum Passenger count (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PersonType">
+            <summary>
+            Type of passenger like Adult,Child,Infant and Senior Citizen (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ValidFrom">
+            <summary>
+            Price valid from date (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ValidTo">
+            <summary>
+            Price Valid up to date (Not all supplier provides this)
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">

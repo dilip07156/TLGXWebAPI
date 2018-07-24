@@ -853,13 +853,15 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string Language { get; set; }
         /// <summary>
-        /// This will contain all classification attribute of ProductOption.
+        /// Contains all classification attributes of the ProductOption.
+        /// This will provide extra information at option level.
+        /// This may contain supplier specific attribute values and may differ supplier wise.
         /// </summary>
         public List<ClassificationAttrributes> ClassificationAttrributes { get; set; }
     }
 
     /// <summary>
-    /// This will contain all classification attribute of Sub Type INTERNAL.
+    /// This will contain all classification attribute of Sub Type INTERNAL at product level.
     /// </summary>
     public class ClassificationAttrributes
     {
@@ -916,6 +918,11 @@ namespace DistributionWebApi.Models.Activity
         /// How is this price constructed? 
         /// ADULT - Per Adult
         /// CHILD - Per Child
+        /// PER PAX -- PP
+        /// PER VEHICLE -- PV
+        /// PER GROUP -- PG
+        /// PER RIDER -- PR
+        /// PER PILLION -- PL
         /// </summary>
         public string PriceBasis { get; set; }
         /// <summary>
@@ -931,27 +938,27 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string PriceFor { get; set; }
         /// <summary>
-        /// Price is for which market 
+        /// Price is for which market (Not all supplier provides this)
         /// </summary>
         public string Market { get; set; }
         /// <summary>
-        /// Price for Passanger from count
+        /// Price for minimum Passenger count (Not all supplier provides this)
         /// </summary>
         public string FromPax { get; set; }
         /// <summary>
-        /// Price for Passanger to count
+        /// Price for maximum Passenger count (Not all supplier provides this)
         /// </summary>
         public string ToPax { get; set; }
         /// <summary>
-        /// Type of passanger like Adult,Child,Infant and Senior Citizen
+        /// Type of passenger like Adult,Child,Infant and Senior Citizen (Not all supplier provides this)
         /// </summary>
         public string PersonType { get; set; }
         /// <summary>
-        /// Price valid from date
+        /// Price valid from date (Not all supplier provides this)
         /// </summary>
         public string ValidFrom { get; set; }
         /// <summary>
-        /// Price Valid up to date
+        /// Price Valid up to date (Not all supplier provides this)
         /// </summary>
         public string ValidTo { get; set; }
     }
