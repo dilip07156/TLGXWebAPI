@@ -849,19 +849,21 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZones(DistributionWebApi.Models.ZoneSearchRQ)">
             <summary>
-            Retrive zones based on  search parameters
+            Retrive list of zones based on search parameters
             </summary>
-            <param name="RQ"></param>
+            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>
             <returns>
             returns List of Zones.
             </returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneDetails(DistributionWebApi.Models.ZoneDetailRQ)">
             <summary>
-            Retrieve Zone Details with filter on ZoneId
+            Retrieve Zone Details with filter on System specific ZoneId which is returned from ZoneSearch API.
             </summary>
             <param name="RQ"></param>
-            <returns>Details of Zone and Hotels within Zone</returns>
+            <returns>Details of Zone and Hotels within specified ZoneRange.
+            As of now we have included hotels within 10Km range. However, this may change in future.
+            </returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneTypeMaster">
             <summary>
@@ -1893,9 +1895,14 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Category">
             <summary>
-            Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+            Mapping System Activity Category for Product Classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Type">
@@ -2156,9 +2163,14 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Category">
             <summary>
-            Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+            Mapping System Activity Category for Product Classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Type">
@@ -2668,19 +2680,26 @@
             Activity Language
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ProductOptions.ClassificationAttrributes">
+            <summary>
+            Contains all classification attributes of the ProductOption.
+            This will provide extra information at option level.
+            This may contain supplier specific attribute values and may differ supplier wise.
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.ClassificationAttrributes">
             <summary>
-            This will contain all classification attribute of Sub Type INTERNAL.
+            This will contain all classification attributes of Sub Type INTERNAL at product level or all classification attributes at option level.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Group">
             <summary>
-            Classification Attribute SubType
+            Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Type">
             <summary>
-            Classification Attribute Type
+            Classification Attribute Type eg: Product or ProductOption or Policies
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Value">
@@ -2724,6 +2743,11 @@
             How is this price constructed? 
             ADULT - Per Adult
             CHILD - Per Child
+            PER PAX -- PP
+            PER VEHICLE -- PV
+            PER GROUP -- PG
+            PER RIDER -- PR
+            PER PILLION -- PL
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceId">
@@ -2739,6 +2763,36 @@
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceFor">
             <summary>
             Whether the price is for Product or Option (Similar Product)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.Market">
+            <summary>
+            Price is for which market (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.FromPax">
+            <summary>
+            Price for minimum Passenger count (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ToPax">
+            <summary>
+            Price for maximum Passenger count (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PersonType">
+            <summary>
+            Type of passenger like Adult,Child,Infant and Senior Citizen (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ValidFrom">
+            <summary>
+            Price valid from date (Not all supplier provides this)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.ValidTo">
+            <summary>
+            Price Valid up to date (Not all supplier provides this)
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">
@@ -2767,6 +2821,14 @@
             dd = days
             HH = hour in 24hr format
             mm = minutes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DurationType">
+            <summary>
+            Duration type of the activity and it is defined as per total duration of the activity.
+            More than 0 hrs to less than 4 hrs : Half Day
+            More than or equal to 4 hrs to less then 8 hrs: Full Day
+            More than or equal to 8 hrs : Overnight
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DepartureCode">
@@ -2817,6 +2879,31 @@
         <member name="T:DistributionWebApi.Models.Activity.SimliarProducts">
             <summary>
             list of products similar to returned product as per city and product sub type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.SystemActivityCode">
+            <summary>
+            Mapping system internal activity code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.SystemActivityName">
+            <summary>
+            Mapping system internal activity name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.ActivityType">
+            <summary>
+            Product category type for this activity
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.Options">
+            <summary>
+            This field specifies the list of flavour options that are linked with this activity
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.Prices">
+            <summary>
+            This field specifies the list of flavour prices at product level or Option level that are linked with this activity
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ActivityMasters">
@@ -3837,27 +3924,27 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneInfo.ZoneId">
             <summary>
-            Zone uniqueId.Use This Id to get Detail Information of Zone
+             System Unique zoneId. Use this Id to get detailed information of Zone
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneInfo.Zone_Type">
             <summary>
-            Type of the Zone.This field is mandatory.
+            Type of the Zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneInfo.Zone_SubType">
             <summary>
-            Sub Type Of the Zone.This field is optional.
+            Sub Type Of the Zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneInfo.Zone_Name">
             <summary>
-            Name of the zone.This field is mandatory.
+            Name of the zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneInfo.TLGXCountryCode">
             <summary>
-            TLGX Country Code .This field is mandatory
+            System Country code .
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneDetails">
@@ -3867,47 +3954,46 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.ZoneId">
             <summary>
-            Zone uniqueId.
+             System Zone uniqueId (same as sent in the request parameters).
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Zone_Name">
             <summary>
-            Name of the zone.This field is mandatory.
+            Name of the zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Zone_Type">
             <summary>
-            Type of the Zone.This field is mandatory.
+            Type of the Zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Zone_SubType">
             <summary>
-            Sub Type Of the Zone.This field is optional.
+            Sub Type Of the Zone.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ZoneDetails.TLGXCountryCode">
-            <summary>
-            TLGX Country Code .This field is mandatory
+        <member name="P:DistributionWebApi.Models.ZoneDetails.SystemCountryCode">
+            <summary> System Country Code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Latitude">
             <summary>
-            Latitude of Zone.This field is mandatory
+            Latitude of Zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Longitude">
             <summary>
-            Longitude of Zone.This field is mandatory
+            Longitude of Zone.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.Zone_Radius">
             <summary>
-            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone. As of now Hotels are searchable within 10km of range.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.TotalNumberOfHotels">
             <summary>
-            The Total Number of TLGXHotels returned by the Search Query
+            The Total Number of Hotels in system as per Search 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.PageSize">
@@ -3917,17 +4003,17 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.CurrentPage">
             <summary>
-            What is your current Page in the response
+            The current Page in the response
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.TotalPage">
-            <summary>
-            What is the total number of pages in the response
-            </summary>
+             <summary>
+            The total number of pages in the response
+             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetails.ZoneHotels">
             <summary>
-            A List containing  Hotels within the Zone matching the Search Request
+             List of Hotels within Zone matching the Search Request
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Zone_CityMapping">
@@ -3947,7 +4033,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Zone_ProductMapping.TLGXCompanyHotelID">
             <summary>
-            Unique Id of TLGX Hotel(TLGX HotelCode)
+            Unique Id of TLGX Hotel(TLGX ProductCode)
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Zone_ProductMapping.TLGXHotelName">
@@ -3962,7 +4048,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Zone_ProductMapping.Distance">
             <summary>
-            Distance Of Hotel(in Km) from Latitude-Longitude of Zone.
+            Distance Of Hotel(in Km) from Zone center point.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Zone_ProductMapping.Unit">
@@ -3972,7 +4058,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.Zone_ProductMapping.IsIncluded">
             <summary>
-            If this hotel is Included in Zone or Not.
+            This field specify if the hotel is included in zone or not.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneSearchRQ">
@@ -3982,7 +4068,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_name">
             <summary>
-            Search by Zone Name.This is mandatory field. Name Should be atleast 3chars.
+            Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.PageSize">
@@ -3992,32 +4078,32 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.PageNo">
             <summary>
-            Which Page Number you wish to retrieve from the Search Results set.Page no. starts From 0.This is mandatory field.
+            Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.This is mandatory field.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.SystemCountryCode">
             <summary>
-            Search Zones by System CountryCode.This is optional field.
+            Search Zones by System CountryCode. This is optional field.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_Type">
             <summary>
-            Search Zone by its Type. This is optional field.To get ZoneTypes use "ZoneTypeMaster" service
+            Search Zone by its Type. This is optional field. To get ZoneTypes use "ZoneTypeMaster" API
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_SubType">
             <summary>
-            Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" service
+            Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneDetailRQ">
             <summary>
-            This is the request format for retriving ZoneDetails. It is a paged request/response service.
+            This is the request format for retriving ZoneDetails. 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetailRQ.ZoneId">
             <summary>
-            Search by ZoneId.This is mandatory field.
+            Search by system ZoneId(retrived from ZoneSearch API).This is mandatory field.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetailRQ.PageSize">
@@ -4027,7 +4113,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneDetailRQ.PageNo">
             <summary>
-            Which Page Number you wish to retrieve from the Search Results set.Page no. starts From 0.
+            Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneTypeMaster">

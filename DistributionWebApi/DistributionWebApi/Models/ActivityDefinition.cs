@@ -15,7 +15,7 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// How many Search Results do you wish to receive per request?
         /// </summary>
-        
+
         [Required]
         public int PageSize { get; set; }
         /// <summary>
@@ -123,7 +123,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+        /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+        /// </summary>
+        public string InterestType { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification.
         /// </summary>
         public string Category { get; set; }
         /// <summary>
@@ -142,7 +146,7 @@ namespace DistributionWebApi.Models.Activity
         /// The Main Description of the Activity from the End Supplier.
         /// </summary>
         public string Description { get; set; }
-        
+
         ///// <summary>
         ///// Mapping System Activity Category for Product Session. 
         ///// THis classification is designed to group products into time-bands. 
@@ -222,7 +226,7 @@ namespace DistributionWebApi.Models.Activity
         /// HOw many views does this Activity have? This value may be populated by Supplier Data, where it is provided.
         /// </summary>
         public string NumberOfViews { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -252,7 +256,7 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        
+
         ///// <summary>
         ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
         ///// </summary>
@@ -304,7 +308,6 @@ namespace DistributionWebApi.Models.Activity
         /// IF the activity is tagged under special category
         /// </summary>
         public List<string> Specials { get; set; }
-
         /// <summary>
         /// This will hold data for supplier departure codes where actual departure point is Hotel Pickup. All supplier does not give this data. As of now GTA provides this.
         /// </summary>
@@ -369,7 +372,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// Mapping System Activity Category for Product Classification. THis is the highest level of classification.
+        /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+        /// </summary>
+        public string InterestType { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification.
         /// </summary>
         public string Category { get; set; }
         /// <summary>
@@ -474,7 +481,7 @@ namespace DistributionWebApi.Models.Activity
         /// A list of pictures or videos available for this Activity. The item will be a remote URL reference to picture / video.  This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
         /// </summary>
         public List<Media> ActivityMedia { get; set; }
-        
+
         ///// <summary>
         ///// The duration of the activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML
         ///// </summary>
@@ -845,19 +852,25 @@ namespace DistributionWebApi.Models.Activity
         /// Activity Language
         /// </summary>
         public string Language { get; set; }
+        /// <summary>
+        /// Contains all classification attributes of the ProductOption.
+        /// This will provide extra information at option level.
+        /// This may contain supplier specific attribute values and may differ supplier wise.
+        /// </summary>
+        public List<ClassificationAttrributes> ClassificationAttrributes { get; set; }
     }
 
     /// <summary>
-    /// This will contain all classification attribute of Sub Type INTERNAL.
+    /// This will contain all classification attributes of Sub Type INTERNAL at product level or all classification attributes at option level.
     /// </summary>
     public class ClassificationAttrributes
     {
         /// <summary>
-        /// Classification Attribute SubType
+        /// Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
         /// </summary>
         public string Group { get; set; }
         /// <summary>
-        /// Classification Attribute Type
+        /// Classification Attribute Type eg: Product or ProductOption or Policies
         /// </summary>
         public string Type { get; set; }
         /// <summary>
@@ -905,6 +918,11 @@ namespace DistributionWebApi.Models.Activity
         /// How is this price constructed? 
         /// ADULT - Per Adult
         /// CHILD - Per Child
+        /// PER PAX -- PP
+        /// PER VEHICLE -- PV
+        /// PER GROUP -- PG
+        /// PER RIDER -- PR
+        /// PER PILLION -- PL
         /// </summary>
         public string PriceBasis { get; set; }
         /// <summary>
@@ -919,6 +937,30 @@ namespace DistributionWebApi.Models.Activity
         /// Whether the price is for Product or Option (Similar Product)
         /// </summary>
         public string PriceFor { get; set; }
+        /// <summary>
+        /// Price is for which market (Not all supplier provides this)
+        /// </summary>
+        public string Market { get; set; }
+        /// <summary>
+        /// Price for minimum Passenger count (Not all supplier provides this)
+        /// </summary>
+        public string FromPax { get; set; }
+        /// <summary>
+        /// Price for maximum Passenger count (Not all supplier provides this)
+        /// </summary>
+        public string ToPax { get; set; }
+        /// <summary>
+        /// Type of passenger like Adult,Child,Infant and Senior Citizen (Not all supplier provides this)
+        /// </summary>
+        public string PersonType { get; set; }
+        /// <summary>
+        /// Price valid from date (Not all supplier provides this)
+        /// </summary>
+        public string ValidFrom { get; set; }
+        /// <summary>
+        /// Price Valid up to date (Not all supplier provides this)
+        /// </summary>
+        public string ValidTo { get; set; }
     }
 
     /// <summary>
@@ -961,6 +1003,13 @@ namespace DistributionWebApi.Models.Activity
         /// mm = minutes
         /// </summary>
         public string Duration { get; set; }
+        /// <summary>
+        /// Duration type of the activity and it is defined as per total duration of the activity.
+        /// More than 0 hrs to less than 4 hrs : Half Day
+        /// More than or equal to 4 hrs to less then 8 hrs: Full Day
+        /// More than or equal to 8 hrs : Overnight
+        /// </summary>
+        public string DurationType { get; set; }
         public string SupplierSession { get; set; }
         public string Session { get; set; }
         public string OperatingFromDate { get; set; }
@@ -1011,10 +1060,27 @@ namespace DistributionWebApi.Models.Activity
     /// </summary>
     public class SimliarProducts
     {
+        /// <summary>
+        /// Mapping system internal activity code
+        /// </summary>
         public string SystemActivityCode { get; set; }
+        /// <summary>
+        /// Mapping system internal activity name
+        /// </summary>
         public string SystemActivityName { get; set; }
+        /// <summary>
+        /// Product category type for this activity
+        /// </summary>
         public string ActivityType { get; set; }
+        /// <summary>
+        /// This field specifies the list of flavour options that are linked with this activity
+        /// </summary>
         public List<ProductOptions> Options { get; set; }
+        /// <summary>
+        /// This field specifies the list of flavour prices at product level or Option level that are linked with this activity
+        /// </summary>
         public List<Prices> Prices { get; set; }
     }
+
+
 }
