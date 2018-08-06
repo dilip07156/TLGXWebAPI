@@ -2841,6 +2841,11 @@
             Departure Point based on Operating Day and time (Not all supplier provides this)
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.DaysOfWeek.DepartureDescription">
+            <summary>
+            Departure Description based on Operating Day and time (Not all supplier Provides this) 
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.SupplierCityDepartureCode">
             <summary>
             This structure will hold data for supplier departure codes where actual departure point is Hotel Pickup.
