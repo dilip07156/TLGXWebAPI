@@ -119,7 +119,7 @@ namespace DistributionWebApi.Models.Static
         /// for future use
         /// </summary>
         public List<SafetyRegulations> SafetyRegulations { get; set; }
-        
+
         /// <summary>
         /// for future use
         /// </summary>
@@ -130,6 +130,17 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public ProductStatus ProductStatus { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// Policies of product
+        /// </summary>
+        public List<Policies> Policies { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Collection rooms details of product
+        /// </summary>
+        public List<Rooms> Rooms { get; set; }
         //public SupplierDetails SupplierDetails { get; set; }
 
         //public string CreatedBy { get; set; }
@@ -166,6 +177,13 @@ namespace DistributionWebApi.Models.Static
         /// Supplier Company Name
         /// </summary>
         public string CompanyName { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Accommodation Type Code : Including HT, MT, APT,1,2 etc.
+        /// </summary>
+        public string ProductCategorySubTypeId { get; set; }
+
 
         //[JsonProperty(Required = Required.Always)]
         /// <summary>
@@ -220,10 +238,40 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public string Rating { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// Exact Star rating of this Product
+        /// </summary>
+        public string ExactRating { get; set; }
+
+        /// <summary>
+        /// Star rating of this Product
+        /// </summary>
+        public string Stars { get; set; }
+
+        /// <summary>
+        /// Review score of this Product
+        /// </summary>
+        public string ReviewScore { get; set; }
+
+        /// <summary>
+        /// The review score of the Product
+        /// </summary>
+        public string noOfReviews { get; set; }
+
+
+
         /// <summary>
         /// Internal Product star rating
         /// </summary>
         public string CompanyRating { get; set; }
+
+        /// <summary>
+        /// Product Ranking
+        /// </summary>
+        //New field Added
+        public string HotelRanking { get; set; }
+
 
         /// <summary>
         /// Internal Product star rating reviewed on
@@ -267,6 +315,18 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public string CheckOutTime { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// What is the check in close time
+        /// </summary>
+        public string CheckinCloseTime { get; set; }
+
+        /// <summary>
+        /// What is the check out close time
+        /// </summary>
+        public string CheckoutCloseTime { get; set; }
+
+
         /// <summary>
         /// (for future use)
         /// </summary>
@@ -292,8 +352,62 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public General General { get; set; }
 
-        //public string ShortDescription { get; set; }
-        //public string LongDescription { get; set; }
+
+
+        //New field Added
+        /// <summary>
+        /// Contain flag for product, is bookable without credit card.
+        /// </summary>
+        public bool IsBookWithoutCC { get; set; }
+        /// <summary>
+        /// Is product is recommended.
+        /// </summary>
+        public bool IsRecommended { get; set; }
+        /// <summary>
+        /// Is rating is estimated for Product
+        /// </summary>
+        public bool IsRatingEstimatedAutomatically { get; set; }
+
+        /// <summary>
+        /// Is creditcard is required 
+        /// </summary>
+        public bool IsCreditcardRequired { get; set; }
+
+        /// <summary>
+        /// Contain info of the inside look at the hotel.
+        /// </summary>
+        public string HotelMessage { get; set; }
+
+        /// <summary>
+        /// Maximum number of persons in a reservation.
+        /// </summary>
+        public string MaxPersonReservation { get; set; }
+
+        /// <summary>
+        ///Maximum number of rooms this property allows in one booking.
+        /// </summary>
+        public string MaxRoomReservation { get; set; }
+
+        /// <summary>
+        /// The default language of the Product.
+        /// </summary>
+        public string DefaultLanguage { get; set; }
+
+        /// <summary>
+        /// Languages spoken by the product's staff
+        /// </summary>
+        public string SpokenLanguages { get; set; }
+
+        /// <summary>
+        ///  currency code that the charge is shown in.
+        /// </summary>
+        public string currency { get; set; }
+
+        /// <summary>
+        /// Limit the results to properties with the specified facilities.  
+        /// </summary>
+        public string Facilities { get; set; }
+
     }
 
     public class Date
@@ -359,17 +473,46 @@ namespace DistributionWebApi.Models.Static
         //[JsonProperty(Required = Required.Always)]
         public string PostalCode { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// Contain unique id of the Country
+        /// </summary>
+        public string CountryCode { get; set; }
+
         /// <summary>
         /// Address detailing
         /// </summary>
         //[JsonProperty(Required = Required.Always)]
         public string Country { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// Contain state code
+        /// </summary>
+        public string StateCode { get; set; }
+
         /// <summary>
         /// Address detailing
         /// </summary>
         //[JsonProperty(Required = Required.Always)]
         public string State { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Contain unique id of the district
+        /// </summary>
+        public string DistrictId { get; set; }
+
+        /// <summary>
+        /// Contain district name 
+        /// </summary>
+        public string DistrictName { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Contain unique id of the city
+        /// </summary>
+        public string CityCode { get; set; }
 
         /// <summary>
         /// Address detailing
@@ -383,6 +526,12 @@ namespace DistributionWebApi.Models.Static
         //[JsonProperty(Required = Required.Always)]
         public string Area { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// Contain the region
+        /// </summary>
+        public string Region { get; set; }
+
         /// <summary>
         /// Address detailing - Second level below the city 
         /// </summary>
@@ -393,6 +542,8 @@ namespace DistributionWebApi.Models.Static
         /// Address detailing (Latitude and Longitude)
         /// </summary>
         public Geometry Geometry { get; set; }
+
+
     }
 
     public class Geometry
@@ -425,6 +576,12 @@ namespace DistributionWebApi.Models.Static
         /// Website URL for the product
         /// </summary>
         public string Website { get; set; }
+
+        /// <summary>
+        /// Mobile App URL for the product
+        /// </summary>
+        //New field Added
+        public string MobileAppUrl { get; set; }
 
         /// <summary>
         /// general email address of the product
@@ -646,15 +803,30 @@ namespace DistributionWebApi.Models.Static
     /// </summary>
     public class Facility
     {
-        /// <summary>
-        /// facility category
-        /// </summary>
-        public string Category { get; set; }
 
+        //New field Added
+        /// <summary>
+        /// facility type id
+        /// </summary>
+        public string Facility_Id { get; set; }
+
+        //New field Added
         /// <summary>
         /// the type of facility
         /// </summary>
         public string Type { get; set; }
+
+        //New field Added
+        //New field Added
+        /// <summary>
+        /// facility category id
+        /// </summary>
+        public string FacilityCategoryID { get; set; }
+
+        /// <summary>
+        /// facility category
+        /// </summary>
+        public string Category { get; set; }
 
         /// <summary>
         /// description of facility
@@ -680,6 +852,14 @@ namespace DistributionWebApi.Models.Static
         /// if the facility is chargable
         /// </summary>
         public bool IsChargeable { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Extra char per facility
+        /// </summary>
+        public string ExtraCharge { get; set; }
+
+
     }
 
     /// <summary>
@@ -723,8 +903,20 @@ namespace DistributionWebApi.Models.Static
     public class Type2
     {
         public string RoomCategory { get; set; }
+
+        /// <summary>
+        /// Maximum adult people for the room.
+        /// </summary>
         public int MaxAdults { get; set; }
+
+        /// <summary>
+        /// Maximum children for the room.
+        /// </summary>
         public int MaxChild { get; set; }
+
+        /// <summary>
+        /// Maximum people for the room.
+        /// </summary>
         public int MaxPax { get; set; }
     }
 
@@ -883,6 +1075,43 @@ namespace DistributionWebApi.Models.Static
         /// Valid to date
         /// </summary>
         public Date To { get; set; }
+
+        //New field Added
+        /// <summary>
+        /// Media width
+        /// </summary>
+        public string MediaWidth { get; set; }
+
+        /// <summary>
+        /// Media Height
+        /// </summary>
+        public string MediaHeight { get; set; }
+
+        /// <summary>
+        /// Media Thumbnail
+        /// </summary>
+        public string ThumbnailUrl { get; set; }
+
+        /// <summary>
+        /// Media LargeImageURL
+        /// </summary>
+        public string LargeImageURL { get; set; }
+
+        /// <summary>
+        /// Media SmallImageURL
+        /// </summary>
+        public string SmallImageURL { get; set; }
+
+        /// <summary>
+        /// for future use
+        /// </summary>
+        public string MediaFileMaster { get; set; }
+
+        /// <summary>
+        /// Media file format
+        /// </summary>
+        public string MediaFileFormat { get; set; }
+        //New field Added
     }
 
     /// <summary>
@@ -976,5 +1205,194 @@ namespace DistributionWebApi.Models.Static
         public Date From { get; set; }
         public Date To { get; set; }
         public string Reason { get; set; }
+    }
+
+
+
+    //New field Added
+    /// <summary>
+    /// Containt he polices type and their description
+    /// </summary>
+    public class Policies
+    {
+        /// <summary>
+        /// Type of policy
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Policy description
+        /// </summary>
+        public string Description { get; set; }
+    }
+
+    /// <summary>
+    /// Contain the Room Info of product
+    /// </summary>
+    public class Rooms
+    {
+        /// <summary>
+        /// ID of this type of the room.
+        /// </summary>
+        public string RoomTypeId { get; set; }
+
+        /// <summary>
+        /// Localized name of the room type
+        /// </summary>
+        public string RoomTypeName { get; set; }
+
+        /// <summary>
+        /// Category ID of this type of the room.
+        /// </summary>
+        public string RoomCategoryCode { get; set; }
+
+        /// <summary>
+        /// Category Name of this type of the room.
+        /// </summary>
+        public string RoomCategoryName { get; set; }
+
+
+        public string RoomCode { get; set; }
+        public string CompanyRoomCategory { get; set; }
+
+        /// <summary>
+        /// The description of this room.
+        /// </summary>
+        public string RoomDescription { get; set; }
+
+        /// <summary>
+        /// Available facility in this room.
+        /// </summary>
+        public string AmenitiesType { get; set; }
+
+        /// <summary>
+        /// Total number of bathrooms for this room.
+        /// </summary>
+        public int BathRoomCount { get; set; }
+
+        /// <summary>
+        /// Type of bathrooms for this room.
+        /// </summary>
+        public string BathRoomType { get; set; }
+
+        /// <summary>
+        /// The size of the room.
+        /// </summary>
+        public string Size { get; set; }
+
+
+        public string View { get; set; }
+        /// <summary>
+        /// Ranking refers to the ranking score of this room relative to the other rooms at the property.
+        /// </summary>
+        public string RoomRanking { get; set; }
+
+        /// <summary>
+        /// If this room can be booked.
+        /// </summary>
+        public bool IsRoomBookable { get; set; }
+
+        /// <summary>
+        /// The maximum price of the room.
+        /// </summary>
+        public string MaxPrice { get; set; }
+
+        /// <summary>
+        /// The minimum price of the room.
+        /// </summary>
+        public string MinPrice { get; set; }
+
+        /// <summary>
+        /// Contain the pax occupancy details.
+        /// </summary>
+        public PassengerOccupancy PassengerOccupancy { get; set; }
+
+        /// <summary>
+        /// Collection of room facilities
+        /// </summary>
+        public List<RoomAmenities> RoomAmenities { get; set; }
+        /// <summary>
+        /// Collection of Bedroom details.
+        /// </summary>
+        public List<BedRooms> BedRooms { get; set; }
+
+        /// <summary>
+        /// Collection of room media details.
+        /// </summary>
+        public List<StaticMedia> RoomMedia { get; set; }
+
+
+    }
+
+    /// <summary>
+    /// Contain the Bed details of room
+    /// </summary>
+    public class BedRooms
+    {
+        /// <summary>
+        /// Bed type Id in this bed configuration
+        /// </summary>
+        public string BedTypeID { get; set; }
+
+        /// <summary>
+        /// Bed type in this bed configuration
+        /// </summary>
+        public string BedType { get; set; }
+
+        /// <summary>
+        /// Description of the number and size of various bed types in the room.
+        /// </summary>
+
+        public string BeddingConfiguration { get; set; }
+
+
+
+
+        /// <summary>
+        /// Total number of bedrooms for this room.
+        /// </summary>
+        public string BedRoomCount { get; set; }
+
+        /// <summary>
+        /// Total number of extra beds for adults this room.
+        /// </summary>
+        public string MaxAdultWithExtraBed { get; set; }
+
+        /// <summary>
+        /// Total number of extra beds for childrens this room.
+        /// </summary>
+        public string MaxChildWithExtraBed { get; set; }
+
+        /// <summary>
+        /// Total number of extra beds for this room.
+        /// </summary>
+        public string NoOfExreaBeds { get; set; }
+
+    }
+
+    /// <summary>
+    /// Room facilities of Product
+    /// </summary>
+    public class RoomAmenities
+    {
+        /// <summary>
+        /// The type id of facility this is (like a category) per room.
+        /// </summary>
+        public string AmenityId { get; set; }
+
+        /// <summary>
+        /// The type of facility this is (like a category) per room.
+        /// </summary>
+        public string RoomAmenityType { get; set; }
+
+        /// <summary>
+        /// The category id of facility this is per room.
+        /// </summary>
+        public string AmenityCategoryID { get; set; }
+
+        /// <summary>
+        /// The category of facility this is per room.
+        /// </summary>
+        public string AmenityCategory { get; set; }
     }
 }
