@@ -1022,6 +1022,10 @@ namespace DistributionWebApi.Models.Activity
         /// Departure Point based on Operating Day and time (Not all supplier provides this)
         /// </summary>
         public string DeparturePoint { get; set; }
+        /// <summary>
+        /// Departure Description based on Operating Day and time (Not all supplier Provides this) 
+        /// </summary>
+        public string DepartureDescription { get; set; }
     }
 
     /// <summary>
