@@ -1174,6 +1174,16 @@
             for future use
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Policies">
+            <summary>
+            Policies of product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Accomodation.Rooms">
+            <summary>
+            Collection rooms details of product
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Static.AccomodationInfo">
             <summary>
             Classification info for Accommodation product
@@ -1187,6 +1197,11 @@
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyName">
             <summary>
             Supplier Company Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ProductCategorySubTypeId">
+            <summary>
+            Accommodation Type Code : Including HT, MT, APT,1,2 etc.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ProductCatSubType">
@@ -1239,9 +1254,34 @@
             Product star rating
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ExactRating">
+            <summary>
+            Exact Star rating of this Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Stars">
+            <summary>
+            Star rating of this Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.ReviewScore">
+            <summary>
+            Review score of this Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.noOfReviews">
+            <summary>
+            The review score of the Product
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CompanyRating">
             <summary>
             Internal Product star rating
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.HotelRanking">
+            <summary>
+            Product Ranking
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.RatingDatedOn">
@@ -1284,6 +1324,16 @@
             What is the check out time
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CheckinCloseTime">
+            <summary>
+            What is the check in close time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.CheckoutCloseTime">
+            <summary>
+            What is the check out close time
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.FamilyDetails">
             <summary>
             (for future use)
@@ -1307,6 +1357,61 @@
         <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.General">
             <summary>
             Contains general descriptive information about the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsBookWithoutCC">
+            <summary>
+            Contain flag for product, is bookable without credit card.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsRecommended">
+            <summary>
+            Is product is recommended.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsRatingEstimatedAutomatically">
+            <summary>
+            Is rating is estimated for Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.IsCreditcardRequired">
+            <summary>
+            Is creditcard is required 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.HotelMessage">
+            <summary>
+            Contain info of the inside look at the hotel.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.MaxPersonReservation">
+            <summary>
+            Maximum number of persons in a reservation.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.MaxRoomReservation">
+             <summary>
+            Maximum number of rooms this property allows in one booking.
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.DefaultLanguage">
+            <summary>
+            The default language of the Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.SpokenLanguages">
+            <summary>
+            Languages spoken by the product's staff
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.currency">
+            <summary>
+             currency code that the charge is shown in.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccomodationInfo.Facilities">
+            <summary>
+            Limit the results to properties with the specified facilities.  
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Static.Address">
@@ -1354,14 +1459,39 @@
             Address detailing
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.CountryCode">
+            <summary>
+            Contain unique id of the Country
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Static.Address.Country">
             <summary>
             Address detailing
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.StateCode">
+            <summary>
+            Contain state code
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Static.Address.State">
             <summary>
             Address detailing
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.DistrictId">
+            <summary>
+            Contain unique id of the district
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.DistrictName">
+            <summary>
+            Contain district name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.CityCode">
+            <summary>
+            Contain unique id of the city
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.Address.City">
@@ -1372,6 +1502,11 @@
         <member name="P:DistributionWebApi.Models.Static.Address.Area">
             <summary>
             Address detailing - First level below the city
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Address.Region">
+            <summary>
+            Contain the region
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.Address.Location">
@@ -1407,6 +1542,11 @@
         <member name="P:DistributionWebApi.Models.Static.ContactDetails.Website">
             <summary>
             Website URL for the product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.ContactDetails.MobileAppUrl">
+            <summary>
+            Mobile App URL for the product
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.ContactDetails.EmailAddress">
@@ -1574,14 +1714,24 @@
             the facilities of the product
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Static.Facility.Category">
+        <member name="P:DistributionWebApi.Models.Static.Facility.Facility_Id">
             <summary>
-            facility category
+            facility type id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.Facility.Type">
             <summary>
             the type of facility
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.FacilityCategoryID">
+            <summary>
+            facility category id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.Category">
+            <summary>
+            facility category
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Static.Facility.Desc">
@@ -1609,6 +1759,11 @@
             if the facility is chargable
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.Facility.ExtraCharge">
+            <summary>
+            Extra char per facility
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Static.PassengerOccupancy">
             <summary>
             for future use
@@ -1627,6 +1782,21 @@
         <member name="T:DistributionWebApi.Models.Static.Type2">
             <summary>
             for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Type2.MaxAdults">
+            <summary>
+            Maximum adult people for the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Type2.MaxChild">
+            <summary>
+            Maximum children for the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Type2.MaxPax">
+            <summary>
+            Maximum people for the room.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Static.Distance">
@@ -1745,6 +1915,41 @@
             Valid to date
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.MediaWidth">
+            <summary>
+            Media width
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.MediaHeight">
+            <summary>
+            Media Height
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.ThumbnailUrl">
+            <summary>
+            Media Thumbnail
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.LargeImageURL">
+            <summary>
+            Media LargeImageURL
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.SmallImageURL">
+            <summary>
+            Media SmallImageURL
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.MediaFileMaster">
+            <summary>
+            for future use
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.StaticMedia.MediaFileFormat">
+            <summary>
+            Media file format
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Static.Updates">
             <summary>
             for future use
@@ -1783,6 +1988,176 @@
         <member name="T:DistributionWebApi.Models.Static.Deactivated">
             <summary>
             for future use
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Policies">
+            <summary>
+            Containt he polices type and their description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Policies.Type">
+            <summary>
+            Type of policy
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Policies.Description">
+            <summary>
+            Policy description
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.Rooms">
+            <summary>
+            Contain the Room Info of product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomTypeId">
+            <summary>
+            ID of this type of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomTypeName">
+            <summary>
+            Localized name of the room type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomCategoryCode">
+            <summary>
+            Category ID of this type of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomCategoryName">
+            <summary>
+            Category Name of this type of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomDescription">
+            <summary>
+            The description of this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.AmenitiesType">
+            <summary>
+            Available facility in this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.BathRoomCount">
+            <summary>
+            Total number of bathrooms for this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.BathRoomType">
+            <summary>
+            Type of bathrooms for this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.Size">
+            <summary>
+            The size of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomRanking">
+            <summary>
+            Ranking refers to the ranking score of this room relative to the other rooms at the property.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.IsRoomBookable">
+            <summary>
+            If this room can be booked.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.MaxPrice">
+            <summary>
+            The maximum price of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.MinPrice">
+            <summary>
+            The minimum price of the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.PassengerOccupancy">
+            <summary>
+            Contain the pax occupancy details.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomAmenities">
+            <summary>
+            Collection of room facilities
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.BedRooms">
+            <summary>
+            Collection of Bedroom details.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.Rooms.RoomMedia">
+            <summary>
+            Collection of room media details.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.BedRooms">
+            <summary>
+            Contain the Bed details of room
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.BedTypeID">
+            <summary>
+            Bed type Id in this bed configuration
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.BedType">
+            <summary>
+            Bed type in this bed configuration
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.BeddingConfiguration">
+            <summary>
+            Description of the number and size of various bed types in the room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.BedRoomCount">
+            <summary>
+            Total number of bedrooms for this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.MaxAdultWithExtraBed">
+            <summary>
+            Total number of extra beds for adults this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.MaxChildWithExtraBed">
+            <summary>
+            Total number of extra beds for childrens this room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.BedRooms.NoOfExreaBeds">
+            <summary>
+            Total number of extra beds for this room.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.RoomAmenities">
+            <summary>
+            Room facilities of Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.RoomAmenities.AmenityId">
+            <summary>
+            The type id of facility this is (like a category) per room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.RoomAmenities.RoomAmenityType">
+            <summary>
+            The type of facility this is (like a category) per room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.RoomAmenities.AmenityCategoryID">
+            <summary>
+            The category id of facility this is per room.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.RoomAmenities.AmenityCategory">
+            <summary>
+            The category of facility this is per room.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ">
