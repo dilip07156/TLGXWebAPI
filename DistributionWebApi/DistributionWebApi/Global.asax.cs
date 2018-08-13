@@ -30,6 +30,9 @@ namespace DistributionWebApi
             GlobalConfiguration.Configuration.Formatters.Add(new JsonDownLoadFormatter(new QueryStringMapping("format", "json", "application/json")));
             GlobalConfiguration.Configuration.Formatters.Add(new XmlDownLoadFormatter(new QueryStringMapping("format", "xml", "application/xml")));
 
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+
             //GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(new UriPathExtensionMapping("json", "application/json"));
 
             //GlobalConfiguration.Configuration.Formatters.XmlFormatter.MediaTypeMappings.Add(new UriPathExtensionMapping("xml", "application/xml"));
