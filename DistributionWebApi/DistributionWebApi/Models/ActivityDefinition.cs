@@ -246,6 +246,7 @@ namespace DistributionWebApi.Models.Activity
         public string[] Highlights { get; set; }
         /// <summary>
         /// A list of Terms and Conditions in this Activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
+        /// It contains the details other than booking policies.
         /// </summary>
         public string[] TermsAndConditions { get; set; }
         /// <summary>
@@ -564,7 +565,8 @@ namespace DistributionWebApi.Models.Activity
     public class ImportantInfoAndBookingPolicies
     {
         /// <summary>
-        /// What is the Type of Information. This will include Additional Information, Things to Carry, Voucher requirements etc
+        /// What is the Type of Information. This will include CancellationPolicy,ConfirmationPolicy,VoucherRemarks, Voucher requirements,SalesPoints,
+        /// Free cancellation Before,Warnings,OtherPolicy,SalesPoints,IsCancelable,RefundPolicy etc
         /// </summary>
         public string InfoType { get; set; }
         /// <summary>
@@ -583,7 +585,8 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string MediaType { get; set; }
         /// <summary>
-        /// What sort of image is this? This includes High Resolution, Thumbnail.
+        /// What sort of image is this? This includes  
+        /// Video,High Resolution, Thumbnail,Large,Medium,Small or NotSpecified.
         /// </summary>
         public string MediaSubType { get; set; }
         /// <summary>
@@ -866,7 +869,9 @@ namespace DistributionWebApi.Models.Activity
     public class ClassificationAttrributes
     {
         /// <summary>
-        /// Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
+        /// Classification Attribute SubType. This will hold supplier level extra attribute field name. 
+        /// e.g. For Product : ThingsToCarry, RecommendedDuration, Market, AdditionalInfo, Notes, PhysicalLevel, Advisory, PackagePeriod, BestFor, Itinerary etc.
+        /// e.g. For ProductOption :  Each and Every attribute and their values for an option (like for Transfer Service - VehicleName,VehicleACNONAC) etc.
         /// </summary>
         public string Group { get; set; }
         /// <summary>
@@ -909,9 +914,8 @@ namespace DistributionWebApi.Models.Activity
         public double? Price { get; set; }
         /// <summary>
         /// What sort of price is this? 
-        /// MERCHANT NET PRICE - 
-        /// PRICE - 
-        /// RACK - 
+        /// MerchantNetPrice, SupplierSellPrice, ServiceCost 
+        /// or ServiceCost with Included facilities like ServiceCostIncluded_E-Ticket,ServiceCostIncluded_Pick up at the venue etc...
         /// </summary>
         public string PriceType { get; set; }
         /// <summary>
