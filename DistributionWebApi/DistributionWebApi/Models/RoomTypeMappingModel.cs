@@ -582,19 +582,30 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string BeddingConfig { get; set; }
 
+        public string CityCode { get; set; }
+        public string CityName { get; set; }
+        public string CountryCode { get; set; }
+        public string CountryName { get; set; }
+        public string StateCode { get; set; }
+        public string StateName { get; set; }
+        public string RoomDescription { get; set; }
+        public string SupplierProductName { get; set; }
+        public string SupplierProvider { get; set; }
+
         public DateTime CreateDateTime { get; set; }
-        public DateTime ProcessDateTime { get; set; }
+        public DateTime? ProcessDateTime { get; set; }
         public string ProcessBatchId { get; set; }
-        public int ProcessBatchNo { get; set; }
+        public int? ProcessBatchNo { get; set; }
 
         public string Accommodation_SupplierRoomType_Id { get; set; }
         public string Accommodation_Id { get; set; }
         public string Accommodation_RoomInfo_Id { get; set; }
         public string Status { get; set; }
-        public int SystemRoomTypeMapId { get; set; }
-        public float MatchingScore { get; set; }
-        public int SystemProductCode { get; set; }
+        public int? SystemRoomTypeMapId { get; set; }
+        public float? MatchingScore { get; set; }
+        public int? SystemProductCode { get; set; }
         public string SystemRoomTypeCode { get; set; }
+        public string TLGXRoomTypeCode { get; set; }
     }
     #endregion
 }
