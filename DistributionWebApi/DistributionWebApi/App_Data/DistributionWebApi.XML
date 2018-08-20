@@ -2403,6 +2403,7 @@
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.TermsAndConditions">
             <summary>
             A list of Terms and Conditions in this Activity. This is End Supplier Data so the qulaity of this may vary. It may also contain inline HTML.
+            It contains the details other than booking policies.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.BookingPolicies">
@@ -2730,7 +2731,8 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ImportantInfoAndBookingPolicies.InfoType">
             <summary>
-            What is the Type of Information. This will include Additional Information, Things to Carry, Voucher requirements etc
+            What is the Type of Information. This will include CancellationPolicy,ConfirmationPolicy,VoucherRemarks, Voucher requirements,SalesPoints,
+            Free cancellation Before,Warnings,OtherPolicy,SalesPoints,IsCancelable,RefundPolicy etc
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ImportantInfoAndBookingPolicies.InfoText">
@@ -2750,7 +2752,8 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Media.MediaSubType">
             <summary>
-            What sort of image is this? This includes High Resolution, Thumbnail.
+            What sort of image is this? This includes  
+            Video,High Resolution, Thumbnail,Large,Medium,Small or NotSpecified.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Media.FullUrl">
@@ -3069,7 +3072,9 @@
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Group">
             <summary>
-            Classification Attribute SubType. This will hold supplier level extra attribute field name. e.g. DropoffPoint,IncludedOptional,PickUpTime,AdditionalInfo etc.
+            Classification Attribute SubType. This will hold supplier level extra attribute field name. 
+            e.g. For Product : ThingsToCarry, RecommendedDuration, Market, AdditionalInfo, Notes, PhysicalLevel, Advisory, PackagePeriod, BestFor, Itinerary etc.
+            e.g. For ProductOption :  Each and Every attribute and their values for an option (like for Transfer Service - VehicleName,VehicleACNONAC) etc.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ClassificationAttrributes.Type">
@@ -3108,9 +3113,8 @@
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceType">
             <summary>
             What sort of price is this? 
-            MERCHANT NET PRICE - 
-            PRICE - 
-            RACK - 
+            MerchantNetPrice, SupplierSellPrice, ServiceCost 
+            or ServiceCost with Included facilities like ServiceCostIncluded_E-Ticket,ServiceCostIncluded_Pick up at the venue etc...
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Prices.PriceBasis">
@@ -4944,6 +4948,171 @@
         <member name="P:DistributionWebApi.Models.RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses.SupplierData">
             <summary>
             Collection of Supplier data for room type grouped at TLGX Accommodation CommonHotelId that was submitted in the mapping request.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline._id">
+            <summary>
+            Unique id of the document
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.Mode">
+            <summary>
+            This field specifies the type of room type mapping requests. You should always set this value to "online".
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.BatchId">
+            <summary>
+            Please generate a unique Batch / Tracking ID to allow end to end tracebility.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.TLGXCommonHotelId">
+            <summary>
+            TLGX Accommodation CommonHotelId - TLGX MDM unique identifier for a hotel property. This value can be retrived by using ProductMappingLite api.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierId">
+            <summary>
+            Nakshatra mapping system's SupplierCode. This can be retreieved by using SupplierMaster api.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierProductId">
+            <summary>
+            Supplier Product code for accommodation.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierRoomId">
+            <summary>
+            Supplier system room id.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierRoomTypeCode">
+            <summary>
+            Supplier room type code. Certain suppliers use both id and code values.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierRoomName">
+            <summary>
+            Supplier room type name.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierRoomCategory">
+            <summary>
+            Supplier room category name. Certain suppliers use both room type and category.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.SupplierRoomCategoryId">
+            <summary>
+             Supplier room category id. Certain suppliers use both room type and category.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.MaxAdults">
+            <summary>
+            The maximum number of adults permitted in the room stay.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.MaxChild">
+            <summary>
+            The maximum number of children permitted in the room stay.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.MaxInfants">
+            <summary>
+            The maximum number of infants permitted in the room stay.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.MaxGuestOccupancy">
+            <summary>
+            The maximum number of total occupancy permitted in the room stay.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.Quantity">
+            <summary>
+            Quantity of suppier rooms of this type.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.RatePlan">
+            <summary>
+            Specific rate plan name for this room stay (For future use).
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.RatePlanCode">
+            <summary>
+            Specific rate plan code for this room stay (For future use).
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.RoomSize">
+            <summary>
+            The size of the room
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.BathRoomType">
+            <summary>
+            The type of bathroom in the room stay.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.RoomView">
+            <summary>
+            The type of room view. Accepts either code or name.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.FloorName">
+            <summary>
+            The name of the floor if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.FloorNumber">
+            <summary>
+            The number of the floor if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.Amenities">
+            <summary>
+            Amenities of the room stay if specified by the supplier (For future use).
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.RoomLocationCode">
+            <summary>
+            Any specific room location code if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.ChildAge">
+            <summary>
+            Maximum child age for this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.ExtraBed">
+            <summary>
+            if extra bed applicable for this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.Bedrooms">
+            <summary>
+            The number of bedrooms for this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.Smoking">
+            <summary>
+            Is Smoking permitted in this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.BedType">
+            <summary>
+            The type of bed for this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.MinGuestOccupancy">
+            <summary>
+            The minimum guest occupancy for this room stay if specified by the supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.PromotionalVendorCode">
+            <summary>
+            Any promotional vendor code for this room stay if specified by the supplier (For future use).
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.RoomTypeMappingOnline.BeddingConfig">
+            <summary>
+            Any specific bedding configuration for this room stay if specified by the supplier.
             </summary>
         </member>
         <member name="T:DistributionWebApi.NLogHelper.NLogger">
