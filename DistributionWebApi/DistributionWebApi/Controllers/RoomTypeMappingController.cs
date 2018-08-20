@@ -231,6 +231,7 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task InsertRoomTypeMappingOnline(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
         {
             try

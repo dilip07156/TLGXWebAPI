@@ -451,6 +451,7 @@ namespace DistributionWebApi.Models
         /// Unique id of the document
         /// </summary>
         [BsonIgnoreIfDefault]
+        [BsonId]
         public ObjectId _id { get; set; }
         /// <summary>
         /// This field specifies the type of room type mapping requests. You should always set this value to "online".
@@ -585,8 +586,15 @@ namespace DistributionWebApi.Models
         public DateTime ProcessDateTime { get; set; }
         public string ProcessBatchId { get; set; }
         public int ProcessBatchNo { get; set; }
+
+        public string Accommodation_SupplierRoomType_Id { get; set; }
+        public string Accommodation_Id { get; set; }
+        public string Accommodation_RoomInfo_Id { get; set; }
+        public string Status { get; set; }
+        public int SystemRoomTypeMapId { get; set; }
+        public float MatchingScore { get; set; }
+        public int SystemProductCode { get; set; }
+        public string SystemRoomTypeCode { get; set; }
     }
     #endregion
-
-
 }
