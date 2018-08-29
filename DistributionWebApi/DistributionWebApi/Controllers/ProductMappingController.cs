@@ -185,6 +185,7 @@ namespace DistributionWebApi.Controllers
                             if (searchResult != null)
                             {
                                 result.SystemProductCode = searchResult["SystemProductCode"].AsString;
+                                result.TlgxMdmHotelId = searchResult["TlgxMdmHotelId"].AsString;
                                 result.MapId = searchResult["MapId"].AsInt32;
                                 result.Status = "Mapped";
                                 resultList.Add(result);
@@ -280,7 +281,8 @@ namespace DistributionWebApi.Controllers
                 project = project.Include("SupplierProductCode");
                 project = project.Include("SystemProductCode");
                 project = project.Include("MapId");
-                
+                project = project.Include("TlgxMdmHotelId");
+
                 var searchResult = await collectionProductMapping.Find(filter).Project(project).ToListAsync();
                 
                 List<ProductMappingLite> searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
@@ -299,6 +301,7 @@ namespace DistributionWebApi.Controllers
                                   SequenceNumber = rq.SequenceNumber,
                                   SessionId = rq.SessionId,
                                   SystemProductCode = (sdlj == null ? string.Empty : sdlj.SystemProductCode),
+                                  TlgxMdmHotelId = (sdlj == null ? string.Empty : sdlj.TlgxMdmHotelId)
                               }).ToList();
 
                 //int mapCount = resultList.Where(w => w.MapId != 0).Count();
@@ -379,7 +382,8 @@ namespace DistributionWebApi.Controllers
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
-                                        SystemProductCode = x.SystemProductCode
+                                        SystemProductCode = x.SystemProductCode,
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId
                                     })
                                     .ToListAsync();
 
@@ -424,7 +428,8 @@ namespace DistributionWebApi.Controllers
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
-                                        SystemProductCode = x.SystemProductCode
+                                        SystemProductCode = x.SystemProductCode,
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId
                                     })
                                     .ToListAsync();
 
@@ -469,7 +474,8 @@ namespace DistributionWebApi.Controllers
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
-                                        SystemProductCode = x.SystemProductCode
+                                        SystemProductCode = x.SystemProductCode,
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId
                                     })
                                     .ToListAsync();
 
