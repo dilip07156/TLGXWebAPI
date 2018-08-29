@@ -3675,6 +3675,11 @@
             system unique mapping id
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping.TlgxMdmHotelId">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.ProductMapping_RQ">
             <summary>
             Product Mapping Request Parameter
@@ -3807,6 +3812,11 @@
             TLGX Mapping Id
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ProductMapping_RS.TlgxMdmHotelId">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.SupplierCode">
             <summary>
             Supplier Code
@@ -3825,6 +3835,11 @@
         <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.MapId">
             <summary>
             System Mapping Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.TlgxMdmHotelId">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ProductMappingLite_RQ">
@@ -3896,6 +3911,11 @@
         <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.MapId">
             <summary>
             TLGX Mapping Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.TlgxMdmHotelId">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Country.CountryName">
