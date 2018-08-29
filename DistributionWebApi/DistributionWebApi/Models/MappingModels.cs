@@ -361,6 +361,10 @@ namespace DistributionWebApi.Models
         /// system unique mapping id
         /// </summary>
         public int MapId { get; set; }
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxMdmHotelId { get; set; }
     }
 
     /// <summary>
@@ -485,6 +489,10 @@ namespace DistributionWebApi.Models
         /// TLGX Mapping Id
         /// </summary>
         public int MapId { get; set; }
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxMdmHotelId { get; set; }
     }
 
     public class SystemProductMapping_RS
@@ -505,6 +513,10 @@ namespace DistributionWebApi.Models
         /// System Mapping Id
         /// </summary>
         public int MapId { get; set; }
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxMdmHotelId { get; set; }
     }
 
     /// <summary>
@@ -576,6 +588,10 @@ namespace DistributionWebApi.Models
         /// TLGX Mapping Id
         /// </summary>
         public int MapId { get; set; }
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxMdmHotelId { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -591,6 +607,8 @@ namespace DistributionWebApi.Models
         public int MapId { get; set; }
         [BsonElement]
         public string SystemProductCode { get; set; }
+        [BsonElement]
+        public string TlgxMdmHotelId { get; set; }
     }
 
     //public class MyListProductMappingLiteSerializer : SerializerBase<List<ProductMappingLite>>
