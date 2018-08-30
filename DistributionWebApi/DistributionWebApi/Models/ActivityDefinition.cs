@@ -702,11 +702,11 @@ namespace DistributionWebApi.Models.Activity
         /// <summary>
         /// The latitide for the Activity
         /// </summary>
-        public decimal? Latitude { get; set; }
+        public string Latitude { get; set; }
         /// <summary>
         /// The Longitude for the Activity
         /// </summary>
-        public decimal? Longitude { get; set; }
+        public string Longitude { get; set; }
         /// <summary>
         /// The Physical Address for the Activity. This usually contains a combination of street, City, Country and Postal Code.
         /// </summary>
