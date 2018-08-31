@@ -446,6 +446,52 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
+        /// Retrieves System Hotel Mapping for TLGX MDM Hotel Id and Supplier Code
+        /// </summary>
+        /// <param name="TlgxMdmHotelId">TLGX MDM Hotel Id</param>
+        /// <param name="SupplierCode">TLGX Supplier Code</param>
+        /// <returns>System Hotel Mapping</returns>
+        [HttpGet]
+        [Route("TLGX/Product/ProductCode/{TlgxMdmHotelId}/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        public async Task<HttpResponseMessage> GetSupplierProductMappingByTlgxMdmHotelId(string TlgxMdmHotelId, string SupplierCode)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
+
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.TlgxMdmHotelId, TlgxMdmHotelId.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new SystemProductMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierProductCode = x.SupplierProductCode,
+                                        SystemProductCode = x.SystemProductCode,
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
         /// Retrieves System Hotel Mapping for Supplier ProductCode and Supplier Code
         /// </summary>
         /// <param name="SupplierProductCode">Supplier Product Code</param>
