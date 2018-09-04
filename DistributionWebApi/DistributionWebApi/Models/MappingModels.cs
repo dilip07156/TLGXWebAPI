@@ -457,7 +457,7 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// TLGX Product Code
+        /// System Product Code / Common product code 
         /// </summary>
         public string SystemProductCode { get; set; }
         /// <summary>
@@ -481,12 +481,12 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierCityCode { get; set; }
         /// <summary>
-        /// TLGX Product Mapping status. 
+        /// System Product Mapping status. 
         /// Values should be "Mapped" to indicate a successful Product Mapping, "No results found" for unsuccessful Product Mapping 
         /// </summary>
         public string Status { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System Mapping Id
         /// </summary>
         public int MapId { get; set; }
         /// <summary>
@@ -506,7 +506,7 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// System Product Code
+        /// System Product Code / Common product code 
         /// </summary>
         public string SystemProductCode { get; set; }
         /// <summary>
@@ -581,11 +581,11 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
-        /// TLGX Product Code
+        /// System Product Code / Common product code
         /// </summary>
         public string SystemProductCode { get; set; }
         /// <summary>
-        /// TLGX Mapping Id
+        /// System Mapping Id
         /// </summary>
         public int MapId { get; set; }
         /// <summary>
