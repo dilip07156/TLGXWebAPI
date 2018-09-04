@@ -974,6 +974,14 @@
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>System Hotel Mapping</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSupplierProductMappingByTlgxMdmHotelId(System.String,System.String)">
+            <summary>
+            Retrieves System Hotel Mapping for TLGX MDM Hotel Id and Supplier Code
+            </summary>
+            <param name="TlgxMdmHotelId">TLGX MDM Hotel Id</param>
+            <param name="SupplierCode">TLGX Supplier Code</param>
+            <returns>System Hotel Mapping</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSystemProductMappingByCode(System.String,System.String)">
             <summary>
             Retrieves System Hotel Mapping for Supplier ProductCode and Supplier Code
@@ -3773,7 +3781,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.SystemProductCode">
             <summary>
-            TLGX Product Code
+            System Product Code / Common product code 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.SupplierProductName">
@@ -3803,13 +3811,13 @@
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.Status">
             <summary>
-            TLGX Product Mapping status. 
+            System Product Mapping status. 
             Values should be "Mapped" to indicate a successful Product Mapping, "No results found" for unsuccessful Product Mapping 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.MapId">
             <summary>
-            TLGX Mapping Id
+            System Mapping Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMapping_RS.TlgxMdmHotelId">
@@ -3829,7 +3837,7 @@
         </member>
         <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.SystemProductCode">
             <summary>
-            System Product Code
+            System Product Code / Common product code 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SystemProductMapping_RS.MapId">
@@ -3905,12 +3913,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.SystemProductCode">
             <summary>
-            TLGX Product Code
+            System Product Code / Common product code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.MapId">
             <summary>
-            TLGX Mapping Id
+            System Mapping Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.TlgxMdmHotelId">
