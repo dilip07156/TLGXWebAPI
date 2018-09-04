@@ -974,6 +974,14 @@
             <param name="SupplierCode">TLGX Supplier Code</param>
             <returns>System Hotel Mapping</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSupplierProductMappingByTlgxMdmHotelId(System.String,System.String)">
+            <summary>
+            Retrieves System Hotel Mapping for TLGX MDM Hotel Id and Supplier Code
+            </summary>
+            <param name="TlgxMdmHotelId">TLGX MDM Hotel Id</param>
+            <param name="SupplierCode">TLGX Supplier Code</param>
+            <returns>System Hotel Mapping</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSystemProductMappingByCode(System.String,System.String)">
             <summary>
             Retrieves System Hotel Mapping for Supplier ProductCode and Supplier Code
