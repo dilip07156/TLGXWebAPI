@@ -119,6 +119,9 @@
     <Reference Include="MongoDB.Driver.Core, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Driver.Core.2.7.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Nest, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.6.2.0\lib\net46\Nest.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -253,6 +256,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\CityMappingController.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\ElasticController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\CountryMappingController.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="Controllers\ProductStaticController.cs" />
     <Compile Include="Controllers\RoomTypeMappingController.cs" />
     <Compile Include="Controllers\SupplierMasterController.cs" />
+    <Compile Include="Controllers\UnifiedMappingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +281,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\RoomTypeMappingModel.cs" />
     <Compile Include="Models\TraceLog.cs" />
+    <Compile Include="Models\UnifiedMappingModels.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />
     <Compile Include="NLogHelper\Nlogger_Target.cs" />
@@ -384,6 +390,7 @@
     <Content Include="Views\Login\VerifyCode.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Elastic\Index.cshtml" />
     <None Include="Web.AWSDEV.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
