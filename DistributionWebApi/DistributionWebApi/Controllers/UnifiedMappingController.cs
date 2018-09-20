@@ -81,27 +81,27 @@ namespace DistributionWebApi.Controllers
 
                     #region RoomMappingSearch
 
-                    FilterDefinition<BsonDocument> filterRoomMapping;
-                    filterRoomMapping = Builders<BsonDocument>.Filter.Empty;
+                    if(SupplierRoomTypeIds.Length > 0 || SupplierRoomTypeCodes.Length > 0)
+                    {
+                        FilterDefinition<BsonDocument> filterRoomMapping;
+                        filterRoomMapping = Builders<BsonDocument>.Filter.Empty;
 
-                    filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("supplierCode", SupplierCodes);
-                    filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("SupplierProductId", SupplierProductCodes);
-                    filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.Or(Builders<BsonDocument>.Filter.AnyIn("SupplierRoomId", SupplierRoomTypeIds), Builders<BsonDocument>.Filter.AnyIn("SupplierRoomTypeCode", SupplierRoomTypeCodes));
+                        filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("supplierCode", SupplierCodes);
+                        filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("SupplierProductId", SupplierProductCodes);
+                        filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.Or(Builders<BsonDocument>.Filter.AnyIn("SupplierRoomId", SupplierRoomTypeIds), Builders<BsonDocument>.Filter.AnyIn("SupplierRoomTypeCode", SupplierRoomTypeCodes));
 
-                    //filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("SupplierRoomId", SupplierRoomTypeIds);
-                    //filterRoomMapping = filterRoomMapping & Builders<BsonDocument>.Filter.AnyIn("SupplierRoomTypeCode", SupplierRoomTypeCodes);
+                        ProjectionDefinition<BsonDocument> projectRoomMapping = Builders<BsonDocument>.Projection.Include("supplierCode");
+                        projectRoomMapping = projectRoomMapping.Exclude("_id");
+                        projectRoomMapping = projectRoomMapping.Include("SupplierProductId");
+                        projectRoomMapping = projectRoomMapping.Include("SupplierRoomId");
+                        projectRoomMapping = projectRoomMapping.Include("SystemRoomTypeMapId");
+                        projectRoomMapping = projectRoomMapping.Include("SystemProductCode");
+                        projectRoomMapping = projectRoomMapping.Include("TLGXAccoRoomId");
+                        projectRoomMapping = projectRoomMapping.Include("TLGXAccoId");
 
-                    ProjectionDefinition<BsonDocument> projectRoomMapping = Builders<BsonDocument>.Projection.Include("supplierCode");
-                    projectRoomMapping = projectRoomMapping.Exclude("_id");
-                    projectRoomMapping = projectRoomMapping.Include("SupplierProductId");
-                    projectRoomMapping = projectRoomMapping.Include("SupplierRoomId");
-                    projectRoomMapping = projectRoomMapping.Include("SystemRoomTypeMapId");
-                    projectRoomMapping = projectRoomMapping.Include("SystemProductCode");
-                    projectRoomMapping = projectRoomMapping.Include("TLGXAccoRoomId");
-                    projectRoomMapping = projectRoomMapping.Include("TLGXAccoId");
-
-                    var searchRoomMappingResult = collectionRoomTypeMapping.Find(filterRoomMapping).Project(projectRoomMapping).ToList();
-                    searchedRoomMappingData = JsonConvert.DeserializeObject<List<HotelRoomTypeMappingModel>>(searchRoomMappingResult.ToJson());
+                        var searchRoomMappingResult = collectionRoomTypeMapping.Find(filterRoomMapping).Project(projectRoomMapping).ToList();
+                        searchedRoomMappingData = JsonConvert.DeserializeObject<List<HotelRoomTypeMappingModel>>(searchRoomMappingResult.ToJson());
+                    }
 
                     #endregion RoomMappingSearch
 
@@ -143,7 +143,16 @@ namespace DistributionWebApi.Controllers
                             RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
                             RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
                             RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
-                            RoomMappingResponse.MappedRooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId || w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).Select(s => new UnifiedHotelAndRoomMapping_MappedRoomType { RoomMapId = s.SystemRoomTypeMapId, TlgxAccoRoomId = s.TLGXAccoRoomId }).ToList();
+
+                            if(mappingResponse.ContainsRoomMappings)
+                            {
+                                RoomMappingResponse.MappedRooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId || w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).Select(s => new UnifiedHotelAndRoomMapping_MappedRoomType { RoomMapId = s.SystemRoomTypeMapId, TlgxAccoRoomId = s.TLGXAccoRoomId }).ToList();
+                            }
+                            else
+                            {
+                                RoomMappingResponse.MappedRooms = new List<UnifiedHotelAndRoomMapping_MappedRoomType>();
+                            }
+                            
                             RoomMappingResponseList.Add(RoomMappingResponse);
                         }
                         mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
