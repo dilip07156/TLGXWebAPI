@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -14,10 +15,12 @@ namespace DistributionWebApi.Models.Activity
     {
         /// <summary>
         /// How many Search Results do you wish to receive per request?
+        /// Default Value = 10
         /// </summary>
-
         [Required]
-        public int PageSize { get; set; }
+        [DefaultValue(10)]
+        [Range(1, 100, ErrorMessage = "PageSize must be between 1 to 100")]
+        public int PageSize { get; set; } = 10;
         /// <summary>
         /// Which Page Number you wish to retrieve from the Search Results set
         /// </summary>
@@ -46,9 +49,12 @@ namespace DistributionWebApi.Models.Activity
     {
         /// <summary>
         /// How many Search Results do you wish to receive per request?
+        /// Default Value = 10
         /// </summary>
         [Required]
-        public int PageSize { get; set; }
+        [DefaultValue(10)]
+        [Range(1, 100, ErrorMessage = "PageSize must be between 1 to 100")]
+        public int PageSize { get; set; } = 10;
         /// <summary>
         /// Which Page Number you wish to retrieve from the Search Results set
         /// </summary>
@@ -77,9 +83,12 @@ namespace DistributionWebApi.Models.Activity
     {
         /// <summary>
         /// How many Search Results do you wish to receive per request?
+        /// Default Value = 10
         /// </summary>
         [Required]
-        public int PageSize { get; set; }
+        [DefaultValue(10)]
+        [Range(1, 100, ErrorMessage = "PageSize must be between 1 to 100")]
+        public int PageSize { get; set; } = 10;
         /// <summary>
         /// Which Page Number you wish to retrieve from the Search Results set
         /// </summary>
