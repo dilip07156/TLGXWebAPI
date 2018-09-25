@@ -33,7 +33,7 @@ namespace DistributionWebApi.Controllers
 
         /// <summary>
         /// Retrieves a Search Result List of based on a Collection of Country Ids combined with a System Code. The Country ID should be the calling system's Code 
-        /// as the mapping to Activity Destination is handled by the API
+        /// as the mapping to Activity Destination is handled by the API.
         /// </summary>
         /// <param name="param"></param>
         /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
@@ -48,11 +48,9 @@ namespace DistributionWebApi.Controllers
             {
                 ActivitySearchResult resultList = new ActivitySearchResult();
 
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
-                if (param.PageSize == 0)
+                if (param.PageSize > 100)
                 {
-                    resultList.Message = "Page Size should be greater than Zero.";
+                    resultList.Message = "Page Size shouldn't be greater than 100.";
                     return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
                 }
 
@@ -96,10 +94,14 @@ namespace DistributionWebApi.Controllers
                 SortDefinition<BsonDocument> sortByPrices;
                 sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price"); //Filter.Eq("Prices.PriceFor", "Product").
 
-                var TotalRecords = await collectionActivity.Find(filter).CountAsync();
-                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
@@ -192,7 +194,7 @@ namespace DistributionWebApi.Controllers
 
         /// <summary>
         /// Retrieves a Search Result List of based on a Collection of City Ids combined with a System Code.   The City ID should be the calling system's Code 
-        /// as the mapping to Activity Destination is handled by the API
+        /// as the mapping to Activity Destination is handled by the API.
         /// </summary>
         /// <param name="param"></param>
         /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
@@ -206,12 +208,10 @@ namespace DistributionWebApi.Controllers
             try
             {
                 ActivitySearchResult resultList = new ActivitySearchResult();
-
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
-                if (param.PageSize == 0)
+                
+                if (param.PageSize > 100)
                 {
-                    resultList.Message = "Page Size should be greater than Zero.";
+                    resultList.Message = "Page Size shouldn't be greater than 100.";
                     return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
                 }
 
@@ -253,14 +253,17 @@ namespace DistributionWebApi.Controllers
                     }
                 }
 
-                var TotalRecords = await collectionActivity.Find(filter).CountAsync();
+                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
 
                 SortDefinition<BsonDocument> sortByPrices;
                 sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
@@ -351,7 +354,8 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves a Search Result List of based on a Collection of Activity Classifications Ids combined with a System Code.   The classification types can be retrieved using the GetClassificationAttributeStructureService
+        /// Retrieves a Search Result List of based on a Collection of Activity Classifications Ids combined with a System Code. 
+        /// The classification types can be retrieved using the GetClassificationAttributeStructureService.
         /// </summary>
         /// <param name="param"></param>
         /// <returns>Returns a Collection of Search Results. This is a condensed version of the Activity Product Detail. Full Product Detail can be retrieved for Product Display
@@ -366,11 +370,9 @@ namespace DistributionWebApi.Controllers
             {
                 ActivitySearchResult resultList = new ActivitySearchResult();
 
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
-                if (param.PageSize == 0)
+                if (param.PageSize > 100)
                 {
-                    resultList.Message = "Page Size should be greater than Zero.";
+                    resultList.Message = "Page Size shouldn't be greater than 100.";
                     return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
                 }
 
@@ -392,10 +394,13 @@ namespace DistributionWebApi.Controllers
                 SortDefinition<BsonDocument> sortByPrices;
                 sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                var TotalRecords = await collectionActivity.Find(filter).CountAsync();
-                var searchResult = await collectionActivity.Find(filter).Sort(sortByPrices).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync();
+                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
                 List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+
+                resultList.PageSize = param.PageSize;
+                resultList.CurrentPage = param.PageNo;
 
                 int remainder = (int)TotalRecords % param.PageSize;
                 int quotient = (int)TotalRecords / param.PageSize;
