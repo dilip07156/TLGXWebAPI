@@ -284,11 +284,11 @@ namespace DistributionWebApi.Controllers
                 project = project.Include("TlgxMdmHotelId");
 
                 var searchResult = await collectionProductMapping.Find(filter).Project(project).ToListAsync();
-                
+
                 List<ProductMappingLite> searchedData = JsonConvert.DeserializeObject<List<ProductMappingLite>>(searchResult.ToJson());
 
                 List<ProductMappingLite_RS> resultList = new List<ProductMappingLite_RS>();
-                
+
                 resultList = (from rq in RQ
                               join sd in searchedData on new { SupplierCode = rq.SupplierCode.ToUpper(), SupplierProductCode = rq.SupplierProductCode.ToUpper() } equals new { SupplierCode = sd.SupplierCode, SupplierProductCode = sd.SupplierProductCode } into sdtemp
                               from sdlj in sdtemp.DefaultIfEmpty()
@@ -362,7 +362,7 @@ namespace DistributionWebApi.Controllers
         /// <returns>A list of Supplier Code and Supplier Product code mapped to System product code which is sent in request</returns>
         [HttpGet]
         [Route("System/Product/ProductCode/{ProductCode}")]
-        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        [ResponseType(typeof(List<CompleteProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetAllSupplierProductMappingByCode(string ProductCode)
         {
             try
@@ -376,14 +376,102 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
 
+                //var searchResult = await collectionProductMapping.Find(filter)
+                //                    .Project(x => new SystemProductMapping_RS
+                //                    {
+                //                        SupplierCode = x.SupplierCode,
+                //                        MapId = x.MapId,
+                //                        SupplierProductCode = x.SupplierProductCode,
+                //                        SystemProductCode = x.SystemProductCode,
+                //                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                //                    })
+                //                    .ToListAsync();
+
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new SystemProductMapping_RS
+                                    .Project(x => new CompleteProductMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
                                         SystemProductCode = x.SystemProductCode,
-                                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                        SupplierCityName = x.SupplierCityName,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        SupplierCountryName = x.SupplierCountryName,
+                                        SupplierProductName = x.SupplierProductName,
+                                        SystemCityCode = x.SystemCityCode,
+                                        SystemCityName = x.SystemCityName,
+                                        SystemCountryCode = x.SystemCountryCode,
+                                        SystemCountryName = x.SystemCountryName,
+                                        SystemProductName = x.SystemProductName,
+                                        SystemProductType = x.SystemProductType
+                                    })
+                                    .ToListAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all Supplier Product Mapping for TLGX MDM Hotel Id.
+        /// </summary>
+        /// <param name="TlgxMdmHotelId"></param>
+        /// <returns>A list of Supplier Code and Supplier Product code mapped to TLGX MDM Hotel Id which is sent in request</returns>
+        [HttpGet]
+        [Route("TLGX/Product/ProductCode/{TlgxMdmHotelId}")]
+        [ResponseType(typeof(List<CompleteProductMapping_RS>))]
+        public async Task<HttpResponseMessage> GetAllSupplierProductMappingByTlgxMdmCode(string TlgxMdmHotelId)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<ProductMapping> collectionProductMapping = _database.GetCollection<ProductMapping>("ProductMapping");
+
+                FilterDefinition<ProductMapping> filter;
+                filter = Builders<ProductMapping>.Filter.Empty;
+                filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.TlgxMdmHotelId, TlgxMdmHotelId.Trim().ToUpper());
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
+
+                //var searchResult = await collectionProductMapping.Find(filter)
+                //                    .Project(x => new SystemProductMapping_RS
+                //                    {
+                //                        SupplierCode = x.SupplierCode,
+                //                        MapId = x.MapId,
+                //                        SupplierProductCode = x.SupplierProductCode,
+                //                        SystemProductCode = x.SystemProductCode,
+                //                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                //                    })
+                //                    .ToListAsync();
+
+                var searchResult = await collectionProductMapping.Find(filter)
+                                    .Project(x => new CompleteProductMapping_RS
+                                    {
+                                        SupplierCode = x.SupplierCode,
+                                        MapId = x.MapId,
+                                        SupplierProductCode = x.SupplierProductCode,
+                                        SystemProductCode = x.SystemProductCode,
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                        SupplierCityName = x.SupplierCityName,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        SupplierCountryName = x.SupplierCountryName,
+                                        SupplierProductName = x.SupplierProductName,
+                                        SystemCityCode = x.SystemCityCode,
+                                        SystemCityName = x.SystemCityName,
+                                        SystemCountryCode = x.SystemCountryCode,
+                                        SystemCountryName = x.SystemCountryName,
+                                        SystemProductName = x.SystemProductName,
+                                        SystemProductType = x.SystemProductType
                                     })
                                     .ToListAsync();
 
@@ -407,7 +495,7 @@ namespace DistributionWebApi.Controllers
         /// <returns>System Hotel Mapping</returns>
         [HttpGet]
         [Route("System/Product/ProductCode/{ProductCode}/SupplierCode/{SupplierCode}")]
-        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        [ResponseType(typeof(List<CompleteProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetSupplierProductMappingByCode(string ProductCode, string SupplierCode)
         {
             try
@@ -420,16 +508,38 @@ namespace DistributionWebApi.Controllers
                 filter = Builders<ProductMapping>.Filter.Empty;
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SystemProductCode, ProductCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
-                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));  
+                filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
+
+                //var searchResult = await collectionProductMapping.Find(filter)
+                //                    .Project(x => new SystemProductMapping_RS
+                //                    {
+                //                        SupplierCode = x.SupplierCode,
+                //                        MapId = x.MapId,
+                //                        SupplierProductCode = x.SupplierProductCode,
+                //                        SystemProductCode = x.SystemProductCode,
+                //                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                //                    })
+                //                    .ToListAsync();
 
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new SystemProductMapping_RS
+                                    .Project(x => new CompleteProductMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
                                         SystemProductCode = x.SystemProductCode,
-                                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                        SupplierCityName = x.SupplierCityName,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        SupplierCountryName = x.SupplierCountryName,
+                                        SupplierProductName = x.SupplierProductName,
+                                        SystemCityCode = x.SystemCityCode,
+                                        SystemCityName = x.SystemCityName,
+                                        SystemCountryCode = x.SystemCountryCode,
+                                        SystemCountryName = x.SystemCountryName,
+                                        SystemProductName = x.SystemProductName,
+                                        SystemProductType = x.SystemProductType
                                     })
                                     .ToListAsync();
 
@@ -453,7 +563,7 @@ namespace DistributionWebApi.Controllers
         /// <returns>System Hotel Mapping</returns>
         [HttpGet]
         [Route("TLGX/Product/ProductCode/{TlgxMdmHotelId}/SupplierCode/{SupplierCode}")]
-        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        [ResponseType(typeof(List<CompleteProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetSupplierProductMappingByTlgxMdmHotelId(string TlgxMdmHotelId, string SupplierCode)
         {
             try
@@ -468,14 +578,36 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
 
+                //var searchResult = await collectionProductMapping.Find(filter)
+                //                    .Project(x => new SystemProductMapping_RS
+                //                    {
+                //                        SupplierCode = x.SupplierCode,
+                //                        MapId = x.MapId,
+                //                        SupplierProductCode = x.SupplierProductCode,
+                //                        SystemProductCode = x.SystemProductCode,
+                //                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                //                    })
+                //                    .ToListAsync();
+
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new SystemProductMapping_RS
+                                    .Project(x => new CompleteProductMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
                                         SystemProductCode = x.SystemProductCode,
-                                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                        SupplierCityName = x.SupplierCityName,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        SupplierCountryName = x.SupplierCountryName,
+                                        SupplierProductName = x.SupplierProductName,
+                                        SystemCityCode = x.SystemCityCode,
+                                        SystemCityName = x.SystemCityName,
+                                        SystemCountryCode = x.SystemCountryCode,
+                                        SystemCountryName = x.SystemCountryName,
+                                        SystemProductName = x.SystemProductName,
+                                        SystemProductType = x.SystemProductType
                                     })
                                     .ToListAsync();
 
@@ -499,7 +631,7 @@ namespace DistributionWebApi.Controllers
         /// <returns>System Hotel Mapping</returns>
         [HttpGet]
         [Route("Supplier/Product/SupplierProductCode/{SupplierProductCode}/SupplierCode/{SupplierCode}")]
-        [ResponseType(typeof(List<SystemProductMapping_RS>))]
+        [ResponseType(typeof(List<CompleteProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetSystemProductMappingByCode(string SupplierProductCode, string SupplierCode)
         {
             try
@@ -514,14 +646,36 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
                 filter = filter & Builders<ProductMapping>.Filter.Or(Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "MAPPED"), Builders<ProductMapping>.Filter.Eq(x => x.MappingStatus, "AUTOMAPPED"));
 
+                //var searchResult = await collectionProductMapping.Find(filter)
+                //                    .Project(x => new SystemProductMapping_RS
+                //                    {
+                //                        SupplierCode = x.SupplierCode,
+                //                        MapId = x.MapId,
+                //                        SupplierProductCode = x.SupplierProductCode,
+                //                        SystemProductCode = x.SystemProductCode,
+                //                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                //                    })
+                //                    .ToListAsync();
+
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new SystemProductMapping_RS
+                                    .Project(x => new CompleteProductMapping_RS
                                     {
                                         SupplierCode = x.SupplierCode,
                                         MapId = x.MapId,
                                         SupplierProductCode = x.SupplierProductCode,
                                         SystemProductCode = x.SystemProductCode,
-                                        TlgxMdmHotelId = x.TlgxMdmHotelId
+                                        TlgxMdmHotelId = x.TlgxMdmHotelId,
+                                        SupplierCityCode = x.SupplierCityCode,
+                                        SupplierCityName = x.SupplierCityName,
+                                        SupplierCountryCode = x.SupplierCountryCode,
+                                        SupplierCountryName = x.SupplierCountryName,
+                                        SupplierProductName = x.SupplierProductName,
+                                        SystemCityCode = x.SystemCityCode,
+                                        SystemCityName = x.SystemCityName,
+                                        SystemCountryCode = x.SystemCountryCode,
+                                        SystemCountryName = x.SystemCountryName,
+                                        SystemProductName = x.SystemProductName,
+                                        SystemProductType = x.SystemProductType
                                     })
                                     .ToListAsync();
 
@@ -560,7 +714,7 @@ namespace DistributionWebApi.Controllers
                 filter = filter & Builders<ProductMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
 
                 var searchResult = await collectionProductMapping.Find(filter)
-                                    .Project(x => new 
+                                    .Project(x => new
                                     {
                                         x.SupplierProductCode
                                     })
