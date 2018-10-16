@@ -44,18 +44,25 @@ namespace DistributionWebApi.Controllers
 
                 if (RQ != null)
                 {
+                    #region Variable Declaration and Initialization
+
                     _database = MongoDBHandler.mDatabase();
                     IMongoCollection<BsonDocument> collectionRoomTypeMapping = _database.GetCollection<BsonDocument>("RoomTypeMapping");
                     IMongoCollection<RoomTypeMappingOnline> collection_rto = _database.GetCollection<RoomTypeMappingOnline>("RoomTypeMappingOnline");
                     IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
+                    IMongoCollection<BsonDocument> collectionAccommodationMaster = _database.GetCollection<BsonDocument>("AccommodationMaster");
+
 
                     List<ProductMappingLite> searchedHotelMappingData = new List<ProductMappingLite>();
                     List<HotelRoomTypeMappingModel> searchedRoomMappingData = new List<HotelRoomTypeMappingModel>();
+                    List<DC_AccomodationMasterMapping> searchedAccomodationSearchData = new List<DC_AccomodationMasterMapping>();
 
                     var SupplierCodes = RQ.MappingRequests.Where(w => w.SupplierCode != null).Select(x => x.SupplierCode.ToUpper()).Distinct().ToArray();
                     var SupplierProductCodes = RQ.MappingRequests.Where(w => w.SupplierProductCode != null).Select(x => x.SupplierProductCode.ToUpper()).Distinct().ToArray();
                     var SupplierRoomTypeIds = RQ.MappingRequests.SelectMany(p => p.SupplierRoomTypes.Where(w => w.SupplierRoomId != null).Select(s => s.SupplierRoomId.ToUpper())).Distinct().ToArray();
                     var SupplierRoomTypeCodes = RQ.MappingRequests.SelectMany(p => p.SupplierRoomTypes.Where(w => w.SupplierRoomTypeCode != null).Select(s => s.SupplierRoomTypeCode.ToUpper())).Distinct().ToArray();
+
+                    #endregion Variable Declaration and Initialization
 
                     #region HotelMappingSearch
 
@@ -79,9 +86,19 @@ namespace DistributionWebApi.Controllers
 
                     #endregion HotelMappingSearch
 
+                    #region Fetch Accommodation Master
+                    FilterDefinition<BsonDocument> filterAccoMaster;
+                    filterAccoMaster = Builders<BsonDocument>.Filter.Empty;
+                    filterAccoMaster = filterAccoMaster & Builders<BsonDocument>.Filter.AnyIn("_id", searchedHotelMappingData.Select(s => Convert.ToInt32(s.SystemProductCode)));
+                    ProjectionDefinition<BsonDocument> projectAccoMaster = Builders<BsonDocument>.Projection.Include("_id");
+                    projectAccoMaster = projectAccoMaster.Include("IsRoomMappingCompleted");
+                    var searchAccoMasterResult = collectionAccommodationMaster.Find(filterAccoMaster).Project(projectAccoMaster).ToList();
+                    searchedAccomodationSearchData = JsonConvert.DeserializeObject<List<DC_AccomodationMasterMapping>>(searchAccoMasterResult.ToJson());
+                    #endregion Fetch Accommodation Master
+
                     #region RoomMappingSearch
 
-                    if(SupplierRoomTypeIds.Length > 0 || SupplierRoomTypeCodes.Length > 0)
+                    if (SupplierRoomTypeIds.Length > 0 || SupplierRoomTypeCodes.Length > 0)
                     {
                         FilterDefinition<BsonDocument> filterRoomMapping;
                         filterRoomMapping = Builders<BsonDocument>.Filter.Empty;
@@ -126,13 +143,15 @@ namespace DistributionWebApi.Controllers
                             mappingResponse.CommonHotelId = HotelMapping.SystemProductCode;
                             mappingResponse.ProductMapId = HotelMapping.MapId;
                             mappingResponse.TlgxAccoId = HotelMapping.TlgxMdmHotelId;
+                            mappingResponse.ContainsRoomMappings = searchedAccomodationSearchData.Where(w => w.CommonHotelId == Convert.ToInt32(HotelMapping.SystemProductCode)).Select(s => s.IsRoomMappingCompleted).FirstOrDefault();
                         }
 
                         var RoomMappings = searchedRoomMappingData.Where(w => w.supplierCode == mappingRequest.SupplierCode && w.SupplierProductId == mappingRequest.SupplierProductCode).Select(s => s).ToList();
-                        if (RoomMappings.Count > 0)
-                        {
-                            mappingResponse.ContainsRoomMappings = true;
-                        }
+
+                        //if (RoomMappings.Count > 0)
+                        //{
+                        //    mappingResponse.ContainsRoomMappings = true;
+                        //}
 
                         var RoomMappingResponseList = new List<UnifiedHotelAndRoomMapping_RoomTypeResponse>();
                         foreach (var mappingRoomRequest in mappingRequest.SupplierRoomTypes)
@@ -144,7 +163,7 @@ namespace DistributionWebApi.Controllers
                             RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
                             RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
 
-                            if(mappingResponse.ContainsRoomMappings)
+                            if (mappingResponse.ContainsRoomMappings)
                             {
                                 RoomMappingResponse.MappedRooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId || w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).Select(s => new UnifiedHotelAndRoomMapping_MappedRoomType { RoomMapId = s.SystemRoomTypeMapId, TlgxAccoRoomId = s.TLGXAccoRoomId }).ToList();
                             }
@@ -152,7 +171,7 @@ namespace DistributionWebApi.Controllers
                             {
                                 RoomMappingResponse.MappedRooms = new List<UnifiedHotelAndRoomMapping_MappedRoomType>();
                             }
-                            
+
                             RoomMappingResponseList.Add(RoomMappingResponse);
                         }
                         mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
@@ -163,7 +182,6 @@ namespace DistributionWebApi.Controllers
                     returnResult.MappingResponses = mappingResponseList;
 
                     #endregion Build Response
-
                 }
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
