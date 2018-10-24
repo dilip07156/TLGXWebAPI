@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 
+
 namespace DistributionWebApi.Controllers
 {
     /// <summary>
@@ -173,6 +174,58 @@ namespace DistributionWebApi.Controllers
                             }
 
                             RoomMappingResponseList.Add(RoomMappingResponse);
+
+                            #region Roomtype Mapping Online data insert into Mongo
+                            if (RoomMappingResponse.MappedRooms.Count == 0)
+                            {
+                                int? SystemProductCode = null;
+                                if (int.TryParse(mappingResponse.CommonHotelId, out int CommonHotelId))
+                                {
+                                    SystemProductCode = CommonHotelId;
+                                }
+
+                                RoomTypeMappingController _obj = new RoomTypeMappingController();
+                                // Fire & Forget 
+                                await Task.Run(() => _obj.InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                {
+                                    //_id = ObjectId.GenerateNewId(),
+                                    Amenities = mappingRoomRequest.Amenities,
+                                    BatchId = RQ.SessionId, //RQ.BatchId,
+                                    BathRoomType = mappingRoomRequest.BathRoomType,
+                                    BeddingConfig = mappingRoomRequest.BeddingConfig,
+                                    Bedrooms = mappingRoomRequest.Bedrooms,
+                                    BedType = mappingRoomRequest.BedType,
+                                    ChildAge = mappingRoomRequest.ChildAge,
+                                    CreateDateTime = DateTime.Now,
+                                    ExtraBed = mappingRoomRequest.ExtraBed,
+                                    FloorName = mappingRoomRequest.FloorName,
+                                    FloorNumber = mappingRoomRequest.FloorNumber,
+                                    MaxAdults = mappingRoomRequest.MaxAdults,
+                                    MaxChild = mappingRoomRequest.MaxChild,
+                                    MaxGuestOccupancy = mappingRoomRequest.MaxGuestOccupancy,
+                                    MaxInfants = mappingRoomRequest.MaxInfants,
+                                    MinGuestOccupancy = mappingRoomRequest.MinGuestOccupancy,
+                                    Mode = "Online", //RQ.Mode,
+                                    PromotionalVendorCode = mappingRoomRequest.PromotionalVendorCode,
+                                    Quantity = mappingRoomRequest.Quantity,
+                                    RatePlan = mappingRoomRequest.RatePlan,
+                                    RatePlanCode = mappingRoomRequest.RatePlanCode,
+                                    RoomLocationCode = mappingRoomRequest.RoomLocationCode,
+                                    RoomSize = mappingRoomRequest.RoomSize,
+                                    RoomView = mappingRoomRequest.RoomView,
+                                    Smoking = mappingRoomRequest.Smoking,
+                                    SupplierId = mappingRequest.SupplierCode,
+                                    SupplierProductId = mappingRequest.SupplierProductCode,
+                                    SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
+                                    SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
+                                    SupplierRoomId = mappingRoomRequest.SupplierRoomId,
+                                    SupplierRoomName = mappingRoomRequest.SupplierRoomName,
+                                    SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode,
+                                    TLGXCommonHotelId = mappingResponse.TlgxAccoId,
+                                    SystemProductCode = SystemProductCode
+                                }));
+                            }
+                            #endregion
                         }
                         mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
 
