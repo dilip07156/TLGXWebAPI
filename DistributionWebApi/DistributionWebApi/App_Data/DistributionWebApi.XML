@@ -967,6 +967,13 @@
             <param name="ProductCode"></param>
             <returns>A list of Supplier Code and Supplier Product code mapped to System product code which is sent in request</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetAllSupplierProductMappingByTlgxMdmCode(System.String)">
+            <summary>
+            Retrieves all Supplier Product Mapping for TLGX MDM Hotel Id.
+            </summary>
+            <param name="TlgxMdmHotelId"></param>
+            <returns>A list of Supplier Code and Supplier Product code mapped to TLGX MDM Hotel Id which is sent in request</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.ProductMappingController.GetSupplierProductMappingByCode(System.String,System.String)">
             <summary>
             Retrieves System Hotel Mapping for System Product Code and Supplier Code
@@ -3946,6 +3953,91 @@
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ProductMappingLite_RS.TlgxMdmHotelId">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.CompleteProductMapping_RS">
+            <summary>
+            Complete Product Mapping Response Schema
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierCode">
+            <summary>
+            System supplier code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierProductCode">
+            <summary>
+            Supplier specific product code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierProductName">
+            <summary>
+            Supplier specific product name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierCountryName">
+            <summary>
+            Supplier specific country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierCountryCode">
+            <summary>
+            Supplier specific country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierCityName">
+            <summary>
+            Supplier specific city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SupplierCityCode">
+            <summary>
+            Supplier specific city code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemProductCode">
+            <summary>
+            system product code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemProductName">
+            <summary>
+            system product name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemCountryName">
+            <summary>
+            system country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemCityName">
+            <summary>
+            system city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemCountryCode">
+            <summary>
+            system country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemCityCode">
+            <summary>
+            system city code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.SystemProductType">
+            <summary>
+            system product type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.MapId">
+            <summary>
+            system unique mapping id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompleteProductMapping_RS.TlgxMdmHotelId">
             <summary>
             TLGX MDM Unique identifier for hotel property
             </summary>

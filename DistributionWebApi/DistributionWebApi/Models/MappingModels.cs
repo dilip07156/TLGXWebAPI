@@ -672,4 +672,80 @@ namespace DistributionWebApi.Models
     //        return result;
     //    }
     //}
+
+    /// <summary>
+    /// Complete Product Mapping Response Schema
+    /// </summary>
+    public class CompleteProductMapping_RS
+    {
+        /// <summary>
+        /// System supplier code
+        /// </summary>
+        public string SupplierCode { get; set; }
+        /// <summary>
+        /// Supplier specific product code
+        /// </summary>
+        public string SupplierProductCode { get; set; }
+        /// <summary>
+        /// Supplier specific product name
+        /// </summary>
+        public string SupplierProductName { get; set; }
+        /// <summary>
+        /// Supplier specific country name
+        /// </summary>
+        public string SupplierCountryName { get; set; }
+        /// <summary>
+        /// Supplier specific country code
+        /// </summary>
+        public string SupplierCountryCode { get; set; }
+        /// <summary>
+        /// Supplier specific city name
+        /// </summary>
+        public string SupplierCityName { get; set; }
+        /// <summary>
+        /// Supplier specific city code
+        /// </summary>
+        public string SupplierCityCode { get; set; }
+        /// <summary>
+        /// system product code
+        /// </summary>
+        public string SystemProductCode { get; set; }
+        /// <summary>
+        /// system product name
+        /// </summary>
+        public string SystemProductName { get; set; }
+        /// <summary>
+        /// system country name
+        /// </summary>
+        public string SystemCountryName { get; set; }
+        /// <summary>
+        /// system city name
+        /// </summary>
+        public string SystemCityName { get; set; }
+        /// <summary>
+        /// system country code
+        /// </summary>
+        public string SystemCountryCode { get; set; }
+        /// <summary>
+        /// system city code
+        /// </summary>
+        public string SystemCityCode { get; set; }
+        /// <summary>
+        /// system product type
+        /// </summary>
+        public string SystemProductType { get; set; }
+        ///// <summary>
+        ///// mapping status of the supplier product
+        ///// </summary>
+        //public string MappingStatus { get; set; }
+        /// <summary>
+        /// system unique mapping id
+        /// </summary>
+        public int MapId { get; set; }
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxMdmHotelId { get; set; }
+    }
+
 }
