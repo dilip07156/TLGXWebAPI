@@ -558,6 +558,36 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:DistributionWebApi.Controllers.AccommodationMasterController">
+            <summary>
+            Used to retrieve TLGX Accommodation Master information.
+            </summary>
+        </member>
+        <member name="F:DistributionWebApi.Controllers.AccommodationMasterController._database">
+            <summary>
+            Mongo database handler
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.AccommodationMasterController.GetAllAccommodation">
+            <summary>
+            Retrieve all TLGX System Accommodation
+            </summary>
+            <returns>List of TLGX Accommodation Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.AccommodationMasterController.GetAccommodationByCountryCode(System.String)">
+            <summary>
+            Retrieve all TLGX System Accommodation with StartsWith Filter on TLGX Country Code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>List of TLGX Accommodation Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.AccommodationMasterController.GetAccommodationByCountryName(System.String)">
+            <summary>
+            Retrieve all TLGX System Accommodation with StartsWith Filter on TLGX Country Name
+            </summary>
+            <param name="CountryName"></param>
+            <returns>List of TLGX Accommodation Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.ActivityMappingController">
             <summary>
             Contains a collection of APIs to allow the search and dislay of a range of Activity Supplier Static Data. Each individual Suppliers' static data has been
@@ -2194,6 +2224,296 @@
         <member name="P:DistributionWebApi.Models.Static.RoomAmenities.AmenityCategory">
             <summary>
             The category of facility this is per room.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.AccommodationMaster">
+            <summary>
+            Accommodation Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CommonHotelId">
+            <summary>
+            The type id is Hotel ID
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.TLGXAccoId">
+            <summary>
+            Contain TLGX Accommodation id of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.HotelName">
+            <summary>
+            Contain Accommodation Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.ProductCategory">
+            <summary>
+            Contain Type of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.ProductCategorySubType">
+            <summary>
+            Contain Subtype of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.HotelStarRating">
+            <summary>
+            Contain start rating of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.StateCode">
+            <summary>
+            Contain State Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.StateName">
+            <summary>
+            Contain State Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.StreetName">
+            <summary>
+            Contain Street info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.StreetNumber">
+            <summary>
+            Contain Street Number of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Street3">
+            <summary>
+            Contain Street3 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Street4">
+            <summary>
+            Contain Street4 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Street5">
+            <summary>
+            Contain Street5 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.PostalCode">
+            <summary>
+            Contain Postal Code info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Town">
+            <summary>
+            Contain Town info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Location">
+            <summary>
+            Contain Location of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Area">
+            <summary>
+            Contain Area of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CityCode">
+            <summary>
+            Contain City Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CityName">
+            <summary>
+            Contain City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CountryCode">
+            <summary>
+            Contain ISO Country Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CountryName">
+            <summary>
+            Contain Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.IsRoomMappingCompleted">
+            <summary>
+            Contain Room Mapping Completed info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Telephone">
+            <summary>
+            Contain Telephone info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Fax">
+            <summary>
+            Contain Contact Fax of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Email">
+            <summary>
+            Contain Contact Email of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.WebSiteURL">
+            <summary>
+            Contain Contact WebSite of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.FullAddress">
+            <summary>
+            Contain Full Address of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Latitude">
+            <summary>
+            Contain Latitude of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.Longitude">
+            <summary>
+            Contain Longitude of Accommodation
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.AccommodationMasterRS">
+            <summary>
+            Accommodation Master RS
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.HotelID">
+            <summary>
+            Contain TLGX Accommodation id of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.HotelName">
+            <summary>
+            Contain Accommodation Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.ProductCategory">
+            <summary>
+            Contain Type of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.HotelType">
+            <summary>
+            Contain ProductCategory Subtype of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.HotelStarRating">
+            <summary>
+            Contain start rating of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.StreetName">
+            <summary>
+            Contain Street info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.StreetNumber">
+            <summary>
+            Contain Street Number of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Street3">
+            <summary>
+            Contain Street3 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Street4">
+            <summary>
+            Contain Street4 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Street5">
+            <summary>
+            Contain Street5 of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.PostalCode">
+            <summary>
+            Contain Postal Code info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Town">
+            <summary>
+            Contain Town info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Location">
+            <summary>
+            Contain Location of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Area">
+            <summary>
+            Contain Area of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.CityCode">
+            <summary>
+            Contain City Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.CityName">
+            <summary>
+            Contain City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.StateCode">
+            <summary>
+            Contain State Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.StateName">
+            <summary>
+            Contain State Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.CountryCode">
+            <summary>
+            Contain ISO Country Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.CountryName">
+            <summary>
+            Contain Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.FullAddress">
+            <summary>
+            Contain Full Address of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.TelephoneNumber">
+            <summary>
+            Contain Telephone info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Fax">
+            <summary>
+            Contain Contact Fax of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.URL">
+            <summary>
+            Contain Contact WebSite of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.EmailAddress">
+            <summary>
+            Contain Contact Email of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Latitude">
+            <summary>
+            Contain Latitude of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Longitude">
+            <summary>
+            Contain Longitude of Accommodation
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ">

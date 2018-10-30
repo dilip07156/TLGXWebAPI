@@ -1395,4 +1395,340 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public string AmenityCategory { get; set; }
     }
+
+    /// <summary>
+    /// Accommodation Master
+    /// </summary>
+    public class AccommodationMaster
+    {
+
+        /// <summary>
+        /// The type id is Hotel ID
+        /// </summary>
+
+        //[BsonId]
+        //[Newtonsoft.Json.JsonProperty("_id")]
+        //[JsonIgnore]
+        //[IgnoreDataMember]
+        [BsonElement("_id")]
+        public int CommonHotelId { get; set; }
+
+
+        /// <summary>
+        /// Contain TLGX Accommodation id of Accommodation
+        /// </summary>
+        
+        public string TLGXAccoId { get; set; }
+
+
+
+        /// <summary>
+        /// Contain Accommodation Name
+        /// </summary>
+        public string HotelName { get; set; }
+
+
+        /// <summary>
+        /// Contain Type of Accommodation
+        /// </summary>
+        public string ProductCategory { get; set; }
+
+
+        /// <summary>
+        /// Contain Subtype of Accommodation
+        /// </summary>
+        public string ProductCategorySubType { get; set; }
+
+        /// <summary>
+        /// Contain start rating of Accommodation
+        /// </summary>
+        public string HotelStarRating { get; set; }
+
+
+
+
+        /// <summary>
+        /// Contain State Code
+        /// </summary>
+        public string StateCode { get; set; }
+
+        /// <summary>
+        /// Contain State Name
+        /// </summary>
+        public string StateName { get; set; }
+
+        /// <summary>
+        /// Contain Street info of Accommodation
+        /// </summary>
+        public string StreetName { get; set; }
+
+        /// <summary>
+        /// Contain Street Number of Accommodation
+        /// </summary>
+        public string StreetNumber { get; set; }
+
+        /// <summary>
+        /// Contain Street3 of Accommodation
+        /// </summary>
+        public string Street3 { get; set; }
+
+        /// <summary>
+        /// Contain Street4 of Accommodation
+        /// </summary>
+        public string Street4 { get; set; }
+
+        /// <summary>
+        /// Contain Street5 of Accommodation
+        /// </summary>
+        public string Street5 { get; set; }
+
+        /// <summary>
+        /// Contain Postal Code info of Accommodation
+        /// </summary>
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// Contain Town info of Accommodation
+        /// </summary>
+        public string Town { get; set; }
+
+        /// <summary>
+        /// Contain Location of Accommodation
+        /// </summary>
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Contain Area of Accommodation
+        /// </summary>
+        public string Area { get; set; }
+
+        /// <summary>
+        /// Contain City Code
+        /// </summary>
+        public string CityCode { get; set; }
+
+        /// <summary>
+        /// Contain City Name
+        /// </summary>
+        public string CityName { get; set; }
+
+
+        /// <summary>
+        /// Contain ISO Country Code
+        /// </summary>
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// Contain Country Name
+        /// </summary>
+        public string CountryName { get; set; }
+
+
+        /// <summary>
+        /// Contain Room Mapping Completed info of Accommodation
+        /// </summary>
+        public bool IsRoomMappingCompleted { get; set; }
+
+        /// <summary>
+        /// Contain Telephone info of Accommodation
+        /// </summary>
+        public string Telephone { get; set; }
+
+        /// <summary>
+        /// Contain Contact Fax of Accommodation
+        /// </summary>
+        public string Fax { get; set; }
+
+        /// <summary>
+        /// Contain Contact Email of Accommodation
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Contain Contact WebSite of Accommodation
+        /// </summary>
+        public string WebSiteURL { get; set; }
+
+        /// <summary>
+        /// Contain Full Address of Accommodation
+        /// </summary>
+        public string FullAddress { get; set; }
+
+        /// <summary>
+        /// Contain Latitude of Accommodation
+        /// </summary>
+        public string Latitude { get; set; }
+
+        /// <summary>
+        /// Contain Longitude of Accommodation
+        /// </summary>
+        public string Longitude { get; set; }
+
+
+    }
+
+
+    /// <summary>
+    /// Accommodation Master RS
+    /// </summary>
+    public class AccommodationMasterRS
+    {
+
+
+
+
+        /// <summary>
+        /// Contain TLGX Accommodation id of Accommodation
+        /// </summary>
+        //[BsonElement("TLGXAccoId")]
+        public string HotelID { get; set; }
+
+
+
+        /// <summary>
+        /// Contain Accommodation Name
+        /// </summary>
+        public string HotelName { get; set; }
+
+
+        /// <summary>
+        /// Contain Type of Accommodation
+        /// </summary>
+        public string ProductCategory { get; set; }
+
+
+        /// <summary>
+        /// Contain ProductCategory Subtype of Accommodation
+        /// </summary>
+        public string HotelType { get; set; }
+
+        /// <summary>
+        /// Contain start rating of Accommodation
+        /// </summary>
+        public string HotelStarRating { get; set; }
+
+
+        /// <summary>
+        /// Contain Street info of Accommodation
+        /// </summary>
+        public string StreetName { get; set; }
+
+        /// <summary>
+        /// Contain Street Number of Accommodation
+        /// </summary>
+        public string StreetNumber { get; set; }
+
+        /// <summary>
+        /// Contain Street3 of Accommodation
+        /// </summary>
+        public string Street3 { get; set; }
+
+        /// <summary>
+        /// Contain Street4 of Accommodation
+        /// </summary>
+        public string Street4 { get; set; }
+
+        /// <summary>
+        /// Contain Street5 of Accommodation
+        /// </summary>
+        public string Street5 { get; set; }
+
+        /// <summary>
+        /// Contain Postal Code info of Accommodation
+        /// </summary>
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// Contain Town info of Accommodation
+        /// </summary>
+        public string Town { get; set; }
+
+        /// <summary>
+        /// Contain Location of Accommodation
+        /// </summary>
+        public string Location { get; set; }
+
+        /// <summary>
+        /// Contain Area of Accommodation
+        /// </summary>
+        public string Area { get; set; }
+
+        /// <summary>
+        /// Contain City Code
+        /// </summary>
+        public string CityCode { get; set; }
+
+        /// <summary>
+        /// Contain City Name
+        /// </summary>
+        public string CityName { get; set; }
+
+
+
+        /// <summary>
+        /// Contain State Code
+        /// </summary>
+        public string StateCode { get; set; }
+
+        /// <summary>
+        /// Contain State Name
+        /// </summary>
+        public string StateName { get; set; }
+
+
+        /// <summary>
+        /// Contain ISO Country Code
+        /// </summary>
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// Contain Country Name
+        /// </summary>
+        public string CountryName { get; set; }
+
+
+        /// <summary>
+        /// Contain Full Address of Accommodation
+        /// </summary>
+        public string FullAddress { get; set; }
+
+        ///// <summary>
+        ///// Contain Room Mapping Completed info of Accommodation
+        ///// </summary>
+        //public bool IsRoomMappingCompleted { get; set; }
+
+        /// <summary>
+        /// Contain Telephone info of Accommodation
+        /// </summary>
+        public string TelephoneNumber { get; set; }
+
+        /// <summary>
+        /// Contain Contact Fax of Accommodation
+        /// </summary>
+        public string Fax { get; set; }
+
+        /// <summary>
+        /// Contain Contact WebSite of Accommodation
+        /// </summary>
+        public string URL { get; set; }
+
+        /// <summary>
+        /// Contain Contact Email of Accommodation
+        /// </summary>
+        public string EmailAddress { get; set; }
+
+      
+
+        /// <summary>
+        /// Contain Latitude of Accommodation
+        /// </summary>
+        public string Latitude { get; set; }
+
+        /// <summary>
+        /// Contain Longitude of Accommodation
+        /// </summary>
+        public string Longitude { get; set; }
+
+
+    }
 }
