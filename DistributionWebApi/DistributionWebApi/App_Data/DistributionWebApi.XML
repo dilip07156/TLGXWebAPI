@@ -1432,77 +1432,77 @@
             Information about Extension to holiday.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Collections">
+        <member name="T:DistributionWebApi.Models.HolidayCollections">
             <summary>
             Structure for Holiday.Collections
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Collections.Type">
+        <member name="P:DistributionWebApi.Models.HolidayCollections.Type">
             <summary>
             Master values may be retrived from a Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Collections.DisplayName">
+        <member name="P:DistributionWebApi.Models.HolidayCollections.DisplayName">
             <summary>
             Name of the Supplier.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Types">
+        <member name="T:DistributionWebApi.Models.HolidayTypes">
             <summary>
             Structure for Holiday.Interests,Holiday.TravellerType,Holiday.TravelFrequency
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Types.Type">
+        <member name="P:DistributionWebApi.Models.HolidayTypes.Type">
             <summary>
              Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Types.SubType">
+        <member name="P:DistributionWebApi.Models.HolidayTypes.SubType">
             <summary>
               SubTypes for Type.Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Destinations">
+        <member name="T:DistributionWebApi.Models.HolidayDestinations">
             <summary>
             Structure for Holiday.Destinations
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.TLGXCountryCode">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.TLGXCountryCode">
             <summary>
              TLGX Country Code.Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.TLGXCountryName">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.TLGXCountryName">
             <summary>
              TLGX Country Name.Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.TLGXCityCode">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.TLGXCityCode">
             <summary>
              TLGX City Code.Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.TLGXCityName">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.TLGXCityName">
             <summary>
              TLGX City Name.Values may be retrived from Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.SupplierCountryCode">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.SupplierCountryCode">
             <summary>
              CountryCode given by Supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.SupplierCountryName">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.SupplierCountryName">
             <summary>
              CountryName given by Supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.SupplierCityCode">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.SupplierCityCode">
             <summary>
              CityCode given by Supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Destinations.SupplierCityName">
+        <member name="P:DistributionWebApi.Models.HolidayDestinations.SupplierCityName">
             <summary>
              CityName given by Supplier
             </summary>
@@ -1547,557 +1547,557 @@
             if Insurance is included in holiday or not.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.UniqueSellingPoints">
+        <member name="T:DistributionWebApi.Models.HolidayUniqueSellingPoints">
             <summary>
             Structure for Holiday.UniqueSellingPoints
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UniqueSellingPoints.Id">
+        <member name="P:DistributionWebApi.Models.HolidayUniqueSellingPoints.Id">
             <summary>
              Id of unique sellinf Points
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UniqueSellingPoints.Text">
+        <member name="P:DistributionWebApi.Models.HolidayUniqueSellingPoints.Text">
             <summary>
              Description about attractions/UniqueSellingPoints.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Highlights">
+        <member name="T:DistributionWebApi.Models.HolidayHighlights">
             <summary>
             Structure for Holiday.Highlights
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Destination">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Destination">
             <summary>
             Name of the destination provided by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.City">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.City">
             <summary>
              City Name  provided by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Country">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Country">
             <summary>
              Country Name  provided by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Day">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Day">
             <summary>
             Day
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Date">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Date">
             <summary>
             Date on which this information is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Type">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Type">
             <summary>
             Type of the attraction.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Highlights.Text">
+        <member name="P:DistributionWebApi.Models.HolidayHighlights.Text">
             <summary>
             Description for the attraction.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.BrandsAndBrochures">
+        <member name="T:DistributionWebApi.Models.HolidayBrandsAndBrochures">
             <summary>
             Structure for Holiday.Brands
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.BrandsAndBrochures.Id">
+        <member name="P:DistributionWebApi.Models.HolidayBrandsAndBrochures.Id">
             <summary>
              Id. 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.BrandsAndBrochures.Name">
+        <member name="P:DistributionWebApi.Models.HolidayBrandsAndBrochures.Name">
             <summary>
              Name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.BrandsAndBrochures.Code">
+        <member name="P:DistributionWebApi.Models.HolidayBrandsAndBrochures.Code">
             <summary>
              Code provided by supplier.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Media">
+        <member name="T:DistributionWebApi.Models.HolidayMedia">
             <summary>
             Structure for Holiday.Media
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.URL">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.URL">
             <summary>
             Url to access the media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.Width">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.Width">
             <summary>
             width of the media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.Height">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.Height">
             <summary>
             Height of the media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.Name">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.Name">
             <summary>
             name of the media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.DisplayName">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.DisplayName">
             <summary>
             Display name for media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.FileCategory">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.FileCategory">
             <summary>
             category of  media .
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.FileType">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.FileType">
             <summary>
             Type of  media.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.FilePath">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.FilePath">
             <summary>
             path to access media.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.ValidFromDate">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.ValidFromDate">
             <summary>
             from which date media information is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.ValidToDate">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.ValidToDate">
             <summary>
             upto which date media information is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.DisplayOrder">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.DisplayOrder">
             <summary>
             Display order for media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Media.Description">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.Description">
             <summary>
             detail description about media.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.TermsConditions">
+        <member name="T:DistributionWebApi.Models.HolidayTermsConditions">
             <summary>
             Structure for Holiday.TermsConditions,Holiday.BookingPolicy,Holiday.TourNotes
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TermsConditions.Type">
+        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.Type">
             <summary>
             Type of information
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TermsConditions.Name">
+        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.Name">
             <summary>
             name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TermsConditions.Text">
+        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.Text">
             <summary>
             Description
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.TermsConditions.Order">
+        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.Order">
             <summary>
             order number.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.InclusionExclusion">
+        <member name="T:DistributionWebApi.Models.HolidayInclusionExclusion">
             <summary>
             Structure for Holiday.Inclusions,Holiday.Exclusions
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.InclusionExclusion.Type">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Type">
             <summary>
             Inclusion/exclusion type.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.InclusionExclusion.Name">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Name">
             <summary>
             Name for inclusion/exclusion.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.InclusionExclusion.Text">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Text">
             <summary>
             description of inclusion/exclusion.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.InclusionExclusion.Order">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Order">
             <summary>
             order of inclusion/exclusion.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.InclusionExclusion.IsMandatoryPaid">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.IsMandatoryPaid">
             <summary>
             IsMandatoryPaid for the inclusion/exclusion.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.StartingPrice">
+        <member name="T:DistributionWebApi.Models.HolidayStartingPrice">
             <summary>
             Structure for Holiday.StartingPrice
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.StartingPrice.Currency">
+        <member name="P:DistributionWebApi.Models.HolidayStartingPrice.Currency">
             <summary>
             Currency in which price is given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.StartingPrice.Amount">
+        <member name="P:DistributionWebApi.Models.HolidayStartingPrice.Amount">
             <summary>
             Price for Holiday.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.StartingPrice.PriceBasis">
+        <member name="P:DistributionWebApi.Models.HolidayStartingPrice.PriceBasis">
             <summary>
              Information about on which basis price is calculated.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.StartingPrice.PriceText">
+        <member name="P:DistributionWebApi.Models.HolidayStartingPrice.PriceText">
             <summary>
             Description about price.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.HubDetails">
+        <member name="T:DistributionWebApi.Models.HolidayHubDetails">
             <summary>
             Structure for Holiday.HubDetails
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HubDetails.HubId">
+        <member name="P:DistributionWebApi.Models.HolidayHubDetails.HubId">
             <summary>
             Id of the Hub.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HubDetails.HubName">
+        <member name="P:DistributionWebApi.Models.HolidayHubDetails.HubName">
             <summary>
             Name of the Hub.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.DayWiseItineraries">
+        <member name="T:DistributionWebApi.Models.HolidayDayWiseItineraries">
             <summary>
             Structure for Holiday.DayWiseItineraries
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.DayWiseItineraries.FromDate">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.FromDate">
             <summary>
             Date from which Itinerary details are valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.DayWiseItineraries.ToDate">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ToDate">
             <summary>
             Date upto  which Itinerary details are valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.DayWiseItineraries.PackageCategory">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.PackageCategory">
             <summary>
             Package category is the Holiday category(e.g 2*,4* ).
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.DayWiseItineraries.HostCategory">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.HostCategory">
             <summary>
             Host category is type of Holiday(e.g economy, delux,premium etc..).
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.DayWiseItineraries.Day">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.Day">
             <summary>
             Day wise Itinerary
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Day">
+        <member name="T:DistributionWebApi.Models.HolidayDay">
             <summary>
             Holiday.DayWiseItineraries.Day
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.DayNumber">
+        <member name="P:DistributionWebApi.Models.HolidayDay.DayNumber">
             <summary>
             Day Number for Itinerary.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.Date">
+        <member name="P:DistributionWebApi.Models.HolidayDay.Date">
             <summary>
             Date for itinerary details .
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.DayHeader">
+        <member name="P:DistributionWebApi.Models.HolidayDay.DayHeader">
             <summary>
             header info for itinearary
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.Country">
+        <member name="P:DistributionWebApi.Models.HolidayDay.Country">
             <summary>
             Country Name given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.CountryCode">
+        <member name="P:DistributionWebApi.Models.HolidayDay.CountryCode">
             <summary>
             CountryCode given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.City">
+        <member name="P:DistributionWebApi.Models.HolidayDay.City">
             <summary>
             City Name given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.CityCode">
+        <member name="P:DistributionWebApi.Models.HolidayDay.CityCode">
             <summary>
              City code given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.Type">
+        <member name="P:DistributionWebApi.Models.HolidayDay.Type">
             <summary>
             Type of the itinerary.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.OvernightStay">
+        <member name="P:DistributionWebApi.Models.HolidayDay.OvernightStay">
             <summary>
             overninght stay for the day.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.ShortDescription">
+        <member name="P:DistributionWebApi.Models.HolidayDay.ShortDescription">
             <summary>
             Short Description for itinerary on the day.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.LongDescription">
+        <member name="P:DistributionWebApi.Models.HolidayDay.LongDescription">
             <summary>
             Long Description for itinerary on the day.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.DayNote">
+        <member name="P:DistributionWebApi.Models.HolidayDay.DayNote">
             <summary>
             Note.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.Meals">
+        <member name="P:DistributionWebApi.Models.HolidayDay.Meals">
             <summary>
             information about meals
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.ItineraryItems">
+        <member name="P:DistributionWebApi.Models.HolidayDay.ItineraryItems">
             <summary>
             Information about different services(Itinerary items) on this day.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Day.Media">
+        <member name="P:DistributionWebApi.Models.HolidayDay.Media">
             <summary>
             
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Meals">
+        <member name="T:DistributionWebApi.Models.HolidayMeals">
             <summary>
             Holiday.DayWiseItineraries.Day.Meals
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Meals.MealType">
+        <member name="P:DistributionWebApi.Models.HolidayMeals.MealType">
             <summary>
             Type of the meal.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Meals.MealDescription">
+        <member name="P:DistributionWebApi.Models.HolidayMeals.MealDescription">
             <summary>
             Description about meal.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.ItineraryItems">
+        <member name="T:DistributionWebApi.Models.HolidayItineraryItems">
             <summary>
             Holiday.DayWiseItineraries.Day.ItineraryItems
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.Type">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.Type">
             <summary>
             Type of Service detail
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.Name">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.Name">
             <summary>
             Name of Service detail
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.Country">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.Country">
             <summary>
             Country name provided by supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.City">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.City">
             <summary>
             City name provided by supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.OvernightStay">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.OvernightStay">
             <summary>
             Information about overnight stay for this service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.LongDescription">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.LongDescription">
             <summary>
             Long description about service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.ShortDescription">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.ShortDescription">
             <summary>
              short description about service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.PickupPoint">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.PickupPoint">
             <summary>
             Pick up point for the Itinerary service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.DropPoint">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.DropPoint">
             <summary>
             Drop point for the Itinerary service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.PickupTime">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.PickupTime">
             <summary>
             Pick up time for the Itinerary service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.DropTime">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.DropTime">
             <summary>
             Drop time for the Itinerary service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ItineraryItems.Duration">
+        <member name="P:DistributionWebApi.Models.HolidayItineraryItems.Duration">
             <summary>
             Total duration for the completion.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Accommodation">
+        <member name="T:DistributionWebApi.Models.HolidayAccommodation">
             <summary>
             Structure for Holiday.Accommodation
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.TLGXProductCode">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXProductCode">
             <summary>
             TLGX Code for Product given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.SupplierProductCode">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.SupplierProductCode">
             <summary>
             Code provided by Supplier for Product.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.TLGXCountryName">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXCountryName">
             <summary>
              TLGX CountryName.Master values may be retrived from a Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.TLGXCountryCode">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXCountryCode">
              <summary>
             TLGX country code.
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.TLGXCityCode">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXCityCode">
             <summary>
             TLGX Code for Product given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.SupplierCityName">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.SupplierCityName">
             <summary>
             City Name provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.SupplierCityCode">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.SupplierCityCode">
             <summary>
              City Code provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.NumberOfNights">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.NumberOfNights">
             <summary>
             Number of Nights.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.PackageCategory">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.PackageCategory">
             <summary>
              Tour Package Category under which this accomodation is provided. values may be 2*,3* etc..
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.HostCategory">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.HostCategory">
             <summary>
             Tour SubCategory values may be Economy,Delux,Premium etc..
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.HotelCategory">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.HotelCategory">
             <summary>
             Category of Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.HotelName">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.HotelName">
             <summary>
              Name of the Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.StarRating">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.StarRating">
             <summary>
             star Rtaing of Hotel (e.g 3*,4*)
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.StartDate">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.StartDate">
             <summary>
              Date on which this accomodation is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.FinishDate">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.FinishDate">
             <summary>
             Date upto which this accomodation is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.DepartureId">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureId">
             <summary>
             Departure Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.DepartureStartDate">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureStartDate">
             <summary>
              Date for Departure.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.DepartureEndDate">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureEndDate">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.TripAdvisorRating">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TripAdvisorRating">
             <summary>
              Rating by Trip Advisor for the hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.HotelDescription">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.HotelDescription">
             <summary>
             Description for Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.Facilities">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.Facilities">
             <summary>
              information of Facilities at Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Accommodation.Media">
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.Media">
             <summary>
              Media for Hotel(images/Videos)
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Facility">
+        <member name="T:DistributionWebApi.Models.HolidayFacility">
             <summary>
             Structure for Holiday.Accommodation.Facility
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Facility.Type">
+        <member name="P:DistributionWebApi.Models.HolidayFacility.Type">
             <summary>
             Facility Type
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Facility.Name">
+        <member name="P:DistributionWebApi.Models.HolidayFacility.Name">
             <summary>
             Name of the Facility.
             </summary>
@@ -2257,478 +2257,478 @@
              Review for Activity.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.HolidayReview">
+        <member name="T:DistributionWebApi.Models.ReviewDetails">
             <summary>
             Structure for Holiday.Activity.Review
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.Title">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.Title">
             <summary>
             Title for review.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.Text">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.Text">
             <summary>
             Description of review.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.Name">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.Name">
             <summary>
             Name for review.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.Score">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.Score">
             <summary>
             Review score.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.ImageURL">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.ImageURL">
             <summary>
             Image URL for review.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.Date">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.Date">
             <summary>
             Date on which review is given.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayReview.ReviewProvider">
+        <member name="P:DistributionWebApi.Models.ReviewDetails.ReviewProvider">
             <summary>
             Who has given the review.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Flights">
+        <member name="T:DistributionWebApi.Models.HolidayFlights">
             <summary>
             Structure for Holiday.Flights
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.Airline">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.Airline">
             <summary>
             Name of the Airline Company.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.FlightNumber">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.FlightNumber">
             <summary>
             Flight Number.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.IncludedInTrip">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.IncludedInTrip">
             <summary>
             Flight is included in holiday or not.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.DepartureAirportCode">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.DepartureAirportCode">
             <summary>
             Airport Code from which Departure will take place.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.DepartureAirportName">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.DepartureAirportName">
             <summary>
             Airport Name from which Departure will take place.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.DepartureTerminal">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.DepartureTerminal">
             <summary>
             Name of the terminal.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.DepartureTime">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.DepartureTime">
             <summary>
             Time for Departure.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.DepartureDate">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.DepartureDate">
             <summary>
             Date of Departure.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.Duration">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.Duration">
             <summary>
             Duration.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.FlightStops">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.FlightStops">
             <summary>
             Stops for Flight.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.ArrivalAirportCode">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.ArrivalAirportCode">
             <summary>
             Airport Code .
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.ArrivalAirportName">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.ArrivalAirportName">
             <summary>
             Airport name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.ArrivalTerminal">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.ArrivalTerminal">
             <summary>
             Terminal information.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.ArrivalTime">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.ArrivalTime">
             <summary>
             Time of Flight arrival.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.ArrivalDate">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.ArrivalDate">
             <summary>
             date for Flight Arrival.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.TicketClass">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.TicketClass">
             <summary>
             Class of Flight ticket(e.g Economy,Buisness)
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.BaggageAllowance">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.BaggageAllowance">
             <summary>
             Information about Baggage Allowance.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.Meals">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.Meals">
             <summary>
             Information about meals provided.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.RefundPolicy">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.RefundPolicy">
             <summary>
             Information about Refunds.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.BookingPolicyText">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.BookingPolicyText">
             <summary>
             Flight Booking Policies
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.Inclusion">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.Inclusion">
             <summary>
             Inclusion details.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Flights.Exclusion">
+        <member name="P:DistributionWebApi.Models.HolidayFlights.Exclusion">
             <summary>
             Exclusion details.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.Departure" -->
-        <member name="P:DistributionWebApi.Models.Departure.DepartureId">
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.HolidayDeparture" -->
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.DepartureId">
              <summary>
             
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Departure.DepartureName">
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.DepartureName">
              <summary>
             
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Departure.StartDate">
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.StartDate">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Departure.EndDate">
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.EndDate">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Departure.StartCity">
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.StartCity">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Departure.EndCity">
+        <member name="P:DistributionWebApi.Models.HolidayDeparture.EndCity">
             <summary>
             
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.PrePost">
+        <member name="T:DistributionWebApi.Models.HolidayPrePost">
             <summary>
             Structure for Holiday.Pre, Holiday.Post
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.Type">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.Type">
             <summary>
             Type of information.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.Country">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.Country">
             <summary>
             CountryN ame provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.City">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.City">
             <summary>
             City Name provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.TLGXProductCode">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.TLGXProductCode">
             <summary>
             TLGX HotelCode.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.SupplierProductCode">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.SupplierProductCode">
             <summary>
              Supplier HotelCode.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.HotelName">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.HotelName">
             <summary>
             Name of the Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.StarRating">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.StarRating">
             <summary>
             Hotel Star  Rating.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.HotelDescription">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.HotelDescription">
             <summary>
              Hotel Description
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.Currency">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.Currency">
             <summary>
             Currency in which price is given.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.Amount">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.Amount">
             <summary>
             Price.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.PriceFor">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.PriceFor">
             <summary>
             Description about price.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.NumberOfNights">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.NumberOfNights">
             <summary>
             Number Of Nights in the Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.DayNo">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.DayNo">
             <summary>
             Number Of Days in the Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.TripAdvisorRating">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.TripAdvisorRating">
             <summary>
             Rating by Trip Advisor.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.PrePost.PaxDescription">
+        <member name="P:DistributionWebApi.Models.HolidayPrePost.PaxDescription">
             <summary>
             Pax description for hotel.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Optionals">
+        <member name="T:DistributionWebApi.Models.HolidayOptionals">
             <summary>
             Structure for Holiday.Pre, Holiday.Post
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Country">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Country">
             <summary>
             Country name given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.City">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.City">
             <summary>
             City Name provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.TLGXCountryName">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.TLGXCountryName">
             <summary>
             TLGX Country Name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.TLGXCountryCode">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.TLGXCountryCode">
             <summary>
             TLGX Country Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.TLGXCityName">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.TLGXCityName">
             <summary>
              TLGX City Name
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.TLGXCityCode">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.TLGXCityCode">
             <summary>
             TLGX City Code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.AvailableonDays">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.AvailableonDays">
              <summary>
             On which day Optional  Activity is available .
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Date">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Date">
             <summary>
              Date for  optional Activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.StartTime">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.StartTime">
             <summary>
             Starting Time.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.EndTime">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.EndTime">
             <summary>
             End Time.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Session">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Session">
             <summary>
             
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Duration">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Duration">
              <summary>
             Total  Duration of this optional activity.
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.ActivityName">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.ActivityName">
             <summary>
             Name of Activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.ActivityDescription">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.ActivityDescription">
             <summary>
             Description for activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.ActivityImage">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.ActivityImage">
             <summary>
             Image for activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.AverageReviewRating">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.AverageReviewRating">
             <summary>
             Review ratings for activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Currency">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Currency">
             <summary>
             In which Currency price is given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Price">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Price">
             <summary>
             price for this optional activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.PaxDescription">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.PaxDescription">
             <summary>
             Description about no. of peoples.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.ItienraryDay">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.ItienraryDay">
             <summary>
             On which day this Optional Activity is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Inclusion">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Inclusion">
             <summary>
             What is Included in Activity.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Optionals.Exclusion">
+        <member name="P:DistributionWebApi.Models.HolidayOptionals.Exclusion">
             <summary>
             What is excluded from activity
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Extension">
+        <member name="T:DistributionWebApi.Models.HolidayExtension">
             <summary>
             Structure for Holiday.Extension
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Country">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Country">
             <summary>
             Country name given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.City">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.City">
             <summary>
             City Name provided by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Name">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Name">
             <summary>
             Name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Days">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Days">
             <summary>
             No. of days extended.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Nights">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Nights">
             <summary>
              No. of nights extended.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Description">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Description">
             <summary>
             Detail description for extension.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Inclusions">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Inclusions">
              <summary>
             What is included.
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Price">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Price">
             <summary>
             price for this.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.Currency">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.Currency">
             <summary>
             in which currency price is given by Supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.PriceBasis">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.PriceBasis">
             <summary>
             On what basis price is valid.( Detail Information about price.)
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Extension.HolidayReferenceNumber">
+        <member name="P:DistributionWebApi.Models.HolidayExtension.HolidayReferenceNumber">
             <summary>
             Holiday Reference Number
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.Review">
+        <member name="T:DistributionWebApi.Models.HolidayReview">
             <summary>
             Structure for Holiday.Extension
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Review.ReviewSummary">
+        <member name="P:DistributionWebApi.Models.HolidayReview.ReviewSummary">
             <summary>
             Summary of Reviews.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Review.ReviewDetails">
+        <member name="P:DistributionWebApi.Models.HolidayReview.ReviewDetails">
             <summary>
             Details of Reviews
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.ReviewSummary">
+        <member name="T:DistributionWebApi.Models.HolidayReviewSummary">
             <summary>
             Structure for Holiday.ReviewSummary
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ReviewSummary.Source">
+        <member name="P:DistributionWebApi.Models.HolidayReviewSummary.Source">
             <summary>
             Source of Reviews.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ReviewSummary.Type">
+        <member name="P:DistributionWebApi.Models.HolidayReviewSummary.Type">
             <summary>
             Type of Reviews.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ReviewSummary.score">
+        <member name="P:DistributionWebApi.Models.HolidayReviewSummary.score">
              <summary>
             Review Score.
              </summary>
