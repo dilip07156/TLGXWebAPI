@@ -117,6 +117,7 @@ namespace DistributionWebApi.Controllers
                 //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
                 //return response;
 
+                RQ = RQ.Where(w => w != null).ToList();
 
                 _database = MongoDBHandler.mDatabase();
 
@@ -265,8 +266,10 @@ namespace DistributionWebApi.Controllers
                 IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
                 //IMongoCollection<BsonDocument> collectionActivityMapping = _database.GetCollection<BsonDocument>("ActivityMappingLite");
 
-                var SupplierCodes = RQ.Select(x => x.SupplierCode.ToUpper()).Distinct().ToArray();
-                var SupplierProductCodes = RQ.Select(x => x.SupplierProductCode.ToUpper()).Distinct().ToArray();
+                RQ = RQ.Where(w => w != null).ToList();
+
+                var SupplierCodes = RQ.Where(w => w.SupplierCode != null).Select(x => x.SupplierCode.ToUpper()).Distinct().ToArray();
+                var SupplierProductCodes = RQ.Where(w => w.SupplierProductCode != null).Select(x => x.SupplierProductCode.ToUpper()).Distinct().ToArray();
 
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
