@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using DistributionWebApi.Models;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -103,15 +104,15 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Collection is a name of Supplier providing holiday.
         /// </summary>
-        public Collections Collections { get; set; }
+        public HolidayCollections Collections { get; set; }
         /// <summary>
         /// Biforgation of Holiday by types of traveller such as Couple ,Men,Women etc..Values may be retrived from Master Service.   
         /// </summary>
-        public List<Types> TravellerType { get; set; }
+        public List<HolidayTypes> TravellerType { get; set; }
         /// <summary>
         /// Biforgation of Holiday by interests such as Beach ,Backpack,Hills etc..Values may be retrived from Master Service.   
         /// </summary>
-        public List<Types> Interests { get; set; }
+        public List<HolidayTypes> Interests { get; set; }
         /// <summary>
         /// Biforgation of Holiday by Frequency of travel  such as First Time ,Been there before etc..Values may be retrived from Master Service. 
         /// </summary>
@@ -143,7 +144,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Starting price of the holiday
         /// </summary>
-        public List<StartingPrice> StartingPrice { get; set; }
+        public List<HolidayStartingPrice> StartingPrice { get; set; }
         /// <summary>
         /// Comfort level of the holiday.
         /// </summary>
@@ -155,7 +156,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Different destinations included in holiday.
         /// </summary>
-        public List<Destinations> Destinations { get; set; }
+        public List<HolidayDestinations> Destinations { get; set; }
         /// <summary>
         /// what is included in the holiday. values are'Y' /'N'.
         /// </summary>
@@ -163,55 +164,55 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Main attractions for holiday.
         /// </summary>
-        public List<UniqueSellingPoints> UniqueSellingPoints { get; set; }
+        public List<HolidayUniqueSellingPoints> UniqueSellingPoints { get; set; }
         /// <summary>
         /// Information about Highlights of the holiday.
         /// </summary>
-        public List<Highlights> Highlights { get; set; }
+        public List<HolidayHighlights> Highlights { get; set; }
         /// <summary>
         /// Brand information of holiday.
         /// </summary>
-        public BrandsAndBrochures Brands { get; set; }
+        public HolidayBrandsAndBrochures Brands { get; set; }
         /// <summary>
         /// Documment of details of holiday
         /// </summary>
-        public List<BrandsAndBrochures> Brochures { get; set; }
+        public List<HolidayBrandsAndBrochures> Brochures { get; set; }
         /// <summary>
         /// Information about images,videos for holidays
         /// </summary>
-        public List<Media> Media { get; set; }
+        public List<HolidayMedia> Media { get; set; }
         /// <summary>
         /// What is included in holiday.
         /// </summary>
-        public List<InclusionExclusion> Inclusions { get; set; }
+        public List<HolidayInclusionExclusion> Inclusions { get; set; }
         /// <summary>
         /// What is excluded from package.
         /// </summary>
-        public List<InclusionExclusion> Exclusions { get; set; }
+        public List<HolidayInclusionExclusion> Exclusions { get; set; }
         /// <summary>
         /// Terms and conditions for Holiday.
         /// </summary>
-        public List<TermsConditions> TermsConditions { get; set; }
+        public List<HolidayTermsConditions> TermsConditions { get; set; }
         /// <summary>
         /// policies about booking of holiday
         /// </summary>
-        public List<TermsConditions> BookingPolicy { get; set; }
+        public List<HolidayTermsConditions> BookingPolicy { get; set; }
         /// <summary>
         /// Key notes about holiday.
         /// </summary>
-        public List<TermsConditions> TourNotes { get; set; }
+        public List<HolidayTermsConditions> TourNotes { get; set; }
         /// <summary>
         /// Information about Starting cities for holiday
         /// </summary>
-        public List<HubDetails> HubDetails { get; set; }
+        public List<HolidayHubDetails> HubDetails { get; set; }
         /// <summary>
         /// Day wise itinerary information.
         /// </summary>
-        public List<DayWiseItineraries> DayWiseItineraries { get; set; }
+        public List<HolidayDayWiseItineraries> DayWiseItineraries { get; set; }
         /// <summary>
         /// Details about Accomodations provided in Holiday.
         /// </summary>
-        public List<Accommodation> Accommodation { get; set; }
+        public List<HolidayAccommodation> Accommodation { get; set; }
         /// <summary>
         /// Details about Sightseeings/Activities included in Holiday.
         /// </summary>
@@ -219,31 +220,31 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Flight Details for Holiday.
         /// </summary>
-        public List<Flights> Flights { get; set; }
+        public List<HolidayFlights> Flights { get; set; }
         /// <summary>
         /// Departure Details for Holiday.
         /// </summary>
-        public List<Departure> Departure { get; set; }
+        public List<HolidayDeparture> Departure { get; set; }
         /// <summary>
         /// Pre Tour Details.
         /// </summary>
-        public List<PrePost> Pre { get; set; }
+        public List<HolidayPrePost> Pre { get; set; }
         /// <summary>
         /// Post Tour Details.
         /// </summary>
-        public List<PrePost> Post { get; set; }
+        public List<HolidayPrePost> Post { get; set; }
         /// <summary>
         /// Post Tour Details.
         /// </summary>
-        public List<Optionals> Optionals { get; set; }
+        public List<HolidayOptionals> Optionals { get; set; }
         /// <summary>
         /// Informatio about Extension to holiday.
         /// </summary>
-        public List<Extension> Extension { get; set; }
+        public List<HolidayExtension> Extension { get; set; }
         /// <summary>
         /// Information about Extension to holiday.
         /// </summary>
-        public List<Review> Review { get; set; }
+        public List<HolidayReview> Review { get; set; }
         ///// <summary>
         ///// Detailed information about Price  for holiday.
         ///// </summary>

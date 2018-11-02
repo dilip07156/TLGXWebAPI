@@ -9,7 +9,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Collections
     /// </summary>
-    public class Collections
+    public class HolidayCollections
     {
         /// <summary>
         /// Master values may be retrived from a Master Service.
@@ -26,7 +26,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Interests,Holiday.TravellerType,Holiday.TravelFrequency
     /// </summary>
-    public class Types
+    public class HolidayTypes
     {
         /// <summary>
         ///  Values may be retrived from Master Service.
@@ -43,7 +43,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Destinations
     /// </summary>
-    public class Destinations
+    public class HolidayDestinations
     {
         /// <summary>
         ///  TLGX Country Code.Values may be retrived from Master Service.
@@ -121,7 +121,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.UniqueSellingPoints
     /// </summary>
-    public class UniqueSellingPoints
+    public class HolidayUniqueSellingPoints
     {
         /// <summary>
         ///  Id of unique sellinf Points
@@ -138,7 +138,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Highlights
     /// </summary>
-    public class Highlights
+    public class HolidayHighlights
     {
         /// <summary>
         /// Name of the destination provided by supplier.
@@ -176,7 +176,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Brands
     /// </summary>
-    public class BrandsAndBrochures
+    public class HolidayBrandsAndBrochures
     {
         /// <summary>
         ///  Id. 
@@ -197,7 +197,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Media
     /// </summary>
-    public class Media
+    public class HolidayMedia
     {
         /// <summary>
         /// Url to access the media file.
@@ -254,7 +254,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.TermsConditions,Holiday.BookingPolicy,Holiday.TourNotes
     /// </summary>
-    public class TermsConditions
+    public class HolidayTermsConditions
     {
         /// <summary>
         /// Type of information
@@ -280,7 +280,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Inclusions,Holiday.Exclusions
     /// </summary>
-    public class InclusionExclusion
+    public class HolidayInclusionExclusion
     {
         /// <summary>
         /// Inclusion/exclusion type.
@@ -310,7 +310,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.StartingPrice
     /// </summary>
-    public class StartingPrice
+    public class HolidayStartingPrice
     {
         /// <summary>
         /// Currency in which price is given by supplier.
@@ -336,7 +336,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.HubDetails
     /// </summary>
-    public class HubDetails
+    public class HolidayHubDetails
     {
         /// <summary>
         /// Id of the Hub.
@@ -354,7 +354,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.DayWiseItineraries
     /// </summary>
-    public class DayWiseItineraries
+    public class HolidayDayWiseItineraries
     {
         /// <summary>
         /// Date from which Itinerary details are valid.
@@ -375,7 +375,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Day wise Itinerary
         /// </summary>
-        public List<Day> Day { get; set; }
+        public List<HolidayDay> Day { get; set; }
 
 
     }
@@ -384,7 +384,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Holiday.DayWiseItineraries.Day
     /// </summary>
-    public class Day
+    public class HolidayDay
     {
         /// <summary>
         /// Day Number for Itinerary.
@@ -437,22 +437,22 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// information about meals
         /// </summary>
-        public List<Meals> Meals { get; set; }
+        public List<HolidayMeals> Meals { get; set; }
         /// <summary>
         /// Information about different services(Itinerary items) on this day.
         /// </summary>
-        public List<ItineraryItems> ItineraryItems { get; set; }
+        public List<HolidayItineraryItems> ItineraryItems { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public List<Media> Media { get; set; }
+        public List<HolidayMedia> Media { get; set; }
     }
 
     #region Holiday.DayWiseItineraries.Day.Meals
     /// <summary>
     /// Holiday.DayWiseItineraries.Day.Meals
     /// </summary>
-    public class Meals
+    public class HolidayMeals
     {
         /// <summary>
         /// Type of the meal.
@@ -469,7 +469,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Holiday.DayWiseItineraries.Day.ItineraryItems
     /// </summary>
-    public class ItineraryItems
+    public class HolidayItineraryItems
     {
         /// <summary>
         /// Type of Service detail
@@ -530,7 +530,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Accommodation
     /// </summary>
-    public class Accommodation
+    public class HolidayAccommodation
     {
         /// <summary>
         /// TLGX Code for Product given by supplier.
@@ -615,11 +615,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         ///  information of Facilities at Hotel.
         /// </summary>
-        public List<Facility> Facilities { get; set; }
+        public List<HolidayFacility> Facilities { get; set; }
         /// <summary>
         ///  Media for Hotel(images/Videos)
         /// </summary>
-        public List<Media> Media { get; set; }
+        public List<HolidayMedia> Media { get; set; }
     }
     #endregion Holiday.Accommodation
 
@@ -627,7 +627,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Accommodation.Facility
     /// </summary>
-    public class Facility
+    public class HolidayFacility
     {
         /// <summary>
         /// Facility Type
@@ -729,11 +729,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         ///  information of Facilities at Hotel.
         /// </summary>
-        public List<Facility> DepartureEndDate { get; set; }
+        public List<HolidayFacility> DepartureEndDate { get; set; }
         /// <summary>
         ///  Package category for Holiday
         /// </summary>
-        public List<Media> PackageCategory { get; set; }
+        public List<HolidayMedia> PackageCategory { get; set; }
         /// <summary>
         /// Host Category of Holiday. Values may be (Economy,Delux,Premium etc..)
         /// </summary>
@@ -749,19 +749,19 @@ namespace DistributionWebApi.Models
         /// <summary>
         ///  Media details.
         /// </summary>
-        public List<Media> Media { get; set; }
+        public List<HolidayMedia> Media { get; set; }
         /// <summary>
         ///  what is included in Holiday.
         /// </summary>
-        public List<InclusionExclusion> Inclusion { get; set; }
+        public List<HolidayInclusionExclusion> Inclusion { get; set; }
         /// <summary>
         ///  what is excluded in Holiday.
         /// </summary>
-        public List<InclusionExclusion> Exclusion { get; set; }
+        public List<HolidayInclusionExclusion> Exclusion { get; set; }
         /// <summary>
         ///  Booking policies
         /// </summary>
-        public List<TermsConditions> BookingPolicies { get; set; }
+        public List<HolidayTermsConditions> BookingPolicies { get; set; }
         /// <summary>
         ///  Review for Activity.
         /// </summary>
@@ -773,7 +773,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Activity.Review
     /// </summary>
-    public class HolidayReview
+    public class ReviewDetails
     {
         /// <summary>
         /// Title for review.
@@ -811,7 +811,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Flights
     /// </summary>
-    public class Flights
+    public class HolidayFlights
     {
         /// <summary>
         /// Name of the Airline Company.
@@ -896,11 +896,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Inclusion details.
         /// </summary>
-        public List<InclusionExclusion> Inclusion { get; set; }
+        public List<HolidayInclusionExclusion> Inclusion { get; set; }
         /// <summary>
         /// Exclusion details.
         /// </summary>
-        public List<InclusionExclusion> Exclusion { get; set; }
+        public List<HolidayInclusionExclusion> Exclusion { get; set; }
 
     }
     #endregion Holiday.Flights
@@ -908,7 +908,7 @@ namespace DistributionWebApi.Models
     #region Holiday.Departure
     /// <summary>
     /// Structure for Holiday.Departure
-    public class Departure
+    public class HolidayDeparture
     {
         /// <summary>
         ///
@@ -942,7 +942,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Pre, Holiday.Post
     /// </summary>
-    public class PrePost
+    public class HolidayPrePost
     {
         /// <summary>
         /// Type of information.
@@ -1012,7 +1012,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Pre, Holiday.Post
     /// </summary>
-    public class Optionals
+    public class HolidayOptionals
     {
         /// <summary>
         /// Country name given by supplier.
@@ -1097,11 +1097,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// What is Included in Activity.
         /// </summary>
-        public List<InclusionExclusion> Inclusion { get; set; }
+        public List<HolidayInclusionExclusion> Inclusion { get; set; }
         /// <summary>
         /// What is excluded from activity
         /// </summary>
-        public List<InclusionExclusion> Exclusion { get; set; }
+        public List<HolidayInclusionExclusion> Exclusion { get; set; }
 
     }
     #endregion Holiday.optionals
@@ -1110,7 +1110,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Extension
     /// </summary>
-    public class Extension
+    public class HolidayExtension
     {
         /// <summary>
         /// Country name given by supplier.
@@ -1163,16 +1163,16 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.Extension
     /// </summary>
-    public class Review
+    public class HolidayReview
     {
         /// <summary>
         /// Summary of Reviews.
         /// </summary>
-        public ReviewSummary ReviewSummary { get; set; }
+        public HolidayReviewSummary ReviewSummary { get; set; }
         /// <summary>
         /// Details of Reviews
         /// </summary>
-        public HolidayReview ReviewDetails { get; set; }
+        public ReviewDetails ReviewDetails { get; set; }
 
     }
     #endregion Holiday.Review
@@ -1181,7 +1181,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Structure for Holiday.ReviewSummary
     /// </summary>
-    public class ReviewSummary
+    public class HolidayReviewSummary
     {
         /// <summary>
         /// Source of Reviews.
