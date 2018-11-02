@@ -95,7 +95,7 @@ namespace DistributionWebApi.Controllers
 
                 List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                if (TotalRecords != 0)
+                if (TotalRecords != 0 && param.PageSize != 0)
                 {
                     SortDefinition<BsonDocument> sortByPrices;
                     sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
@@ -268,7 +268,7 @@ namespace DistributionWebApi.Controllers
 
                 List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                if (TotalRecords != 0)
+                if (TotalRecords != 0 && param.PageSize != 0)
                 {
                     SortDefinition<BsonDocument> sortByPrices;
                     sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
@@ -416,7 +416,7 @@ namespace DistributionWebApi.Controllers
 
                 List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                if (TotalRecords != 0)
+                if (TotalRecords != 0 && param.PageSize != 0)
                 {
                     SortDefinition<BsonDocument> sortByPrices;
                     sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
