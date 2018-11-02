@@ -28,6 +28,7 @@ namespace DistributionWebApi
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 
             GlobalConfiguration.Configuration.Formatters.Add(new CsvMediaTypeFormatter(new QueryStringMapping("format", "csv", "text/csv")));
+            GlobalConfiguration.Configuration.Formatters.Add(new TextPipeMediaTypeFormatter(new QueryStringMapping("format", "pipe", "text/csv")));
             GlobalConfiguration.Configuration.Formatters.Add(new JsonpFormatter());
             GlobalConfiguration.Configuration.Formatters.Add(new JsonDownLoadFormatter(new QueryStringMapping("format", "json", "application/json")));
             GlobalConfiguration.Configuration.Formatters.Add(new XmlDownLoadFormatter(new QueryStringMapping("format", "xml", "application/xml")));

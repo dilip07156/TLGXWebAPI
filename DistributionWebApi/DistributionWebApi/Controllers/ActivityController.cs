@@ -91,24 +91,35 @@ namespace DistributionWebApi.Controllers
                     }
                 }
 
-                SortDefinition<BsonDocument> sortByPrices;
-                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price"); //Filter.Eq("Prices.PriceFor", "Product").
-
                 var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
+                if (TotalRecords != 0 && param.PageSize != 0)
+                {
+                    SortDefinition<BsonDocument> sortByPrices;
+                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
+                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                int remainder = (int)TotalRecords % param.PageSize;
-                int quotient = (int)TotalRecords / param.PageSize;
-                if (remainder > 0)
-                    remainder = 1;
+                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
-                resultList.TotalPage = quotient + remainder;
+                    resultList.PageSize = param.PageSize;
+                    resultList.CurrentPage = param.PageNo;
+
+                    int remainder = (int)TotalRecords % param.PageSize;
+                    int quotient = (int)TotalRecords / param.PageSize;
+                    if (remainder > 0)
+                    {
+                        remainder = 1;
+                    }
+                    resultList.TotalPage = quotient + remainder;
+                }
+                else
+                {
+                    resultList.TotalPage = 0;
+                }
+
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
@@ -208,7 +219,7 @@ namespace DistributionWebApi.Controllers
             try
             {
                 ActivitySearchResult resultList = new ActivitySearchResult();
-                
+
                 if (param.PageSize > 100)
                 {
                     resultList.Message = "Page Size shouldn't be greater than 100.";
@@ -255,22 +266,33 @@ namespace DistributionWebApi.Controllers
 
                 var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
 
-                SortDefinition<BsonDocument> sortByPrices;
-                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
+                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
+                if (TotalRecords != 0 && param.PageSize != 0)
+                {
+                    SortDefinition<BsonDocument> sortByPrices;
+                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
+                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
-                int remainder = (int)TotalRecords % param.PageSize;
-                int quotient = (int)TotalRecords / param.PageSize;
-                if (remainder > 0)
-                    remainder = 1;
+                    resultList.PageSize = param.PageSize;
+                    resultList.CurrentPage = param.PageNo;
 
-                resultList.TotalPage = quotient + remainder;
+                    int remainder = (int)TotalRecords % param.PageSize;
+                    int quotient = (int)TotalRecords / param.PageSize;
+                    if (remainder > 0)
+                    {
+                        remainder = 1;
+                    }
+                    resultList.TotalPage = quotient + remainder;
+                }
+                else
+                {
+                    resultList.TotalPage = 0;
+                }
+
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
@@ -340,7 +362,6 @@ namespace DistributionWebApi.Controllers
                             Prices = s.Prices
                         }).ToList();
                     }
-
                 }
 
                 return Request.CreateResponse(HttpStatusCode.OK, resultList);
@@ -391,23 +412,35 @@ namespace DistributionWebApi.Controllers
                     }
                 }
 
-                SortDefinition<BsonDocument> sortByPrices;
-                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
-
                 var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
-                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                List<ActivityDefinition> searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                resultList.PageSize = param.PageSize;
-                resultList.CurrentPage = param.PageNo;
+                if (TotalRecords != 0 && param.PageSize != 0)
+                {
+                    SortDefinition<BsonDocument> sortByPrices;
+                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                int remainder = (int)TotalRecords % param.PageSize;
-                int quotient = (int)TotalRecords / param.PageSize;
-                if (remainder > 0)
-                    remainder = 1;
+                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                resultList.TotalPage = quotient + remainder;
+                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
+
+                    resultList.PageSize = param.PageSize;
+                    resultList.CurrentPage = param.PageNo;
+
+                    int remainder = (int)TotalRecords % param.PageSize;
+                    int quotient = (int)TotalRecords / param.PageSize;
+                    if (remainder > 0)
+                    {
+                        remainder = 1;
+                    }
+                    resultList.TotalPage = quotient + remainder;
+                }
+                else
+                {
+                    resultList.TotalPage = 0;
+                }
+
                 resultList.CurrentPage = param.PageNo;
                 resultList.TotalNumberOfActivities = TotalRecords;
                 resultList.Activities = (from a in searchedData
