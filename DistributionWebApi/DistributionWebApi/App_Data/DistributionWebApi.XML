@@ -7404,6 +7404,41 @@
             TLGX MDM Unique identifier for hotel property
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxAccoName">
+            <summary>
+            TLGX MDM hotel property name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemCountryCode">
+            <summary>
+            System Country Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemCountryName">
+            <summary>
+            System Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemCityCode">
+            <summary>
+            System City Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemCityName">
+            <summary>
+            System City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemStateCode">
+            <summary>
+            System State Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemStateName">
+            <summary>
+            System State Name
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.ContainsRoomMappings">
             <summary>
             This field will indicate whether the hotel have any room mapping attached to it or not
@@ -7447,6 +7482,16 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.TlgxAccoRoomId">
             <summary>
             TLGX Accommodation Room Info Id.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.TlgxAccoRoomName">
+            <summary>
+            TLGX Accommodation Room Type Name.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.TlgxAccoRoomCategory">
+            <summary>
+            TLGX Accommodation Room Type Category.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.RoomMapId">
