@@ -239,6 +239,41 @@ namespace DistributionWebApi.Models
         public string TlgxAccoId { get; set; }
 
         /// <summary>
+        /// TLGX MDM hotel property name
+        /// </summary>
+        public string TlgxAccoName { get; set; }
+
+        /// <summary>
+        /// System Country Code
+        /// </summary>
+        public string SystemCountryCode { get; set; }
+
+        /// <summary>
+        /// System Country Name
+        /// </summary>
+        public string SystemCountryName { get; set; }
+
+        /// <summary>
+        /// System City Code
+        /// </summary>
+        public string SystemCityCode { get; set; }
+
+        /// <summary>
+        /// System City Name
+        /// </summary>
+        public string SystemCityName { get; set; }
+
+        /// <summary>
+        /// System State Code
+        /// </summary>
+        public string SystemStateCode { get; set; }
+
+        /// <summary>
+        /// System State Name
+        /// </summary>
+        public string SystemStateName { get; set; }
+
+        /// <summary>
         /// This field will indicate whether the hotel have any room mapping attached to it or not
         /// </summary>
         public bool ContainsRoomMappings { get; set; }
@@ -290,10 +325,21 @@ namespace DistributionWebApi.Models
         /// TLGX Accommodation Room Info Id.
         /// </summary>
         public string TlgxAccoRoomId { get; set; }
+
+        /// <summary>
+        /// TLGX Accommodation Room Type Name.
+        /// </summary>
+        public string TlgxAccoRoomName { get; set; }
+
+        /// <summary>
+        /// TLGX Accommodation Room Type Category.
+        /// </summary>
+        public string TlgxAccoRoomCategory { get; set; }
+
         /// <summary>
         /// Nakshatra room type mapping id.
         /// </summary>
-        public int RoomMapId { get; set; }
+        public Int64 RoomMapId { get; set; }
     }
 
 }

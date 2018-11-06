@@ -40,37 +40,36 @@ namespace DistributionWebApi.Controllers
             {
                 _database = MongoDBHandler.mDatabase();
                 var collection = _database.GetCollection<AccommodationMaster>("AccommodationMaster");
-                var result = await collection.Find(c => true && c.TLGXAccoId != null)
-                    .Project(u => new AccommodationMasterRS {
+                var result = await collection.Find(c => c.TLGXAccoId != null)
+                    .Project(u => new AccommodationMasterRS
+                    {
                         HotelID = u.TLGXAccoId,
-                    HotelName = u.HotelName,
-                    HotelType = u.ProductCategorySubType,
-                    HotelStarRating = u.HotelStarRating,
-                    StreetName = u.StreetName,
-                    StreetNumber = u.StreetNumber,
-                    Street3 = u.Street3,
-                    Street4=u.Street4,
-                    Street5 = u.Street5,
-                    PostalCode = u.PostalCode,
-                    Town = u.Town,
-                    Location = u.Location,
-                    Area = u.Area,
-                    CityCode = u.CityCode,
-                    CityName = u.CityName,
-                    StateCode = u.StateCode,
-                    StateName = u.StateName,
-                    CountryCode = u.CountryCode,
-                    CountryName = u.CountryName,
-                    FullAddress = u.FullAddress,
-                    TelephoneNumber = u.Telephone,
-                    Fax = u.Fax,
-                    URL = u.WebSiteURL,
-                    EmailAddress = u.Email,
-                    Latitude = u.Latitude,
-                    Longitude = u.Longitude
-
-
-                }).ToListAsync();
+                        HotelName = u.HotelName,
+                        HotelType = u.ProductCategorySubType,
+                        HotelStarRating = u.HotelStarRating,
+                        StreetName = u.StreetName,
+                        StreetNumber = u.StreetNumber,
+                        Street3 = u.Street3,
+                        Street4 = u.Street4,
+                        Street5 = u.Street5,
+                        PostalCode = u.PostalCode,
+                        Town = u.Town,
+                        Location = u.Location,
+                        Area = u.Area,
+                        CityCode = u.CityCode,
+                        CityName = u.CityName,
+                        StateCode = u.StateCode,
+                        StateName = u.StateName,
+                        CountryCode = u.CountryCode,
+                        CountryName = u.CountryName,
+                        FullAddress = u.FullAddress,
+                        TelephoneNumber = u.Telephone,
+                        Fax = u.Fax,
+                        URL = u.WebSiteURL,
+                        EmailAddress = u.Email,
+                        Latitude = u.Latitude,
+                        Longitude = u.Longitude
+                    }).ToListAsync();
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
                 return response;
             }
