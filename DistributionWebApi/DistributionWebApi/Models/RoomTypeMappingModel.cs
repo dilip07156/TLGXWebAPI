@@ -634,14 +634,16 @@ namespace DistributionWebApi.Models
         
         public string RoomDescription { get; set; }
         
-        public int SystemRoomTypeMapId { get; set; }
+        public Int64 SystemRoomTypeMapId { get; set; }
         
         public int? SystemProductCode { get; set; }
         
         public string SystemRoomTypeCode { get; set; }
         
         public string SystemRoomTypeName { get; set; }
-        
+
+        public string SystemRoomCategory { get; set; }
+
         public string SystemNormalizedRoomType { get; set; }
         
         public string SystemStrippedRoomType { get; set; }
