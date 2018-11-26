@@ -19,6 +19,8 @@ namespace DistributionWebApi.Models
         public string HotelName { get; set; }
         public string ProductCategory { get; set; }
         public string ProductCategorySubType { get; set; }
+        public string Brand { get; set; }
+        public string Chain { get; set; }
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
         public string CityCode { get; set; }
