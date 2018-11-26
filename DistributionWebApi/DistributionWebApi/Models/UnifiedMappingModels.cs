@@ -244,6 +244,21 @@ namespace DistributionWebApi.Models
         public string TlgxAccoName { get; set; }
 
         /// <summary>
+        /// TLGX MDM hotel Product Sub Type
+        /// </summary>
+        public string ProductSubType { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Brand
+        /// </summary>
+        public string Brand { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Chain
+        /// </summary>
+        public string Chain { get; set; }
+
+        /// <summary>
         /// System Country Code
         /// </summary>
         public string SystemCountryCode { get; set; }
