@@ -105,6 +105,9 @@ namespace DistributionWebApi.Controllers
                         projectAccoMaster = projectAccoMaster.Include("StateCode");
                         projectAccoMaster = projectAccoMaster.Include("StateName");
                         projectAccoMaster = projectAccoMaster.Include("HotelName");
+                        projectAccoMaster = projectAccoMaster.Include("ProductCategorySubType");
+                        projectAccoMaster = projectAccoMaster.Include("Brand");
+                        projectAccoMaster = projectAccoMaster.Include("Chain");
                         var searchAccoMasterResult = collectionAccommodationMaster.Find(filterAccoMaster).Project(projectAccoMaster).ToList();
                         searchedAccomodationSearchData = JsonConvert.DeserializeObject<List<DC_AccomodationMasterMapping>>(searchAccoMasterResult.ToJson());
                         #endregion Fetch Accommodation Master
@@ -169,6 +172,9 @@ namespace DistributionWebApi.Controllers
                                 mappingResponse.SystemCountryName = (Acco == null ? string.Empty : Acco.CountryName);
                                 mappingResponse.SystemStateCode = (Acco == null ? string.Empty : Acco.StateCode);
                                 mappingResponse.SystemStateName = (Acco == null ? string.Empty : Acco.StateName);
+                                mappingResponse.ProductSubType = (Acco == null ? string.Empty : Acco.ProductCategorySubType);
+                                mappingResponse.Chain = (Acco == null ? string.Empty : Acco.Chain);
+                                mappingResponse.Brand = (Acco == null ? string.Empty : Acco.Brand);
                             }
 
                             var RoomMappings = searchedRoomMappingData.Where(w => w.supplierCode == mappingRequest.SupplierCode && w.SupplierProductId == mappingRequest.SupplierProductCode).Select(s => s).ToList();
