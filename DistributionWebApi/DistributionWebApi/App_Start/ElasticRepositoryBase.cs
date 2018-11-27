@@ -112,7 +112,7 @@ namespace DistributionWebApi.App_Start
             {
                 return index;
             }
-            var date = String.Format("{0:dd.MM.yyyy}", DateTime.Today);
+            var date = String.Format("{0:yyyy.MM.dd}", DateTime.Today);
             return $"{index}-{date}";
         }
 
