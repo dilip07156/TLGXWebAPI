@@ -114,7 +114,17 @@ namespace DistributionWebApi.App_Start
                 return index;
             }
             var date = String.Format("{0:yyyy.MM.dd}", DateTime.Today);
-            return $"{index}-{date}";
+
+            if(ConfigurationManager.AppSettings["CurrentEnvironment"] == "PERF")
+            {
+                return $"nakwapiperf-{date}";
+            }
+            else
+            {
+                return $"{index}-{date}";
+            }
+
+            
         }
 
         private static TAttr GetCustomAttribute<T, TAttr>()
