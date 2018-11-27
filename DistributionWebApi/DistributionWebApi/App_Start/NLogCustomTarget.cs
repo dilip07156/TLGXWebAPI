@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Text;
 using NLog.Common;
 using System.Threading.Tasks;
+using DistributionWebApi.Models;
 
 namespace DistributionWebApi.App_Start
 {
@@ -28,12 +29,15 @@ namespace DistributionWebApi.App_Start
         [RequiredParameter]
         public string Host { get; set; }
 
+        private RepositoryBase<TraceLog, string> _logRepo;
+
         /// <summary>
         /// Constructor ElkTargetNlog
         /// </summary>
         public NLogELKTargetWithProxy()
         {
-            Host = System.Configuration.ConfigurationManager.AppSettings["elklogindex"];
+            Host = System.Configuration.ConfigurationManager.AppSettings["ElasticUri"];
+            _logRepo = new RepositoryBase<TraceLog, string>();
         }
 
         /// <summary>
@@ -49,28 +53,33 @@ namespace DistributionWebApi.App_Start
         {
             try
             {
-                string proxy = System.Configuration.ConfigurationManager.AppSettings["ProxyUri"];
-                HttpClient client;
-                HttpClientHandler httpClientHandler;
-                if (!string.IsNullOrWhiteSpace(proxy))
-                {
-                    httpClientHandler = new HttpClientHandler
-                    {
-                        Proxy = new WebProxy(proxy, false),
-                        UseProxy = true
-                    };
-                    client = new HttpClient(httpClientHandler);
-                }
-                else
-                {
-                    client = new HttpClient();
-                }
+                TraceLog log = new TraceLog();
+                log = JsonConvert.DeserializeObject<TraceLog>(message);
+                _logRepo.Insert(log);
 
-                StringContent json = new StringContent(message, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync(new Uri(host), json);
+                //HttpClient client;
+                //HttpClientHandler httpClientHandler;
 
-                json.Dispose();
-                client.Dispose();
+                //string proxy = System.Configuration.ConfigurationManager.AppSettings["ProxyUri"];
+                //if (!string.IsNullOrWhiteSpace(proxy))
+                //{
+                //    httpClientHandler = new HttpClientHandler
+                //    {
+                //        Proxy = new WebProxy(proxy, false),
+                //        UseProxy = true
+                //    };
+                //    client = new HttpClient(httpClientHandler);
+                //}
+                //else
+                //{
+                //    client = new HttpClient();
+                //}
+
+                //StringContent json = new StringContent(message, Encoding.UTF8, "application/json");
+                //var result = await client.PostAsync(new Uri(host), json);
+
+                //json.Dispose();
+                //client.Dispose();
             }
             catch (Exception ex)
             {
