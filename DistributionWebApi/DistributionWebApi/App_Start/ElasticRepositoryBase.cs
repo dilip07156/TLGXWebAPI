@@ -110,7 +110,7 @@ namespace DistributionWebApi.App_Start
             }
             var index = details.IndexName;
 
-            if (ConfigurationManager.AppSettings["CurrentEnvironment"] == "PERF")
+            if (GetSettingByKey("CurrentEnvironment") == "PERF")
             {
                 index = index + "perf";
             }
@@ -122,6 +122,11 @@ namespace DistributionWebApi.App_Start
             var date = String.Format("{0:yyyy.MM.dd}", DateTime.Today);
 
             return $"{index}-{date}";
+        }
+
+        private static string GetSettingByKey(string key)
+        {
+            return ConfigurationManager.AppSettings[key] ?? string.Empty;
         }
 
         private static TAttr GetCustomAttribute<T, TAttr>()
