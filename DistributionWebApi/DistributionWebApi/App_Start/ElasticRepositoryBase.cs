@@ -53,7 +53,7 @@ namespace DistributionWebApi.App_Start
         public List<TEntity> GetAll()
         {
             List<TEntity> all = null;
-            var result = GetPaginatedData(0, 2000);
+            var result = GetPaginatedData(0, 100, new QueryContainer {  });
             //all = result.Results;
             all = result;
             return all;
@@ -64,7 +64,7 @@ namespace DistributionWebApi.App_Start
             ISearchResponse<TEntity> response = _client.Search<TEntity>(s => s
               .Index(GetIndex<TEntity>())
               .From(0)
-              .Size(200)
+              .Size(50)
               .SearchType(Elasticsearch.Net.SearchType.QueryThenFetch));
 
             return response.Documents.ToList();
@@ -77,6 +77,7 @@ namespace DistributionWebApi.App_Start
                .From(from)
                .Size(size)
                .Query(q => query)
+               .Source(sf => sf.Excludes(f => f.Fields("parameter")))
                .SearchType(Elasticsearch.Net.SearchType.QueryThenFetch));
 
             return GetSearchResults(response);
