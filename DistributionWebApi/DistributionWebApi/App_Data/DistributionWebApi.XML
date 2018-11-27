@@ -4,6 +4,27 @@
         <name>DistributionWebApi</name>
     </assembly>
     <members>
+        <member name="T:DistributionWebApi.App_Start.NLogELKTargetWithProxy">
+            <summary>
+            This is a custom NLogger class which logs the message to a network address.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Host">
+            <summary>
+            Target URL
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.#ctor">
+            <summary>
+            Constructor ElkTargetNlog
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Write(NLog.LogEventInfo)">
+            <summary>
+            write method to send the message to network
+            </summary>
+            <param name="logEvent"></param>
+        </member>
         <member name="T:DistributionWebApi.LoggingFilterAttribute">
             <summary>
             This class will be handle all incoming and outgoing message filter
@@ -31,27 +52,6 @@
             
             </summary>
             <param name="filters"></param>
-        </member>
-        <member name="T:DistributionWebApi.App_Start.NLogELKTargetWithProxy">
-            <summary>
-            This is a custom NLogger class which logs the message to a network address.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Host">
-            <summary>
-            Target URL
-            </summary>
-        </member>
-        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.#ctor">
-            <summary>
-            Constructor ElkTargetNlog
-            </summary>
-        </member>
-        <member name="M:DistributionWebApi.App_Start.NLogELKTargetWithProxy.Write(NLog.LogEventInfo)">
-            <summary>
-            write method to send the message to network
-            </summary>
-            <param name="logEvent"></param>
         </member>
         <member name="P:DistributionWebApi.WebApiConfig.JsonpFormatter.JsonpParameterName">
             <summary>
@@ -7407,6 +7407,21 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxAccoName">
             <summary>
             TLGX MDM hotel property name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.ProductSubType">
+            <summary>
+            TLGX MDM hotel Product Sub Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.Brand">
+            <summary>
+            TLGX MDM hotel Brand
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.Chain">
+            <summary>
+            TLGX MDM hotel Chain
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SystemCountryCode">

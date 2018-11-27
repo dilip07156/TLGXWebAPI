@@ -1,8 +1,55 @@
-﻿
+﻿@model IEnumerable<DistributionWebApi.Models.TraceLog>
+
+
 @{
     ViewBag.Title = "Elastic";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Elastic</h2>
+<h2>Elastic Log Data</h2>
+
+<hr />
+<table class="table table-bordered table-condensed table-striped table-responsive">
+    <tr>
+        <th>LogDate</th>
+        <th>ClientIP</th>
+        <th>LogType</th>
+        <th>Format</th>
+        <th>Method</th>
+        <th>URL</th>
+        <th>Controller</th>
+        <th>Action</th>
+        <th>Parameter</th>
+        <th>MessageType</th>
+        <th>Username</th>
+        <th>Token</th>
+        <th>TraceId</th>
+        <th>Application</th>
+        <th>HostIp</th>
+        <th>TotalRecords</th>
+        <th>ResponseTime</th>
+    </tr>
+    @foreach (var log in Model)
+    {
+        <tr>
+            <td>@log.LogDate</td>
+            <td>@log.ClientIP</td>
+            <td>@log.LogType</td>
+            <td>@log.Format</td>
+            <td>@log.Method</td>
+            <td>@log.URL</td>
+            <td>@log.Controller</td>
+            <td>@log.Action</td>
+            <td>@log.Parameter</td>
+            <td>@log.MessageType</td>
+            <td>@log.Username</td>
+            <td>@log.Token</td>
+            <td>@log.TraceId</td>
+            <td>@log.Application</td>
+            <td>@log.HostIp</td>
+            <td>@log.TotalRecords</td>
+            <td>@log.ResponseTime</td>
+        </tr>
+    }
+</table>
 

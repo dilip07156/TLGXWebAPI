@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Nest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace DistributionWebApi.Models
 {
-    public class TraceLog
+    [ElasticIndexDetails("nakwapi", true)]
+    [ElasticsearchType(Name = "log")]
+    public class TraceLog : EntityBase
     {
         public DateTime LogDate { get; set; }
         public string ClientIP { get; set; }
@@ -24,6 +28,5 @@ namespace DistributionWebApi.Models
         public string HostIp { get; set; }
         public int TotalRecords { get; set; }
         public double ResponseTime { get; set; }
-
     }
 }
