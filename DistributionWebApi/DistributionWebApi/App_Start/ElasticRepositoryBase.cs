@@ -53,7 +53,7 @@ namespace DistributionWebApi.App_Start
         public List<TEntity> GetAll()
         {
             List<TEntity> all = null;
-            var result = GetPaginatedData(0, 100, new QueryContainer {  });
+            var result = GetPaginatedData(0, 100, new QueryContainer { });
             //all = result.Results;
             all = result;
             return all;
@@ -109,22 +109,19 @@ namespace DistributionWebApi.App_Start
                 throw new Exception("ElasticIndexDetailsAttribute has not been set for the type " + typeof(T).FullName);
             }
             var index = details.IndexName;
+
+            if (ConfigurationManager.AppSettings["CurrentEnvironment"] == "PERF")
+            {
+                index = index + "perf";
+            }
+
             if (!details.IsTimeSeries)
             {
                 return index;
             }
             var date = String.Format("{0:yyyy.MM.dd}", DateTime.Today);
 
-            if(ConfigurationManager.AppSettings["CurrentEnvironment"] == "PERF")
-            {
-                return $"nakwapiperf-{date}";
-            }
-            else
-            {
-                return $"{index}-{date}";
-            }
-
-            
+            return $"{index}-{date}";
         }
 
         private static TAttr GetCustomAttribute<T, TAttr>()
