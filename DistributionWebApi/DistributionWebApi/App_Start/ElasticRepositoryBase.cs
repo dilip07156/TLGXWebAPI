@@ -110,11 +110,6 @@ namespace DistributionWebApi.App_Start
             }
             var index = details.IndexName;
 
-            if (GetSettingByKey("CurrentEnvironment") == "PERF")
-            {
-                index = index + "perf";
-            }
-
             if (!details.IsTimeSeries)
             {
                 return index;
