@@ -63,7 +63,7 @@ namespace DistributionWebApi.App_Start
             {
                 TraceLog log = new TraceLog();
                 log = JsonConvert.DeserializeObject<TraceLog>(message);
-                _logRepo.Insert(log, Environment);
+                _logRepo.Insert(log);
 
                 //HttpClient client;
                 //HttpClientHandler httpClientHandler;
