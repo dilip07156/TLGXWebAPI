@@ -1564,7 +1564,16 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public string Longitude { get; set; }
 
+        /// <summary>
+        /// Contain Status of Accommodation
+        /// </summary>
+        public string CodeStatus { get; set; }
 
+        /// <summary>
+        /// Contain Full SuburbDowntown of Accommodation
+        /// </summary>
+        public string SuburbDowntown { get; set; }
+        
     }
 
 
@@ -1729,6 +1738,148 @@ namespace DistributionWebApi.Models.Static
         /// </summary>
         public string Longitude { get; set; }
 
+        /// <summary>
+        /// Contain Status of Accommodation
+        /// </summary>
+        public string CodeStatus { get; set; }
 
+    }
+
+    //GAURAV_TMAP_889
+    /// <summary>
+    /// Accommodation Master RS
+    /// </summary>
+    public class AccommodationMasterGIATARS
+    {
+        
+
+        /// <summary>
+        /// Contain TLGX Accommodation id of Accommodation
+        /// </summary>
+        //[BsonElement("TLGXAccoId")]
+        public string HotelID { get; set; }
+
+
+
+        /// <summary>
+        /// Contain Accommodation Name
+        /// </summary>
+        public string HotelName { get; set; }
+
+        /// <summary>
+        /// Contain ProductCategory Subtype of Accommodation
+        /// </summary>
+        public string HotelType { get; set; }
+
+        /// <summary>
+        /// Contain start rating of Accommodation
+        /// </summary>
+        public string HotelStarRating { get; set; }
+
+
+        /// <summary>
+        /// Contain Street info of Accommodation
+        /// </summary>
+        public string AddressStreet { get; set; }
+
+        ///// <summary>
+        ///// Contain Street Number of Accommodation
+        ///// </summary>
+        //public string StreetNumber { get; set; }
+
+        /// <summary>
+        /// Contain AddressSuburb of Accommodation
+        /// </summary>
+        public string AddressSuburb { get; set; }
+
+        ///// <summary>
+        ///// Contain Street4 of Accommodation
+        ///// </summary>
+        //public string Street4 { get; set; }
+
+        ///// <summary>
+        ///// Contain Street5 of Accommodation
+        ///// </summary>
+        //public string Street5 { get; set; }
+
+        /// <summary>
+        /// Contain Postal Code info of Accommodation
+        /// </summary>
+        public string PostalCode { get; set; }
+
+      
+
+        /// <summary>
+        /// Contain City Name
+        /// </summary>
+        public string CityName { get; set; }
+
+
+
+
+        /// <summary>
+        /// Contain State Name
+        /// </summary>
+        public string StateName { get; set; }
+
+
+        ///// <summary>
+        ///// Contain ISO Country Code
+        ///// </summary>
+        //public string CountryCode { get; set; }
+
+        ///// <summary>
+        ///// Contain Country Name
+        ///// </summary>
+        //public string CountryName { get; set; }
+
+
+        /// <summary>
+        /// Contain Full Address of Accommodation
+        /// </summary>
+        public string GIATA_ID { get; set; }
+
+        ///// <summary>
+        ///// Contain Room Mapping Completed info of Accommodation
+        ///// </summary>
+        //public bool IsRoomMappingCompleted { get; set; }
+
+
+        /// <summary>
+        /// Contain Telephone info of Accommodation
+        /// </summary>
+        public string TelephoneNumber { get; set; }
+
+        /// <summary>
+        /// Contain Contact Fax of Accommodation
+        /// </summary>
+        public string FaxNumber { get; set; }
+
+        /// <summary>
+        /// Contain Contact WebSite of Accommodation
+        /// </summary>
+        public string URL { get; set; }
+
+        /// <summary>
+        /// Contain Contact Email of Accommodation
+        /// </summary>
+        public string EmailAddress { get; set; }
+
+
+
+        /// <summary>
+        /// Contain Latitude of Accommodation
+        /// </summary>
+        public string Latitude { get; set; }
+
+        /// <summary>
+        /// Contain Longitude of Accommodation
+        /// </summary>
+        public string Longitude { get; set; }
+
+        /// <summary>
+        /// Contain Status of Accommodation
+        /// </summary>
+        public string CodeStatus { get; set; }
     }
 }

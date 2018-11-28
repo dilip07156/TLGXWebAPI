@@ -3984,6 +3984,16 @@
             Contain Longitude of Accommodation
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.CodeStatus">
+            <summary>
+            Contain Status of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMaster.SuburbDowntown">
+            <summary>
+            Contain Full SuburbDowntown of Accommodation
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Static.AccommodationMasterRS">
             <summary>
             Accommodation Master RS
@@ -4122,6 +4132,101 @@
         <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.Longitude">
             <summary>
             Contain Longitude of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterRS.CodeStatus">
+            <summary>
+            Contain Status of Accommodation
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Static.AccommodationMasterGIATARS">
+            <summary>
+            Accommodation Master RS
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.HotelID">
+            <summary>
+            Contain TLGX Accommodation id of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.HotelName">
+            <summary>
+            Contain Accommodation Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.HotelType">
+            <summary>
+            Contain ProductCategory Subtype of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.HotelStarRating">
+            <summary>
+            Contain start rating of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.AddressStreet">
+            <summary>
+            Contain Street info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.AddressSuburb">
+            <summary>
+            Contain AddressSuburb of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.PostalCode">
+            <summary>
+            Contain Postal Code info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.CityName">
+            <summary>
+            Contain City Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.StateName">
+            <summary>
+            Contain State Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.GIATA_ID">
+            <summary>
+            Contain Full Address of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.TelephoneNumber">
+            <summary>
+            Contain Telephone info of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.FaxNumber">
+            <summary>
+            Contain Contact Fax of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.URL">
+            <summary>
+            Contain Contact WebSite of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.EmailAddress">
+            <summary>
+            Contain Contact Email of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.Latitude">
+            <summary>
+            Contain Latitude of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.Longitude">
+            <summary>
+            Contain Longitude of Accommodation
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Static.AccommodationMasterGIATARS.CodeStatus">
+            <summary>
+            Contain Status of Accommodation
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Activity.ActivitySearchByCountry_RQ">
