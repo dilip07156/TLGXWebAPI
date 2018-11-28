@@ -8,7 +8,7 @@ using System.Web;
 
 namespace DistributionWebApi.Models
 {
-    [ElasticIndexDetails("nakwapiperf", true)]
+    [ElasticIndexDetails("nakwapi", true)]
     [ElasticsearchType(Name = "log")]
     public class TraceLog : EntityBase
     {

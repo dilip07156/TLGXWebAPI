@@ -42,27 +42,27 @@ namespace DistributionWebApi.App_Start
             return new ElasticClient(connectionSettings);
         }
 
-        public TEntity GetById(TIdentifier id)
+        public TEntity GetById(TIdentifier id, string env)
         {
-            var response = _client.Get<TEntity>(new DocumentPath<TEntity>(id.ToString()), g => g.Index(GetIndex<TEntity>()));
+            var response = _client.Get<TEntity>(new DocumentPath<TEntity>(id.ToString()), g => g.Index(GetIndex<TEntity>(env)));
             if (response.Source != null)
                 response.Source.Id = response.Id;
             return response.Source;
         }
 
-        public List<TEntity> GetAll()
+        public List<TEntity> GetAll(string env)
         {
             List<TEntity> all = null;
-            var result = GetPaginatedData(0, 100, new QueryContainer { });
+            var result = GetPaginatedData(0, 100, env, new QueryContainer { });
             //all = result.Results;
             all = result;
             return all;
         }
 
-        public List<TEntity> GetAllRaw()
+        public List<TEntity> GetAllRaw(string env)
         {
             ISearchResponse<TEntity> response = _client.Search<TEntity>(s => s
-              .Index(GetIndex<TEntity>())
+              .Index(GetIndex<TEntity>(env))
               .From(0)
               .Size(50)
               .SearchType(Elasticsearch.Net.SearchType.QueryThenFetch));
@@ -70,10 +70,10 @@ namespace DistributionWebApi.App_Start
             return response.Documents.ToList();
         }
 
-        private List<TEntity> GetPaginatedData(int from, int size, QueryContainer query = null)
+        private List<TEntity> GetPaginatedData(int from, int size, string env, QueryContainer query = null)
         {
             ISearchResponse<TEntity> response = _client.Search<TEntity>(s => s
-               .Index(GetIndex<TEntity>())
+               .Index(GetIndex<TEntity>(env))
                .From(from)
                .Size(size)
                .Query(q => query)
@@ -95,13 +95,13 @@ namespace DistributionWebApi.App_Start
             return new List<TEntity>(documents); //, response.ScrollId
         }
 
-        public string Insert(TEntity doc)
+        public string Insert(TEntity doc, string env)
         {
-            var response = _client.Index<TEntity>(doc, g => g.Index(GetIndex<TEntity>()));
+            var response = _client.Index<TEntity>(doc, g => g.Index(GetIndex<TEntity>(env)));
             return response.Id;
         }
 
-        private static string GetIndex<T>()
+        private static string GetIndex<T>(string env)
         {
             var details = GetCustomAttribute<T, ElasticIndexDetailsAttribute>();
             if (details == null)
@@ -109,6 +109,8 @@ namespace DistributionWebApi.App_Start
                 throw new Exception("ElasticIndexDetailsAttribute has not been set for the type " + typeof(T).FullName);
             }
             var index = details.IndexName;
+
+            index = index + env.ToLower();
 
             if (!details.IsTimeSeries)
             {
