@@ -29,6 +29,9 @@ namespace DistributionWebApi.App_Start
         [RequiredParameter]
         public string Host { get; set; }
 
+        [RequiredParameter]
+        public string Environment { get; set; }
+
         private RepositoryBase<TraceLog, string> _logRepo;
 
         /// <summary>
@@ -37,6 +40,11 @@ namespace DistributionWebApi.App_Start
         public NLogELKTargetWithProxy()
         {
             Host = System.Configuration.ConfigurationManager.AppSettings["ElasticUri"];
+            Environment = System.Configuration.ConfigurationManager.AppSettings["CurrentEnvironment"];
+            if(Environment != "PERF")
+            {
+                Environment = string.Empty;
+            }
             _logRepo = new RepositoryBase<TraceLog, string>();
         }
 
@@ -55,7 +63,7 @@ namespace DistributionWebApi.App_Start
             {
                 TraceLog log = new TraceLog();
                 log = JsonConvert.DeserializeObject<TraceLog>(message);
-                _logRepo.Insert(log);
+                _logRepo.Insert(log, Environment);
 
                 //HttpClient client;
                 //HttpClientHandler httpClientHandler;

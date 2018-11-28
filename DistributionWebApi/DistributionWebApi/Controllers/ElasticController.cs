@@ -17,8 +17,13 @@ namespace DistributionWebApi.Controllers
 
         public ActionResult Index()
         {
+           var Environment = System.Configuration.ConfigurationManager.AppSettings["CurrentEnvironment"];
+            if (Environment != "PERF")
+            {
+                Environment = string.Empty;
+            }
             _logRepo = new RepositoryBase<TraceLog, string>();
-            var data = _logRepo.GetAll();
+            var data = _logRepo.GetAll(Environment);
 
             return View(data);
         }
