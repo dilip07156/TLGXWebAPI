@@ -30,6 +30,7 @@ namespace DistributionWebApi.Mongo
                 mcs.ConnectionMode = ConnectionMode.Automatic;
                 mcs.ConnectTimeout = new TimeSpan(0, 0, 10);
                 mcs.Server = new MongoServerAddress(MongoDBServerHost, Convert.ToInt32(MongoDBServerPort));
+                mcs.MaxConnectionPoolSize = 200;
 
                 if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
                 {
