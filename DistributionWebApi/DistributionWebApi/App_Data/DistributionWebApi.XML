@@ -4357,6 +4357,11 @@
             Mapping System Activity Product Type Category for Product Classification. This is the second level of classification
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.TLGXDisplaySubType">
+            <summary>
+            Mapping System TLGXDisplaySubType master
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.SubType">
             <summary>
             Mapping System Activity Category for Product Classification. THis is the third level of classification.
@@ -4629,6 +4634,11 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.SubType">
             <summary>
             Mapping System Activity Category for Product Classification. THis is the third level of classification.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.TLGXDisplaySubType">
+            <summary>
+            Mapping System Activity TLGXDisplaySubType for Product Classification. 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Name">
