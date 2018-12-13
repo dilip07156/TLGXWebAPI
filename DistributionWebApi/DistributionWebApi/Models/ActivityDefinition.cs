@@ -144,6 +144,10 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string Type { get; set; }
         /// <summary>
+        /// Mapping System TLGXDisplaySubType master
+        /// </summary>
+        public string TLGXDisplaySubType { get; set; }
+        /// <summary>
         /// Mapping System Activity Category for Product Classification. THis is the third level of classification.
         /// </summary>
         public string SubType { get; set; }
@@ -397,6 +401,10 @@ namespace DistributionWebApi.Models.Activity
         /// Mapping System Activity Category for Product Classification. THis is the third level of classification.
         /// </summary>
         public string SubType { get; set; }
+        /// <summary>
+        /// Mapping System Activity TLGXDisplaySubType for Product Classification. 
+        /// </summary>
+        public string TLGXDisplaySubType { get; set; }
         /// <summary>
         /// The Name of the Activity Product as per the End Supplier
         /// </summary>
