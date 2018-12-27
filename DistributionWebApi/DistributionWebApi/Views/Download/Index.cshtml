@@ -5,209 +5,214 @@
 
 <h1>Static Data Downloads</h1>
 
-
-
-<div class="container">
-
-    <div class="row">
-        <table class="table">
-            <tr>
-                <td class="col-md-7">
-                    <strong>Countries</strong>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="countrycsv" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>CSV</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="countrypipe" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>PIPE</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="countryjson" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>JSON</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="countryxml" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>XML</strong>
-                    </button>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-7">
-                    @*<strong>Cities</strong>*@
-                    <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>Cities By Country&nbsp&nbsp;</strong></label>
-                        <select id="ddlCityByCountry" class="form-control"></select>
+<div class="row">
+    <table class="table">
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>Countries</strong></div>
                     </div>
+                </div>
 
-                </td>
-                <td class="text-center">
-                    <button type="button" id="citycsv" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>CSV</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="citypipe" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>PIPE</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="cityjson" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>JSON</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="cityxml" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>XML</strong>
-                    </button>
-                </td>
-            </tr>
+            </td>
+            <td class="text-center">
+                <button type="button" id="countrycsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="countrypipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="countryjson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="countryxml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
 
-            <tr>
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>Cities By Country</strong></div>
+                    </div>
+                    <select id="ddlCityByCountry" class="form-control"></select>
+                </div>
+
+            </td>
+            <td class="text-center">
+                <button type="button" id="citycsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="citypipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="cityjson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="cityxml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>States By Country</strong></div>
+                    </div>
+                    <select id="ddlStatesByCountry" class="form-control"></select>
+                </div>
+            </td>
+            <td class="text-center">
+                <button type="button" id="statecsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="statepipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="statejson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="statexml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>Ports By Country</strong></div>
+                    </div>
+                    <select id="ddlPortByCountry" class="form-control"></select>
+                </div>
+            </td>
+            <td class="text-center">
+                <button type="button" id="portcsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="portpipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="portjson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="portxml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>GIATA Exports</strong></div>
+                    </div>
+                    <select id="ddlAccommodationByCountry" class="form-control"></select>
+                </div>
+
+            </td>
+            <td class="text-center">
+                <button type="button" id="accommodationcsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="accommodationpipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+
+            <td class="text-center">
+                <button type="button" id="accommodationjson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="accommodationxml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
+        @*<tr>
                 <td class="col-md-7">
-                    @*<strong>States</strong>*@
                     <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>States By Country&nbsp;</strong></label>
-                        <select id="ddlStatesByCountry" class="form-control"></select>
+                        <label class="control-label input-group-addon"><strong>Hotels By Country&nbsp</strong></label>
+                        <select id="ddlHotelByCountry" class="form-control"></select>
                     </div>
                 </td>
                 <td class="text-center">
-                    <button type="button" id="statecsv" class="btn btn-default">
+                    <button type="button" id="hotelcsv" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>CSV</strong>
                     </button>
                 </td>
                 <td class="text-center">
-                    <button type="button" id="statepipe" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>PIPE</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="statejson" class="btn btn-default">
+                    <button type="button" id="hoteljson" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>JSON</strong>
                     </button>
                 </td>
                 <td class="text-center">
-                    <button type="button" id="statexml" class="btn btn-default">
+                    <button type="button" id="hotelxml" class="btn btn-default">
                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                         <strong>XML</strong>
                     </button>
                 </td>
-            </tr>
+            </tr>*@
 
-            <tr>
-                <td class="col-md-7">
-                    @*<strong>Ports</strong>*@
-                    <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>Ports By Country&nbsp&nbsp&nbsp;</strong></label>
-                        <select id="ddlPortByCountry" class="form-control"></select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="portcsv" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>CSV</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="portpipe" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>PIPE</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="portjson" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>JSON</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="portxml" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>XML</strong>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-7">
-                    @*<strong>AccommodationMaster</strong>*@
-                    <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>GIATA Exports&nbsp&nbsp;</strong></label>
-                        <select id="ddlAccommodationByCountry" class="form-control"></select>
-                    </div>
-
-                </td>
-                <td class="text-center">
-                    <button type="button" id="accommodationcsv" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>CSV</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="accommodationpipe" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>PIPE</strong>
-                    </button>
-                </td>
-
-                <td class="text-center">
-                    <button type="button" id="accommodationjson" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>JSON</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="accommodationxml" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>XML</strong>
-                    </button>
-                </td>
-            </tr>
-            @*<tr>
-                    <td class="col-md-7">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon"><strong>Hotels By Country&nbsp</strong></label>
-                            <select id="ddlHotelByCountry" class="form-control"></select>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" id="hotelcsv" class="btn btn-default">
-                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                            <strong>CSV</strong>
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" id="hoteljson" class="btn btn-default">
-                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                            <strong>JSON</strong>
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <button type="button" id="hotelxml" class="btn btn-default">
-                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                            <strong>XML</strong>
-                        </button>
-                    </td>
-                </tr>*@
-
-        </table>
-    </div>
+    </table>
 </div>
+
 
 @section scripts{
     <script type="text/javascript">
