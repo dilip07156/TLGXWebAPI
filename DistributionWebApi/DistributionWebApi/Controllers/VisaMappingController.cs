@@ -71,7 +71,7 @@ namespace DistributionWebApi.Controllers
 
                 IMongoCollection<VisaDefinition> collectionVisa = _database.GetCollection<VisaDefinition>("VisaCountryDetail");
 
-                var searchResult = await collectionVisa.Find(s => true).FirstOrDefaultAsync();
+                var searchResult = await collectionVisa.Find(s => true).ToListAsync();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
                 return response;

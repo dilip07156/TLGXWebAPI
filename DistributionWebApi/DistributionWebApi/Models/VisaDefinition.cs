@@ -134,25 +134,27 @@ namespace DistributionWebApi.Models.VisaMapping
         public VisaCountryOffices CountryOffices { get; set; }
     }
 
-    [BsonIgnoreExtraElements]
-    public class VisaInformationLink
-    {
-        public string href { get; set; }
-        public string content { get; set; }
-        public string target { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class VisaInformationLink
+    //{
+    //    public string href { get; set; }
+    //    public string content { get; set; }
+    //    public string target { get; set; }
+    //}
 
-    [BsonIgnoreExtraElements]
-    public class ReciprocalVisaInfo2
-    {
-        public VisaInformationLink InformationLink { get; set; }
-        public List<string> content { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class ReciprocalVisaInfo2
+    //{
+    //    //public VisaInformationLink InformationLink { get; set; }
+    //    public BsonDocument InformationLink { get; set; }
+    //    public List<string> content { get; set; }
+    //}
 
     [BsonIgnoreExtraElements]
     public class VisaDescription
     {
-        public ReciprocalVisaInfo2 ReciprocalVisaInfo { get; set; }
+        //public ReciprocalVisaInfo2 ReciprocalVisaInfo { get; set; }
+        public BsonDocument ReciprocalVisaInfo { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -248,24 +250,24 @@ namespace DistributionWebApi.Models.VisaMapping
     {
     }
 
-    [BsonIgnoreExtraElements]
-    public class VisaGeneralInfo
-    {
-        //public Climate Climate { get; set; }
-        public string SmallMap { get; set; }
-        public string Languages { get; set; }
-        public string Time { get; set; }
-        public string Capital { get; set; }
-        public string Flag { get; set; }
-        public string Code { get; set; }
-        public string Area { get; set; }
-        public string Currency { get; set; }
-        public string LargeMap { get; set; }
-        public string Population { get; set; }
-        public string WorldFactBook { get; set; }
-        public string NationalDay { get; set; }
-        public string Location { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class VisaGeneralInfo
+    //{
+    //    //public Climate Climate { get; set; }
+    //    public string SmallMap { get; set; }
+    //    public string Languages { get; set; }
+    //    public string Time { get; set; }
+    //    public string Capital { get; set; }
+    //    public string Flag { get; set; }
+    //    public string Code { get; set; }
+    //    public string Area { get; set; }
+    //    public string Currency { get; set; }
+    //    public string LargeMap { get; set; }
+    //    public string Population { get; set; }
+    //    public string WorldFactBook { get; set; }
+    //    public string NationalDay { get; set; }
+    //    public string Location { get; set; }
+    //}
 
     [BsonIgnoreExtraElements]
     public class VisaMonth
@@ -318,20 +320,22 @@ namespace DistributionWebApi.Models.VisaMapping
         public string Name { get; set; }
     }
 
-    [BsonIgnoreExtraElements]
-    public class VisaAirports
-    {
-        public List<VisaAirport> Airport { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class VisaAirports
+    //{
+    //    public List<VisaAirport> Airport { get; set; }
+    //}
 
     [BsonIgnoreExtraElements]
     public class VisaCountryDetails
     {
-        public VisaGeneralInfo GeneralInfo { get; set; }
+        //public VisaGeneralInfo GeneralInfo { get; set; }
+        public BsonDocument GeneralInfo { get; set; }
         public VisaHolidays Holidays { get; set; }
         public BsonDocument Airlines { get; set; }
         public VisaCountryName CountryName { get; set; }
-        public VisaAirports Airports { get; set; }
+        //public VisaAirports Airports { get; set; }
+        public BsonDocument Airports { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -360,40 +364,42 @@ namespace DistributionWebApi.Models.VisaMapping
         public List<VisaOffice2> Office { get; set; }
     }
 
-    [BsonIgnoreExtraElements]
-    public class VisaDiplomaticRepresentation
-    {
-        // public Offices Offices { get; set; }
-        public BsonDocument Offices { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class VisaDiplomaticRepresentation
+    //{
+    //    // public Offices Offices { get; set; }
+    //    public BsonDocument Offices { get; set; }
+    //}
 
-    [BsonIgnoreExtraElements]
-    public class Visa
-    {
-        public string AdditionalInfo { get; set; }
-        //public List<VisaInformation> VisaInformation { get; set; }
-        public BsonArray VisaInformation { get; set; }
-        public VisaSAARCInfo SAARCInfo { get; set; }
-        public ReciprocalVisaInfo ReciprocalVisaInfo { get; set; }
-        public VisaInternationalAdvisory InternationalAdvisory { get; set; }
-        public VisaIVSAdvisory IVSAdvisory { get; set; }
+    //[BsonIgnoreExtraElements]
+    //public class Visa
+    //{
+    //    public string AdditionalInfo { get; set; }
+    //    //public List<VisaInformation> VisaInformation { get; set; }
+    //    public BsonArray VisaInformation { get; set; }
+    //    public VisaSAARCInfo SAARCInfo { get; set; }
+    //    public ReciprocalVisaInfo ReciprocalVisaInfo { get; set; }
+    //    public VisaInternationalAdvisory InternationalAdvisory { get; set; }
+    //    public VisaIVSAdvisory IVSAdvisory { get; set; }
 
-        //public IntlHelpAddress IntlHelpAddress { get; set; }
-        public BsonDocument IntlHelpAddress { get; set; }
+    //    //public IntlHelpAddress IntlHelpAddress { get; set; }
+    //    public BsonDocument IntlHelpAddress { get; set; }
 
-        public string CountryCode { get; set; }
-        //public VisaIndianEmbassy IndianEmbassy { get; set; }
-        public BsonDocument IndianEmbassy { get; set; }
-        public VisaCountryDetails CountryDetails { get; set; }
-        public VisaDiplomaticRepresentation DiplomaticRepresentation { get; set; }
-    }
+    //    public string CountryCode { get; set; }
+    //    //public VisaIndianEmbassy IndianEmbassy { get; set; }
+    //    public BsonDocument IndianEmbassy { get; set; }
+    //    public VisaCountryDetails CountryDetails { get; set; }
+    //    //public VisaDiplomaticRepresentation DiplomaticRepresentation { get; set; }
+    //    public BsonDocument DiplomaticRepresentation { get; set; }
+    //}
 
     [BsonIgnoreExtraElements]
     public class VisaDetail
     {
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
-        public Visa Visa { get; set; }
+        //public Visa Visa { get; set; }
+        public BsonDocument Visa { get; set; }
     }
 
     [BsonIgnoreExtraElements]
