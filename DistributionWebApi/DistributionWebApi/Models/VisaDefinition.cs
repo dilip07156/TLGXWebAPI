@@ -34,7 +34,7 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class Information
+    public class VisaInformation
     {
         public string ProcessingTime { get; set; }
         public string VisaProcedure { get; set; }
@@ -42,13 +42,13 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class CategoryInfo
+    public class VisaCategoryInfo
     {
-        public Information Information { get; set; }
+        public VisaInformation Information { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class CategoryRequirements
+    public class VisaCategoryRequirements
     {
         public string Requirements { get; set; }
     }
@@ -60,18 +60,18 @@ namespace DistributionWebApi.Models.VisaMapping
     //}
 
     [BsonIgnoreExtraElements]
-    public class CategoryDetail
+    public class VisaCategoryDetail
     {
         public string CategoryCode { get; set; }
-        public CategoryInfo CategoryInfo { get; set; }
-        public CategoryRequirements CategoryRequirements { get; set; }
+        public VisaCategoryInfo CategoryInfo { get; set; }
+        public VisaCategoryRequirements CategoryRequirements { get; set; }
         public string Category { get; set; }
         //public CategoryNotes CategoryNotes { get; set; }
         public BsonDocument CategoryNotes { get; set; }
     }
 
     //[BsonIgnoreExtraElements]
-    //public class CategoryFee
+    //public class VisaCategoryFee
     //{
     //    public string CategoryCode  { get; set; }
     //    public string Category { get; set; }
@@ -80,15 +80,15 @@ namespace DistributionWebApi.Models.VisaMapping
     //}
 
     //[BsonIgnoreExtraElements]
-    //public class CategoryFees
+    //public class VisaCategoryFees
     //{
-    //    public List<CategoryFee> Category { get; set; }
+    //    public List<VisaCategoryFee> Category { get; set; }
     //}
 
     //[BsonIgnoreExtraElements]
-    //public class Categories
+    //public class VisaCategories
     //{
-    //    public List<CategoryDetail> Category { get; set; }
+    //    public List<VisaCategoryDetail> Category { get; set; }
     //}
 
     //[BsonIgnoreExtraElements]
@@ -96,23 +96,23 @@ namespace DistributionWebApi.Models.VisaMapping
     //{
     //    public string TerritoryCity { get; set; }
     //    public VisaInfo VisaInfo { get; set; }
-    //    public Categories Categories { get; set; }
-    //    public CategoryFees CategoryFees { get; set; }
+    //    public VisaCategories Categories { get; set; }
+    //    public VisaCategoryFees CategoryFees { get; set; }
     //    public string CategoryForms { get; set; }
     //}
 
     [BsonIgnoreExtraElements]
-    public class Website
+    public class VisaWebsite
     {
     }
 
     [BsonIgnoreExtraElements]
-    public class CountryOffice
+    public class VisaCountryOffice
     {
         public string CountryID { get; set; }
         public string VisaRequired { get; set; }
         public string WhereToApply { get; set; }
-        public Website Website { get; set; }
+        public VisaWebsite Website { get; set; }
         public string City { get; set; }
         public string County { get; set; }
         public string Name { get; set; }
@@ -123,19 +123,19 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class CountryOffices
+    public class VisaCountryOffices
     {
-        public List<CountryOffice> CountryOffice { get; set; }
+        public List<VisaCountryOffice> CountryOffice { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class SAARCInfo
+    public class VisaSAARCInfo
     {
-        public CountryOffices CountryOffices { get; set; }
+        public VisaCountryOffices CountryOffices { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class InformationLink
+    public class VisaInformationLink
     {
         public string href { get; set; }
         public string content { get; set; }
@@ -145,12 +145,12 @@ namespace DistributionWebApi.Models.VisaMapping
     [BsonIgnoreExtraElements]
     public class ReciprocalVisaInfo2
     {
-        public InformationLink InformationLink { get; set; }
+        public VisaInformationLink InformationLink { get; set; }
         public List<string> content { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Description
+    public class VisaDescription
     {
         public ReciprocalVisaInfo2 ReciprocalVisaInfo { get; set; }
     }
@@ -158,47 +158,47 @@ namespace DistributionWebApi.Models.VisaMapping
     [BsonIgnoreExtraElements]
     public class ReciprocalVisaInfo
     {
-        public Description Description { get; set; }
+        public VisaDescription Description { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Description2
+    public class VisaDescription2
     {
-        public string InternationalAdvisory { get; set; }
+        public string VisaInternationalAdvisory { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class InternationalAdvisory
+    public class VisaInternationalAdvisory
     {
-        public Description2 Description { get; set; }
+        public VisaDescription2 Description { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Description4
+    public class VisaDescription4
     {
     }
 
     [BsonIgnoreExtraElements]
-    public class Heading
+    public class VisaHeading
     {
-        public Description4 Description { get; set; }
+        public VisaDescription4 Description { get; set; }
         public string content { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Description3
+    public class VisaDescription3
     {
-        public Heading Heading { get; set; }
+        public VisaHeading Heading { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class IVSAdvisory
+    public class VisaIVSAdvisory
     {
-        public Description3 Description { get; set; }
+        public VisaDescription3 Description { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class HelpAddress
+    public class VisaHelpAddress
     {
         public string Phone { get; set; }
         public string Country { get; set; }
@@ -212,13 +212,13 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class IntlHelpAddress
+    public class VisaIntlHelpAddress
     {
-        public List<HelpAddress> HelpAddress { get; set; }
+        public List<VisaHelpAddress> HelpAddress { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Office
+    public class VisaOffice
     {
         public string Email { get; set; }
         public string Address { get; set; }
@@ -236,20 +236,20 @@ namespace DistributionWebApi.Models.VisaMapping
         public string PinCode { get; set; }
     }
 
+    //[BsonIgnoreExtraElements]
+    //public class VisaIndianEmbassy
+    //{
+    //    public VisaOffice Office { get; set; }
+    //    //public BsonDocument Office { get; set; }
+    //}
+
     [BsonIgnoreExtraElements]
-    public class IndianEmbassy
+    public class VisaClimate
     {
-        //public Office Office { get; set; }
-        public BsonDocument Office { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Climate
-    {
-    }
-
-    [BsonIgnoreExtraElements]
-    public class GeneralInfo
+    public class VisaGeneralInfo
     {
         //public Climate Climate { get; set; }
         public string SmallMap { get; set; }
@@ -268,27 +268,27 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class Month
+    public class VisaMonth
     {
     }
 
-    public class Date
+    public class VisaDate
     {
     }
 
     [BsonIgnoreExtraElements]
-    public class Holiday
+    public class VisaHoliday
     {
-        public Month Month { get; set; }
+        public VisaMonth Month { get; set; }
         public string HolidayName { get; set; }
         public string Year { get; set; }
-        public Date Date { get; set; }
+        public VisaDate Date { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Holidays
+    public class VisaHolidays
     {
-        public Holiday Holiday { get; set; }
+        public VisaHoliday Holiday { get; set; }
     }
 
     //[BsonIgnoreExtraElements]
@@ -298,21 +298,20 @@ namespace DistributionWebApi.Models.VisaMapping
     //    public string Name { get; set; }
     //}
 
-    [BsonIgnoreExtraElements]
-    public class Airlines
-    {
-        // public List<Airline> Airline { get; set; }
-        public BsonDocument Airline { get; set; }
-    }
+    //[BsonIgnoreExtraElements]
+    //public class VisaAirlines
+    //{
+    //    public List<VisaAirline> Airline { get; set; }
+    //}
 
     [BsonIgnoreExtraElements]
-    public class CountryName
+    public class VisaCountryName
     {
         public string Name { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Airport
+    public class VisaAirport
     {
         public string Type { get; set; }
         public string Code { get; set; }
@@ -320,23 +319,23 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class Airports
+    public class VisaAirports
     {
-        public List<Airport> Airport { get; set; }
+        public List<VisaAirport> Airport { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class CountryDetails
+    public class VisaCountryDetails
     {
-        public GeneralInfo GeneralInfo { get; set; }
-        public Holidays Holidays { get; set; }
-        public Airlines Airlines { get; set; }
-        public CountryName CountryName { get; set; }
-        public Airports Airports { get; set; }
+        public VisaGeneralInfo GeneralInfo { get; set; }
+        public VisaHolidays Holidays { get; set; }
+        public BsonDocument Airlines { get; set; }
+        public VisaCountryName CountryName { get; set; }
+        public VisaAirports Airports { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class Office2
+    public class VisaOffice2
     {
         public string Timings { get; set; }
         public string Email { get; set; }
@@ -356,13 +355,13 @@ namespace DistributionWebApi.Models.VisaMapping
     }
 
     [BsonIgnoreExtraElements]
-    public class Offices
+    public class VisaOffices
     {
-        public List<Office2> Office { get; set; }
+        public List<VisaOffice2> Office { get; set; }
     }
 
     [BsonIgnoreExtraElements]
-    public class DiplomaticRepresentation
+    public class VisaDiplomaticRepresentation
     {
         // public Offices Offices { get; set; }
         public BsonDocument Offices { get; set; }
@@ -374,18 +373,19 @@ namespace DistributionWebApi.Models.VisaMapping
         public string AdditionalInfo { get; set; }
         //public List<VisaInformation> VisaInformation { get; set; }
         public BsonArray VisaInformation { get; set; }
-        public SAARCInfo SAARCInfo { get; set; }
+        public VisaSAARCInfo SAARCInfo { get; set; }
         public ReciprocalVisaInfo ReciprocalVisaInfo { get; set; }
-        public InternationalAdvisory InternationalAdvisory { get; set; }
-        public IVSAdvisory IVSAdvisory { get; set; }
+        public VisaInternationalAdvisory InternationalAdvisory { get; set; }
+        public VisaIVSAdvisory IVSAdvisory { get; set; }
 
         //public IntlHelpAddress IntlHelpAddress { get; set; }
         public BsonDocument IntlHelpAddress { get; set; }
 
         public string CountryCode { get; set; }
-        public IndianEmbassy IndianEmbassy { get; set; }
-        public CountryDetails CountryDetails { get; set; }
-        public DiplomaticRepresentation DiplomaticRepresentation { get; set; }
+        //public VisaIndianEmbassy IndianEmbassy { get; set; }
+        public BsonDocument IndianEmbassy { get; set; }
+        public VisaCountryDetails CountryDetails { get; set; }
+        public VisaDiplomaticRepresentation DiplomaticRepresentation { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -399,9 +399,10 @@ namespace DistributionWebApi.Models.VisaMapping
     [BsonIgnoreExtraElements]
     public class VisaDefinition
     {
-        [BsonId]
-        [Newtonsoft.Json.JsonProperty("_id")]
-        public object SystemVisaCode { get; set; }
+        //[BsonId]
+        //[Newtonsoft.Json.JsonProperty("_id")]
+        //public object SystemVisaCode { get; set; }
+
         /// <summary>
         /// Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
         /// </summary>

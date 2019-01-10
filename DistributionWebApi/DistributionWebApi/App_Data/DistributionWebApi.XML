@@ -1147,8 +1147,19 @@
             static object of Mongo DB Class
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCountries(System.String)" -->
-        <!-- Badly formed XML comment ignored for member "M:DistributionWebApi.Controllers.VisaMappingController.GetVisaMasters" -->
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCountries(System.String)">
+            <summary>
+            This will return all master key value pair related to Visa
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>A key value pair of Visa master attribute type and attribute values</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaMasters">
+            <summary>
+            This will return single Visa detail  key value pair related to CountryCode
+            </summary>
+            <returns>A key value pair of Visa master attribute type and attribute values</returns>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayModel">
              <summary>
             
