@@ -295,6 +295,7 @@
     <Compile Include="Models\TraceLog.cs" />
     <Compile Include="Models\UnifiedMappingModels.cs" />
     <Compile Include="Models\VisaDefinition.cs" />
+    <Compile Include="Models\VisaDefinition2.cs" />
     <Compile Include="Models\Visamasters.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />

@@ -1147,17 +1147,11 @@
             static object of Mongo DB Class
             </summary>
         </member>
-        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCountries(System.String)">
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCounttyCode(System.String)">
             <summary>
             This will return all master key value pair related to Visa
             </summary>
             <param name="CountryCode"></param>
-            <returns>A key value pair of Visa master attribute type and attribute values</returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaMasters">
-            <summary>
-            This will return single Visa detail  key value pair related to CountryCode
-            </summary>
             <returns>A key value pair of Visa master attribute type and attribute values</returns>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayModel">
@@ -7658,6 +7652,21 @@
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.VisaMapping.VisaDefinition.SupplierName">
+            <summary>
+            End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisaInformation2">
+            <summary>
+            This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierCode">
+            <summary>
+            Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierName">
             <summary>
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
