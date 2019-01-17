@@ -165,7 +165,7 @@ namespace DistributionWebApi.Controllers
                                         int TotalCategoryNodes = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"].ToList().Count;
                                         for (int r = 0; r < TotalCategoryNodes; r++)
                                         {
-                                            objCategoryFormNew.CategoryCode.Add(Convert.ToString( VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"][r]));
+                                            objCategoryFormNew.CategoryCode.Add(Convert.ToString(VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"][r]));
                                         }
                                         int TotalFormNodes = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"].ToList().Count;
                                         for (int r = 0; r < TotalFormNodes; r++)
@@ -189,8 +189,8 @@ namespace DistributionWebApi.Controllers
                                         objCategoryFormNew.Form.Add((string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"]);
                                         objCategoryFormNew.FormPath.Add((string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["FormPath"]);
                                         objVisaInformationNew.CategoryForms.CategoryForm.Add(objCategoryFormNew);
-                                    }                                
-                                                                   
+                                    }
+
                                 }
                             }
 
@@ -307,16 +307,32 @@ namespace DistributionWebApi.Controllers
                                             objVisaInformation2New.Information = new Information();
                                             int totalInformationLinks = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"].ToList().Count;
                                             objVisaInformation2New.Information.InformationLink = new List<InformationLink>();
-                                            for (int l = 0; l < totalInformationLinks; l++)
+
+                                            var TypeOfInformationLink = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"].GetType();
+                                            if (TypeOfInformationLink.Name.ToUpper() == "JOBJECT")
                                             {
                                                 InformationLink objInformationLinkNew = new InformationLink();
-                                                objInformationLinkNew.href = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["href"];
-                                                objInformationLinkNew.content = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["content"];
-                                                objInformationLinkNew.target = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["target"];
 
+                                                objInformationLinkNew.href = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"]["href"];
+                                                objInformationLinkNew.content = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"]["content"];
+                                                objInformationLinkNew.target = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"]["target"];
                                                 objVisaInformation2New.Information.InformationLink.Add(objInformationLinkNew);
-
                                             }
+                                            else
+                                            {
+                                                for (int l = 0; l < totalInformationLinks; l++)
+                                                {
+                                                    InformationLink objInformationLinkNew = new InformationLink();
+
+                                                    objInformationLinkNew.href = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["href"];
+                                                    objInformationLinkNew.content = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["content"];
+                                                    objInformationLinkNew.target = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["InformationLink"][l]["target"];
+
+                                                    objVisaInformation2New.Information.InformationLink.Add(objInformationLinkNew);
+
+                                                }
+                                            }
+
                                         }
                                     }
                                     else
@@ -329,6 +345,29 @@ namespace DistributionWebApi.Controllers
                                         objInformationLinkNew.content = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"];
                                         objVisaInformation2New.Information.InformationLink.Add(objInformationLinkNew);
 
+                                    }
+
+
+                                    if (VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"].ToList().Count != 0
+                                        && VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"] != null)
+                                    {
+                                        var ContentType = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"].GetType();
+                                        if (ContentType.Name.ToUpper() == "JARRAY")
+                                        {
+                                            objVisaInformation2New.Information.content = new List<string>();
+                                            int TotalContentRecords = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"].ToList().Count;
+                                            for (int t = 0; t < TotalContentRecords; t++)
+                                            {
+                                                objVisaInformation2New.Information.content.Add(Convert.ToString(VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"][t]));
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            objVisaInformation2New.Information.content = new List<string>();
+                                            int TotalContentRecords = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"].ToList().Count;
+                                            objVisaInformation2New.Information.content.Add(Convert.ToString(VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["VisaInfo"]["VisaInformation"]["Information"]["content"]));
+                                        }
                                     }
 
                                     //else
@@ -562,7 +601,7 @@ namespace DistributionWebApi.Controllers
 
                     }
 
-                    
+
                     #region Initialise collection
                     objVisa.CountryCode = (string)JobjectVisaDetail["CountryCode"];
                     objVisa.CountryDetails = new List<Models.VisaCountryDetails>();
@@ -572,7 +611,7 @@ namespace DistributionWebApi.Controllers
                     objVisa.IntlHelpAddress = new Models.VisaIntlHelpAddress();
                     objVisa.IVSAdvisory = new List<Models.VisaIVSAdvisory>();
                     objVisa.ReciprocalVisaInfo = new List<Models.ReciprocalVisaInfo>();
-                    objVisa.SAARCInfo = new List<Models.VisaSAARCInfo>(); 
+                    objVisa.SAARCInfo = new List<Models.VisaSAARCInfo>();
                     #endregion
 
 
