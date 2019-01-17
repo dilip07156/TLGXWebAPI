@@ -12,11 +12,25 @@ namespace DistributionWebApi.Models
     /// This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
     /// </summary>
 
+    public class InformationLink
+    {
+        public string href { get; set; }
+        public string content { get; set; }
+        public string target { get; set; }
+    }
+
+    public class Information
+    {
+        public List<InformationLink> InformationLink { get; set; }
+        public List<string> content { get; set; }
+    }
+
+
 
     [BsonIgnoreExtraElements]
     public class VisaInformation2
     {
-        public string Information { get; set; }
+        public Information Information { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -38,6 +52,7 @@ namespace DistributionWebApi.Models
         public string ProcessingTime { get; set; }
         public string VisaProcedure { get; set; }
         public string DocumentsRequired { get; set; }
+        public string content { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -46,10 +61,15 @@ namespace DistributionWebApi.Models
         public List<VisaInformationChildNode> Information { get; set; }
     }
 
+    public class Requirements
+    {
+        public string Line { get; set; }
+    }
+
     [BsonIgnoreExtraElements]
     public class VisaCategoryRequirements
     {
-        public string Requirements { get; set; }
+        public Requirements Requirements { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -65,13 +85,14 @@ namespace DistributionWebApi.Models
         public List<VisaCategoryInfo> CategoryInfo { get; set; }
         public List<VisaCategoryRequirements> CategoryRequirements { get; set; }
         public string Category { get; set; }
-        public List<CategoryNotes> CategoryNotes { get; set; }
+        public CategoryNotes CategoryNotes { get; set; }
         //public BsonDocument CategoryNotes { get; set; }
     }
 
     [BsonIgnoreExtraElements]
     public class VisaCategoryFee
     {
+
         public string CategoryCode { get; set; }
         public string Category { get; set; }
         public string CategoryFeeAmountINR { get; set; }
@@ -81,7 +102,7 @@ namespace DistributionWebApi.Models
     [BsonIgnoreExtraElements]
     public class VisaCategoryFees
     {
-        public List<VisaCategoryFee> Category { get; set; }
+        public List<List<VisaCategoryFee>> Category { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -92,12 +113,25 @@ namespace DistributionWebApi.Models
 
     [BsonIgnoreExtraElements]
     public class VisaInformation
-    {
+    {      
         public string TerritoryCity { get; set; }
         public List<VisaInfo> VisaInfo { get; set; }
         public List<VisaCategories> Categories { get; set; }
         public List<VisaCategoryFees> CategoryFees { get; set; }
-        public string CategoryForms { get; set; }
+        public CategoryForms CategoryForms { get; set; }
+    }
+
+
+    public class CategoryForm
+    {
+        public string CategoryCode { get; set; }
+        public string Form { get; set; }
+        public string FormPath { get; set; }
+    }
+
+    public class CategoryForms
+    {
+        public List<CategoryForm> CategoryForm { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -111,7 +145,7 @@ namespace DistributionWebApi.Models
         public string CountryID { get; set; }
         public string VisaRequired { get; set; }
         public string WhereToApply { get; set; }
-        public VisaWebsite Website { get; set; }
+        public string Website { get; set; }
         public string City { get; set; }
         public string County { get; set; }
         public string Name { get; set; }
@@ -280,10 +314,10 @@ namespace DistributionWebApi.Models
     [BsonIgnoreExtraElements]
     public class VisaHoliday
     {
-        public VisaMonth Month { get; set; }
+        public string Month { get; set; }
         public string HolidayName { get; set; }
         public string Year { get; set; }
-        public VisaDate Date { get; set; }
+        public string Date { get; set; }
     }
 
     [BsonIgnoreExtraElements]

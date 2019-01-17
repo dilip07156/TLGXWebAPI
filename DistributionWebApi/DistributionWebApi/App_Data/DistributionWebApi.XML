@@ -1147,9 +1147,9 @@
             static object of Mongo DB Class
             </summary>
         </member>
-        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCounttyCode(System.String)">
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCountryCode(System.String)">
             <summary>
-            This will return all master key value pair related to Visa
+            This will return all Visa details as per country code
             </summary>
             <param name="CountryCode"></param>
             <returns>A key value pair of Visa master attribute type and attribute values</returns>
@@ -7656,7 +7656,7 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.VisaInformation2">
+        <member name="T:DistributionWebApi.Models.InformationLink">
             <summary>
             This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
             </summary>
