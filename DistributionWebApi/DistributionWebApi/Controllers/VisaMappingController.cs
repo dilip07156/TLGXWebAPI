@@ -154,12 +154,43 @@ namespace DistributionWebApi.Controllers
                                 int TotalCategoryForms = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"].ToList().Count;
                                 for (int c = 0; c < TotalCategoryForms; c++)
                                 {
-                                    CategoryForm objCategoryFormNew = new CategoryForm();
-                                    objCategoryFormNew.CategoryCode = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"];
-                                    objCategoryFormNew.Form = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"];
-                                    objCategoryFormNew.FormPath = (string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["FormPath"];
+                                    var TypeOfCategoryCodeNode = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"].GetType();
 
-                                    objVisaInformationNew.CategoryForms.CategoryForm.Add(objCategoryFormNew);
+                                    if (TypeOfCategoryCodeNode.Name.ToUpper() == "JARRAY")
+                                    {
+                                        CategoryForm objCategoryFormNew = new CategoryForm();
+                                        objCategoryFormNew.CategoryCode = new List<string>();
+                                        objCategoryFormNew.Form = new List<string>();
+                                        objCategoryFormNew.FormPath = new List<string>();
+                                        int TotalCategoryNodes = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"].ToList().Count;
+                                        for (int r = 0; r < TotalCategoryNodes; r++)
+                                        {
+                                            objCategoryFormNew.CategoryCode.Add(Convert.ToString( VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"][r]));
+                                        }
+                                        int TotalFormNodes = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"].ToList().Count;
+                                        for (int r = 0; r < TotalFormNodes; r++)
+                                        {
+                                            objCategoryFormNew.Form.Add(Convert.ToString(VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"][r]));
+                                        }
+                                        int TotalFormPathNodes = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["FormPath"].ToList().Count;
+                                        for (int r = 0; r < TotalFormPathNodes; r++)
+                                        {
+                                            objCategoryFormNew.FormPath.Add(Convert.ToString(VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["FormPath"][r]));
+                                        }
+                                        objVisaInformationNew.CategoryForms.CategoryForm.Add(objCategoryFormNew);
+                                    }
+                                    else
+                                    {  // It is a object containing single value
+                                        CategoryForm objCategoryFormNew = new CategoryForm();
+                                        objCategoryFormNew.CategoryCode = new List<string>();
+                                        objCategoryFormNew.Form = new List<string>();
+                                        objCategoryFormNew.FormPath = new List<string>();
+                                        objCategoryFormNew.CategoryCode.Add((string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["CategoryCode"]);
+                                        objCategoryFormNew.Form.Add((string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["Form"]);
+                                        objCategoryFormNew.FormPath.Add((string)VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryForms"]["CategoryForm"][c]["FormPath"]);
+                                        objVisaInformationNew.CategoryForms.CategoryForm.Add(objCategoryFormNew);
+                                    }                                
+                                                                   
                                 }
                             }
 
@@ -168,7 +199,8 @@ namespace DistributionWebApi.Controllers
 
 
 
-                            if (VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryFees"].ToList().Count > 0)
+                            if (VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryFees"] != null &&
+                                VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["CategoryFees"].ToList().Count > 0)
                             {
                                 objVisaInformationNew.CategoryFees = new List<VisaCategoryFees>();
                                 objVisaInformationNew.CategoryFees.Add(new VisaCategoryFees());
@@ -310,7 +342,8 @@ namespace DistributionWebApi.Controllers
 
                                 #region categories
 
-                                if (VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["Categories"]["Category"].ToList().Count > 0)
+                                if (VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["Categories"] != null &&
+                                    VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["Categories"]["Category"].ToList().Count > 0)
                                 {
                                     int totalCategoriesCount = VisaJson["VisaDetail"]["Visa"]["VisaInformation"][i]["Categories"]["Category"].ToList().Count;
                                     objVisaInformationNew.Categories = new List<VisaCategories>();
@@ -529,7 +562,8 @@ namespace DistributionWebApi.Controllers
 
                     }
 
-                    //objVisa.AdditionalInfo = (string)JobjectVisaDetail["AdditionalInfo"];
+                    
+                    #region Initialise collection
                     objVisa.CountryCode = (string)JobjectVisaDetail["CountryCode"];
                     objVisa.CountryDetails = new List<Models.VisaCountryDetails>();
                     objVisa.DiplomaticRepresentation = new List<VisaDiplomaticRepresentation>();
@@ -538,7 +572,8 @@ namespace DistributionWebApi.Controllers
                     objVisa.IntlHelpAddress = new Models.VisaIntlHelpAddress();
                     objVisa.IVSAdvisory = new List<Models.VisaIVSAdvisory>();
                     objVisa.ReciprocalVisaInfo = new List<Models.ReciprocalVisaInfo>();
-                    objVisa.SAARCInfo = new List<Models.VisaSAARCInfo>();
+                    objVisa.SAARCInfo = new List<Models.VisaSAARCInfo>(); 
+                    #endregion
 
 
                     #region ReciprocalInfo

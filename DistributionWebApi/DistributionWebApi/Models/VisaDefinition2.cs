@@ -124,9 +124,9 @@ namespace DistributionWebApi.Models
 
     public class CategoryForm
     {
-        public string CategoryCode { get; set; }
-        public string Form { get; set; }
-        public string FormPath { get; set; }
+        public List<string> CategoryCode { get; set; }
+        public List<string> Form { get; set; }
+        public List<string> FormPath { get; set; }
     }
 
     public class CategoryForms
