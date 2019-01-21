@@ -113,6 +113,7 @@ namespace DistributionWebApi.Models.Activity
     /// <summary>
     /// This response gives the Full Static Data definition for the Activity. It is a standardised format containing the static data of the Individual Supplier.
     /// </summary>
+    [BsonIgnoreExtraElements]
     public class ActivityDefinition
     {
 

@@ -5268,6 +5268,11 @@
             Price Valid up to date (Not all supplier provides this)
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PackageSupplier">
+            <summary>
+            End supplier
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">
             <summary>
             For Future Use to handle Mapping to Extenal Systems
