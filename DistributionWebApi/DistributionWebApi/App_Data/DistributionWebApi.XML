@@ -1142,6 +1142,18 @@
             <param name="RQ">Combination of Hotel and Room mapping request.</param>
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
+        <member name="F:DistributionWebApi.Controllers.VisaMappingController._database">
+            <summary>
+            static object of Mongo DB Class
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCounttyCode(System.String)">
+            <summary>
+            This will return all master key value pair related to Visa
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>A key value pair of Visa master attribute type and attribute values</returns>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayModel">
              <summary>
             
@@ -5256,6 +5268,11 @@
             Price Valid up to date (Not all supplier provides this)
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PackageSupplier">
+            <summary>
+            End supplier
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">
             <summary>
             For Future Use to handle Mapping to Extenal Systems
@@ -7627,6 +7644,71 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.RoomMapId">
             <summary>
             Nakshatra room type mapping id.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisaMapping.VisaInformation2">
+            <summary>
+            This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaMapping.VisaDefinition.SupplierCode">
+            <summary>
+            Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaMapping.VisaDefinition.SupplierName">
+            <summary>
+            End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisaInformation2">
+            <summary>
+            This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierCode">
+            <summary>
+            Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierName">
+            <summary>
+            End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Visamaster">
+            <summary>
+            Activity related masters
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.Type">
+            <summary>
+            attribute type master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.ParentType">
+            <summary>
+            parent attribute type master if exists
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.Values">
+            <summary>
+            values of the attribute master
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisamasterValues">
+            <summary>
+            structure for values of the attribute master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisamasterValues.Value">
+            <summary>
+            attribute value
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisamasterValues.ParentValue">
+            <summary>
+            parent attribute value if exists
             </summary>
         </member>
         <member name="T:DistributionWebApi.NLogHelper.NLogger">
