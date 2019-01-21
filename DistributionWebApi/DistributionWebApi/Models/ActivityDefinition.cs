@@ -982,6 +982,10 @@ namespace DistributionWebApi.Models.Activity
         /// Price Valid up to date (Not all supplier provides this)
         /// </summary>
         public string ValidTo { get; set; }
+        /// <summary>
+        /// End supplier
+        /// </summary>
+        public string PackageSupplier { get; set; }
     }
 
     /// <summary>
