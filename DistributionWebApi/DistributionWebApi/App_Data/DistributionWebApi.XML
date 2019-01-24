@@ -7661,14 +7661,766 @@
             This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierCode">
+        <member name="P:DistributionWebApi.Models.InformationLink.href">
+            <summary>
+            contain href information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.InformationLink.content">
+            <summary>
+            contain content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.InformationLink.target">
+            <summary>
+            contain target information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Information.InformationLink">
+            <summary>
+            contain list of information links node having information like content,target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Information.content">
+            <summary>
+            Hold List of content
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationNode.Information">
+            <summary>
+            hold list of information nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInformation.GeneralInfo">
+            <summary>
+            Contain visa general information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInfo.VisaInformation">
+            <summary>
+            hold list of visa inforrmation 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInfo.VisaGeneralInformation">
+            <summary>
+            hold list of visa General inforrmation 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.ProcessingTime">
+            <summary>
+            Contain visa processing time 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.VisaProcedure">
+            <summary>
+            Contain visa Procedure information 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.DocumentsRequired">
+            <summary>
+            Contain Documents required to get visa 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.content">
+            <summary>
+            Contain content Information  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryInfo.Information">
+            <summary>
+            Contain list of information like processing time and visa procedure  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Requirements.Line">
+            <summary>
+            Contain Information about Requirements  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryRequirements.Requirements">
+            <summary>
+            Contain Requirements node  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryNotes.Notes">
+            <summary>
+            hold list of notes of category requirement node  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryCode">
+            <summary>
+            Contain Category code  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryInfo">
+            <summary>
+            Holds list of category information nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryRequirements">
+            <summary>
+            Holds list of category requirements nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.Category">
+            <summary>
+            Contain the type of Visa category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryNotes">
+            <summary>
+            Contain the category notes of Visa 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryCode">
+            <summary>
+            Contain Category Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.Category">
+            <summary>
+            Contain Category name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryFeeAmountINR">
+            <summary>
+            Contain Category fee in  Indian Currency
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryFeeAmountOther">
+            <summary>
+            Contain Category fee in  Other Currency
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFees.Category">
+            <summary>
+            Contain list of visa category fee
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategories.Category">
+            <summary>
+            Contain list of visa category 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.TerritoryCity">
+            <summary>
+            Contain Terror city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.VisaInfo">
+            <summary>
+            Contain List of Visa Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.Categories">
+            <summary>
+            Contain List of Visa Categories Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.CategoryFees">
+            <summary>
+            Contain List of Visa Category Fees Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.CategoryForms">
+            <summary>
+            Contain Category Form Node
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.CategoryCode">
+            <summary>
+            Contain List of Category Codes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.Form">
+            <summary>
+            Contain List of Form Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.FormPath">
+            <summary>
+            Contain List of Form Path Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForms.CategoryForm">
+            <summary>
+            Contain List of Visa Category Form Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.CountryID">
+            <summary>
+            Contain Code of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.VisaRequired">
+            <summary>
+            Contain visa required Yes or No
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.WhereToApply">
+            <summary>
+            Contain the location where to apply for visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Website">
+            <summary>
+            Contain the web site information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.City">
+            <summary>
+            Contain the city name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.County">
+            <summary>
+            Contain the Country name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Name">
+            <summary>
+            Contain the Name of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.PinCode">
+            <summary>
+            Contain the Pin code of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Address">
+            <summary>
+            Contain the Address of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Telephone">
+            <summary>
+            Contain the telephone of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Fax">
+            <summary>
+            Contain the fax number of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffices.CountryOffice">
+            <summary>
+            holds the list of country office to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaSAARCInfo.CountryOffices">
+            <summary>
+            holds the list of country office to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationLink.href">
+            <summary>
+            contain the href of a link
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:DistributionWebApi.Models.VisaInformationLink.content" -->
+        <!-- Badly formed XML comment ignored for member "P:DistributionWebApi.Models.VisaInformationLink.target" -->
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfoChildNode.InformationLink">
+            <summary>
+            hold the list of information links having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfoChildNode.content">
+            <summary>
+            hold the list of Content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescription.ReciprocalVisaInfo">
+            <summary>
+            hold the list of reciprocal visa info nodes having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfo.Description">
+            <summary>
+            hold the list of description nodes having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescriptionInnerNode.VisaInternationalAdvisory">
+            <summary>
+            contain the information of visa international advisory 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInternationalAdvisory.Description">
+            <summary>
+            hold the list of visa international advisory information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHeading.Description">
+            <summary>
+            hold the list of description information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHeading.content">
+            <summary>
+            Contains the content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescriptionNode.Heading">
+            <summary>
+            hold the list of Visa heading information like content, description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIVSAdvisory.Description">
+            <summary>
+            hold the list of Visa IVS advisory information like description, content
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Phone">
+            <summary>
+            Contain phone number of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Country">
+            <summary>
+            Contain Country name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Website">
+            <summary>
+            Contain name of web site of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.City">
+            <summary>
+            Contain city name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Fax">
+            <summary>
+            Contain fax name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.URL">
+            <summary>
+            Contain fax name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Name">
+            <summary>
+            Contain URL of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.PinCode">
+            <summary>
+            Contain pincode of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Address">
+            <summary>
+            Contain Address of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIntlHelpAddress.HelpAddress">
+            <summary>
+            hold list of help address to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Email">
+            <summary>
+            Contain Email Id of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Address">
+            <summary>
+            Contain Address of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Phone">
+            <summary>
+            Contain phone number of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Country">
+            <summary>
+            Contain country name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCountryCode">
+            <summary>
+            Contain system country code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCountryName">
+            <summary>
+            Contain system country name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Website">
+            <summary>
+            Contain Web site name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.City">
+            <summary>
+            Contain Web city name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCityCode">
+            <summary>
+            Contain system city code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCityName">
+            <summary>
+            Contain system city name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Fax">
+            <summary>
+            Contain fax number of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.URL">
+            <summary>
+            Contain URL of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Name">
+            <summary>
+            Contain name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.PinCode">
+            <summary>
+            Contain pin code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIndianEmbassy.Office">
+            <summary>
+            hold list of visa office information like email, phone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.SmallMap">
+            <summary>
+            Contain path of image of small map
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Languages">
+            <summary>
+            Contain Languages spoken in country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Time">
+            <summary>
+            Contain time zone of country  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Capital">
+            <summary>
+            Contain capital of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Flag">
+            <summary>
+            Contain path of image of flag for a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Code">
+            <summary>
+            Contain Code of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Area">
+            <summary>
+            describes area of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Currency">
+            <summary>
+            Contain currency used within country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.LargeMap">
+            <summary>
+            Contain path of image of large map
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Population">
+            <summary>
+            Contain approximate population of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.WorldFactBook">
+            <summary>
+            Contain URL of a country Fact book
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.NationalDay">
+            <summary>
+            Contain national day of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Location">
+            <summary>
+            Contain location of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Month">
+            <summary>
+            Contain name of a month for particular holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.HolidayName">
+            <summary>
+            Contain name of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Year">
+            <summary>
+            Contain year of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Date">
+            <summary>
+            Contain date of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHolidays.Holiday">
+            <summary>
+            list of holiday information like month, date and year
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirline.Code">
+            <summary>
+            list of code of a airline
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirline.Name">
+            <summary>
+            list of name of a airline
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirlines.Airline">
+            <summary>
+            list of air line information like code and name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryName.Name">
+            <summary>
+            contains the name of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Type">
+            <summary>
+            contains the type of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Code">
+            <summary>
+            contains the code of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Name">
+            <summary>
+            contains the name of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirports.Airport">
+            <summary>
+            hold a list of airports information like type and code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.GeneralInfo">
+            <summary>
+            Hold list of general information like location, language
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Holidays">
+            <summary>
+            Hold list of holiday information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Airlines">
+            <summary>
+            Hold list of visa Air line information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.CountryName">
+            <summary>
+            Hold list of country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Airports">
+            <summary>
+            Hold list of visa Air port information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Timings">
+            <summary>
+            Contain working timing of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Email">
+            <summary>
+            Contain Email id of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Address">
+            <summary>
+            Contain Address of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Telephone">
+            <summary>
+            Contain telephone number of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.VisaTimings">
+            <summary>
+            Contain Visa timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Website">
+            <summary>
+            Contain website name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.City">
+            <summary>
+            Contain city name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Name">
+            <summary>
+            Contain city name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.PinCode">
+            <summary>
+            Contain pin code of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Phone">
+            <summary>
+            Contain phone number of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.CollectionTimings">
+            <summary>
+            Contain Collection timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Country">
+            <summary>
+            Contain country name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.PublicTimings">
+            <summary>
+            Contain public timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Fax">
+            <summary>
+            Contain fax name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Notes">
+            <summary>
+            Contain notes if any of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffices.Office">
+            <summary>
+            Holds the List of Visa Information offices available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDiplomaticRepresentation.Offices">
+            <summary>
+            Holds the List of Visa Information offices available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.AdditionalInfo">
+            <summary>
+            Contain Additional Info
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.VisaInformation">
+            <summary>
+            Holds the List of Visa Information Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.SAARCInfo">
+            <summary>
+            Holds the List of Saarc Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.ReciprocalVisaInfo">
+            <summary>
+            Holds the List of Reciprocal Visa Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.InternationalAdvisory">
+            <summary>
+            Holds the List of International Advisory Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IVSAdvisory">
+            <summary>
+            Holds the List of IVS Advisory Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IntlHelpAddress">
+            <summary>
+            Holds the International help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.CountryCode">
+            <summary>
+            Contain Country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IndianEmbassy">
+            <summary>
+            Holds the List of Indian Embassy
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.CountryDetails">
+            <summary>
+            Holds the List of Country details nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.DiplomaticRepresentation">
+            <summary>
+            Holds the List of Diplomatic Representation nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.CountryCode">
+            <summary>
+            Contain Country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.CountryName">
+            <summary>
+            Contain Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.Visa">
+            <summary>
+            Holds list of Visa Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.SupplierCode">
             <summary>
             Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.VisaDefinition2.SupplierName">
+        <member name="P:DistributionWebApi.Models.VisaDefinition.CallType">
+            <summary>
+            Holds the Call type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.SupplierName">
             <summary>
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.VisaDetail">
+            <summary>
+            holds a list of Visa Details
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Visamaster">
