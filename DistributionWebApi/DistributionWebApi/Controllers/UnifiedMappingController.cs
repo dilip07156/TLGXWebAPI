@@ -67,6 +67,7 @@ namespace DistributionWebApi.Controllers
                         var SupplierProductCodes = RQ.MappingRequests.Where(w => w.SupplierProductCode != null).Select(x => x.SupplierProductCode.ToUpper()).Distinct().ToArray();
                         var SupplierRoomTypeIds = RQ.MappingRequests.SelectMany(p => p.SupplierRoomTypes.Where(w => w.SupplierRoomId != null).Select(s => s.SupplierRoomId.ToUpper())).Distinct().ToArray();
                         var SupplierRoomTypeCodes = RQ.MappingRequests.SelectMany(p => p.SupplierRoomTypes.Where(w => w.SupplierRoomTypeCode != null).Select(s => s.SupplierRoomTypeCode.ToUpper())).Distinct().ToArray();
+                        var TLGXCompanyId = RQ.MappingRequests.Where(w => w.TLGXCompanyId != null).Select(x => x.TLGXCompanyId.ToUpper()).Distinct().ToArray();
 
                         #endregion Variable Declaration and Initialization
 
@@ -96,6 +97,7 @@ namespace DistributionWebApi.Controllers
                         FilterDefinition<BsonDocument> filterAccoMaster;
                         filterAccoMaster = Builders<BsonDocument>.Filter.Empty;
                         filterAccoMaster = filterAccoMaster & Builders<BsonDocument>.Filter.AnyIn("_id", searchedHotelMappingData.Select(s => Convert.ToInt32(s.SystemProductCode)));
+                        filterAccoMaster = filterAccoMaster & Builders<BsonDocument>.Filter.AnyIn("AccomodationCompanyVersions.CompanyId", TLGXCompanyId);
                         ProjectionDefinition<BsonDocument> projectAccoMaster = Builders<BsonDocument>.Projection.Include("_id");
                         projectAccoMaster = projectAccoMaster.Include("IsRoomMappingCompleted");
                         projectAccoMaster = projectAccoMaster.Include("CountryCode");
@@ -108,6 +110,7 @@ namespace DistributionWebApi.Controllers
                         projectAccoMaster = projectAccoMaster.Include("ProductCategorySubType");
                         projectAccoMaster = projectAccoMaster.Include("Brand");
                         projectAccoMaster = projectAccoMaster.Include("Chain");
+                        projectAccoMaster = projectAccoMaster.Include("AccomodationCompanyVersions");
                         var searchAccoMasterResult = collectionAccommodationMaster.Find(filterAccoMaster).Project(projectAccoMaster).ToList();
                         searchedAccomodationSearchData = JsonConvert.DeserializeObject<List<DC_AccomodationMasterMapping>>(searchAccoMasterResult.ToJson());
                         #endregion Fetch Accommodation Master
@@ -161,20 +164,47 @@ namespace DistributionWebApi.Controllers
                             {
                                 var Acco = searchedAccomodationSearchData.Where(w => w.CommonHotelId == Convert.ToInt32(HotelMapping.SystemProductCode)).FirstOrDefault();
 
-                                mappingResponse.CommonHotelId = HotelMapping.SystemProductCode;
-                                mappingResponse.ProductMapId = HotelMapping.MapId;
-                                mappingResponse.TlgxAccoId = HotelMapping.TlgxMdmHotelId;
-                                mappingResponse.TlgxAccoName = (Acco == null ? string.Empty : Acco.HotelName);
-                                mappingResponse.ContainsRoomMappings = (Acco == null ? false : Acco.IsRoomMappingCompleted);
-                                mappingResponse.SystemCityCode = (Acco == null ? string.Empty : Acco.CityCode);
-                                mappingResponse.SystemCityName = (Acco == null ? string.Empty : Acco.CityName);
-                                mappingResponse.SystemCountryCode = (Acco == null ? string.Empty : Acco.CountryCode);
-                                mappingResponse.SystemCountryName = (Acco == null ? string.Empty : Acco.CountryName);
-                                mappingResponse.SystemStateCode = (Acco == null ? string.Empty : Acco.StateCode);
-                                mappingResponse.SystemStateName = (Acco == null ? string.Empty : Acco.StateName);
-                                mappingResponse.ProductSubType = (Acco == null ? string.Empty : Acco.ProductCategorySubType);
-                                mappingResponse.Chain = (Acco == null ? string.Empty : Acco.Chain);
-                                mappingResponse.Brand = (Acco == null ? string.Empty : Acco.Brand);
+
+                                if (Acco != null && Acco.AccomodationCompanyVersions != null)
+                                {
+                                    var companyVersion = Acco.AccomodationCompanyVersions.Where(x => x.CompanyId == mappingRequest.TLGXCompanyId).SingleOrDefault();
+
+                                    mappingResponse.CommonHotelId = HotelMapping.SystemProductCode;
+                                    mappingResponse.ProductMapId = HotelMapping.MapId;
+                                    mappingResponse.TlgxAccoId = companyVersion.TLGXAccoId;
+                                    mappingResponse.TlgxAccoName = companyVersion.ProductName;
+                                    mappingResponse.ContainsRoomMappings = (Acco == null ? false : Acco.IsRoomMappingCompleted);
+                                    mappingResponse.SystemCityCode = (Acco == null ? string.Empty : Acco.CityCode);
+                                    mappingResponse.SystemCityName = (Acco == null ? string.Empty : Acco.CityName);
+                                    mappingResponse.SystemCountryCode = (Acco == null ? string.Empty : Acco.CountryCode);
+                                    mappingResponse.SystemCountryName = (Acco == null ? string.Empty : Acco.CountryName);
+                                    mappingResponse.SystemStateCode = (Acco == null ? string.Empty : Acco.StateCode);
+                                    mappingResponse.SystemStateName = (Acco == null ? string.Empty : Acco.StateName);
+                                    mappingResponse.ProductSubType = companyVersion.ProductCatSubType;
+                                    mappingResponse.Chain = companyVersion.Chain;
+                                    mappingResponse.Brand = companyVersion.Brand;
+                                    mappingResponse.TlgxCompanyId = companyVersion.CompanyId;
+                                    mappingResponse.TlgxCompanyHotelId = companyVersion.CommonProductId;
+                                }
+                                else
+                                {
+                                    mappingResponse.CommonHotelId = HotelMapping.SystemProductCode;
+                                    mappingResponse.ProductMapId = HotelMapping.MapId;
+                                    mappingResponse.TlgxAccoId = HotelMapping.TlgxMdmHotelId;
+                                    mappingResponse.TlgxAccoName = (Acco == null ? string.Empty : Acco.HotelName);
+                                    mappingResponse.ContainsRoomMappings = (Acco == null ? false : Acco.IsRoomMappingCompleted);
+                                    mappingResponse.SystemCityCode = (Acco == null ? string.Empty : Acco.CityCode);
+                                    mappingResponse.SystemCityName = (Acco == null ? string.Empty : Acco.CityName);
+                                    mappingResponse.SystemCountryCode = (Acco == null ? string.Empty : Acco.CountryCode);
+                                    mappingResponse.SystemCountryName = (Acco == null ? string.Empty : Acco.CountryName);
+                                    mappingResponse.SystemStateCode = (Acco == null ? string.Empty : Acco.StateCode);
+                                    mappingResponse.SystemStateName = (Acco == null ? string.Empty : Acco.StateName);
+                                    mappingResponse.ProductSubType = (Acco == null ? string.Empty : Acco.ProductCategorySubType);
+                                    mappingResponse.Chain = (Acco == null ? string.Empty : Acco.Chain);
+                                    mappingResponse.Brand = (Acco == null ? string.Empty : Acco.Brand);
+                                    mappingResponse.TlgxCompanyId = (Acco == null ? string.Empty : (Acco.AccomodationCompanyVersions.Where(x => x.CompanyId == mappingRequest.TLGXCompanyId).SingleOrDefault().CompanyId) ?? null);
+                                    mappingResponse.TlgxCompanyHotelId = (Acco == null ? string.Empty : (Acco.AccomodationCompanyVersions.Where(x => x.CompanyId == mappingRequest.TLGXCompanyId).SingleOrDefault().CompanyProductId) ?? null);
+                                }
                             }
 
                             var RoomMappings = searchedRoomMappingData.Where(w => w.supplierCode == mappingRequest.SupplierCode && w.SupplierProductId == mappingRequest.SupplierProductCode).Select(s => s).ToList();

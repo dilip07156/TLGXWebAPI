@@ -7335,6 +7335,11 @@
             Supplier Product Code received in the Supplier Availability Response.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request.TLGXCompanyId">
+            <summary>
+            Supplier Product Company Id received in the Supplier Availability Response.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request.SupplierRoomTypes">
             <summary>
             Collection of Supplier Room Types
@@ -7519,6 +7524,16 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SupplierProductCode">
             <summary>
             Supplier Product Code received in the Supplier Availability Response.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxCompanyId">
+            <summary>
+            Tlgx Specified Unique Company Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxCompanyHotelId">
+            <summary>
+            Tlgx Specified Unique Company Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.CommonHotelId">
