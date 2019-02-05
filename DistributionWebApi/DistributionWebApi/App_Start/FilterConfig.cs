@@ -103,13 +103,16 @@ namespace DistributionWebApi
             nlog.URL = filterContext.Request.RequestUri.OriginalString;
             nlog.Controller = filterContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerType.FullName;
             nlog.Action = ((System.Web.Http.Controllers.ReflectedHttpActionDescriptor)filterContext.ActionContext.ActionDescriptor).ActionName;
-            nlog.Parameter = Newtonsoft.Json.JsonConvert.SerializeObject(((System.Net.Http.ObjectContent)filterContext.Response.Content).Value);
+            if (filterContext.Response != null)
+            {
+                nlog.Parameter = Newtonsoft.Json.JsonConvert.SerializeObject(((System.Net.Http.ObjectContent)filterContext.Response.Content).Value);
+                nlog.Token = filterContext.Request.Headers.Contains("Token") ? filterContext.Request.Headers.GetValues("Token").FirstOrDefault() : string.Empty;
+                nlog.TraceId = filterContext.Request.GetCorrelationId().ToString();
+                nlog.HostIp = filterContext.Request.RequestUri.Authority;
+            }
             nlog.MessageType = "Response";
             nlog.Username = string.Empty;
-            nlog.Token = filterContext.Request.Headers.Contains("Token") ? filterContext.Request.Headers.GetValues("Token").FirstOrDefault() : string.Empty;
-            nlog.TraceId = filterContext.Request.GetCorrelationId().ToString();
             nlog.Application = "TLGX_WEBAPI";
-            nlog.HostIp = filterContext.Request.RequestUri.Authority;
             nlog.TotalRecords = 0;
             nlog.ResponseTime = (ResponseDatetime - RequestDatetime).TotalMilliseconds;
 

@@ -221,9 +221,12 @@
     <Compile Include="App_Start\ElasticRepositoryBase.cs" />
     <Compile Include="App_Start\ExceptionFilterConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\GlobalWapiExceptionHandler.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NLogCustomTarget.cs" />
+    <Compile Include="App_Start\NlogElkExceptionLogger.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SetupFiltersExtensions.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -280,6 +283,7 @@
     <Compile Include="Models\AccomodationMaster.cs" />
     <Compile Include="Models\ElasticIndexDetailsAttribute.cs" />
     <Compile Include="Models\EntityBase.cs" />
+    <Compile Include="Models\ErrorLog.cs" />
     <Compile Include="Models\HolidayModel.cs" />
     <Compile Include="Models\HolidaySubModels.cs" />
     <Compile Include="Models\ProductStaticModel.cs" />
@@ -297,6 +301,7 @@
     <Compile Include="Models\VisaDefinition.cs" />
     <Compile Include="Models\VisaDefinition2.cs" />
     <Compile Include="Models\Visamasters.cs" />
+    <Compile Include="Models\WapiException.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />
     <Compile Include="NLogHelper\Nlogger_Target.cs" />
