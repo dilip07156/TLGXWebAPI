@@ -762,6 +762,20 @@
             <param name="TourCode"></param>
             <returns>Detailed information about Holiday</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.HolidaySearch(DistributionWebApi.Models.HolidaySearchRequestParams)">
+            <summary>
+            Get Holiday Search details 
+            </summary>
+            <param name="HolidaySearchRequestParams"></param>
+            <returns>Returns list of Holiday search response</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.GetHolidayByNakshatraHolidayId(System.String)">
+            <summary>
+            Returns a single Holiday Object for nakshatra Holiday Id
+            </summary>
+            <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
+            <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -1518,11 +1532,6 @@
         <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.TotalPage">
             <summary>
             What is the total number of pages in the response
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.Message">
-            <summary>
-            Error Messages will appear here
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.Holidays">

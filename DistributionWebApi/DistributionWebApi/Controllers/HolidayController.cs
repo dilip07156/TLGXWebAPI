@@ -36,8 +36,10 @@ namespace DistributionWebApi.Controllers
         /// </summary>
         /// <param name="TourCode"></param>
         /// <returns>Detailed information about Holiday</returns>
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [Obsolete]
         [HttpGet]
-        [Route("System/{TourCode}")]
+        [Route("{TourCode}")]
         [ResponseType(typeof(List<HolidayModel>))]
         public async Task<HttpResponseMessage> GetHolidayMappingByCode(string TourCode)
         {
@@ -73,11 +75,15 @@ namespace DistributionWebApi.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Get Holiday Search details 
+        /// </summary>
+        /// <param name="HolidaySearchRequestParams"></param>
+        /// <returns>Returns list of Holiday search response</returns>
         [HttpPost]
-        [Route("System/GetHolidaySearch")]
+        [Route("Search")]
         [ResponseType(typeof(HolidayMappingSearchResult))]
-        public async Task<HttpResponseMessage> GetHolidaySearch(HolidaySearchRequestParams HolidaySearchRequestParams)
+        public async Task<HttpResponseMessage> HolidaySearch(HolidaySearchRequestParams HolidaySearchRequestParams)
         {
 
             try
@@ -113,7 +119,6 @@ namespace DistributionWebApi.Controllers
                     {
                         var escapedSupplierName = Regex.Escape(HolidaySearchRequestParams.Supplier);
                         filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(escapedSupplierName, RegexOptions.IgnoreCase)));
-                        //filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Eq(x => x.SupplierName.ToLower(), HolidaySearchRequestParams.Supplier.ToLower());
                     }
                     if (!string.IsNullOrEmpty(HolidaySearchRequestParams.MappingStatus))
                     {
@@ -138,7 +143,7 @@ namespace DistributionWebApi.Controllers
 
                     if (HolidaySearchRequestParams.IsTravelFrequencyMissing)
                     {
-                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Size(x => x.TravelFrequency, 0);                       
+                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Size(x => x.TravelFrequency, 0);
                     }
 
                     if (HolidaySearchRequestParams.IsStayTypeMissing)
@@ -148,11 +153,11 @@ namespace DistributionWebApi.Controllers
 
                     if (HolidaySearchRequestParams.IsTravelFrequencyMissing)
                     {
-                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Size(x => x.TravelFrequency, 0);                    
+                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Size(x => x.TravelFrequency, 0);
                     }
                     if (HolidaySearchRequestParams.IsPaceOfHolidayMissing)
                     {
-                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Eq(x => x.PaceOfHoliday, null);                    
+                        filter = filter & Builders<DistributionWebApi.Models.HolidayModel>.Filter.Eq(x => x.PaceOfHoliday, null);
                     }
 
                     if (HolidaySearchRequestParams.IsUSPMissing)
@@ -163,9 +168,9 @@ namespace DistributionWebApi.Controllers
                     var TotalRecords = await collectionHolidayMapping.Find(filter).CountDocumentsAsync();
 
                     List<HolidayModel> searchedData = new List<HolidayModel>();
-              
+
                     if (TotalRecords != 0 && HolidaySearchRequestParams.PageSize != 0)
-                    {                     
+                    {
                         searchedData = await collectionHolidayMapping.Find(filter).Skip(HolidaySearchRequestParams.PageSize * HolidaySearchRequestParams.PageNo).Limit(HolidaySearchRequestParams.PageSize).ToListAsync();
 
 
@@ -207,6 +212,41 @@ namespace DistributionWebApi.Controllers
                 }
                 else
                     return null;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// Returns a single Holiday Object for nakshatra Holiday Id
+        /// </summary>
+        /// <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
+        /// <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
+        [HttpGet]
+        [Route("Get/{NakshtraHolidayid}")]
+        [ResponseType(typeof(HolidayModel))]
+        public async Task<HttpResponseMessage> GetHolidayByNakshatraHolidayId(string NakshtraHolidayid)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<HolidayModel> collectionHolidayModelMapping = _database.GetCollection<HolidayModel>("HolidayMapping");
+
+                FilterDefinition<HolidayModel> filter;
+                filter = Builders<HolidayModel>.Filter.Empty;
+
+                filter = filter & Builders<HolidayModel>.Filter.Eq(x => x.NakshatraHolidayId, NakshtraHolidayid);
+
+                var searchResult = await collectionHolidayModelMapping.Find(filter).FirstOrDefaultAsync();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                return response;
 
             }
             catch (Exception ex)

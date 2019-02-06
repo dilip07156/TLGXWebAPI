@@ -25,7 +25,7 @@ namespace DistributionWebApi.Models
 
         //public bool TLGX { get; set; }
 
-       // public bool Overlay { get; set; }
+        // public bool Overlay { get; set; }
 
 
     }
@@ -48,10 +48,6 @@ namespace DistributionWebApi.Models
         /// What is the total number of pages in the response
         /// </summary>
         public int TotalPage { get; set; }
-        /// <summary>
-        /// Error Messages will appear here
-        /// </summary>
-        public string Message { get; set; }
         /// <summary>
         /// A List containing the Activities matching the Search Request
         /// </summary>
