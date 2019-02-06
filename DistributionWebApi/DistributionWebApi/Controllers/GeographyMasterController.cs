@@ -38,20 +38,13 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(List<Country>))]
         public async Task<HttpResponseMessage> GetAllContries()
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<Country>("CountryMaster");
-                var result = await collection.Find(bson => true).SortBy(s => s.CountryName).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Country>("CountryMaster");
+            var result = await collection.Find(bson => true).SortBy(s => s.CountryName).ToListAsync();
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
+
         }
 
         /// <summary>
@@ -358,7 +351,7 @@ namespace DistributionWebApi.Controllers
             try
             {
                 ZoneSearchRS zoneResult = new ZoneSearchRS();
-               
+
                 if (RQ.PageSize == 0)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Page Size should be greater than Zero.");
@@ -409,7 +402,7 @@ namespace DistributionWebApi.Controllers
                                 TLGXCountryCode = x.TLGXCountryCode,
                                 Zone_Name = x.Zone_Name,
                                 Zone_SubType = x.Zone_SubType,
-                                Zone_Type = x.Zone_Type,  
+                                Zone_Type = x.Zone_Type,
                             }).Skip(RQ.PageNo * RQ.PageSize).Limit(RQ.PageSize).ToListAsync();
                             zoneResult.Zones = result;
                             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
@@ -467,7 +460,7 @@ namespace DistributionWebApi.Controllers
                 {
                     var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
                     var searchResult = await collection.Find(x => x._id == RQ.ZoneId.ToUpper()).ToListAsync();
-                    if (searchResult != null && searchResult.Count>0)
+                    if (searchResult != null && searchResult.Count > 0)
                     {
                         var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius }).FirstOrDefault();
                         if (details != null)
@@ -523,7 +516,7 @@ namespace DistributionWebApi.Controllers
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest, "No zone found");
                     }
-                    
+
                 }
                 else
                 {
