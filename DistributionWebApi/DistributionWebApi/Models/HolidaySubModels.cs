@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,30 @@ namespace DistributionWebApi.Models
     }
     #endregion
 
+    /// <summary>
+    /// Structure for Holiday.Interests,Holiday.TravellerType.subType
+    /// </summary>
+    public class SubType
+    {
+        /// <summary>
+        /// Contain Type 
+        /// </summary>
+        public string Type { get; set; }
+    }
+
+    /// <summary>
+    /// Structure for Holiday.TravelFrequency.Type
+    /// </summary>
+    public class TravelFrequency
+    {
+        /// <summary>
+        /// Contain Type 
+        /// </summary>
+        public string Type { get; set; }
+    }
+
+
+
     #region Holiday.Interests & Holiday.TravellerType
     /// <summary>
     /// Structure for Holiday.Interests,Holiday.TravellerType,Holiday.TravelFrequency
@@ -35,7 +60,38 @@ namespace DistributionWebApi.Models
         /// <summary>
         ///   SubTypes for Type.Values may be retrived from Master Service.
         /// </summary>
-        public List<string> SubType { get; set; }
+        public List<SubType> SubType { get; set; }
+    }
+    #endregion
+
+
+    public class PaceOfHoliday
+    {
+        public string Type { get; set; }
+    }
+
+    #region Holiday.Interests & Holiday.TravellerType
+    /// <summary>
+    /// Structure for Per person
+    /// </summary>
+    public class HolidayPerPersonPrice
+    {
+        /// <summary>
+        /// Currency name.
+        /// </summary>
+        public string Currency { get; set; }
+        /// <summary>
+        ///   Amount in decimal
+        /// </summary>
+        public double Amount { get; set; }
+        /// <summary>
+        ///   contain Price basis
+        /// </summary>
+        public string PriceBasis { get; set; }
+        /// <summary>
+        ///   contain Price text
+        /// </summary>
+        public string PriceText { get; set; }
     }
     #endregion
 
@@ -155,11 +211,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Day
         /// </summary>
-        public string Day { get; set; }
+        public int Day { get; set; }
         /// <summary>
         /// Date on which this information is valid.
         /// </summary>
-        public string Date { get; set; }
+        public DateTime? Date { get; set; }
         /// <summary>
         /// Type of the attraction.
         /// </summary>
@@ -218,7 +274,19 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Display name for media file.
         /// </summary>
-        public string DisplayName { get; set; }
+        public string ProductDisplayName { get; set; }
+        /// <summary>
+        /// Contain Country Name
+        /// </summary>
+        public string Country { get; set; }
+        /// <summary>
+        /// Contain State
+        /// </summary>
+        public string State { get; set; }
+        /// <summary>
+        /// Contain city
+        /// </summary>
+        public string City { get; set; }
         /// <summary>
         /// category of  media .
         /// </summary>
@@ -230,19 +298,19 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// path to access media.
         /// </summary>
-        public string FilePath { get; set; }
-        /// <summary>
-        /// from which date media information is valid.
-        /// </summary>
-        public string ValidFromDate { get; set; }
-        /// <summary>
-        /// upto which date media information is valid.
-        /// </summary>
-        public string ValidToDate { get; set; }
+        public string LogicalFilePath { get; set; }
+        ///// <summary>
+        ///// from which date media information is valid.
+        ///// </summary>
+        //public string ValidFromDate { get; set; }
+        ///// <summary>
+        ///// upto which date media information is valid.
+        ///// </summary>
+        //public string ValidToDate { get; set; }
         /// <summary>
         /// Display order for media file.
         /// </summary>
-        public string DisplayOrder { get; set; }
+        public int DisplayOrder { get; set; }
         /// <summary>
         /// detail description about media.
         /// </summary>
@@ -259,7 +327,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Type of information
         /// </summary>
-        public string Type { get; set; }
+        public string ServiceType { get; set; }
         /// <summary>
         /// name.
         /// </summary>
@@ -271,7 +339,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// order number.
         /// </summary>
-        public string Order { get; set; }
+        public int Order { get; set; }
 
     }
     #endregion
@@ -285,7 +353,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Inclusion/exclusion type.
         /// </summary>
-        public string Type { get; set; }
+        public string ServiceType { get; set; }
         /// <summary>
         /// Name for inclusion/exclusion.
         /// </summary>
@@ -297,11 +365,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// order of inclusion/exclusion.
         /// </summary>
-        public string Order { get; set; }
-        /// <summary>
-        /// IsMandatoryPaid for the inclusion/exclusion.
-        /// </summary>
-        public string IsMandatoryPaid { get; set; }
+        public int Order { get; set; }
+        ///// <summary>
+        ///// IsMandatoryPaid for the inclusion/exclusion.
+        ///// </summary>
+        //public string IsMandatoryPaid { get; set; }
 
     }
     #endregion
@@ -357,25 +425,148 @@ namespace DistributionWebApi.Models
     public class HolidayDayWiseItineraries
     {
         /// <summary>
-        /// Date from which Itinerary details are valid.
+        /// Contain TagType
         /// </summary>
-        public string FromDate { get; set; }
+        public string TagType { get; set; }
         /// <summary>
-        /// Date upto  which Itinerary details are valid.
+        /// Contain Destination
         /// </summary>
-        public string ToDate { get; set; }
+        public string Destination { get; set; }
         /// <summary>
-        /// Package category is the Holiday category(e.g 2*,4* ).
+        /// Contain TLGXCountry
         /// </summary>
-        public string PackageCategory { get; set; }
+        public string TLGXCountry { get; set; }
         /// <summary>
-        /// Host category is type of Holiday(e.g economy, delux,premium etc..).
+        /// Contain TLGXCity
         /// </summary>
-        public string HostCategory { get; set; }
+        public string TLGXCity { get; set; }
         /// <summary>
+        /// Contain Supplier Country
+        /// </summary>
+        public string SupplierCountry { get; set; }
+        /// <summary>
+        /// Contain Supplier City
+        /// </summary>
+        public string SupplierCity { get; set; }
+        /// <summary>
+        /// Contain Product Category
+        /// </summary>
+        public string ProductCategory { get; set; }
+        /// <summary>
+        /// Contain Product Category Sub Type
+        /// </summary>
+        public string ProductCategorySubType { get; set; }
+        /// <summary>
+        /// Contain Product Name
+        /// </summary>
+        public string ProductName { get; set; }
+        /// <summary>
+        /// Contain Product ID
+        /// </summary>
+        public string ProductId { get; set; }
+        /// <summary>
+        /// Contain Long Description
+        /// </summary>
+        public string LongDescription { get; set; }
+        /// <summary>
+        /// Contain Short Description
+        /// </summary>
+        public string ShortDescription { get; set; }
+        /// <summary>
+        /// Contain Tag Description
+        /// </summary>
+        public string TagDescription { get; set; }
+        /// <summary>
+        /// Contain start time
+        /// </summary>
+        public string StartTime { get; set; }
+        /// <summary>
+        /// Contain End Time 
+        /// </summary>
+        public string EndTime { get; set; }
+        /// <summary>
+        /// Contain Session
+        /// </summary>
+        public string Session { get; set; }
+        /// <summary>
+        /// Contain Dynamic Attributes
+        /// </summary>
+        public string DynamicAttributes { get; set; }
+        /// <summary>
+        /// Contain Date Structure
+        /// </summary>
+        public List<HolidayDates> Dates { get; set; }
+
+
+        ///// <summary>
+        ///// Date from which Itinerary details are valid.
+        ///// </summary>
+        //public string FromDate { get; set; }
+        ///// <summary>
+        ///// Date upto  which Itinerary details are valid.
+        ///// </summary>
+        //public string ToDate { get; set; }
+        ///// <summary>
+        ///// Package category is the Holiday category(e.g 2*,4* ).
+        ///// </summary>
+        //public string PackageCategory { get; set; }
+        ///// <summary>
+        ///// Host category is type of Holiday(e.g economy, delux,premium etc..).
+        ///// </summary>
+        //public string HostCategory { get; set; }
+        ///// <summary>
         /// Day wise Itinerary
         /// </summary>
-        public List<HolidayDay> Day { get; set; }
+        // public List<HolidayDay> Day { get; set; }
+
+
+    }
+
+    /// <summary>
+    /// Holiday.DayWiseItineraries.Dates
+    /// </summary>
+    public class HolidayDates
+    {
+        /// <summary>
+        /// Contain from day Number
+        /// </summary>
+        public int FromDay { get; set; }
+        /// <summary>
+        /// Day from month number.
+        /// </summary>
+        public int FromMonth { get; set; }
+        /// <summary>
+        /// From year Number.
+        /// </summary>
+        public int FromYear { get; set; }
+        /// <summary>
+        /// Contain till day information.
+        /// </summary>
+        public int ToDay { get; set; }
+        /// <summary>
+        /// Contain till month information
+        /// </summary>
+        public int ToMonth { get; set; }
+        /// <summary>
+        /// contain till year information
+        /// </summary>
+        public int ToYear { get; set; }
+        /// <summary>
+        /// Contain Description
+        /// </summary>
+        public string Description { get; set; }
+        /// <summary>
+        /// Contain tag description.
+        /// </summary>
+        public string TagDescription { get; set; }
+        /// <summary>
+        /// Contain dynamic attributes.
+        /// </summary>
+        public string DynamicAttributes { get; set; }
+        /// <summary>
+        /// Contain status.
+        /// </summary>
+        public string Status { get; set; }
 
 
     }
@@ -549,6 +740,10 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string TLGXCountryCode { get; set; }
         /// <summary>
+        /// TLGX City Name given by Supplier
+        /// </summary>
+        public string TLGXCityName { get; set; }
+        /// <summary>
         /// TLGX Code for Product given by supplier.
         /// </summary>
         public string TLGXCityCode { get; set; }
@@ -563,7 +758,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Number of Nights.
         /// </summary>
-        public string NumberOfNights { get; set; }
+        public int NumberOfNights { get; set; }
         /// <summary>
         ///  Tour Package Category under which this accomodation is provided. values may be 2*,3* etc..
         /// </summary>
@@ -583,43 +778,43 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// star Rtaing of Hotel (e.g 3*,4*)
         /// </summary>
-        public string StarRating { get; set; }
-        /// <summary>
-        ///  Date on which this accomodation is valid.
-        /// </summary>
-        public string StartDate { get; set; }
-        /// <summary>
-        /// Date upto which this accomodation is valid.
-        /// </summary>
-        public string FinishDate { get; set; }
-        /// <summary>
-        /// Departure Id
-        /// </summary>
-        public string DepartureId { get; set; }
-        /// <summary>
-        ///  Date for Departure.
-        /// </summary>
-        public string DepartureStartDate { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DepartureEndDate { get; set; }
-        /// <summary>
-        ///  Rating by Trip Advisor for the hotel.
-        /// </summary>
-        public string TripAdvisorRating { get; set; }
-        /// <summary>
-        /// Description for Hotel.
-        /// </summary>
-        public string HotelDescription { get; set; }
-        /// <summary>
-        ///  information of Facilities at Hotel.
-        /// </summary>
-        public List<HolidayFacility> Facilities { get; set; }
-        /// <summary>
-        ///  Media for Hotel(images/Videos)
-        /// </summary>
-        public List<HolidayMedia> Media { get; set; }
+        //public string StarRating { get; set; }
+        ///// <summary>
+        /////  Date on which this accomodation is valid.
+        ///// </summary>
+        //public string StartDate { get; set; }
+        ///// <summary>
+        ///// Date upto which this accomodation is valid.
+        ///// </summary>
+        //public string FinishDate { get; set; }
+        ///// <summary>
+        ///// Departure Id
+        ///// </summary>
+        //public string DepartureId { get; set; }
+        ///// <summary>
+        /////  Date for Departure.
+        ///// </summary>
+        //public string DepartureStartDate { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string DepartureEndDate { get; set; }
+        ///// <summary>
+        /////  Rating by Trip Advisor for the hotel.
+        ///// </summary>
+        //public string TripAdvisorRating { get; set; }
+        ///// <summary>
+        ///// Description for Hotel.
+        ///// </summary>
+        //public string HotelDescription { get; set; }
+        ///// <summary>
+        /////  information of Facilities at Hotel.
+        ///// </summary>
+        //public List<HolidayFacility> Facilities { get; set; }
+        ///// <summary>
+        /////  Media for Hotel(images/Videos)
+        ///// </summary>
+        //public List<HolidayMedia> Media { get; set; }
     }
     #endregion Holiday.Accommodation
 
@@ -649,123 +844,219 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Code for Product given by supplier.
         /// </summary>
-        public string ID { get; set; }
+        public string TLGXActivityId { get; set; }
         /// <summary>
         /// Code provided by Supplier for Product.
         /// </summary>
-        public string ActivityName { get; set; }
+        public string TLGXActivityName { get; set; }
         /// <summary>
-        ///  TLGX CountryName.Master values may be retrived from a Master Service.
-        /// </summary>
-        public string ActivityDescription { get; set; }
-        /// <summary>
-        ///TLGX country code.
-        /// </summary>
-        public string CountryName { get; set; }
-        /// <summary>
-        /// TLGX Code for Product given by supplier.
-        /// </summary>
-        public string CityName { get; set; }
-        /// <summary>
-        /// City Name provided by Supplier.
-        /// </summary>
-        public string SupplierCityCode { get; set; }
-        /// <summary>
-        ///  City Code provided by Supplier.
-        /// </summary>
-        public string TLGXCountryName { get; set; }
-        /// <summary>
-        /// Number of Nights.
+        /// Country Code provided by Supplier for Product.
         /// </summary>
         public string TLGXCountryCode { get; set; }
         /// <summary>
-        ///  Tour Package Category under which this accomodation is provided. values may be 2*,3* etc..
+        /// Country Name provided by Supplier for Product.
+        /// </summary>
+        public string TLGXCountryName { get; set; }
+        /// <summary>
+        /// City Name provided by Supplier for Product.
         /// </summary>
         public string TLGXCityName { get; set; }
         /// <summary>
-        /// Tour SubCategory values may be Economy,Delux,Premium etc..
+        /// City Code provided by Supplier for Product.
         /// </summary>
         public string TLGXCityCode { get; set; }
         /// <summary>
-        /// Category of Hotel.
+        /// Supplier Country Name provided by Supplier for Product.
         /// </summary>
-        public string DayNumber { get; set; }
+        public string SupplierCountryName { get; set; }
         /// <summary>
-        ///  Name of the Hotel.
+        /// Supplier Country Code provided by Supplier for Product.
         /// </summary>
-        public string Date { get; set; }
+        public string SupplierCountryCode { get; set; }
         /// <summary>
-        /// star Rtaing of Hotel (e.g 3*,4*)
+        /// Supplier City Code provided by Supplier for Product.
+        /// </summary>
+        public string SupplierCityCode { get; set; }
+        /// <summary>
+        /// Supplier City Name provided by Supplier for Product.
+        /// </summary>
+        public string SupplierCityName { get; set; }
+        /// <summary>
+        /// Contain number of days.
+        /// </summary>
+        public int DayNumber { get; set; }
+        /// <summary>
+        /// Contain date
+        /// </summary>
+        public DateTime? Date { get; set; }
+        /// <summary>
+        /// Contain start date
         /// </summary>
         public string StartTime { get; set; }
         /// <summary>
-        ///  Date on which this accomodation is valid.
+        /// Date upto which this accomodation is valid.
         /// </summary>
         public string EndTime { get; set; }
         /// <summary>
-        /// Date upto which this accomodation is valid.
+        /// Contain Session Information
         /// </summary>
-        public string Lat { get; set; }
+        public string Session { get; set; }
         /// <summary>
-        /// Departure Id
+        ///  Date on which this accomodation is valid.
         /// </summary>
-        public string Lon { get; set; }
+        public DateTime? StartDate { get; set; }
         /// <summary>
-        ///  Date for Departure.
-        /// </summary>
-        public string StartDate { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FinishDate { get; set; }
-        /// <summary>
-        ///  Rating by Trip Advisor for the hotel.
+        /// Contain Departure id
         /// </summary>
         public string DepartureId { get; set; }
         /// <summary>
-        /// Description for Hotel.
+        /// Contain Departure start date
         /// </summary>
-        public string DepartureStartDate { get; set; }
+        public DateTime? DepartureStartDate { get; set; }
         /// <summary>
-        ///  information of Facilities at Hotel.
+        /// Contain Departure end date
         /// </summary>
-        public List<HolidayFacility> DepartureEndDate { get; set; }
+        public DateTime? DepartureEndDate { get; set; }
         /// <summary>
-        ///  Package category for Holiday
+        /// Contain product category
         /// </summary>
-        public List<HolidayMedia> PackageCategory { get; set; }
+        public string ProductCategory { get; set; }
         /// <summary>
-        /// Host Category of Holiday. Values may be (Economy,Delux,Premium etc..)
+        /// Contain host category  Values may be (Economy,Delux,Premium etc..)
         /// </summary>
         public string HostCategory { get; set; }
         /// <summary>
-        ///  Pick Up Point.
+        /// Contain pick up destination
         /// </summary>
         public string PickupDestination { get; set; }
         /// <summary>
-        /// Drop point.
+        /// Contain drop destination
         /// </summary>
         public string DropDestination { get; set; }
-        /// <summary>
-        ///  Media details.
-        /// </summary>
-        public List<HolidayMedia> Media { get; set; }
-        /// <summary>
-        ///  what is included in Holiday.
-        /// </summary>
-        public List<HolidayInclusionExclusion> Inclusion { get; set; }
-        /// <summary>
-        ///  what is excluded in Holiday.
-        /// </summary>
-        public List<HolidayInclusionExclusion> Exclusion { get; set; }
-        /// <summary>
-        ///  Booking policies
-        /// </summary>
-        public List<HolidayTermsConditions> BookingPolicies { get; set; }
-        /// <summary>
-        ///  Review for Activity.
-        /// </summary>
-        public List<HolidayReview> Review { get; set; }
+
+
+
+
+        ///// <summary>
+        ///// TLGX Code for Product given by supplier.
+        ///// </summary>
+        //public string ID { get; set; }
+        ///// <summary>
+        ///// Code provided by Supplier for Product.
+        ///// </summary>
+        //public string ActivityName { get; set; }
+        ///// <summary>
+        /////  TLGX CountryName.Master values may be retrived from a Master Service.
+        ///// </summary>
+        //public string ActivityDescription { get; set; }
+        ///// <summary>
+        /////TLGX country code.
+        ///// </summary>
+        //public string CountryName { get; set; }
+        ///// <summary>
+        ///// TLGX Code for Product given by supplier.
+        ///// </summary>
+        //public string CityName { get; set; }
+        ///// <summary>
+        ///// City Name provided by Supplier.
+        ///// </summary>
+        //public string SupplierCityCode { get; set; }
+        ///// <summary>
+        /////  City Code provided by Supplier.
+        ///// </summary>
+        //public string TLGXCountryName { get; set; }
+        ///// <summary>
+        ///// Number of Nights.
+        ///// </summary>
+        //public string TLGXCountryCode { get; set; }
+        ///// <summary>
+        /////  Tour Package Category under which this accomodation is provided. values may be 2*,3* etc..
+        ///// </summary>
+        //public string TLGXCityName { get; set; }
+        ///// <summary>
+        ///// Tour SubCategory values may be Economy,Delux,Premium etc..
+        ///// </summary>
+        //public string TLGXCityCode { get; set; }
+        ///// <summary>
+        ///// Category of Hotel.
+        ///// </summary>
+        //public string DayNumber { get; set; }
+        ///// <summary>
+        /////  Name of the Hotel.
+        ///// </summary>
+        //public string Date { get; set; }
+        ///// <summary>
+        ///// star Rtaing of Hotel (e.g 3*,4*)
+        ///// </summary>
+        //public string StartTime { get; set; }
+        ///// <summary>
+        /////  Date on which this accomodation is valid.
+        ///// </summary>
+        //public string EndTime { get; set; }
+        ///// <summary>
+        ///// Date upto which this accomodation is valid.
+        ///// </summary>
+        //public string Lat { get; set; }
+        ///// <summary>
+        ///// Departure Id
+        ///// </summary>
+        //public string Lon { get; set; }
+        ///// <summary>
+        /////  Date for Departure.
+        ///// </summary>
+        //public string StartDate { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string FinishDate { get; set; }
+        ///// <summary>
+        /////  Rating by Trip Advisor for the hotel.
+        ///// </summary>
+        //public string DepartureId { get; set; }
+        ///// <summary>
+        ///// Description for Hotel.
+        ///// </summary>
+        //public string DepartureStartDate { get; set; }
+        ///// <summary>
+        /////  information of Facilities at Hotel.
+        ///// </summary>
+        //public List<HolidayFacility> DepartureEndDate { get; set; }
+        ///// <summary>
+        /////  Package category for Holiday
+        ///// </summary>
+        //public List<HolidayMedia> PackageCategory { get; set; }
+        ///// <summary>
+        ///// Host Category of Holiday. Values may be (Economy,Delux,Premium etc..)
+        ///// </summary>
+        //public string HostCategory { get; set; }
+        ///// <summary>
+        /////  Pick Up Point.
+        ///// </summary>
+        //public string PickupDestination { get; set; }
+        ///// <summary>
+        ///// Drop point.
+        ///// </summary>
+        //public string DropDestination { get; set; }
+        ///// <summary>
+        /////  Media details.
+        ///// </summary>
+        //public List<HolidayMedia> Media { get; set; }
+        ///// <summary>
+        /////  what is included in Holiday.
+        ///// </summary>
+        //public List<HolidayInclusionExclusion> Inclusion { get; set; }
+        ///// <summary>
+        /////  what is excluded in Holiday.
+        ///// </summary>
+        //public List<HolidayInclusionExclusion> Exclusion { get; set; }
+        ///// <summary>
+        /////  Booking policies
+        ///// </summary>
+        //public List<HolidayTermsConditions> BookingPolicies { get; set; }
+        ///// <summary>
+        /////  Review for Activity.
+        ///// </summary>
+        //public List<HolidayReview> Review { get; set; }
     }
     #endregion Holiday.Activity
 
@@ -910,35 +1201,361 @@ namespace DistributionWebApi.Models
     /// Structure for Holiday.Departure
     public class HolidayDeparture
     {
-        /// <summary>
-        ///
-        /// </summary>
+        ///// <summary>
+        ///// contain departure Id
+        ///// </summary>
         public string DepartureId { get; set; }
-        /// <summary>
-        ///
-        /// </summary>
-        public string DepartureName { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string StartDate { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string EndDate { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string StartCity { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string EndCity { get; set; }
+        ///// <summary>
+        ///// contain Country code start
+        ///// </summary>
+        public string TLGXCountryCodeStart { get; set; }
+        ///// <summary>
+        ///// contain Tlgx City Code start date
+        ///// </summary>
+        public string TLGXCityCodeStart { get; set; }
+        ///// <summary>
+        ///// contain start date
+        ///// </summary>
+        [JsonIgnore]
+        public DateTime? StartDate { get; set; }
+        ///// <summary>
+        ///// Tlgx Country code end
+        ///// </summary>
+        public string TLGXCountryCodeEnd { get; set; }
+        ///// <summary>
+        ///// contain TLGX city code end
+        ///// </summary>
+        public string TLGXCityCodeEnd { get; set; }
+
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public string DepartureId { get; set; }
+        ///// <summary>
+        /////
+        ///// </summary>
+        //public string DepartureName { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string StartDate { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string EndDate { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string StartCity { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string EndCity { get; set; }
 
     }
     #endregion Holiday.Departure
 
-    #region Holiday.PrePost
+    /// <summary>
+    /// Structure for Holiday.PackagePrice.BasePrice.Discount
+    /// 
+    public class DiscountStructure
+    {
+        ///// <summary>
+        ///// Contain name of Discount
+        ///// </summary>
+        public string Name { get; set; }
+        ///// <summary>
+        ///// Contain Type of discount
+        ///// </summary>
+        public string Type { get; set; }
+        ///// <summary>
+        ///// Contain discount amount
+        ///// </summary>
+        public double DiscountAmount { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PackagePrice.BasePrice.Tax
+    /// 
+    public class Tax
+    {
+        ///// <summary>
+        ///// Inclusive of taxes Yes or No
+        ///// </summary>
+        public string InclusiveOfTaxes { get; set; }
+        ///// <summary>
+        ///// Date from which it is valid
+        ///// </summary>
+        public DateTime? ValidFrom { get; set; }
+        ///// <summary>
+        ///// Date upto which it is valid
+        ///// </summary>
+        public DateTime? ValidTo { get; set; }
+        ///// <summary>
+        ///// Contain Tax type
+        ///// </summary>
+        public string TaxType { get; set; }
+        ///// <summary>
+        ///// Contain tax rate
+        ///// </summary>
+        public double TaxRate { get; set; }
+        ///// <summary>
+        ///// Contain tax value
+        ///// </summary>
+        public double TaxValue { get; set; }
+        ///// <summary>
+        ///// Contain tax calculated on rate Type
+        ///// </summary>
+        public string TaxCalculatedOnRateType { get; set; }
+        ///// <summary>
+        ///// Contain Applicable on
+        ///// </summary>
+        public string ApplicableOn { get; set; }
+
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PackagePrice.BasePrice.PriceDetails.tax
+    /// 
+    public class TaxStructure
+    {
+        ///// <summary>
+        ///// Contain Tax Rate
+        ///// </summary>
+        public string TaxRate { get; set; }
+        ///// <summary>
+        ///// contain Tax Type
+        ///// </summary>
+        public string TaxType { get; set; }
+        ///// <summary>
+        ///// Contain Tax amount
+        ///// </summary>
+        public double TaxAmount { get; set; }
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PackagePrice.BasePrice.PriceDetails
+    /// 
+    public class PriceDetailsStructure
+    {
+        public int PassengerRangeFrom { get; set; }
+
+        public int PassengerRangeTo { get; set; }
+
+        public DateTime? ValidFrom { get; set; }
+
+        public DateTime? ValidTo { get; set; }
+
+        public string Currency { get; set; }
+
+        public double Amount { get; set; }
+
+        public string PersonType { get; set; }
+
+        public string RoomType { get; set; }
+
+        public string ExtraBedding { get; set; }
+
+        public int AgeFrom { get; set; }
+
+        public int AgeTo { get; set; }
+
+        public string PriceDescription { get; set; }
+
+        public List<TaxStructure> Tax { get; set; }
+
+
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PackagePrice.BasePrice
+    /// 
+    public class BasePriceStructure
+    {
+        ///// <summary>
+        ///// Contain hub Id
+        ///// </summary>
+        public string HubId { get; set; }
+        /// <summary>
+        /// Contain hub name
+        /// </summary>
+        public string HubName { get; set; }
+        /// <summary>
+        /// hold list of price details
+        /// </summary>
+        public List<PriceDetailsStructure> PriceDetails { get; set; }
+        /// <summary>
+        /// hold a list of discount 
+        /// </summary>
+        public List<DiscountStructure> Discount { get; set; }
+        /// <summary>
+        /// hold a list of tax applied
+        /// </summary>
+        public List<Tax> Tax { get; set; }
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PreTourPrice and Holiday.PostTourPrice
+    /// 
+    public class PreTourPrice
+    {
+        /// <summary>
+        /// Code provided by Supplier for Product.
+        /// </summary>
+        public string SupplierProductCode { get; set; }
+        /// <summary>
+        /// Contain passenger range from
+        /// </summary>
+        public double PassengerRangeFrom { get; set; }
+        /// <summary>
+        /// contain passenger range to
+        /// </summary>
+        public double PassengerRangeTo { get; set; }
+        /// <summary>
+        /// contain date from which it is valid.
+        /// </summary>
+        public DateTime? ValidFrom { get; set; }
+        /// <summary>
+        /// contain date upto which it is valid
+        /// </summary>
+        public DateTime? ValidTo { get; set; }
+        /// <summary>
+        /// Contain Currency Name 
+        /// </summary>
+        public string Currency { get; set; }
+        /// <summary>
+        /// Contain Amount 
+        /// </summary>
+        public double Amount { get; set; }
+        /// <summary>
+        /// Contain Person type
+        /// </summary>
+        public string PersonType { get; set; }
+        /// <summary>
+        /// Contain Room Type
+        /// </summary>
+        public string RoomType { get; set; }
+        /// <summary>
+        /// Contain extra bedding information
+        /// </summary>
+        public string ExtraBedding { get; set; }
+        /// <summary>
+        /// Contain age from information
+        /// </summary>
+        public int AgeFrom { get; set; }
+        /// <summary>
+        /// contain Age to Information
+        /// </summary>
+        public int AgeTo { get; set; }
+        /// <summary>
+        /// Contain Discount name information
+        /// </summary>
+        public string DiscountName { get; set; }
+        /// <summary>
+        /// cotain disocunt Amount
+        /// </summary>
+        public int DiscountAmount { get; set; }
+        /// <summary>
+        /// Hold a list of Tax Structure
+        /// </summary>
+        public List<TaxStructure> Tax { get; set; }
+    }
+
+
+
+    /// <summary>
+    /// Structure for Holiday.PackagePrice
+    /// 
+    public class PackagePrice
+    {
+        /// <summary>
+        /// Display Name
+        /// </summary>
+        public string DisplayName { get; set; }
+        /// <summary>
+        /// Category Name
+        /// </summary>
+        public string Category { get; set; }
+        /// <summary>
+        /// Star Rating category
+        /// </summary>
+        public string StarRatingCategory { get; set; }
+        /// <summary>
+        /// Notes if any
+        /// </summary>
+        public string Notes { get; set; }
+
+        public List<BasePriceStructure> BasePrice { get; set; }
+
+    }
+
+    /// <summary>
+    /// Structure for Holiday.PreTourStructure , Holiday.PostTourStructure
+    /// 
+    public class PreTourStructure
+    {
+        /// <summary>
+        /// TLGX Code for Product given by supplier.
+        /// </summary>
+        public string TLGXProductCode { get; set; }
+        /// <summary>
+        /// Code provided by Supplier for Product.
+        /// </summary>
+        public string SupplierProductCode { get; set; }
+        /// <summary>
+        ///  TLGX Country Name.Values may be retrived from Master Service.
+        /// </summary>
+        public string TLGXCountryName { get; set; }
+        /// <summary>
+        ///  TLGX Country Code.Values may be retrived from Master Service.
+        /// </summary>
+        public string TLGXCountryCode { get; set; }
+        /// <summary>
+        ///  TLGX City Name.Values may be retrived from Master Service.
+        /// </summary>
+        public string TLGXCityName { get; set; }
+        /// <summary>
+        ///  TLGX City Code.Values may be retrived from Master Service.
+        /// </summary>
+        public string TLGXCityCode { get; set; }
+        /// <summary>
+        ///  CityName given by Supplier
+        /// </summary>
+        public string SupplierCityName { get; set; }
+        /// <summary>
+        ///  CityCode given by Supplier
+        /// </summary>
+        public string SupplierCityCode { get; set; }
+        /// <summary>
+        /// Number Of Nights in the Hotel.
+        /// </summary>
+        public int NumberOfNights { get; set; }
+        ///// <summary>
+        ///// Host category is type of Holiday(e.g economy, delux,premium etc..).
+        ///// </summary>
+        public string HostCategory { get; set; }
+        /// <summary>
+        /// Category of Hotel.
+        /// </summary>
+        public string HotelCategory { get; set; }
+        ///// <summary>
+        ///// Package category is the Holiday category(e.g 2*,4* ).
+        ///// </summary>
+        public string PackageCategory { get; set; }
+        /// <summary>
+        ///  Name of the Hotel.
+        /// </summary>
+        public string HotelName { get; set; }
+
+    }
+
+
+
+
+    #region Holiday.Pre 
     /// <summary>
     /// Structure for Holiday.Pre, Holiday.Post
     /// </summary>

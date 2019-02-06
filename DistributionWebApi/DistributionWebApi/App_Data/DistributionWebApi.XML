@@ -762,6 +762,20 @@
             <param name="TourCode"></param>
             <returns>Detailed information about Holiday</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.HolidaySearch(DistributionWebApi.Models.HolidaySearchRequestParams)">
+            <summary>
+            Get Holiday Search details 
+            </summary>
+            <param name="HolidaySearchRequestParams"></param>
+            <returns>Returns list of Holiday search response</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.GetHolidayByNakshatraHolidayId(System.String)">
+            <summary>
+            Returns a single Holiday Object for nakshatra Holiday Id
+            </summary>
+            <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
+            <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -1142,6 +1156,18 @@
             <param name="RQ">Combination of Hotel and Room mapping request.</param>
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
+        <member name="F:DistributionWebApi.Controllers.VisaMappingController._database">
+            <summary>
+            static object of Mongo DB Class
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.VisaMappingController.GetVisaDetailByCountryCode(System.String)">
+            <summary>
+            This will return all Visa details as per country code
+            </summary>
+            <param name="CountryCode"></param>
+            <returns>A key value pair of Visa master attribute type and attribute values</returns>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayModel">
              <summary>
             
@@ -1150,6 +1176,21 @@
         <member name="P:DistributionWebApi.Models.HolidayModel.Id">
             <summary>
             Unique Id for each Tour.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.SupplierHolidayId">
+            <summary>
+            Unique Supplier Holiday Id for each Tour.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.CallType">
+            <summary>
+            Call Type Like HotelMapping
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.NakshatraHolidayId">
+            <summary>
+            Unique Supplier Holiday Id for each Tour.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.SupplierName">
@@ -1167,14 +1208,14 @@
             Holiday is effective from this date.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.CreateDate">
+        <member name="P:DistributionWebApi.Models.HolidayModel.EffectiveToDate">
             <summary>
-            Date on which Holiday is created on system.
+            Holiday is effective To this date.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.CreateUSer">
             <summary>
-            The user who created the product.
+            Date on which Holiday is created on system.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.EditDate">
@@ -1187,6 +1228,21 @@
             The user who edited Holiday.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.IsActive">
+            <summary>
+            is active or not
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.UserReviewStatus">
+            <summary>
+            The user review status.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.UserRemarks">
+            <summary>
+            The user Remarks if any
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.ProductCategory">
             <summary>
             The Product category for this Holiday.Master values may be retrived from a Master Service.
@@ -1197,19 +1253,44 @@
             The Product SubCategory for this Holiday.Master values may be retrived from a Master Service.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Name">
+        <member name="P:DistributionWebApi.Models.HolidayModel.GroupOfCompany">
+            <summary>
+            The group of company name.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.GroupCompany">
+            <summary>
+            The group of company.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.Company">
+            <summary>
+            contains the company name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.SBU">
+            <summary>
+            contains the SBU 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.BU">
+            <summary>
+            contains the BU 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.CompanyProductId">
+            <summary>
+            contains the Company Product Id 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.ProductName">
+            <summary>
+            Name of the Product
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.Overview">
             <summary>
             Name of the Holiday
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.ShortDescription">
-            <summary>
-            Short Description for the holiday.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.LongDescription">
-            <summary>
-            Long Description for the holiday.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.TypeOfHoliday">
@@ -1235,6 +1316,16 @@
         <member name="P:DistributionWebApi.Models.HolidayModel.FlavorType">
             <summary>
             It is a type of flavour. e.g self drive package ,cruise package.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.FlavourValidFrom">
+            <summary>
+            It is a Date from which flavour is valid.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.FlavourValidTo">
+            <summary>
+            It is a Date To which flavour is valid.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.ProductType">
@@ -1277,14 +1368,14 @@
             Rating based on entire holiday.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.PaceofHoliday">
+        <member name="P:DistributionWebApi.Models.HolidayModel.PaceOfHoliday">
             <summary>
             This field gives you pace of holiday such as Relaxing,Moderate etc..
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.StayType">
             <summary>
-            This field gives you different stay Types available for holiday.e.g Hotels,Villas,Homestays etc..
+            Should not be mandatory as this data point will not come via API in most cases 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.Days">
@@ -1295,6 +1386,11 @@
         <member name="P:DistributionWebApi.Models.HolidayModel.Nights">
             <summary>
             Number of nights included in holiday.(e.g 2 Nights)
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PerPersonPrice">
+            <summary>
+            hold a list of Per Person Structure
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.Duration">
@@ -1377,11 +1473,6 @@
             Key notes about holiday.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.HubDetails">
-            <summary>
-            Information about Starting cities for holiday
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.DayWiseItineraries">
             <summary>
             Day wise itinerary information.
@@ -1397,39 +1488,55 @@
             Details about Sightseeings/Activities included in Holiday.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Flights">
-            <summary>
-            Flight Details for Holiday.
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.Departure">
             <summary>
             Departure Details for Holiday.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Pre">
+        <member name="P:DistributionWebApi.Models.HolidayModel.PreTour">
             <summary>
             Pre Tour Details.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Post">
+        <member name="P:DistributionWebApi.Models.HolidayModel.PostTour">
             <summary>
             Post Tour Details.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Optionals">
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PageSize">
             <summary>
-            Post Tour Details.
+            How many Search Results do you wish to receive per request?
+            Default Value = 10
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Extension">
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PageNo">
             <summary>
-            Informatio about Extension to holiday.
+            Which Page Number you wish to retrieve from the Search Results set
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Review">
+        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.TotalNumberOfHolidays">
             <summary>
-            Information about Extension to holiday.
+            The Total Number of Activities returned by the Search Query
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.PageSize">
+            <summary>
+            The NUmber of records included in the response per page
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.CurrentPage">
+            <summary>
+            What is your current Page in the response
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.TotalPage">
+            <summary>
+            What is the total number of pages in the response
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMappingSearchResult.Holidays">
+            <summary>
+            A List containing the Activities matching the Search Request
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayCollections">
@@ -1447,6 +1554,26 @@
             Name of the Supplier.
             </summary>
         </member>
+        <member name="T:DistributionWebApi.Models.SubType">
+            <summary>
+            Structure for Holiday.Interests,Holiday.TravellerType.subType
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SubType.Type">
+            <summary>
+            Contain Type 
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.TravelFrequency">
+            <summary>
+            Structure for Holiday.TravelFrequency.Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.TravelFrequency.Type">
+            <summary>
+            Contain Type 
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayTypes">
             <summary>
             Structure for Holiday.Interests,Holiday.TravellerType,Holiday.TravelFrequency
@@ -1460,6 +1587,31 @@
         <member name="P:DistributionWebApi.Models.HolidayTypes.SubType">
             <summary>
               SubTypes for Type.Values may be retrived from Master Service.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.HolidayPerPersonPrice">
+            <summary>
+            Structure for Per person
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayPerPersonPrice.Currency">
+            <summary>
+            Currency name.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayPerPersonPrice.Amount">
+            <summary>
+              Amount in decimal
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayPerPersonPrice.PriceBasis">
+            <summary>
+              contain Price basis
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayPerPersonPrice.PriceText">
+            <summary>
+              contain Price text
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayDestinations">
@@ -1647,9 +1799,24 @@
             name of the media file.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayMedia.DisplayName">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.ProductDisplayName">
             <summary>
             Display name for media file.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMedia.Country">
+            <summary>
+            Contain Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMedia.State">
+            <summary>
+            Contain State
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayMedia.City">
+            <summary>
+            Contain city
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayMedia.FileCategory">
@@ -1662,19 +1829,9 @@
             Type of  media.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayMedia.FilePath">
+        <member name="P:DistributionWebApi.Models.HolidayMedia.LogicalFilePath">
             <summary>
             path to access media.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayMedia.ValidFromDate">
-            <summary>
-            from which date media information is valid.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayMedia.ValidToDate">
-            <summary>
-            upto which date media information is valid.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayMedia.DisplayOrder">
@@ -1692,7 +1849,7 @@
             Structure for Holiday.TermsConditions,Holiday.BookingPolicy,Holiday.TourNotes
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.Type">
+        <member name="P:DistributionWebApi.Models.HolidayTermsConditions.ServiceType">
             <summary>
             Type of information
             </summary>
@@ -1717,7 +1874,7 @@
             Structure for Holiday.Inclusions,Holiday.Exclusions
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Type">
+        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.ServiceType">
             <summary>
             Inclusion/exclusion type.
             </summary>
@@ -1735,11 +1892,6 @@
         <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.Order">
             <summary>
             order of inclusion/exclusion.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayInclusionExclusion.IsMandatoryPaid">
-            <summary>
-            IsMandatoryPaid for the inclusion/exclusion.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayStartingPrice">
@@ -1787,29 +1939,149 @@
             Structure for Holiday.DayWiseItineraries
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.FromDate">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.TagType">
             <summary>
-            Date from which Itinerary details are valid.
+            Contain TagType
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ToDate">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.Destination">
             <summary>
-            Date upto  which Itinerary details are valid.
+            Contain Destination
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.PackageCategory">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.TLGXCountry">
             <summary>
-            Package category is the Holiday category(e.g 2*,4* ).
+            Contain TLGXCountry
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.HostCategory">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.TLGXCity">
             <summary>
-            Host category is type of Holiday(e.g economy, delux,premium etc..).
+            Contain TLGXCity
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.Day">
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.SupplierCountry">
             <summary>
-            Day wise Itinerary
+            Contain Supplier Country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.SupplierCity">
+            <summary>
+            Contain Supplier City
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ProductCategory">
+            <summary>
+            Contain Product Category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ProductCategorySubType">
+            <summary>
+            Contain Product Category Sub Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ProductName">
+            <summary>
+            Contain Product Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ProductId">
+            <summary>
+            Contain Product ID
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.LongDescription">
+            <summary>
+            Contain Long Description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.ShortDescription">
+            <summary>
+            Contain Short Description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.TagDescription">
+            <summary>
+            Contain Tag Description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.StartTime">
+            <summary>
+            Contain start time
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.EndTime">
+            <summary>
+            Contain End Time 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.Session">
+            <summary>
+            Contain Session
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.DynamicAttributes">
+            <summary>
+            Contain Dynamic Attributes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDayWiseItineraries.Dates">
+            <summary>
+            Contain Date Structure
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.HolidayDates">
+            <summary>
+            Holiday.DayWiseItineraries.Dates
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.FromDay">
+            <summary>
+            Contain from day Number
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.FromMonth">
+            <summary>
+            Day from month number.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.FromYear">
+            <summary>
+            From year Number.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.ToDay">
+            <summary>
+            Contain till day information.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.ToMonth">
+            <summary>
+            Contain till month information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.ToYear">
+            <summary>
+            contain till year information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.Description">
+            <summary>
+            Contain Description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.TagDescription">
+            <summary>
+            Contain tag description.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.DynamicAttributes">
+            <summary>
+            Contain dynamic attributes.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayDates.Status">
+            <summary>
+            Contain status.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayDay">
@@ -1997,6 +2269,11 @@
             TLGX country code.
              </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXCityName">
+            <summary>
+            TLGX City Name given by Supplier
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.HolidayAccommodation.TLGXCityCode">
             <summary>
             TLGX Code for Product given by supplier.
@@ -2037,56 +2314,6 @@
              Name of the Hotel.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.StarRating">
-            <summary>
-            star Rtaing of Hotel (e.g 3*,4*)
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.StartDate">
-            <summary>
-             Date on which this accomodation is valid.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.FinishDate">
-            <summary>
-            Date upto which this accomodation is valid.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureId">
-            <summary>
-            Departure Id
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureStartDate">
-            <summary>
-             Date for Departure.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.DepartureEndDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.TripAdvisorRating">
-            <summary>
-             Rating by Trip Advisor for the hotel.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.HotelDescription">
-            <summary>
-            Description for Hotel.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.Facilities">
-            <summary>
-             information of Facilities at Hotel.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayAccommodation.Media">
-            <summary>
-             Media for Hotel(images/Videos)
-            </summary>
-        </member>
         <member name="T:DistributionWebApi.Models.HolidayFacility">
             <summary>
             Structure for Holiday.Accommodation.Facility
@@ -2107,154 +2334,119 @@
             Structure for Holiday.Activity
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.ID">
+        <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXActivityId">
             <summary>
             TLGX Code for Product given by supplier.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.ActivityName">
+        <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXActivityName">
             <summary>
             Code provided by Supplier for Product.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.ActivityDescription">
+        <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXCountryCode">
             <summary>
-             TLGX CountryName.Master values may be retrived from a Master Service.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.CountryName">
-             <summary>
-            TLGX country code.
-             </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.CityName">
-            <summary>
-            TLGX Code for Product given by supplier.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.SupplierCityCode">
-            <summary>
-            City Name provided by Supplier.
+            Country Code provided by Supplier for Product.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXCountryName">
             <summary>
-             City Code provided by Supplier.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXCountryCode">
-            <summary>
-            Number of Nights.
+            Country Name provided by Supplier for Product.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXCityName">
             <summary>
-             Tour Package Category under which this accomodation is provided. values may be 2*,3* etc..
+            City Name provided by Supplier for Product.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.TLGXCityCode">
             <summary>
-            Tour SubCategory values may be Economy,Delux,Premium etc..
+            City Code provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayActivity.SupplierCountryName">
+            <summary>
+            Supplier Country Name provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayActivity.SupplierCountryCode">
+            <summary>
+            Supplier Country Code provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayActivity.SupplierCityCode">
+            <summary>
+            Supplier City Code provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayActivity.SupplierCityName">
+            <summary>
+            Supplier City Name provided by Supplier for Product.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.DayNumber">
             <summary>
-            Category of Hotel.
+            Contain number of days.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.Date">
             <summary>
-             Name of the Hotel.
+            Contain date
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.StartTime">
             <summary>
-            star Rtaing of Hotel (e.g 3*,4*)
+            Contain start date
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.EndTime">
             <summary>
-             Date on which this accomodation is valid.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Lat">
-            <summary>
             Date upto which this accomodation is valid.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Lon">
+        <member name="P:DistributionWebApi.Models.HolidayActivity.Session">
             <summary>
-            Departure Id
+            Contain Session Information
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.StartDate">
             <summary>
-             Date for Departure.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.FinishDate">
-            <summary>
-            
+             Date on which this accomodation is valid.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.DepartureId">
             <summary>
-             Rating by Trip Advisor for the hotel.
+            Contain Departure id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.DepartureStartDate">
             <summary>
-            Description for Hotel.
+            Contain Departure start date
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.DepartureEndDate">
             <summary>
-             information of Facilities at Hotel.
+            Contain Departure end date
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.PackageCategory">
+        <member name="P:DistributionWebApi.Models.HolidayActivity.ProductCategory">
             <summary>
-             Package category for Holiday
+            Contain product category
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.HostCategory">
             <summary>
-            Host Category of Holiday. Values may be (Economy,Delux,Premium etc..)
+            Contain host category  Values may be (Economy,Delux,Premium etc..)
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.PickupDestination">
             <summary>
-             Pick Up Point.
+            Contain pick up destination
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayActivity.DropDestination">
             <summary>
-            Drop point.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Media">
-            <summary>
-             Media details.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Inclusion">
-            <summary>
-             what is included in Holiday.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Exclusion">
-            <summary>
-             what is excluded in Holiday.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.BookingPolicies">
-            <summary>
-             Booking policies
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayActivity.Review">
-            <summary>
-             Review for Activity.
+            Contain drop destination
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ReviewDetails">
@@ -2413,34 +2605,182 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.HolidayDeparture" -->
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.DepartureId">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.DepartureName">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.StartDate">
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.DiscountStructure" -->
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.Tax" -->
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.TaxStructure" -->
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.PriceDetailsStructure" -->
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.BasePriceStructure" -->
+        <member name="P:DistributionWebApi.Models.BasePriceStructure.HubName">
             <summary>
-            
+            Contain hub name
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.EndDate">
+        <member name="P:DistributionWebApi.Models.BasePriceStructure.PriceDetails">
             <summary>
-            
+            hold list of price details
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.StartCity">
+        <member name="P:DistributionWebApi.Models.BasePriceStructure.Discount">
             <summary>
-            
+            hold a list of discount 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayDeparture.EndCity">
+        <member name="P:DistributionWebApi.Models.BasePriceStructure.Tax">
             <summary>
-            
+            hold a list of tax applied
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.PreTourPrice" -->
+        <member name="P:DistributionWebApi.Models.PreTourPrice.SupplierProductCode">
+            <summary>
+            Code provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.PassengerRangeFrom">
+            <summary>
+            Contain passenger range from
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.PassengerRangeTo">
+            <summary>
+            contain passenger range to
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.ValidFrom">
+            <summary>
+            contain date from which it is valid.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.ValidTo">
+            <summary>
+            contain date upto which it is valid
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.Currency">
+            <summary>
+            Contain Currency Name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.Amount">
+            <summary>
+            Contain Amount 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.PersonType">
+            <summary>
+            Contain Person type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.RoomType">
+            <summary>
+            Contain Room Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.ExtraBedding">
+            <summary>
+            Contain extra bedding information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.AgeFrom">
+            <summary>
+            Contain age from information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.AgeTo">
+            <summary>
+            contain Age to Information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.DiscountName">
+            <summary>
+            Contain Discount name information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.DiscountAmount">
+            <summary>
+            cotain disocunt Amount
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourPrice.Tax">
+            <summary>
+            Hold a list of Tax Structure
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.PackagePrice" -->
+        <member name="P:DistributionWebApi.Models.PackagePrice.DisplayName">
+            <summary>
+            Display Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PackagePrice.Category">
+            <summary>
+            Category Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PackagePrice.StarRatingCategory">
+            <summary>
+            Star Rating category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PackagePrice.Notes">
+            <summary>
+            Notes if any
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.PreTourStructure" -->
+        <member name="P:DistributionWebApi.Models.PreTourStructure.TLGXProductCode">
+            <summary>
+            TLGX Code for Product given by supplier.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.SupplierProductCode">
+            <summary>
+            Code provided by Supplier for Product.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.TLGXCountryName">
+            <summary>
+             TLGX Country Name.Values may be retrived from Master Service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.TLGXCountryCode">
+            <summary>
+             TLGX Country Code.Values may be retrived from Master Service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.TLGXCityName">
+            <summary>
+             TLGX City Name.Values may be retrived from Master Service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.TLGXCityCode">
+            <summary>
+             TLGX City Code.Values may be retrived from Master Service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.SupplierCityName">
+            <summary>
+             CityName given by Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.SupplierCityCode">
+            <summary>
+             CityCode given by Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.NumberOfNights">
+            <summary>
+            Number Of Nights in the Hotel.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.HotelCategory">
+            <summary>
+            Category of Hotel.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PreTourStructure.HotelName">
+            <summary>
+             Name of the Hotel.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayPrePost">
@@ -5256,6 +5596,11 @@
             Price Valid up to date (Not all supplier provides this)
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.Prices.PackageSupplier">
+            <summary>
+            End supplier
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Activity.SystemMapping">
             <summary>
             For Future Use to handle Mapping to Extenal Systems
@@ -7627,6 +7972,823 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType.RoomMapId">
             <summary>
             Nakshatra room type mapping id.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisaMapping.VisaInformation2">
+            <summary>
+            This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaMapping.VisaDefinition.SupplierCode">
+            <summary>
+            Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaMapping.VisaDefinition.SupplierName">
+            <summary>
+            End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.InformationLink">
+            <summary>
+            This is the request format for Country-based Visas Mapping Searches. It is a paged request/response service.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.InformationLink.href">
+            <summary>
+            contain href information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.InformationLink.content">
+            <summary>
+            contain content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.InformationLink.target">
+            <summary>
+            contain target information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Information.InformationLink">
+            <summary>
+            contain list of information links node having information like content,target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Information.content">
+            <summary>
+            Hold List of content
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationNode.Information">
+            <summary>
+            hold list of information nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInformation.GeneralInfo">
+            <summary>
+            Contain visa general information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInfo.VisaInformation">
+            <summary>
+            hold list of visa inforrmation 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInfo.VisaGeneralInformation">
+            <summary>
+            hold list of visa General inforrmation 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.ProcessingTime">
+            <summary>
+            Contain visa processing time 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.VisaProcedure">
+            <summary>
+            Contain visa Procedure information 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.DocumentsRequired">
+            <summary>
+            Contain Documents required to get visa 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationChildNode.content">
+            <summary>
+            Contain content Information  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryInfo.Information">
+            <summary>
+            Contain list of information like processing time and visa procedure  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Requirements.Line">
+            <summary>
+            Contain Information about Requirements  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryRequirements.Requirements">
+            <summary>
+            Contain Requirements node  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryNotes.Notes">
+            <summary>
+            hold list of notes of category requirement node  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryCode">
+            <summary>
+            Contain Category code  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryInfo">
+            <summary>
+            Holds list of category information nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryRequirements">
+            <summary>
+            Holds list of category requirements nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.Category">
+            <summary>
+            Contain the type of Visa category
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryDetail.CategoryNotes">
+            <summary>
+            Contain the category notes of Visa 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryCode">
+            <summary>
+            Contain Category Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.Category">
+            <summary>
+            Contain Category name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryFeeAmountINR">
+            <summary>
+            Contain Category fee in  Indian Currency
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFee.CategoryFeeAmountOther">
+            <summary>
+            Contain Category fee in  Other Currency
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategoryFees.Category">
+            <summary>
+            Contain list of visa category fee
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCategories.Category">
+            <summary>
+            Contain list of visa category 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.TerritoryCity">
+            <summary>
+            Contain Terror city name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.VisaInfo">
+            <summary>
+            Contain List of Visa Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.Categories">
+            <summary>
+            Contain List of Visa Categories Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.CategoryFees">
+            <summary>
+            Contain List of Visa Category Fees Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformation.CategoryForms">
+            <summary>
+            Contain Category Form Node
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.CategoryCode">
+            <summary>
+            Contain List of Category Codes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.Form">
+            <summary>
+            Contain List of Form Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForm.FormPath">
+            <summary>
+            Contain List of Form Path Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CategoryForms.CategoryForm">
+            <summary>
+            Contain List of Visa Category Form Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.CountryID">
+            <summary>
+            Contain Code of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.VisaRequired">
+            <summary>
+            Contain visa required Yes or No
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.WhereToApply">
+            <summary>
+            Contain the location where to apply for visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Website">
+            <summary>
+            Contain the web site information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.City">
+            <summary>
+            Contain the city name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.County">
+            <summary>
+            Contain the Country name 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Name">
+            <summary>
+            Contain the Name of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.PinCode">
+            <summary>
+            Contain the Pin code of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Address">
+            <summary>
+            Contain the Address of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Telephone">
+            <summary>
+            Contain the telephone of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffice.Fax">
+            <summary>
+            Contain the fax number of country office 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryOffices.CountryOffice">
+            <summary>
+            holds the list of country office to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaSAARCInfo.CountryOffices">
+            <summary>
+            holds the list of country office to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInformationLink.href">
+            <summary>
+            contain the href of a link
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:DistributionWebApi.Models.VisaInformationLink.content" -->
+        <!-- Badly formed XML comment ignored for member "P:DistributionWebApi.Models.VisaInformationLink.target" -->
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfoChildNode.InformationLink">
+            <summary>
+            hold the list of information links having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfoChildNode.content">
+            <summary>
+            hold the list of Content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescription.ReciprocalVisaInfo">
+            <summary>
+            hold the list of reciprocal visa info nodes having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ReciprocalVisaInfo.Description">
+            <summary>
+            hold the list of description nodes having information like content and target
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescriptionInnerNode.VisaInternationalAdvisory">
+            <summary>
+            contain the information of visa international advisory 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaInternationalAdvisory.Description">
+            <summary>
+            hold the list of visa international advisory information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHeading.Description">
+            <summary>
+            hold the list of description information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHeading.content">
+            <summary>
+            Contains the content information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDescriptionNode.Heading">
+            <summary>
+            hold the list of Visa heading information like content, description
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIVSAdvisory.Description">
+            <summary>
+            hold the list of Visa IVS advisory information like description, content
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Phone">
+            <summary>
+            Contain phone number of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Country">
+            <summary>
+            Contain Country name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Website">
+            <summary>
+            Contain name of web site of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.City">
+            <summary>
+            Contain city name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Fax">
+            <summary>
+            Contain fax name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.URL">
+            <summary>
+            Contain fax name of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Name">
+            <summary>
+            Contain URL of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.PinCode">
+            <summary>
+            Contain pincode of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHelpAddress.Address">
+            <summary>
+            Contain Address of help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIntlHelpAddress.HelpAddress">
+            <summary>
+            hold list of help address to get visa
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Email">
+            <summary>
+            Contain Email Id of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Address">
+            <summary>
+            Contain Address of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Phone">
+            <summary>
+            Contain phone number of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Country">
+            <summary>
+            Contain country name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCountryCode">
+            <summary>
+            Contain system country code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCountryName">
+            <summary>
+            Contain system country name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Website">
+            <summary>
+            Contain Web site name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.City">
+            <summary>
+            Contain Web city name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCityCode">
+            <summary>
+            Contain system city code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.SystemCityName">
+            <summary>
+            Contain system city name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Fax">
+            <summary>
+            Contain fax number of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.URL">
+            <summary>
+            Contain URL of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.Name">
+            <summary>
+            Contain name of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffice.PinCode">
+            <summary>
+            Contain pin code of a visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaIndianEmbassy.Office">
+            <summary>
+            hold list of visa office information like email, phone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.SmallMap">
+            <summary>
+            Contain path of image of small map
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Languages">
+            <summary>
+            Contain Languages spoken in country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Time">
+            <summary>
+            Contain time zone of country  
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Capital">
+            <summary>
+            Contain capital of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Flag">
+            <summary>
+            Contain path of image of flag for a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Code">
+            <summary>
+            Contain Code of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Area">
+            <summary>
+            describes area of country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Currency">
+            <summary>
+            Contain currency used within country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.LargeMap">
+            <summary>
+            Contain path of image of large map
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Population">
+            <summary>
+            Contain approximate population of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.WorldFactBook">
+            <summary>
+            Contain URL of a country Fact book
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.NationalDay">
+            <summary>
+            Contain national day of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaGeneralInfo.Location">
+            <summary>
+            Contain location of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Month">
+            <summary>
+            Contain name of a month for particular holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.HolidayName">
+            <summary>
+            Contain name of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Year">
+            <summary>
+            Contain year of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHoliday.Date">
+            <summary>
+            Contain date of a holiday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaHolidays.Holiday">
+            <summary>
+            list of holiday information like month, date and year
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirline.Code">
+            <summary>
+            list of code of a airline
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirline.Name">
+            <summary>
+            list of name of a airline
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirlines.Airline">
+            <summary>
+            list of air line information like code and name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryName.Name">
+            <summary>
+            contains the name of a country
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Type">
+            <summary>
+            contains the type of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Code">
+            <summary>
+            contains the code of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirport.Name">
+            <summary>
+            contains the name of a airport
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaAirports.Airport">
+            <summary>
+            hold a list of airports information like type and code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.GeneralInfo">
+            <summary>
+            Hold list of general information like location, language
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Holidays">
+            <summary>
+            Hold list of holiday information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Airlines">
+            <summary>
+            Hold list of visa Air line information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.CountryName">
+            <summary>
+            Hold list of country name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaCountryDetails.Airports">
+            <summary>
+            Hold list of visa Air port information
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Timings">
+            <summary>
+            Contain working timing of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Email">
+            <summary>
+            Contain Email id of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Address">
+            <summary>
+            Contain Address of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Telephone">
+            <summary>
+            Contain telephone number of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.VisaTimings">
+            <summary>
+            Contain Visa timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Website">
+            <summary>
+            Contain website name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.City">
+            <summary>
+            Contain city name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Name">
+            <summary>
+            Contain city name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.PinCode">
+            <summary>
+            Contain pin code of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Phone">
+            <summary>
+            Contain phone number of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.CollectionTimings">
+            <summary>
+            Contain Collection timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Country">
+            <summary>
+            Contain country name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.PublicTimings">
+            <summary>
+            Contain public timings of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Fax">
+            <summary>
+            Contain fax name of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOfficeNode.Notes">
+            <summary>
+            Contain notes if any of visa office
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaOffices.Office">
+            <summary>
+            Holds the List of Visa Information offices available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDiplomaticRepresentation.Offices">
+            <summary>
+            Holds the List of Visa Information offices available
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.AdditionalInfo">
+            <summary>
+            Contain Additional Info
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.VisaInformation">
+            <summary>
+            Holds the List of Visa Information Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.SAARCInfo">
+            <summary>
+            Holds the List of Saarc Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.ReciprocalVisaInfo">
+            <summary>
+            Holds the List of Reciprocal Visa Info Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.InternationalAdvisory">
+            <summary>
+            Holds the List of International Advisory Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IVSAdvisory">
+            <summary>
+            Holds the List of IVS Advisory Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IntlHelpAddress">
+            <summary>
+            Holds the International help address
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.CountryCode">
+            <summary>
+            Contain Country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.IndianEmbassy">
+            <summary>
+            Holds the List of Indian Embassy
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.CountryDetails">
+            <summary>
+            Holds the List of Country details nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visa.DiplomaticRepresentation">
+            <summary>
+            Holds the List of Diplomatic Representation nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.CountryCode">
+            <summary>
+            Contain Country code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.CountryName">
+            <summary>
+            Contain Country Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDetail.Visa">
+            <summary>
+            Holds list of Visa Nodes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.SupplierCode">
+            <summary>
+            Mapping System Code for End Supplier. Full List of Codes can be retrieved from the Supplier Code API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.CallType">
+            <summary>
+            Holds the Call type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.SupplierName">
+            <summary>
+            End Supplier System Product Code. This code should be used in all communication with the End Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisaDefinition.VisaDetail">
+            <summary>
+            holds a list of Visa Details
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Visamaster">
+            <summary>
+            Activity related masters
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.Type">
+            <summary>
+            attribute type master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.ParentType">
+            <summary>
+            parent attribute type master if exists
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Visamaster.Values">
+            <summary>
+            values of the attribute master
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.VisamasterValues">
+            <summary>
+            structure for values of the attribute master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisamasterValues.Value">
+            <summary>
+            attribute value
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.VisamasterValues.ParentValue">
+            <summary>
+            parent attribute value if exists
             </summary>
         </member>
         <member name="T:DistributionWebApi.NLogHelper.NLogger">
