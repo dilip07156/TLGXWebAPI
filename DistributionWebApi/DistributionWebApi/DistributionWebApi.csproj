@@ -285,6 +285,8 @@
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\ErrorLog.cs" />
     <Compile Include="Models\HolidayModel.cs" />
+    <Compile Include="Models\HolidaySearchRequestParams.cs" />
+    <Compile Include="Models\HolidaySearchResponse.cs" />
     <Compile Include="Models\HolidaySubModels.cs" />
     <Compile Include="Models\ProductStaticModel.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
