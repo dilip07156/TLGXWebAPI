@@ -776,6 +776,13 @@
             <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
             <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.updateHolidayMapping(DistributionWebApi.Models.HolidayModel)">
+            <summary>
+            Updates Holiday mapping model based on NakshatraHolidayId
+            </summary>
+            <param name="HolidayModel">Holiday mapping object</param>
+            <returns>Returns updated Holiday mapping model </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -1172,11 +1179,6 @@
              <summary>
             
              </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Id">
-            <summary>
-            Unique Id for each Tour.
-            </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.SupplierHolidayId">
             <summary>
