@@ -17,6 +17,7 @@ using System.Web;
 using System.Text;
 using System.Xml.Serialization;
 using NLog.Targets;
+using System.Web.Http.ExceptionHandling;
 
 namespace DistributionWebApi
 {
@@ -626,6 +627,8 @@ namespace DistributionWebApi
             //config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
 
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
+
+            config.Services.Add(typeof(IExceptionLogger), new NlogElkExceptionLogger());
 
         }
 

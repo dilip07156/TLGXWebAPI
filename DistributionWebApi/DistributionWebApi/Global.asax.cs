@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -44,8 +45,14 @@ namespace DistributionWebApi
             //log4net.Config.XmlConfigurator.Configure();
 
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
+
             GlobalConfiguration.Configuration.Filters.Add(new LoggingFilterAttribute());
+
             //GlobalConfiguration.Configuration.Filters.Add(new CacheFilterConfig());
+
+            GlobalConfiguration.Configuration.Filters.Add(new ExceptionFilterConfig());
+
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IExceptionHandler), new GlobalWapiExceptionHandler());
         }
     }
 }
