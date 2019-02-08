@@ -776,6 +776,13 @@
             <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
             <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.HolidayController.updateHolidayMapping(DistributionWebApi.Models.HolidayModel)">
+            <summary>
+            Updates Holiday mapping model based on NakshatraHolidayId
+            </summary>
+            <param name="HolidayModel">Holiday mapping object</param>
+            <returns>Returns updated Holiday mapping model </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -1173,11 +1180,6 @@
             
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.HolidayModel.Id">
-            <summary>
-            Unique Id for each Tour.
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.HolidayModel.SupplierHolidayId">
             <summary>
             Unique Supplier Holiday Id for each Tour.
@@ -1501,6 +1503,26 @@
         <member name="P:DistributionWebApi.Models.HolidayModel.PostTour">
             <summary>
             Post Tour Details.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PackagePrice">
+            <summary>
+            Holds list of PackagePrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PreTourPrice">
+            <summary>
+            Holds list of PreTourPrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PostTourPrice">
+            <summary>
+            Holds list of PostTourPrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.ClassificationAttributes">
+            <summary>
+            Holds list of ClassificationAttributes
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PageSize">
@@ -3072,6 +3094,26 @@
              <summary>
             Review Score.
              </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ClassificationAttributes">
+            <summary>
+            Structure for classification attributes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeType">
+            <summary>
+            ClassificationAttributes Attribute type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeSubType">
+            <summary>
+            Classification Attribute sub type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeValue">
+            <summary>
+            Classification Attribute Value
+            </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Static.StaticData_RQ">
             <summary>
@@ -7663,6 +7705,11 @@
             Supplier Product Code received in the Supplier Availability Response.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request.TLGXCompanyId">
+            <summary>
+            Supplier Product Company Id received in the Supplier Availability Response.
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request.SupplierRoomTypes">
             <summary>
             Collection of Supplier Room Types
@@ -7847,6 +7894,16 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.SupplierProductCode">
             <summary>
             Supplier Product Code received in the Supplier Availability Response.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxCompanyId">
+            <summary>
+            Tlgx Specified Unique Company Id
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.TlgxCompanyHotelId">
+            <summary>
+            Tlgx Specified Unique Company Id
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response.CommonHotelId">
