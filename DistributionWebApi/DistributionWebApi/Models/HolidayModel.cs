@@ -16,12 +16,6 @@ namespace DistributionWebApi.Models
     public class HolidayModel
     {
         /// <summary>
-        /// Unique Id for each Tour.
-        /// </summary>
-        [Required]
-        public string Id { get; set; }
-
-        /// <summary>
         /// Unique Supplier Holiday Id for each Tour.
         /// </summary>
         [Required]
@@ -59,7 +53,7 @@ namespace DistributionWebApi.Models
         /// Date on which Holiday is created on system.
         /// </summary>
         [Required]
-       // public DateTime? CreateDate { get; set; }
+        // public DateTime? CreateDate { get; set; }
         /// <summary>
         /// The user who created the product.
         /// </summary>
@@ -305,11 +299,25 @@ namespace DistributionWebApi.Models
         /// </summary>
         public List<PreTourStructure> PostTour { get; set; }
 
+        /// <summary>
+        /// Holds list of PackagePrice
+        /// </summary>
         public List<PackagePrice> PackagePrice { get; set; }
 
+        /// <summary>
+        /// Holds list of PreTourPrice
+        /// </summary>
         public List<PreTourPrice> PreTourPrice { get; set; }
 
+        /// <summary>
+        /// Holds list of PostTourPrice
+        /// </summary>
         public List<PreTourPrice> PostTourPrice { get; set; }
+
+        /// <summary>
+        /// Holds list of ClassificationAttributes
+        /// </summary>
+        public List<ClassificationAttributes> ClassificationAttributes { get; set; }
 
         ///// <summary>
         ///// Post Tour Details.

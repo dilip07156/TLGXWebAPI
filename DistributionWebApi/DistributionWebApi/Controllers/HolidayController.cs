@@ -256,5 +256,50 @@ namespace DistributionWebApi.Controllers
                 return response;
             }
         }
+
+
+        /// <summary>
+        /// Updates Holiday mapping model based on NakshatraHolidayId
+        /// </summary>
+        /// <param name="HolidayModel">Holiday mapping object</param>
+        /// <returns>Returns updated Holiday mapping model </returns>
+        [HttpPost]
+        [Route("edit")]
+        public async Task<HttpResponseMessage> updateHolidayMapping(HolidayModel HolidayModel)
+        {
+            try
+            {
+                _database = MongoDBHandler.mDatabase();
+
+                IMongoCollection<HolidayModel> collectionHolidayModelMapping = _database.GetCollection<HolidayModel>("HolidayMapping");
+
+                if (HolidayModel != null)
+                {
+                    FilterDefinition<HolidayModel> filter;
+                    filter = Builders<HolidayModel>.Filter.Empty;
+                    var nakshatraHolidayId = HolidayModel.NakshatraHolidayId.ToString().ToUpper();
+                    filter = filter & Builders<HolidayModel>.Filter.Eq(x => x.NakshatraHolidayId, nakshatraHolidayId);
+                    var searchResult = await collectionHolidayModelMapping.Find(filter).FirstOrDefaultAsync();
+                    // Update this record.
+                    if (searchResult != null)
+                    {                      
+                        searchResult = HolidayModel;
+                        var filter1 = Builders<HolidayModel>.Filter.Eq(c => c.NakshatraHolidayId, HolidayModel.NakshatraHolidayId);
+                        collectionHolidayModelMapping.ReplaceOne(filter, HolidayModel, new UpdateOptions { IsUpsert = true });
+                    }
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+                    return response;
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
     }
 }
