@@ -45,6 +45,39 @@ namespace DistributionWebApi.Models
         public string HotelStarRating { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public List<DC_AccomodationCompanyVersions> AccomodationCompanyVersions { get; set; }
+    }
+
+    public class DC_AccomodationCompanyVersions
+    {
+
+        public string CommonProductId { get; set; }
+        public string CompanyProductId { get; set; }
+        public string CompanyId { get; set; }
+        public string CompanyName { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDisplayName { get; set; }
+        public string StarRating { get; set; }
+        public string CompanyRating { get; set; }
+        public string ProductCatSubType { get; set; }
+        public string Brand { get; set; }
+        public string Chain { get; set; }
+        public string HouseNumber { get; set; }
+        public string Street { get; set; }
+        public string Street2 { get; set; }
+        public string Street3 { get; set; }
+        public string Street4 { get; set; }
+        public string Street5 { get; set; }
+        public string Zone { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string Area { get; set; }
+        public string Location { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string TLGXAccoId { get; set; }
     }
 }
 
