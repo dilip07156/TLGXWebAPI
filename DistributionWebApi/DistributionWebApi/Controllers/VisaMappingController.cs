@@ -95,7 +95,7 @@ namespace DistributionWebApi.Controllers
                 _database = MongoDBHandler.mDatabase();
                 IMongoCollection<DistributionWebApi.Models.VisaDefinition> collectionVisa = _database.GetCollection<DistributionWebApi.Models.VisaDefinition>("VisaMapping");
 
-                var filter = Builders<DistributionWebApi.Models.VisaDefinition>.Filter.ElemMatch(x => x.VisaDetail, x => x.CountryCode == CountryCode);
+                var filter = Builders<DistributionWebApi.Models.VisaDefinition>.Filter.ElemMatch(x => x.VisaDetail, x => x.CountryCode.ToLower() == CountryCode.ToLower());
                 var searchResult = await collectionVisa.Find(filter).FirstOrDefaultAsync();
 
                 HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
