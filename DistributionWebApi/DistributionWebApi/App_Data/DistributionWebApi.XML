@@ -1505,6 +1505,26 @@
             Post Tour Details.
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PackagePrice">
+            <summary>
+            Holds list of PackagePrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PreTourPrice">
+            <summary>
+            Holds list of PreTourPrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.PostTourPrice">
+            <summary>
+            Holds list of PostTourPrice
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidayModel.ClassificationAttributes">
+            <summary>
+            Holds list of ClassificationAttributes
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PageSize">
             <summary>
             How many Search Results do you wish to receive per request?
@@ -3074,6 +3094,26 @@
              <summary>
             Review Score.
              </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ClassificationAttributes">
+            <summary>
+            Structure for classification attributes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeType">
+            <summary>
+            ClassificationAttributes Attribute type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeSubType">
+            <summary>
+            Classification Attribute sub type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.AttributeValue">
+            <summary>
+            Classification Attribute Value
+            </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Static.StaticData_RQ">
             <summary>
