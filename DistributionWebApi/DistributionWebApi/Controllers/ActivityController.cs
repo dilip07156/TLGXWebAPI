@@ -128,10 +128,11 @@ namespace DistributionWebApi.Controllers
                                              ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
+                                             //InterestType = a.InterestType,
+                                             //Category = a.Category,
+                                             //Type = a.Type,
+                                             //SubType = a.SubType,
+                                             Categories = a.Categories,
                                              Name = a.Name,
                                              Description = a.Description,
                                              DaysOfTheWeek = a.DaysOfTheWeek,
@@ -170,7 +171,7 @@ namespace DistributionWebApi.Controllers
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
-                    project = project.Include("SubType");
+                    project = project.Include("Categories");
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
@@ -184,7 +185,7 @@ namespace DistributionWebApi.Controllers
                         {
                             SystemActivityCode = s.SystemActivityCode.ToString(),
                             SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
+                            Categories = s.Categories,
                             Options = s.ProductOptions,
                             Prices = s.Prices
                         }).ToList();
@@ -301,10 +302,11 @@ namespace DistributionWebApi.Controllers
                                              ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
+                                             //InterestType = a.InterestType,
+                                             //Category = a.Category,
+                                             //Type = a.Type,
+                                             //SubType = a.SubType,
+                                             Categories = a.Categories,
                                              TLGXDisplaySubType = a.TLGXDisplaySubType,
                                              Name = a.Name,
                                              Description = a.Description,
@@ -344,7 +346,7 @@ namespace DistributionWebApi.Controllers
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
-                    project = project.Include("SubType");
+                    project = project.Include("Categories");
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
@@ -358,7 +360,8 @@ namespace DistributionWebApi.Controllers
                         {
                             SystemActivityCode = s.SystemActivityCode.ToString(),
                             SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
+                            //ActivityType = s.SubType,
+                            Categories = s.Categories,
                             Options = s.ProductOptions,
                             Prices = s.Prices
                         }).ToList();
@@ -404,7 +407,7 @@ namespace DistributionWebApi.Controllers
                 IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
                 FilterDefinition<BsonDocument> filter;
                 filter = Builders<BsonDocument>.Filter.Empty;
-                filter = filter & Builders<BsonDocument>.Filter.AnyIn("Type", param.ActivityTypes);
+                filter = filter & Builders<BsonDocument>.Filter.AnyIn("Categories.Type", param.ActivityTypes);
                 if (param.FilterBySuppliers != null)
                 {
                     if (param.FilterBySuppliers.Length > 0)
@@ -450,10 +453,11 @@ namespace DistributionWebApi.Controllers
                                              ActivityCode = a.SystemActivityCode,
                                              SupplierCompanyCode = a.SupplierCompanyCode,
                                              SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
+                                             //InterestType = a.InterestType,
+                                             //Category = a.Category,
+                                             //Type = a.Type,
+                                             //SubType = a.SubType,
+                                             Categories = a.Categories,
                                              TLGXDisplaySubType = a.TLGXDisplaySubType,
                                              Name = a.Name,
                                              Description = a.Description,
@@ -493,7 +497,7 @@ namespace DistributionWebApi.Controllers
 
                     ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
                     project = project.Include("Name");
-                    project = project.Include("SubType");
+                    project = project.Include("Categories");
                     project = project.Include("Prices");
                     project = project.Include("ProductOptions");
 
@@ -507,7 +511,8 @@ namespace DistributionWebApi.Controllers
                         {
                             SystemActivityCode = s.SystemActivityCode.ToString(),
                             SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
+                            //ActivityType = s.SubType,
+                            Categories = s.Categories,
                             Options = s.ProductOptions,
                             Prices = s.Prices
                         }).ToList();

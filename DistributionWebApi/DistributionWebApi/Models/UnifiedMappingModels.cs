@@ -51,6 +51,12 @@ namespace DistributionWebApi.Models
         public string SupplierProductCode { get; set; }
 
         /// <summary>
+        /// Supplier Product Company Id received in the Supplier Availability Response.
+        /// </summary>
+        [Required]
+        public string TLGXCompanyId { get; set; }
+
+        /// <summary>
         /// Collection of Supplier Room Types
         /// </summary>
         public List<UnifiedHotelAndRoomMapping_RoomTypeRequest> SupplierRoomTypes { get; set; }
@@ -222,6 +228,18 @@ namespace DistributionWebApi.Models
         /// </summary>
         [Required]
         public string SupplierProductCode { get; set; }
+
+        /// <summary>
+        /// Tlgx Specified Unique Company Id
+        /// </summary>
+        [Required]
+        public string TlgxCompanyId { get; set; }
+
+        /// <summary>
+        /// Tlgx Specified Unique Company Id
+        /// </summary>
+        [Required]
+        public string TlgxCompanyHotelId { get; set; }
 
         /// <summary>
         /// System Product Code / Common product code
