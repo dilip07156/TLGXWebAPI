@@ -3115,6 +3115,11 @@
             Classification Attribute Value
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ClassificationAttributes.IsActive">
+            <summary>
+            Classification Attribute is active or not
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Static.StaticData_RQ">
             <summary>
             product static data request format. 

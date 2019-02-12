@@ -240,7 +240,7 @@ namespace DistributionWebApi.Controllers
 
                 FilterDefinition<HolidayModel> filter;
                 filter = Builders<HolidayModel>.Filter.Empty;
-
+                NakshtraHolidayid = NakshtraHolidayid.ToUpper();
                 filter = filter & Builders<HolidayModel>.Filter.Eq(x => x.NakshatraHolidayId, NakshtraHolidayid);
 
                 var searchResult = await collectionHolidayModelMapping.Find(filter).FirstOrDefaultAsync();
