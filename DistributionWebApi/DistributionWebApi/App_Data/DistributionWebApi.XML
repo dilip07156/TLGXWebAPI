@@ -4729,9 +4729,29 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Categories">
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.CategoryGroup">
             <summary>
             Activity category classification
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Category">
+            <summary>
+            Mapping System Activity Category for Product Classification.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Type">
+            <summary>
+            Mapping System Activity Product Type Category for Product Classification. This is the second level of classification
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.SubType">
+            <summary>
+            Mapping System Activity Category for Product Classification. THis is the third level of classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.TLGXDisplaySubType">
@@ -4988,9 +5008,29 @@
             End Supplier System Product Code. This code should be used in all communication with the End Supplier
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.Activity.Categories">
+        <member name="P:DistributionWebApi.Models.Activity.Activity.CategoryGroup">
             <summary>
             Activity category classification
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.InterestType">
+            <summary>
+            Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.Category">
+            <summary>
+            Mapping System Activity Category for Product Classification.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.Type">
+            <summary>
+            Mapping System Activity Product Type Category for Product Classification. This is the second level of classification
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.SubType">
+            <summary>
+            Mapping System Activity Category for Product Classification. THis is the third level of classification.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.TLGXDisplaySubType">
@@ -5719,7 +5759,7 @@
             Mapping system internal activity name
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.Categories">
+        <member name="P:DistributionWebApi.Models.Activity.SimliarProducts.CategoryGroup">
             <summary>
             Activity category classification
             </summary>
