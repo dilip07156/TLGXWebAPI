@@ -18,7 +18,7 @@ namespace DistributionWebApi
             context.Result = new TextPlainErrorResult
             {
                 Request = context.ExceptionContext.Request,
-                Content = "Sorry! Something went wrong. Contact Nakshatra Team. Error Date : " + DateTime.Now.ToString()
+                Content = "Sorry! Something went wrong. Contact Nakshatra Team. Error Date : " + DateTime.Now.ToString() + " " + Environment.NewLine + context.Exception.Message
             };
         }
 
