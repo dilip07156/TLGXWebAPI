@@ -16,51 +16,35 @@ namespace DistributionWebApi.Mongo
 
         static IMongoClient mClientConnection()
         {
-            try
+            string MongoDBApplicationName = System.Configuration.ConfigurationManager.AppSettings["MongoDBApplicationName"];
+            string MongoDBServerHost = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerHost"];
+            string MongoDBServerPort = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerPort"];
+            string MongoDBServerUser = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerUser"];
+            string MongoDBServerPassword = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerPassword"];
+            string MongoDBServerAuthenticationDatabase = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerAuthenticationDatabase"];
+
+            MongoClientSettings mcs = new MongoClientSettings();
+            mcs.ApplicationName = MongoDBApplicationName;
+            mcs.ConnectionMode = ConnectionMode.Automatic;
+            mcs.ConnectTimeout = new TimeSpan(0, 0, 10);
+            mcs.Server = new MongoServerAddress(MongoDBServerHost, Convert.ToInt32(MongoDBServerPort));
+            mcs.MaxConnectionPoolSize = 1000;
+            mcs.WaitQueueSize = 10000;
+
+            if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
             {
-                string MongoDBApplicationName = System.Configuration.ConfigurationManager.AppSettings["MongoDBApplicationName"];
-                string MongoDBServerHost = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerHost"];
-                string MongoDBServerPort = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerPort"];
-                string MongoDBServerUser = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerUser"];
-                string MongoDBServerPassword = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerPassword"];
-                string MongoDBServerAuthenticationDatabase = System.Configuration.ConfigurationManager.AppSettings["MongoDBServerAuthenticationDatabase"];
-
-                MongoClientSettings mcs = new MongoClientSettings();
-                mcs.ApplicationName = MongoDBApplicationName;
-                mcs.ConnectionMode = ConnectionMode.Automatic;
-                mcs.ConnectTimeout = new TimeSpan(0, 0, 10);
-                mcs.Server = new MongoServerAddress(MongoDBServerHost, Convert.ToInt32(MongoDBServerPort));
-                mcs.MaxConnectionPoolSize = 500;
-                mcs.WaitQueueSize = 10000;
-
-                if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
-                {
-                    mcs.Credential = MongoCredential.CreateCredential(MongoDBServerAuthenticationDatabase, MongoDBServerUser, MongoDBServerPassword);
-                }
-
-                _client = new MongoClient(mcs);
-                return _client;
+                mcs.Credential = MongoCredential.CreateCredential(MongoDBServerAuthenticationDatabase, MongoDBServerUser, MongoDBServerPassword);
             }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, "DistributionWebApi.Mongo.MongoDBHandler", "mClientConnection", "");
-                return null;
-            }
+
+            _client = new MongoClient(mcs);
+            return _client;
         }
 
         public static IMongoDatabase mDatabase()
         {
-            try
-            {
-                _client = mClientConnection();
-                _database = _client.GetDatabase(System.Configuration.ConfigurationManager.AppSettings["Mongo_DB_Name"]);//,new MongoDatabaseSettings { ReadConcern = ReadConcern.Local, WriteConcern = WriteConcern.Unacknowledged, ReadPreference = ReadPreference.Primary });          
-                return _database;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, "DistributionWebApi.Mongo.MongoDBHandler", "mDatabase", "");
-                return null;
-            }
+            _client = mClientConnection();
+            _database = _client.GetDatabase(System.Configuration.ConfigurationManager.AppSettings["Mongo_DB_Name"]);//,new MongoDatabaseSettings { ReadConcern = ReadConcern.Local, WriteConcern = WriteConcern.Unacknowledged, ReadPreference = ReadPreference.Primary });          
+            return _database;
         }
 
         //public async Task<bool> MongoDBConnection()

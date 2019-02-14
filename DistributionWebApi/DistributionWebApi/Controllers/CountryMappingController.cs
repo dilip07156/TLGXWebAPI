@@ -40,39 +40,29 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSupplierCountryMappingByName(string CountryName, string SupplierName)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-                FilterDefinition<CountryMapping> filter;
-                filter = Builders<CountryMapping>.Filter.Empty;
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+            FilterDefinition<CountryMapping> filter;
+            filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryName, CountryName.Trim().ToUpper());
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryName, CountryName.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
 
-                var searchResult = await collection.Find(filter)
-                                    .Project(x => new CountryMapping_RS
-                                    {
-                                        CountryName = x.CountryName,
-                                        CountryCode = x.CountryCode,
-                                        SupplierName = x.SupplierName,
-                                        SupplierCode = x.SupplierCode,
-                                        SupplierCountryCode = x.SupplierCountryCode,
-                                        SupplierCountryName = x.SupplierCountryName,
-                                        MapId = x.MapId
-                                    })
-                                    .ToListAsync();
+            var searchResult = await collection.Find(filter)
+                                .Project(x => new CountryMapping_RS
+                                {
+                                    CountryName = x.CountryName,
+                                    CountryCode = x.CountryCode,
+                                    SupplierName = x.SupplierName,
+                                    SupplierCode = x.SupplierCode,
+                                    SupplierCountryCode = x.SupplierCountryCode,
+                                    SupplierCountryName = x.SupplierCountryName,
+                                    MapId = x.MapId
+                                })
+                                .ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
@@ -86,38 +76,29 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSupplierCountryMappingByCode(string CountryCode, string SupplierCode)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-                FilterDefinition<CountryMapping> filter;
-                filter = Builders<CountryMapping>.Filter.Empty;
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+            FilterDefinition<CountryMapping> filter;
+            filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
 
-                var searchResult = await collection.Find(filter)
-                                    .Project(x => new CountryMapping_RS
-                                    {
-                                        CountryName = x.CountryName,
-                                        CountryCode = x.CountryCode,
-                                        SupplierName = x.SupplierName,
-                                        SupplierCode = x.SupplierCode,
-                                        SupplierCountryCode = x.SupplierCountryCode,
-                                        SupplierCountryName = x.SupplierCountryName,
-                                        MapId = x.MapId
-                                    })
-                                    .ToListAsync();
+            var searchResult = await collection.Find(filter)
+                                .Project(x => new CountryMapping_RS
+                                {
+                                    CountryName = x.CountryName,
+                                    CountryCode = x.CountryCode,
+                                    SupplierName = x.SupplierName,
+                                    SupplierCode = x.SupplierCode,
+                                    SupplierCountryCode = x.SupplierCountryCode,
+                                    SupplierCountryName = x.SupplierCountryName,
+                                    MapId = x.MapId
+                                })
+                                .ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
 
@@ -131,33 +112,24 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(SystemCountryMapping_RS))]
         public async Task<HttpResponseMessage> GetAllSupplierCountryMappingByCode(string CountryCode)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-                FilterDefinition<CountryMapping> filter;
-                filter = Builders<CountryMapping>.Filter.Empty;
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+            FilterDefinition<CountryMapping> filter;
+            filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.CountryCode, CountryCode.Trim().ToUpper());
 
-                var searchResult = await collection.Find(filter)
-                                    .Project(x => new SystemCountryMapping_RS
-                                    {
-                                        SupplierCode = x.SupplierCode,
-                                        SupplierCountryCode = x.SupplierCountryCode,
-                                        MapId = x.MapId
-                                    })
-                                    .ToListAsync();
+            var searchResult = await collection.Find(filter)
+                                .Project(x => new SystemCountryMapping_RS
+                                {
+                                    SupplierCode = x.SupplierCode,
+                                    SupplierCountryCode = x.SupplierCountryCode,
+                                    MapId = x.MapId
+                                })
+                                .ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
 
@@ -172,38 +144,29 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSystemCountryMappingByCode(string CountryCode, string SupplierCode)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-                FilterDefinition<CountryMapping> filter;
-                filter = Builders<CountryMapping>.Filter.Empty;
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+            FilterDefinition<CountryMapping> filter;
+            filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryCode, CountryCode.Trim().ToUpper());
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryCode, CountryCode.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCode, SupplierCode.Trim().ToUpper());
 
-                var searchResult = await collection.Find(filter)
-                                    .Project(x => new CountryMapping_RS
-                                    {
-                                        CountryName = x.CountryName,
-                                        CountryCode = x.CountryCode,
-                                        SupplierName = x.SupplierName,
-                                        SupplierCode = x.SupplierCode,
-                                        SupplierCountryCode = x.SupplierCountryCode,
-                                        SupplierCountryName = x.SupplierCountryName,
-                                        MapId = x.MapId
-                                    })
-                                    .ToListAsync();
+            var searchResult = await collection.Find(filter)
+                                .Project(x => new CountryMapping_RS
+                                {
+                                    CountryName = x.CountryName,
+                                    CountryCode = x.CountryCode,
+                                    SupplierName = x.SupplierName,
+                                    SupplierCode = x.SupplierCode,
+                                    SupplierCountryCode = x.SupplierCountryCode,
+                                    SupplierCountryName = x.SupplierCountryName,
+                                    MapId = x.MapId
+                                })
+                                .ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
@@ -217,38 +180,29 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(CountryMapping_RS))]
         public async Task<HttpResponseMessage> GetSystemCountryMappingByName(string CountryName, string SupplierName)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-                FilterDefinition<CountryMapping> filter;
-                filter = Builders<CountryMapping>.Filter.Empty;
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+            FilterDefinition<CountryMapping> filter;
+            filter = Builders<CountryMapping>.Filter.Empty;
 
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryName, CountryName.Trim().ToUpper());
-                filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierCountryName, CountryName.Trim().ToUpper());
+            filter = filter & Builders<CountryMapping>.Filter.Eq(x => x.SupplierName, SupplierName.Trim().ToUpper());
 
-                var searchResult = await collection.Find(filter)
-                                    .Project(x => new CountryMapping_RS
-                                    {
-                                        CountryName = x.CountryName,
-                                        CountryCode = x.CountryCode,
-                                        SupplierName = x.SupplierName,
-                                        SupplierCode = x.SupplierCode,
-                                        SupplierCountryCode = x.SupplierCountryCode,
-                                        SupplierCountryName = x.SupplierCountryName,
-                                        MapId = x.MapId
-                                    })
-                                    .ToListAsync();
+            var searchResult = await collection.Find(filter)
+                                .Project(x => new CountryMapping_RS
+                                {
+                                    CountryName = x.CountryName,
+                                    CountryCode = x.CountryCode,
+                                    SupplierName = x.SupplierName,
+                                    SupplierCode = x.SupplierCode,
+                                    SupplierCountryCode = x.SupplierCountryCode,
+                                    SupplierCountryName = x.SupplierCountryName,
+                                    MapId = x.MapId
+                                })
+                                .ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
@@ -262,80 +216,29 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(List<CrossSupplierCountryMapping_RS>))]
         public async Task<HttpResponseMessage> GetCrossSupplierCountryMapping(List<CrossSupplierCountryMapping_RQ> RQ)
         {
-            try
+            List<CrossSupplierCountryMapping_RS> RS = new List<CrossSupplierCountryMapping_RS>();
+
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<CountryMapping>("CountryMapping");
+
+            foreach (var iRQ in RQ)
             {
-                List<CrossSupplierCountryMapping_RS> RS = new List<CrossSupplierCountryMapping_RS>();
+                CrossSupplierCountryMapping_RS iRS = new CrossSupplierCountryMapping_RS();
+                iRS.SourceSupplierCode = iRQ.SourceSupplierCode;
+                iRS.SourceSupplierCountryCode = iRQ.SourceSupplierCountryCode;
+                iRS.TargetSupplierCode = iRQ.TargetSupplierCode;
 
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<CountryMapping>("CountryMapping");
-
-                foreach (var iRQ in RQ)
+                if (iRS.SourceSupplierCode == null || iRS.SourceSupplierCountryCode == null || iRS.TargetSupplierCode == null)
                 {
-                    CrossSupplierCountryMapping_RS iRS = new CrossSupplierCountryMapping_RS();
-                    iRS.SourceSupplierCode = iRQ.SourceSupplierCode;
-                    iRS.SourceSupplierCountryCode = iRQ.SourceSupplierCountryCode;
-                    iRS.TargetSupplierCode = iRQ.TargetSupplierCode;
-
-                    if (iRS.SourceSupplierCode == null || iRS.SourceSupplierCountryCode == null || iRS.TargetSupplierCode == null)
+                    iRS.Status = "Bad Request";
+                }
+                else
+                {
+                    if (iRQ.SourceSupplierCode.ToUpper() == iRQ.TargetSupplierCode.ToUpper())
                     {
-                        iRS.Status = "Bad Request";
-                    }
-                    else
-                    {
-                        if (iRQ.SourceSupplierCode.ToUpper() == iRQ.TargetSupplierCode.ToUpper())
+                        if (iRQ.SourceSupplierCode.ToUpper() == "TLGX")// change me to SYSTEM
                         {
-                            if (iRQ.SourceSupplierCode.ToUpper() == "TLGX")// change me to SYSTEM
-                            {
-                                var res = await collection.Find(x => (x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
-                                if (res != null)
-                                {
-                                    iRS.TargetSupplierCountryCode = res.CountryCode;
-                                    iRS.TargetSupplierCountryName = res.CountryName;
-                                    iRS.Status = "Mapped";
-                                }
-                                else
-                                {
-                                    iRS.TargetSupplierCountryCode = string.Empty;
-                                    iRS.TargetSupplierCountryName = string.Empty;
-                                    iRS.Status = "No Results Found";
-                                }
-                            }
-                            else
-                            {
-                                var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
-                                if (res != null)
-                                {
-                                    iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
-                                    iRS.TargetSupplierCountryName = res.SupplierCountryName;
-                                    iRS.Status = "Mapped";
-                                }
-                                else
-                                {
-                                    iRS.TargetSupplierCountryCode = string.Empty;
-                                    iRS.TargetSupplierCountryName = string.Empty;
-                                    iRS.Status = "No Results Found";
-                                }
-                            }
-                        }
-                        else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() == "TLGX")
-                        {
-                            var res = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
-                            if (res != null)
-                            {
-                                iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
-                                iRS.TargetSupplierCountryName = res.SupplierCountryName;
-                                iRS.Status = "Mapped";
-                            }
-                            else
-                            {
-                                iRS.TargetSupplierCountryCode = string.Empty;
-                                iRS.TargetSupplierCountryName = string.Empty;
-                                iRS.Status = "No Results Found";
-                            }
-                        }
-                        else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.TargetSupplierCode.ToUpper() == "TLGX")
-                        {
-                            var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                            var res = await collection.Find(x => (x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
                             if (res != null)
                             {
                                 iRS.TargetSupplierCountryCode = res.CountryCode;
@@ -349,11 +252,69 @@ namespace DistributionWebApi.Controllers
                                 iRS.Status = "No Results Found";
                             }
                         }
-                        else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() != "TLGX" && iRQ.TargetSupplierCode.ToUpper() != "TLGX")
+                        else
                         {
-                            var resultForSource = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                            var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                            if (res != null)
+                            {
+                                iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
+                                iRS.TargetSupplierCountryName = res.SupplierCountryName;
+                                iRS.Status = "Mapped";
+                            }
+                            else
+                            {
+                                iRS.TargetSupplierCountryCode = string.Empty;
+                                iRS.TargetSupplierCountryName = string.Empty;
+                                iRS.Status = "No Results Found";
+                            }
+                        }
+                    }
+                    else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() == "TLGX")
+                    {
+                        var res = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                        if (res != null)
+                        {
+                            iRS.TargetSupplierCountryCode = res.SupplierCountryCode;
+                            iRS.TargetSupplierCountryName = res.SupplierCountryName;
+                            iRS.Status = "Mapped";
+                        }
+                        else
+                        {
+                            iRS.TargetSupplierCountryCode = string.Empty;
+                            iRS.TargetSupplierCountryName = string.Empty;
+                            iRS.Status = "No Results Found";
+                        }
+                    }
+                    else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.TargetSupplierCode.ToUpper() == "TLGX")
+                    {
+                        var res = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                        if (res != null)
+                        {
+                            iRS.TargetSupplierCountryCode = res.CountryCode;
+                            iRS.TargetSupplierCountryName = res.CountryName;
+                            iRS.Status = "Mapped";
+                        }
+                        else
+                        {
+                            iRS.TargetSupplierCountryCode = string.Empty;
+                            iRS.TargetSupplierCountryName = string.Empty;
+                            iRS.Status = "No Results Found";
+                        }
+                    }
+                    else if (iRQ.SourceSupplierCode.ToUpper() != iRQ.TargetSupplierCode.ToUpper() && iRQ.SourceSupplierCode.ToUpper() != "TLGX" && iRQ.TargetSupplierCode.ToUpper() != "TLGX")
+                    {
+                        var resultForSource = await collection.Find(x => (x.SupplierCode == iRQ.SourceSupplierCode.Trim().ToUpper() && x.SupplierCountryCode == iRQ.SourceSupplierCountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
 
-                            if (resultForSource == null)
+                        if (resultForSource == null)
+                        {
+                            iRS.TargetSupplierCountryCode = string.Empty;
+                            iRS.TargetSupplierCountryName = string.Empty;
+                            iRS.Status = "No Results Found";
+                        }
+                        else
+                        {
+                            var resultForTarget = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == resultForSource.CountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
+                            if (resultForTarget == null)
                             {
                                 iRS.TargetSupplierCountryCode = string.Empty;
                                 iRS.TargetSupplierCountryName = string.Empty;
@@ -361,37 +322,20 @@ namespace DistributionWebApi.Controllers
                             }
                             else
                             {
-                                var resultForTarget = await collection.Find(x => (x.SupplierCode == iRQ.TargetSupplierCode.Trim().ToUpper() && x.CountryCode == resultForSource.CountryCode.Trim().ToUpper())).FirstOrDefaultAsync();
-                                if (resultForTarget == null)
-                                {
-                                    iRS.TargetSupplierCountryCode = string.Empty;
-                                    iRS.TargetSupplierCountryName = string.Empty;
-                                    iRS.Status = "No Results Found";
-                                }
-                                else
-                                {
 
-                                    iRS.TargetSupplierCountryCode = resultForTarget.SupplierCountryCode;
-                                    iRS.TargetSupplierCountryName = resultForTarget.SupplierCountryName;
-                                    iRS.Status = "Mapped";
-                                }
+                                iRS.TargetSupplierCountryCode = resultForTarget.SupplierCountryCode;
+                                iRS.TargetSupplierCountryName = resultForTarget.SupplierCountryName;
+                                iRS.Status = "Mapped";
                             }
                         }
                     }
-
-                    RS.Add(iRS);
                 }
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, RS);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
+                RS.Add(iRS);
             }
 
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, RS);
+            return response;
         }
 
     }

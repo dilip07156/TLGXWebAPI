@@ -45,190 +45,180 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(RoomTypeMapping_SIRS))]
         public async Task<HttpResponseMessage> GetBulkRoomTypeMapping(RoomTypeMapping_SIRQ RQ)
         {
-            try
+            var returnResult = new RoomTypeMapping_SIRS();
+            if (RQ != null)
             {
-                var returnResult = new RoomTypeMapping_SIRS();
-                if (RQ != null)
-                {
-                    _database = MongoDBHandler.mDatabase();
-                    IMongoCollection<BsonDocument> collection = _database.GetCollection<BsonDocument>("RoomTypeMapping");
-                    IMongoCollection<RoomTypeMappingOnline> collection_rto = _database.GetCollection<RoomTypeMappingOnline>("RoomTypeMappingOnline");
+                _database = MongoDBHandler.mDatabase();
+                IMongoCollection<BsonDocument> collection = _database.GetCollection<BsonDocument>("RoomTypeMapping");
+                IMongoCollection<RoomTypeMappingOnline> collection_rto = _database.GetCollection<RoomTypeMappingOnline>("RoomTypeMappingOnline");
 
-                    returnResult.Mode = RQ.Mode;
-                    returnResult.BatchId = RQ.BatchId;
+                returnResult.Mode = RQ.Mode;
+                returnResult.BatchId = RQ.BatchId;
+
+                if (RQ.HotelRoomTypeMappingRequests != null)
+                {
+                    var hrtmrsl = new List<RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses>();
 
                     if (RQ.HotelRoomTypeMappingRequests != null)
                     {
-                        var hrtmrsl = new List<RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses>();
-
-                        if (RQ.HotelRoomTypeMappingRequests != null)
+                        foreach (var hrtmrq in RQ.HotelRoomTypeMappingRequests)
                         {
-                            foreach (var hrtmrq in RQ.HotelRoomTypeMappingRequests)
+                            var hrtmrs = new RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses();
+                            hrtmrs.TLGXCommonHotelId = hrtmrq.TLGXCommonHotelId;
+
+                            var hrtmrs_sdl = new List<RoomTypeMapping_SIRS_SupplierData>();
+
+                            if (hrtmrq.SupplierData != null)
                             {
-                                var hrtmrs = new RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses();
-                                hrtmrs.TLGXCommonHotelId = hrtmrq.TLGXCommonHotelId;
-
-                                var hrtmrs_sdl = new List<RoomTypeMapping_SIRS_SupplierData>();
-
-                                if (hrtmrq.SupplierData != null)
+                                foreach (var hrtmrq_sd in hrtmrq.SupplierData)
                                 {
-                                    foreach (var hrtmrq_sd in hrtmrq.SupplierData)
+                                    var hrtmrs_sd = new RoomTypeMapping_SIRS_SupplierData();
+
+                                    hrtmrs_sd.SupplierId = hrtmrq_sd.SupplierId;
+                                    hrtmrs_sd.SupplierProductId = hrtmrq_sd.SupplierProductId;
+
+                                    var hrtmrs_srtl = new List<RoomTypeMapping_SIRS_SupplierRoomType>();
+
+                                    if (hrtmrq_sd.SupplierRoomTypes != null)
                                     {
-                                        var hrtmrs_sd = new RoomTypeMapping_SIRS_SupplierData();
-
-                                        hrtmrs_sd.SupplierId = hrtmrq_sd.SupplierId;
-                                        hrtmrs_sd.SupplierProductId = hrtmrq_sd.SupplierProductId;
-
-                                        var hrtmrs_srtl = new List<RoomTypeMapping_SIRS_SupplierRoomType>();
-
-                                        if (hrtmrq_sd.SupplierRoomTypes != null)
+                                        foreach (var hrtmrq_srt in hrtmrq_sd.SupplierRoomTypes)
                                         {
-                                            foreach (var hrtmrq_srt in hrtmrq_sd.SupplierRoomTypes)
+                                            var hrtmrs_srt = new RoomTypeMapping_SIRS_SupplierRoomType();
+
+                                            hrtmrs_srt.SupplierRoomId = hrtmrq_srt.SupplierRoomId;
+                                            hrtmrs_srt.SupplierRoomTypeCode = hrtmrq_srt.SupplierRoomTypeCode;
+                                            hrtmrs_srt.SupplierRoomName = hrtmrq_srt.SupplierRoomName;
+                                            hrtmrs_srt.SupplierRoomCategory = hrtmrq_srt.SupplierRoomCategory;
+                                            hrtmrs_srt.SupplierRoomCategoryId = hrtmrq_srt.SupplierRoomCategoryId;
+
+                                            var iValidCounterCheck = 0;
+                                            var builder = Builders<BsonDocument>.Filter;
+                                            var filter = builder.Empty;
+
+                                            if (!string.IsNullOrWhiteSpace(hrtmrq.TLGXCommonHotelId))
                                             {
-                                                var hrtmrs_srt = new RoomTypeMapping_SIRS_SupplierRoomType();
+                                                filter = filter & builder.Eq("TLGXAccoId", hrtmrq.TLGXCommonHotelId.ToUpper());
+                                                iValidCounterCheck++;
+                                            }
 
-                                                hrtmrs_srt.SupplierRoomId = hrtmrq_srt.SupplierRoomId;
-                                                hrtmrs_srt.SupplierRoomTypeCode = hrtmrq_srt.SupplierRoomTypeCode;
-                                                hrtmrs_srt.SupplierRoomName = hrtmrq_srt.SupplierRoomName;
-                                                hrtmrs_srt.SupplierRoomCategory = hrtmrq_srt.SupplierRoomCategory;
-                                                hrtmrs_srt.SupplierRoomCategoryId = hrtmrq_srt.SupplierRoomCategoryId;
+                                            if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierId))
+                                            {
+                                                filter = filter & builder.Eq("supplierCode", hrtmrq_sd.SupplierId.ToUpper());
+                                                iValidCounterCheck++;
+                                            }
 
-                                                var iValidCounterCheck = 0;
-                                                var builder = Builders<BsonDocument>.Filter;
-                                                var filter = builder.Empty;
+                                            if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierProductId))
+                                            {
+                                                filter = filter & builder.Eq("SupplierProductId", hrtmrq_sd.SupplierProductId.ToUpper());
+                                                iValidCounterCheck++;
+                                            }
 
-                                                if (!string.IsNullOrWhiteSpace(hrtmrq.TLGXCommonHotelId))
+                                            if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomTypeCode))
+                                            {
+                                                filter = filter & builder.Eq("SupplierRoomTypeCode", hrtmrq_srt.SupplierRoomTypeCode);
+                                                iValidCounterCheck++;
+                                            }
+                                            else if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomId))
+                                            {
+                                                filter = filter & builder.Eq("SupplierRoomId", hrtmrq_srt.SupplierRoomId);
+                                                iValidCounterCheck++;
+                                            }
+
+                                            if (iValidCounterCheck == 4)
+                                            {
+                                                BsonDocument result = new BsonDocument();
+                                                try
                                                 {
-                                                    filter = filter & builder.Eq("TLGXAccoId", hrtmrq.TLGXCommonHotelId.ToUpper());
-                                                    iValidCounterCheck++;
-                                                }
+                                                    result = collection.Find(filter).FirstOrDefault();
 
-                                                if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierId))
-                                                {
-                                                    filter = filter & builder.Eq("supplierCode", hrtmrq_sd.SupplierId.ToUpper());
-                                                    iValidCounterCheck++;
-                                                }
-
-                                                if (!string.IsNullOrWhiteSpace(hrtmrq_sd.SupplierProductId))
-                                                {
-                                                    filter = filter & builder.Eq("SupplierProductId", hrtmrq_sd.SupplierProductId.ToUpper());
-                                                    iValidCounterCheck++;
-                                                }
-
-                                                if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomTypeCode))
-                                                {
-                                                    filter = filter & builder.Eq("SupplierRoomTypeCode", hrtmrq_srt.SupplierRoomTypeCode);
-                                                    iValidCounterCheck++;
-                                                }
-                                                else if (!string.IsNullOrWhiteSpace(hrtmrq_srt.SupplierRoomId))
-                                                {
-                                                    filter = filter & builder.Eq("SupplierRoomId", hrtmrq_srt.SupplierRoomId);
-                                                    iValidCounterCheck++;
-                                                }
-
-                                                if (iValidCounterCheck == 4)
-                                                {
-                                                    BsonDocument result = new BsonDocument();
-                                                    try
+                                                    if (result != null)
                                                     {
-                                                        result = collection.Find(filter).FirstOrDefault();
-
-                                                        if (result != null)
-                                                        {
-                                                            hrtmrs_srt.TLGXCommonRoomId = result["TLGXAccoRoomId"].AsString;
-                                                            hrtmrs_srt.MapId = Convert.ToString(result["SystemRoomTypeMapId"].AsNullableInt32);
-                                                        }
-                                                        else
-                                                        {
-                                                            hrtmrs_srt.TLGXCommonRoomId = string.Empty;
-                                                            hrtmrs_srt.MapId = "0";
-                                                        }
+                                                        hrtmrs_srt.TLGXCommonRoomId = result["TLGXAccoRoomId"].AsString;
+                                                        hrtmrs_srt.MapId = Convert.ToString(result["SystemRoomTypeMapId"].AsNullableInt32);
                                                     }
-                                                    catch
+                                                    else
                                                     {
                                                         hrtmrs_srt.TLGXCommonRoomId = string.Empty;
                                                         hrtmrs_srt.MapId = "0";
                                                     }
                                                 }
-                                                else
+                                                catch
                                                 {
                                                     hrtmrs_srt.TLGXCommonRoomId = string.Empty;
                                                     hrtmrs_srt.MapId = "0";
                                                 }
-
-                                                hrtmrs_srtl.Add(hrtmrs_srt);
-
-                                                #region Roomtype Mapping Online data insert into Mongo
-                                                if (hrtmrs_srt.MapId == "0")
-                                                {
-                                                    // Fire & Forget 
-                                                    Task.Run(() => InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
-                                                    {
-                                                        //_id = ObjectId.GenerateNewId(),
-                                                        Amenities = hrtmrq_srt.Amenities,
-                                                        BatchId = RQ.BatchId,
-                                                        BathRoomType = hrtmrq_srt.BathRoomType,
-                                                        BeddingConfig = hrtmrq_srt.BeddingConfig,
-                                                        Bedrooms = hrtmrq_srt.Bedrooms,
-                                                        BedType = hrtmrq_srt.BedType,
-                                                        ChildAge = hrtmrq_srt.ChildAge,
-                                                        CreateDateTime = DateTime.Now,
-                                                        ExtraBed = hrtmrq_srt.ExtraBed,
-                                                        FloorName = hrtmrq_srt.FloorName,
-                                                        FloorNumber = hrtmrq_srt.FloorNumber,
-                                                        MaxAdults = hrtmrq_srt.MaxAdults,
-                                                        MaxChild = hrtmrq_srt.MaxChild,
-                                                        MaxGuestOccupancy = hrtmrq_srt.MaxGuestOccupancy,
-                                                        MaxInfants = hrtmrq_srt.MaxInfants,
-                                                        MinGuestOccupancy = hrtmrq_srt.MinGuestOccupancy,
-                                                        Mode = RQ.Mode,
-                                                        PromotionalVendorCode = hrtmrq_srt.PromotionalVendorCode,
-                                                        Quantity = hrtmrq_srt.Quantity,
-                                                        RatePlan = hrtmrq_srt.RatePlan,
-                                                        RatePlanCode = hrtmrq_srt.RatePlanCode,
-                                                        RoomLocationCode = hrtmrq_srt.RoomLocationCode,
-                                                        RoomSize = hrtmrq_srt.RoomSize,
-                                                        RoomView = hrtmrq_srt.RoomView,
-                                                        Smoking = hrtmrq_srt.Smoking,
-                                                        SupplierId = hrtmrq_sd.SupplierId,
-                                                        SupplierProductId = hrtmrq_sd.SupplierProductId,
-                                                        SupplierRoomCategory = hrtmrq_srt.SupplierRoomCategory,
-                                                        SupplierRoomCategoryId = hrtmrq_srt.SupplierRoomCategoryId,
-                                                        SupplierRoomId = hrtmrq_srt.SupplierRoomId,
-                                                        SupplierRoomName = hrtmrq_srt.SupplierRoomName,
-                                                        SupplierRoomTypeCode = hrtmrq_srt.SupplierRoomTypeCode,
-                                                        TLGXCommonHotelId = hrtmrq.TLGXCommonHotelId
-                                                    }));
-                                                }
-                                                #endregion
-
                                             }
+                                            else
+                                            {
+                                                hrtmrs_srt.TLGXCommonRoomId = string.Empty;
+                                                hrtmrs_srt.MapId = "0";
+                                            }
+
+                                            hrtmrs_srtl.Add(hrtmrs_srt);
+
+                                            #region Roomtype Mapping Online data insert into Mongo
+                                            if (hrtmrs_srt.MapId == "0")
+                                            {
+                                                // Fire & Forget 
+                                                Task.Run(() => InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                                {
+                                                    //_id = ObjectId.GenerateNewId(),
+                                                    Amenities = hrtmrq_srt.Amenities,
+                                                    BatchId = RQ.BatchId,
+                                                    BathRoomType = hrtmrq_srt.BathRoomType,
+                                                    BeddingConfig = hrtmrq_srt.BeddingConfig,
+                                                    Bedrooms = hrtmrq_srt.Bedrooms,
+                                                    BedType = hrtmrq_srt.BedType,
+                                                    ChildAge = hrtmrq_srt.ChildAge,
+                                                    CreateDateTime = DateTime.Now,
+                                                    ExtraBed = hrtmrq_srt.ExtraBed,
+                                                    FloorName = hrtmrq_srt.FloorName,
+                                                    FloorNumber = hrtmrq_srt.FloorNumber,
+                                                    MaxAdults = hrtmrq_srt.MaxAdults,
+                                                    MaxChild = hrtmrq_srt.MaxChild,
+                                                    MaxGuestOccupancy = hrtmrq_srt.MaxGuestOccupancy,
+                                                    MaxInfants = hrtmrq_srt.MaxInfants,
+                                                    MinGuestOccupancy = hrtmrq_srt.MinGuestOccupancy,
+                                                    Mode = RQ.Mode,
+                                                    PromotionalVendorCode = hrtmrq_srt.PromotionalVendorCode,
+                                                    Quantity = hrtmrq_srt.Quantity,
+                                                    RatePlan = hrtmrq_srt.RatePlan,
+                                                    RatePlanCode = hrtmrq_srt.RatePlanCode,
+                                                    RoomLocationCode = hrtmrq_srt.RoomLocationCode,
+                                                    RoomSize = hrtmrq_srt.RoomSize,
+                                                    RoomView = hrtmrq_srt.RoomView,
+                                                    Smoking = hrtmrq_srt.Smoking,
+                                                    SupplierId = hrtmrq_sd.SupplierId,
+                                                    SupplierProductId = hrtmrq_sd.SupplierProductId,
+                                                    SupplierRoomCategory = hrtmrq_srt.SupplierRoomCategory,
+                                                    SupplierRoomCategoryId = hrtmrq_srt.SupplierRoomCategoryId,
+                                                    SupplierRoomId = hrtmrq_srt.SupplierRoomId,
+                                                    SupplierRoomName = hrtmrq_srt.SupplierRoomName,
+                                                    SupplierRoomTypeCode = hrtmrq_srt.SupplierRoomTypeCode,
+                                                    TLGXCommonHotelId = hrtmrq.TLGXCommonHotelId
+                                                }));
+                                            }
+                                            #endregion
+
                                         }
-
-                                        hrtmrs_sd.SupplierRoomTypes = hrtmrs_srtl;
-                                        hrtmrs_sdl.Add(hrtmrs_sd);
                                     }
+
+                                    hrtmrs_sd.SupplierRoomTypes = hrtmrs_srtl;
+                                    hrtmrs_sdl.Add(hrtmrs_sd);
                                 }
-
-                                hrtmrs.SupplierData = hrtmrs_sdl;
-                                hrtmrsl.Add(hrtmrs);
                             }
+
+                            hrtmrs.SupplierData = hrtmrs_sdl;
+                            hrtmrsl.Add(hrtmrs);
                         }
-
-                        returnResult.HotelRoomTypeMappingResponses = hrtmrsl;
                     }
+
+                    returnResult.HotelRoomTypeMappingResponses = hrtmrsl;
                 }
-
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
-                return response;
-
             }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
+            return response;
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]

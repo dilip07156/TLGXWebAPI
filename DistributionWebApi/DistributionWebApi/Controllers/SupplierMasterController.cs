@@ -34,20 +34,11 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(Supplier))]
         public async Task<HttpResponseMessage> GetAllSupplier()
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<Supplier>("Supplier");
-                var result = await collection.Find(s => true).SortBy(s => s.SupplierCode).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Supplier>("Supplier");
+            var result = await collection.Find(s => true).SortBy(s => s.SupplierCode).ToListAsync();
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
         }
 
         /// <summary>
@@ -60,20 +51,11 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(Supplier))]
         public async Task<HttpResponseMessage> GetSupplierByCode(string Code)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<Supplier>("Supplier");
-                var result = await collection.Find(s => s.SupplierCode == Code.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Supplier>("Supplier");
+            var result = await collection.Find(s => s.SupplierCode == Code.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
         }
 
         /// <summary>
@@ -87,20 +69,11 @@ namespace DistributionWebApi.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<HttpResponseMessage> GetSupplierByName(string Name)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<Supplier>("Supplier");
-                var result = await collection.Find(s => s.SupplierName == Name.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Supplier>("Supplier");
+            var result = await collection.Find(s => s.SupplierName == Name.Trim().ToUpper()).SortBy(s => s.SupplierCode).ToListAsync();
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            return response;
         }
     }
 }
