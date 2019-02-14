@@ -38,77 +38,67 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(List<StaticData_RS>))]
         public async Task<HttpResponseMessage> GetProductStaticData(List<StaticData_RQ> param)
         {
-            try
+            if (param == null)
             {
-                if (param == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid request parameter");
-                }
-
-                List<StaticData_RS> resultList = new List<StaticData_RS>();
-
-                _database = MongoDBHandler.mDatabase();
-                //get AccoStaticData
-                var collectionAccoStaticData = _database.GetCollection<Accomodation>("AccoStaticData");
-
-                foreach(var RQ in param)
-                {
-                    var searchResult = collectionAccoStaticData.Find(x => x.AccomodationInfo.CompanyId == RQ.SupplierCode.Trim().ToUpper() && x.AccomodationInfo.CompanyProductId == RQ.SupplierProductCode.Trim().ToUpper()).FirstOrDefault();
-                    resultList.Add(new StaticData_RS
-                    {
-                        SupplierCode = RQ.SupplierCode,
-                        SupplierProductCode = RQ.SupplierProductCode,
-                        Result = searchResult
-                    });
-                }
-
-                //string[] arrayOfSupplierCodes = param.Select(s => s.SupplierCode.Trim().ToUpper()).Distinct().ToArray();
-                //string[] arrayOfSupplierProductCodes = param.Select(s => s.SupplierProductCode.Trim().ToUpper()).Distinct().ToArray();
-
-                //FilterDefinition<BsonDocument> filter;
-                //filter = Builders<BsonDocument>.Filter.Empty;
-                //filter = filter & Builders<BsonDocument>.Filter.AnyIn("AccomodationInfo.CompanyId", arrayOfSupplierCodes);
-                //filter = filter & Builders<BsonDocument>.Filter.AnyIn("AccomodationInfo.CompanyProductId", arrayOfSupplierProductCodes);
-
-                //ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Exclude("_id");
-                ////project = project.Include("AccomodationInfo");
-
-                //var searchResult = await collectionAccoStaticData.Find(filter).Project(project).ToListAsync();
-
-                //List<Accomodation> searchedData = JsonConvert.DeserializeObject<List<Accomodation>>(searchResult.ToJson());
-
-                ////Found Result
-                //resultList = (from a in searchedData
-                //              select new StaticData_RS
-                //              {
-                //                  SupplierCode = a.AccomodationInfo.CompanyId,
-                //                  SupplierProductCode = a.AccomodationInfo.CompanyProductId,
-                //                  Result = a
-                //              }).ToList();
-
-                ////Not Found Result
-                //var resultListNotFound = (from RQ in param
-                //                          join FOUND in resultList on new { SupplierCode = RQ.SupplierCode.Trim().ToUpper(), ProductCode = RQ.SupplierProductCode.Trim().ToUpper() } equals new { SupplierCode = FOUND.SupplierCode.Trim().ToUpper(), ProductCode = FOUND.SupplierProductCode.Trim().ToUpper() } into foundLJ
-                //                          from fdLJ in foundLJ.DefaultIfEmpty()
-                //                          where fdLJ == null
-                //                          select new StaticData_RS
-                //                          {
-                //                              SupplierCode = RQ.SupplierCode,
-                //                              SupplierProductCode = RQ.SupplierProductCode,
-                //                              Result = null
-                //                          }).ToList();
-
-                //resultList.AddRange(resultListNotFound);
-
-                return Request.CreateResponse(HttpStatusCode.OK, resultList);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid request parameter");
             }
-            catch (Exception ex)
+
+            List<StaticData_RS> resultList = new List<StaticData_RS>();
+
+            _database = MongoDBHandler.mDatabase();
+            //get AccoStaticData
+            var collectionAccoStaticData = _database.GetCollection<Accomodation>("AccoStaticData");
+
+            foreach (var RQ in param)
             {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
+                var searchResult = collectionAccoStaticData.Find(x => x.AccomodationInfo.CompanyId == RQ.SupplierCode.Trim().ToUpper() && x.AccomodationInfo.CompanyProductId == RQ.SupplierProductCode.Trim().ToUpper()).FirstOrDefault();
+                resultList.Add(new StaticData_RS
+                {
+                    SupplierCode = RQ.SupplierCode,
+                    SupplierProductCode = RQ.SupplierProductCode,
+                    Result = searchResult
+                });
             }
+
+            //string[] arrayOfSupplierCodes = param.Select(s => s.SupplierCode.Trim().ToUpper()).Distinct().ToArray();
+            //string[] arrayOfSupplierProductCodes = param.Select(s => s.SupplierProductCode.Trim().ToUpper()).Distinct().ToArray();
+
+            //FilterDefinition<BsonDocument> filter;
+            //filter = Builders<BsonDocument>.Filter.Empty;
+            //filter = filter & Builders<BsonDocument>.Filter.AnyIn("AccomodationInfo.CompanyId", arrayOfSupplierCodes);
+            //filter = filter & Builders<BsonDocument>.Filter.AnyIn("AccomodationInfo.CompanyProductId", arrayOfSupplierProductCodes);
+
+            //ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Exclude("_id");
+            ////project = project.Include("AccomodationInfo");
+
+            //var searchResult = await collectionAccoStaticData.Find(filter).Project(project).ToListAsync();
+
+            //List<Accomodation> searchedData = JsonConvert.DeserializeObject<List<Accomodation>>(searchResult.ToJson());
+
+            ////Found Result
+            //resultList = (from a in searchedData
+            //              select new StaticData_RS
+            //              {
+            //                  SupplierCode = a.AccomodationInfo.CompanyId,
+            //                  SupplierProductCode = a.AccomodationInfo.CompanyProductId,
+            //                  Result = a
+            //              }).ToList();
+
+            ////Not Found Result
+            //var resultListNotFound = (from RQ in param
+            //                          join FOUND in resultList on new { SupplierCode = RQ.SupplierCode.Trim().ToUpper(), ProductCode = RQ.SupplierProductCode.Trim().ToUpper() } equals new { SupplierCode = FOUND.SupplierCode.Trim().ToUpper(), ProductCode = FOUND.SupplierProductCode.Trim().ToUpper() } into foundLJ
+            //                          from fdLJ in foundLJ.DefaultIfEmpty()
+            //                          where fdLJ == null
+            //                          select new StaticData_RS
+            //                          {
+            //                              SupplierCode = RQ.SupplierCode,
+            //                              SupplierProductCode = RQ.SupplierProductCode,
+            //                              Result = null
+            //                          }).ToList();
+
+            //resultList.AddRange(resultListNotFound);
+
+            return Request.CreateResponse(HttpStatusCode.OK, resultList);
         }
-
     }
 }

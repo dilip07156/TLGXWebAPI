@@ -90,25 +90,14 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(DistributionWebApi.Models.VisaDefinition))]
         public async Task<HttpResponseMessage> GetVisaDetailByCountryCode(string CountryCode)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
-                IMongoCollection<DistributionWebApi.Models.VisaDefinition> collectionVisa = _database.GetCollection<DistributionWebApi.Models.VisaDefinition>("VisaMapping");
+            _database = MongoDBHandler.mDatabase();
+            IMongoCollection<DistributionWebApi.Models.VisaDefinition> collectionVisa = _database.GetCollection<DistributionWebApi.Models.VisaDefinition>("VisaMapping");
 
-                var filter = Builders<DistributionWebApi.Models.VisaDefinition>.Filter.ElemMatch(x => x.VisaDetail, x => x.CountryCode.ToLower() == CountryCode.ToLower());
-                var searchResult = await collectionVisa.Find(filter).FirstOrDefaultAsync();
+            var filter = Builders<DistributionWebApi.Models.VisaDefinition>.Filter.ElemMatch(x => x.VisaDetail, x => x.CountryCode.ToLower() == CountryCode.ToLower());
+            var searchResult = await collectionVisa.Find(filter).FirstOrDefaultAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
-        
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
