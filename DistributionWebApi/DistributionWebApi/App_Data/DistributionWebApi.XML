@@ -1941,6 +1941,16 @@
             Description about price.
             </summary>
         </member>
+        <member name="T:DistributionWebApi.Models.ComfortLevel">
+            <summary>
+            Structure for Comfort Level
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ComfortLevel.Level">
+            <summary>
+            Level of comfort
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayHubDetails">
             <summary>
             Structure for Holiday.HubDetails
