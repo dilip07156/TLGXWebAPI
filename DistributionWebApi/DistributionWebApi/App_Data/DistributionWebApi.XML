@@ -1611,6 +1611,16 @@
               SubTypes for Type.Values may be retrived from Master Service.
             </summary>
         </member>
+        <member name="T:DistributionWebApi.Models.PaceOfHoliday">
+            <summary>
+            Structure for PaceOfHoliday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PaceOfHoliday.Pace">
+            <summary>
+            Pace value 
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayPerPersonPrice">
             <summary>
             Structure for Per person
