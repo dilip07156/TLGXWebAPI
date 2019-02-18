@@ -51,7 +51,11 @@ namespace DistributionWebApi.Mongo
                 _client = mClientConnection();
             }
 
-            _database = _client.GetDatabase(System.Configuration.ConfigurationManager.AppSettings["Mongo_DB_Name"]);//,new MongoDatabaseSettings { ReadConcern = ReadConcern.Local, WriteConcern = WriteConcern.Unacknowledged, ReadPreference = ReadPreference.Primary });          
+            if(_database == null)
+            {
+                _database = _client.GetDatabase(System.Configuration.ConfigurationManager.AppSettings["Mongo_DB_Name"]);//,new MongoDatabaseSettings { ReadConcern = ReadConcern.Local, WriteConcern = WriteConcern.Unacknowledged, ReadPreference = ReadPreference.Primary });          
+            }
+            
             return _database;
 
         }
