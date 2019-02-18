@@ -26,10 +26,12 @@ namespace DistributionWebApi.Mongo
             MongoClientSettings mcs = new MongoClientSettings();
             mcs.ApplicationName = MongoDBApplicationName;
             mcs.ConnectionMode = ConnectionMode.Automatic;
-            mcs.ConnectTimeout = new TimeSpan(0, 0, 10);
+            mcs.ConnectTimeout = new TimeSpan(0, 0, 5);
             mcs.Server = new MongoServerAddress(MongoDBServerHost, Convert.ToInt32(MongoDBServerPort));
+
             mcs.MaxConnectionPoolSize = 1000;
-            mcs.WaitQueueSize = 10000;
+            mcs.WaitQueueSize = 5000;
+            mcs.WaitQueueTimeout = new TimeSpan(0, 0, 10);
 
             if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
             {
