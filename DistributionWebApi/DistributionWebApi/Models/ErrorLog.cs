@@ -5,7 +5,7 @@ using System.Web;
 using Nest;
 namespace DistributionWebApi.Models
 {
-    [ElasticIndexDetails("nakwapierror", true)]
+    [ElasticIndexDetails("nakwapiperferror", true)]
     [ElasticsearchType(Name = "log")]
     public class ErrorLog : EntityBase
     {
