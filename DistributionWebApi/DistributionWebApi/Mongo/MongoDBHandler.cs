@@ -29,11 +29,12 @@ namespace DistributionWebApi.Mongo
             mcs.ConnectTimeout = new TimeSpan(0, 0, 5);
             mcs.Server = new MongoServerAddress(MongoDBServerHost, Convert.ToInt32(MongoDBServerPort));
 
-            mcs.MaxConnectionPoolSize = 1000;
+            mcs.MaxConnectionPoolSize = 1500;
             mcs.WaitQueueSize = 5000;
             mcs.WaitQueueTimeout = new TimeSpan(0, 0, 10);
             mcs.MaxConnectionLifeTime = new TimeSpan(0, 2, 0);
             mcs.MaxConnectionIdleTime = new TimeSpan(0, 1, 0);
+            mcs.Freeze();
 
             if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
             {
