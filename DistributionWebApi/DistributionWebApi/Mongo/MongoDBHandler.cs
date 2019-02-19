@@ -34,7 +34,6 @@ namespace DistributionWebApi.Mongo
             mcs.WaitQueueTimeout = new TimeSpan(0, 0, 10);
             mcs.MaxConnectionLifeTime = new TimeSpan(0, 2, 0);
             mcs.MaxConnectionIdleTime = new TimeSpan(0, 1, 0);
-            mcs.Freeze();
 
             if (MongoDBServerUser != null && MongoDBServerPassword != null && MongoDBServerAuthenticationDatabase != null)
             {
