@@ -1611,6 +1611,16 @@
               SubTypes for Type.Values may be retrived from Master Service.
             </summary>
         </member>
+        <member name="T:DistributionWebApi.Models.PaceOfHoliday">
+            <summary>
+            Structure for PaceOfHoliday
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PaceOfHoliday.Pace">
+            <summary>
+            Pace value 
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.HolidayPerPersonPrice">
             <summary>
             Structure for Per person
@@ -1939,6 +1949,16 @@
         <member name="P:DistributionWebApi.Models.HolidayStartingPrice.PriceText">
             <summary>
             Description about price.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.ComfortLevel">
+            <summary>
+            Structure for Comfort Level
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ComfortLevel.Level">
+            <summary>
+            Level of comfort
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.HolidayHubDetails">
