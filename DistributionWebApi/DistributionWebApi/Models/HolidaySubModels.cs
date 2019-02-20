@@ -64,10 +64,15 @@ namespace DistributionWebApi.Models
     }
     #endregion
 
-
+    /// <summary>
+    /// Structure for PaceOfHoliday
+    /// </summary>
     public class PaceOfHoliday
     {
-        public string Type { get; set; }
+        /// <summary>
+        /// Pace value 
+        /// </summary>
+        public string Pace { get; set; }
     }
 
     #region Holiday.Interests & Holiday.TravellerType
@@ -399,6 +404,19 @@ namespace DistributionWebApi.Models
 
     }
     #endregion Holiday.StartingPrice
+
+    #region Holiday.ComfortLevel
+   /// <summary>
+   /// Structure for Comfort Level
+   /// </summary>
+   public class ComfortLevel
+    {
+        /// <summary>
+        /// Level of comfort
+        /// </summary>
+        public string Level { get; set; }
+    }
+    #endregion
 
     #region Holiday.HubDetails 
     /// <summary>
