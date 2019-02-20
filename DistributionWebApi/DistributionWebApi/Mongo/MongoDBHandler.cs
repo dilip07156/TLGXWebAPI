@@ -32,8 +32,8 @@ namespace DistributionWebApi.Mongo
             //Previously below was set for MaxConnectionPoolSize and now it is changed to MinConnectionPoolSize
             mcs.MinConnectionPoolSize = 1500;
             
-            mcs.WaitQueueSize = 5000;
-            mcs.WaitQueueTimeout = new TimeSpan(0, 0, 10);
+            //mcs.WaitQueueSize = 5000;
+            //mcs.WaitQueueTimeout = new TimeSpan(0, 0, 10);
 
             //Commented below code as we are not show how this helps
             //mcs.MaxConnectionLifeTime = new TimeSpan(0, 2, 0);
