@@ -83,6 +83,8 @@ namespace DistributionWebApi.Models
         public string HotelStarRating { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+        public List<string> Interests { get; set; }
+        public bool IsDirectContract { get; set; }
         public List<DC_AccomodationCompanyVersions> AccomodationCompanyVersions { get; set; }
     }
 
@@ -116,6 +118,7 @@ namespace DistributionWebApi.Models
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string TLGXAccoId { get; set; }
+        public List<string> Interests { get; set; }
     }
 }
 

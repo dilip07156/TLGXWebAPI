@@ -589,7 +589,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Hotel Overview
         /// </summary>
-        public string Interests { get; set; }
+        public List<string> Interests { get; set; }
 
         /// <summary>
         /// Hotel Rating
@@ -653,17 +653,17 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Accommodation Room Info Id.
         /// </summary>
-        public string TlgxAccoRoomId { get; set; }
+        public string CompanyRoomId  { get; set; }//TlgxAccoRoomId
 
         /// <summary>
         /// TLGX Accommodation Room Type Name.
         /// </summary>
-        public string TlgxAccoRoomName { get; set; }
+        public string CompanyRoomName { get; set; }
 
         /// <summary>
         /// TLGX Accommodation Room Type Category.
         /// </summary>
-        public string TlgxAccoRoomCategory { get; set; }
+        public string CompanyRoomCategory{ get; set; }//TlgxAccoRoomCategory 
 
         /// <summary>
         /// Nakshatra room type mapping id.

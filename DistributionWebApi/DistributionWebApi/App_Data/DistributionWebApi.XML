@@ -7893,17 +7893,17 @@
             List of mapped rooms to supplier room.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxAccoRoomId">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomId">
             <summary>
             TLGX Accommodation Room Info Id.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxAccoRoomName">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomName">
             <summary>
             TLGX Accommodation Room Type Name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxAccoRoomCategory">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomCategory">
             <summary>
             TLGX Accommodation Room Type Category.
             </summary>
