@@ -517,18 +517,18 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Tlgx Specified Unique Company Id
         /// </summary>
-        [Required]
-        public string TlgxCompanyHotelId { get; set; }
+        //[Required]
+        //public string TlgxCompanyHotelId { get; set; }
 
         /// <summary>
         /// System Product Code / Common product code
         /// </summary>
-        public string CommonProductId { get; set; } //Master Acco CommonProductId
+        public string TlgxCommonProductId { get; set; } //Master Acco CommonProductId
 
         /// <summary>
         /// TLGX MDM Unique identifier for hotel property
         /// </summary>
-        public string CompanyProductId { get; set; } //TLGX Acco Id
+        public string TlgxCompanyProductId { get; set; } //TLGX Acco Id
 
         /// <summary>
         /// Hotel property name
@@ -653,7 +653,12 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Accommodation Room Info Id.
         /// </summary>
-        public string CompanyRoomId  { get; set; }//TlgxAccoRoomId
+        public string TlgxCompanyRoomId { get; set; }//TlgxAccoRoomId
+
+        /// <summary>
+        /// TLGX Accommodation Common Room Id.
+        /// </summary>
+        public string TlgxCommonRoomId { get; set; }
 
         /// <summary>
         /// TLGX Accommodation Room Type Name.

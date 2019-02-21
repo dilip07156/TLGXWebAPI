@@ -1142,7 +1142,7 @@
             <param name="RQ">Combination of Hotel and Room mapping request.</param>
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
-        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.GetUnifiedHotelAndRoomTypeMapping1(DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1)">
+        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.GetUnifiedHotelAndRoomTypeMappingV2(DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1)">
             <summary>
             Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
             API can handle single / multiple TLGX Common Hotel Ids at a time. 
@@ -7768,17 +7768,12 @@
             System Mapping Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCompanyHotelId">
-            <summary>
-            Tlgx Specified Unique Company Id
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.CommonProductId">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCommonProductId">
             <summary>
             System Product Code / Common product code
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.CompanyProductId">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCompanyProductId">
             <summary>
             TLGX MDM Unique identifier for hotel property
             </summary>
@@ -7893,9 +7888,14 @@
             List of mapped rooms to supplier room.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomId">
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxCompanyRoomId">
             <summary>
             TLGX Accommodation Room Info Id.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxCommonRoomId">
+            <summary>
+            TLGX Accommodation Common Room Id.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomName">
