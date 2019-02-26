@@ -2,6 +2,7 @@
 using DistributionWebApi.Mongo;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -44,9 +45,20 @@ namespace DistributionWebApi.Controllers
             IMongoCollection<HolidayDetail> holidayDetailCollection = _database.GetCollection<HolidayDetail>("HolidayDetail");
             FilterDefinition<HolidayDetail> filter;
             filter = Builders<HolidayDetail>.Filter.Empty;
-            var escapedSupplierName = Regex.Escape(supplierName);
-            filter = filter & Builders<HolidayDetail>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(escapedSupplierName, RegexOptions.IgnoreCase)));
-            filter = filter & Builders<HolidayDetail>.Filter.ElemMatch(x => x.CallDetails.TourIDs, x => x.TourID.ToUpper() == tourID.ToUpper());
+            
+            if (!string.IsNullOrEmpty(supplierName))
+            {
+                var escapedSupplierName = Regex.Escape(supplierName);
+                filter = filter & Builders<HolidayDetail>.Filter.Regex(x => x.SupplierName, new BsonRegularExpression(new Regex(escapedSupplierName, RegexOptions.IgnoreCase)));
+                filter = filter & Builders<HolidayDetail>.Filter.Where(x => x.CallType != "TourList");
+            }
+
+            if (!string.IsNullOrEmpty(tourID))
+            {
+                filter = filter & Builders<HolidayDetail>.Filter.ElemMatch(x => x.CallDetails.TourIDs, x => x.TourID.ToUpper() == tourID.ToUpper());
+                
+            }
+            
             var searchResult = await holidayDetailCollection.Find(filter).ToListAsync();
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
             return response;
