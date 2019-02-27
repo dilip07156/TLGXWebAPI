@@ -2651,6 +2651,71 @@
         <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.Tax" -->
         <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.TaxStructure" -->
         <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.PriceDetailsStructure" -->
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.PassengerRangeFrom">
+            <summary>
+            Passenger Range From
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.PassengerRangeTo">
+            <summary>
+            Passenger Range To
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.ValidFrom">
+            <summary>
+            ValidFrom
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.ValidTo">
+            <summary>
+            ValidTo
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.Currency">
+            <summary>
+            Currency
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.PersonType">
+            <summary>
+            PersonType
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.RoomType">
+            <summary>
+            RoomType
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.ExtraBedding">
+            <summary>
+            ExtraBedding
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.AgeFrom">
+            <summary>
+            AgeFrom
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.AgeTo">
+            <summary>
+            AgeTo
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.PriceDescription">
+            <summary>
+            PriceDescription
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.PriceDetailsStructure.Tax">
+            <summary>
+            List of TaxStructure
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:DistributionWebApi.Models.BasePriceStructure" -->
         <member name="P:DistributionWebApi.Models.BasePriceStructure.HubName">
             <summary>
