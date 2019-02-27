@@ -1359,30 +1359,59 @@ namespace DistributionWebApi.Models
     /// 
     public class PriceDetailsStructure
     {
+        /// <summary>
+        /// Passenger Range From
+        /// </summary>
         public int PassengerRangeFrom { get; set; }
-
+        /// <summary>
+        /// Passenger Range To
+        /// </summary>
         public int PassengerRangeTo { get; set; }
-
+        /// <summary>
+        /// ValidFrom
+        /// </summary>
+        [JsonIgnore]
         public DateTime? ValidFrom { get; set; }
-
+        /// <summary>
+        /// ValidTo
+        /// </summary>
+        [JsonIgnore]
         public DateTime? ValidTo { get; set; }
-
+        /// <summary>
+        /// Currency
+        /// </summary>
         public string Currency { get; set; }
-
+        /// <summary>
+        /// Amount
+        /// </summary>
         public double Amount { get; set; }
-
+        /// <summary>
+        /// PersonType
+        /// </summary>
         public string PersonType { get; set; }
-
+        /// <summary>
+        /// RoomType
+        /// </summary>
         public string RoomType { get; set; }
-
+        /// <summary>
+        /// ExtraBedding
+        /// </summary>
         public string ExtraBedding { get; set; }
-
+        /// <summary>
+        /// AgeFrom
+        /// </summary>
         public int AgeFrom { get; set; }
-
+        /// <summary>
+        /// AgeTo
+        /// </summary>
         public int AgeTo { get; set; }
-
+        /// <summary>
+        /// PriceDescription
+        /// </summary>
         public string PriceDescription { get; set; }
-
+        /// <summary>
+        /// List of TaxStructure
+        /// </summary>
         public List<TaxStructure> Tax { get; set; }
 
 
@@ -1435,10 +1464,12 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// contain date from which it is valid.
         /// </summary>
+        [JsonIgnore]
         public DateTime? ValidFrom { get; set; }
         /// <summary>
         /// contain date upto which it is valid
         /// </summary>
+        [JsonIgnore]
         public DateTime? ValidTo { get; set; }
         /// <summary>
         /// Contain Currency Name 
