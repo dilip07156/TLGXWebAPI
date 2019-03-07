@@ -266,6 +266,7 @@
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\ElasticController.cs" />
     <Compile Include="Controllers\HolidayController.cs" />
+    <Compile Include="Controllers\HolidayDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\CountryMappingController.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="Models\ElasticIndexDetailsAttribute.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\ErrorLog.cs" />
+    <Compile Include="Models\HolidayDetail.cs" />
     <Compile Include="Models\HolidayModel.cs" />
     <Compile Include="Models\HolidaySearchRequestParams.cs" />
     <Compile Include="Models\HolidaySearchResponse.cs" />
