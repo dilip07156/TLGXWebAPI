@@ -717,9 +717,9 @@ namespace DistributionWebApi.Controllers
 
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
 
-                                mappingResponseList.Add(mappingResponse);
-
                             }
+
+                            mappingResponseList.Add(mappingResponse);
 
                         }
                         returnResult.MappingResponses = mappingResponseList;
