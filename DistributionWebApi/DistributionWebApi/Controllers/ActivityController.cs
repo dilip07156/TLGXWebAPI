@@ -44,163 +44,154 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByCountries(ActivitySearchByCountry_RQ param)
         {
-            try
+            ActivitySearchResult resultList = new ActivitySearchResult();
+
+            if (param.PageSize > 100)
             {
-                ActivitySearchResult resultList = new ActivitySearchResult();
+                resultList.Message = "Page Size shouldn't be greater than 100.";
+                return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+            }
 
-                if (param.PageSize > 100)
+            _database = MongoDBHandler.mDatabase();
+
+            string[] arrayOfStrings;
+
+            if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
+            {
+                //Get System Country Codes from Supplier Codes
+                var collection = _database.GetCollection<BsonDocument>("CountryMapping");
+                FilterDefinition<BsonDocument> filterCountry;
+                filterCountry = Builders<BsonDocument>.Filter.Empty;
+
+                filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct());
+                filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
+                ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CountryCode").Exclude("_id");
+
+                var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
+                arrayOfStrings = searchCountryResult.Select(s => s["CountryCode"].AsString).ToArray();
+            }
+            else
+            {
+                arrayOfStrings = param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
+            }
+
+
+            //get Activities
+            IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
+            FilterDefinition<BsonDocument> filter;
+            filter = Builders<BsonDocument>.Filter.Empty;
+            filter = filter & Builders<BsonDocument>.Filter.AnyIn("CountryCode", arrayOfStrings);
+            if (param.FilterBySuppliers != null)
+            {
+                if (param.FilterBySuppliers.Length > 0)
                 {
-                    resultList.Message = "Page Size shouldn't be greater than 100.";
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                 }
+            }
 
-                _database = MongoDBHandler.mDatabase();
+            var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
 
-                string[] arrayOfStrings;
+            List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
-                {
-                    //Get System Country Codes from Supplier Codes
-                    var collection = _database.GetCollection<BsonDocument>("CountryMapping");
-                    FilterDefinition<BsonDocument> filterCountry;
-                    filterCountry = Builders<BsonDocument>.Filter.Empty;
+            if (TotalRecords != 0 && param.PageSize != 0)
+            {
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCountryCode", param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct());
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
-                    ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CountryCode").Exclude("_id");
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                    var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
-                    arrayOfStrings = searchCountryResult.Select(s => s["CountryCode"].AsString).ToArray();
-                }
-                else
-                {
-                    arrayOfStrings = param.CountryCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
-                }
+                searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
-
-                //get Activities
-                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
-                FilterDefinition<BsonDocument> filter;
-                filter = Builders<BsonDocument>.Filter.Empty;
-                filter = filter & Builders<BsonDocument>.Filter.AnyIn("CountryCode", arrayOfStrings);
-                if (param.FilterBySuppliers != null)
-                {
-                    if (param.FilterBySuppliers.Length > 0)
-                    {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
-                    }
-                }
-
-                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
-
-                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
-
-                if (TotalRecords != 0 && param.PageSize != 0)
-                {
-                    SortDefinition<BsonDocument> sortByPrices;
-                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
-
-                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
-
-                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
-
-                    resultList.PageSize = param.PageSize;
-                    resultList.CurrentPage = param.PageNo;
-
-                    int remainder = (int)TotalRecords % param.PageSize;
-                    int quotient = (int)TotalRecords / param.PageSize;
-                    if (remainder > 0)
-                    {
-                        remainder = 1;
-                    }
-                    resultList.TotalPage = quotient + remainder;
-                }
-                else
-                {
-                    resultList.TotalPage = 0;
-                }
-
+                resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
-                resultList.TotalNumberOfActivities = TotalRecords;
-                resultList.Activities = (from a in searchedData
-                                         select new Activity
-                                         {
-                                             ActivityCode = a.SystemActivityCode,
-                                             SupplierCompanyCode = a.SupplierCompanyCode,
-                                             SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
-                                             Name = a.Name,
-                                             Description = a.Description,
-                                             DaysOfTheWeek = a.DaysOfTheWeek,
-                                             PhysicalIntensity = a.PhysicalIntensity,
-                                             Overview = a.Overview,
-                                             Recommended = a.Recommended,
-                                             CountryName = a.CountryName,
-                                             CountryCode = a.CountryCode,
-                                             CityName = a.CityName,
-                                             CityCode = a.CityCode,
-                                             StarRating = a.StarRating,
-                                             NumberOfReviews = a.NumberOfReviews,
-                                             NumberOfLikes = a.NumberOfLikes,
-                                             NumberOfViews = a.NumberOfViews,
-                                             ActivityMedia = a.ActivityMedia,
-                                             DeparturePoint = a.DeparturePoint,
-                                             ReturnDetails = a.ReturnDetails,
-                                             ProductOptions = a.ProductOptions,
-                                             NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials,
-                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
-                                         }).ToList();
 
-                foreach (var activity in searchedData)
+                int remainder = (int)TotalRecords % param.PageSize;
+                int quotient = (int)TotalRecords / param.PageSize;
+                if (remainder > 0)
                 {
-                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+                    remainder = 1;
+                }
+                resultList.TotalPage = quotient + remainder;
+            }
+            else
+            {
+                resultList.TotalPage = 0;
+            }
 
-                    FilterDefinition<BsonDocument> filterForSimilarProducts;
-                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+            resultList.CurrentPage = param.PageNo;
+            resultList.TotalNumberOfActivities = TotalRecords;
+            resultList.Activities = (from a in searchedData
+                                     select new Activity
+                                     {
+                                         ActivityCode = a.SystemActivityCode,
+                                         SupplierCompanyCode = a.SupplierCompanyCode,
+                                         SupplierProductCode = a.SupplierProductCode,
+                                         InterestType = a.InterestType,
+                                         Category = a.Category,
+                                         Type = a.Type,
+                                         SubType = a.SubType,
+                                         CategoryGroup = a.CategoryGroup,
+                                         Name = a.Name,
+                                         Description = a.Description,
+                                         DaysOfTheWeek = a.DaysOfTheWeek,
+                                         PhysicalIntensity = a.PhysicalIntensity,
+                                         Overview = a.Overview,
+                                         Recommended = a.Recommended,
+                                         CountryName = a.CountryName,
+                                         CountryCode = a.CountryCode,
+                                         CityName = a.CityName,
+                                         CityCode = a.CityCode,
+                                         StarRating = a.StarRating,
+                                         NumberOfReviews = a.NumberOfReviews,
+                                         NumberOfLikes = a.NumberOfLikes,
+                                         NumberOfViews = a.NumberOfViews,
+                                         ActivityMedia = a.ActivityMedia,
+                                         DeparturePoint = a.DeparturePoint,
+                                         ReturnDetails = a.ReturnDetails,
+                                         ProductOptions = a.ProductOptions,
+                                         NumberOfPassengers = a.NumberOfPassengers,
+                                         Prices = a.Prices,
+                                         SuitableFor = a.SuitableFor,
+                                         Specials = a.Specials,
+                                         SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
+                                     }).ToList();
 
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+            foreach (var activity in searchedData)
+            {
+                var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
 
-                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
-                    project = project.Include("Name");
-                    project = project.Include("SubType");
-                    project = project.Include("Prices");
-                    project = project.Include("ProductOptions");
+                FilterDefinition<BsonDocument> filterForSimilarProducts;
+                filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
-                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
 
-                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+                ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                project = project.Include("Name");
+                project = project.Include("Categories");
+                project = project.Include("Prices");
+                project = project.Include("ProductOptions");
 
-                    if (SimilarProdSearchResultObj != null)
+                var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
+
+                List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                if (SimilarProdSearchResultObj != null)
+                {
+                    loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
                     {
-                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
-                        {
-                            SystemActivityCode = s.SystemActivityCode.ToString(),
-                            SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
-                            Options = s.ProductOptions,
-                            Prices = s.Prices
-                        }).ToList();
-                    }
-
+                        SystemActivityCode = s.SystemActivityCode.ToString(),
+                        SystemActivityName = s.Name,
+                        CategoryGroup = s.CategoryGroup,
+                        Options = s.ProductOptions,
+                        Prices = s.Prices
+                    }).ToList();
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK, resultList);
+            }
 
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            return Request.CreateResponse(HttpStatusCode.OK, resultList);
         }
 
         /// <summary>
@@ -216,163 +207,156 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByCities(ActivitySearchByCity_RQ param)
         {
-            try
+            ActivitySearchResult resultList = new ActivitySearchResult();
+
+            if (param.PageSize > 100)
             {
-                ActivitySearchResult resultList = new ActivitySearchResult();
+                resultList.Message = "Page Size shouldn't be greater than 100.";
+                return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+            }
 
-                if (param.PageSize > 100)
+            _database = MongoDBHandler.mDatabase();
+
+            string[] arrayOfStrings;
+
+            if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
+            {
+                //Get System City Codes from Supplier Codes
+                var collection = _database.GetCollection<BsonDocument>("CityMapping");
+                FilterDefinition<BsonDocument> filterCountry;
+                filterCountry = Builders<BsonDocument>.Filter.Empty;
+
+                filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct());
+                filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
+                ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CityCode").Exclude("_id");
+
+                var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
+                arrayOfStrings = searchCountryResult.Select(s => s["CityCode"].AsString).ToArray();
+            }
+            else
+            {
+                arrayOfStrings = param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
+            }
+
+
+            //get Activities
+            IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
+            FilterDefinition<BsonDocument> filter;
+            filter = Builders<BsonDocument>.Filter.Empty;
+            filter = filter & Builders<BsonDocument>.Filter.AnyIn("CityCode", arrayOfStrings);
+
+            if (param.FilterBySuppliers != null)
+            {
+                if (param.FilterBySuppliers.Length > 0)
                 {
-                    resultList.Message = "Page Size shouldn't be greater than 100.";
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                 }
+            }
 
-                _database = MongoDBHandler.mDatabase();
+            var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
 
-                string[] arrayOfStrings;
+            List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                if (!string.IsNullOrWhiteSpace(param.RequestingSupplierCode))
-                {
-                    //Get System City Codes from Supplier Codes
-                    var collection = _database.GetCollection<BsonDocument>("CityMapping");
-                    FilterDefinition<BsonDocument> filterCountry;
-                    filterCountry = Builders<BsonDocument>.Filter.Empty;
+            if (TotalRecords != 0 && param.PageSize != 0)
+            {
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.AnyIn("SupplierCityCode", param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct());
-                    filterCountry = filterCountry & Builders<BsonDocument>.Filter.Eq("SupplierCode", param.RequestingSupplierCode.Trim().ToUpper());
-                    ProjectionDefinition<BsonDocument> projectCountry = Builders<BsonDocument>.Projection.Include("CityCode").Exclude("_id");
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                    var searchCountryResult = await collection.Find(filterCountry).Project(projectCountry).ToListAsync();
-                    arrayOfStrings = searchCountryResult.Select(s => s["CityCode"].AsString).ToArray();
-                }
-                else
-                {
-                    arrayOfStrings = param.CityCodes.Select(s => s.Trim().ToUpper()).Distinct().ToArray();
-                }
+                searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
-
-                //get Activities
-                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
-                FilterDefinition<BsonDocument> filter;
-                filter = Builders<BsonDocument>.Filter.Empty;
-                filter = filter & Builders<BsonDocument>.Filter.AnyIn("CityCode", arrayOfStrings);
-
-                if (param.FilterBySuppliers != null)
-                {
-                    if (param.FilterBySuppliers.Length > 0)
-                    {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
-                    }
-                }
-
-                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
-
-                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
-
-                if (TotalRecords != 0 && param.PageSize != 0)
-                {
-                    SortDefinition<BsonDocument> sortByPrices;
-                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
-
-                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
-
-                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
-
-                    resultList.PageSize = param.PageSize;
-                    resultList.CurrentPage = param.PageNo;
-
-                    int remainder = (int)TotalRecords % param.PageSize;
-                    int quotient = (int)TotalRecords / param.PageSize;
-                    if (remainder > 0)
-                    {
-                        remainder = 1;
-                    }
-                    resultList.TotalPage = quotient + remainder;
-                }
-                else
-                {
-                    resultList.TotalPage = 0;
-                }
-
+                resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
-                resultList.TotalNumberOfActivities = TotalRecords;
-                resultList.Activities = (from a in searchedData
-                                         select new Activity
-                                         {
-                                             ActivityCode = a.SystemActivityCode,
-                                             SupplierCompanyCode = a.SupplierCompanyCode,
-                                             SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
-                                             TLGXDisplaySubType = a.TLGXDisplaySubType,
-                                             Name = a.Name,
-                                             Description = a.Description,
-                                             DaysOfTheWeek = a.DaysOfTheWeek,
-                                             PhysicalIntensity = a.PhysicalIntensity,
-                                             Overview = a.Overview,
-                                             Recommended = a.Recommended,
-                                             CountryName = a.CountryName,
-                                             CountryCode = a.CountryCode,
-                                             CityName = a.CityName,
-                                             CityCode = a.CityCode,
-                                             StarRating = a.StarRating,
-                                             NumberOfReviews = a.NumberOfReviews,
-                                             NumberOfLikes = a.NumberOfLikes,
-                                             NumberOfViews = a.NumberOfViews,
-                                             ActivityMedia = a.ActivityMedia,
-                                             DeparturePoint = a.DeparturePoint,
-                                             ReturnDetails = a.ReturnDetails,
-                                             ProductOptions = a.ProductOptions,
-                                             NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials,
-                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
-                                         }).ToList();
 
-                foreach (var activity in searchedData)
+                int remainder = (int)TotalRecords % param.PageSize;
+                int quotient = (int)TotalRecords / param.PageSize;
+                if (remainder > 0)
                 {
-                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
-
-                    FilterDefinition<BsonDocument> filterForSimilarProducts;
-                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
-
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
-
-                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
-                    project = project.Include("Name");
-                    project = project.Include("SubType");
-                    project = project.Include("Prices");
-                    project = project.Include("ProductOptions");
-
-                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
-
-                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
-
-                    if (SimilarProdSearchResultObj != null)
-                    {
-                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
-                        {
-                            SystemActivityCode = s.SystemActivityCode.ToString(),
-                            SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
-                            Options = s.ProductOptions,
-                            Prices = s.Prices
-                        }).ToList();
-                    }
+                    remainder = 1;
                 }
-
-                return Request.CreateResponse(HttpStatusCode.OK, resultList);
+                resultList.TotalPage = quotient + remainder;
             }
-            catch (Exception ex)
+            else
             {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
+                resultList.TotalPage = 0;
             }
+
+            resultList.CurrentPage = param.PageNo;
+            resultList.TotalNumberOfActivities = TotalRecords;
+            resultList.Activities = (from a in searchedData
+                                     select new Activity
+                                     {
+                                         ActivityCode = a.SystemActivityCode,
+                                         SupplierCompanyCode = a.SupplierCompanyCode,
+                                         SupplierProductCode = a.SupplierProductCode,
+                                         InterestType = a.InterestType,
+                                         Category = a.Category,
+                                         Type = a.Type,
+                                         SubType = a.SubType,
+                                         CategoryGroup = a.CategoryGroup,
+                                         TLGXDisplaySubType = a.TLGXDisplaySubType,
+                                         Name = a.Name,
+                                         Description = a.Description,
+                                         DaysOfTheWeek = a.DaysOfTheWeek,
+                                         PhysicalIntensity = a.PhysicalIntensity,
+                                         Overview = a.Overview,
+                                         Recommended = a.Recommended,
+                                         CountryName = a.CountryName,
+                                         CountryCode = a.CountryCode,
+                                         CityName = a.CityName,
+                                         CityCode = a.CityCode,
+                                         StarRating = a.StarRating,
+                                         NumberOfReviews = a.NumberOfReviews,
+                                         NumberOfLikes = a.NumberOfLikes,
+                                         NumberOfViews = a.NumberOfViews,
+                                         ActivityMedia = a.ActivityMedia,
+                                         DeparturePoint = a.DeparturePoint,
+                                         ReturnDetails = a.ReturnDetails,
+                                         ProductOptions = a.ProductOptions,
+                                         NumberOfPassengers = a.NumberOfPassengers,
+                                         Prices = a.Prices,
+                                         SuitableFor = a.SuitableFor,
+                                         Specials = a.Specials,
+                                         SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
+                                     }).ToList();
+
+            foreach (var activity in searchedData)
+            {
+                var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+
+                FilterDefinition<BsonDocument> filterForSimilarProducts;
+                filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+
+                ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                project = project.Include("Name");
+                project = project.Include("Categories");
+                project = project.Include("Prices");
+                project = project.Include("ProductOptions");
+
+                var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
+
+                List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                if (SimilarProdSearchResultObj != null)
+                {
+                    loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
+                    {
+                        SystemActivityCode = s.SystemActivityCode.ToString(),
+                        SystemActivityName = s.Name,
+                        //ActivityType = s.SubType,
+                        CategoryGroup = s.CategoryGroup,
+                        Options = s.ProductOptions,
+                        Prices = s.Prices
+                    }).ToList();
+                }
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, resultList);
         }
 
         /// <summary>
@@ -388,141 +372,134 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(ActivitySearchResult))]
         public async Task<HttpResponseMessage> GetActivityByActivityTypes(ActivitySearchByTypes_RQ param)
         {
-            try
+            ActivitySearchResult resultList = new ActivitySearchResult();
+
+            if (param.PageSize > 100)
             {
-                ActivitySearchResult resultList = new ActivitySearchResult();
+                resultList.Message = "Page Size shouldn't be greater than 100.";
+                return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+            }
 
-                if (param.PageSize > 100)
+            _database = MongoDBHandler.mDatabase();
+
+            //get Activities
+            IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
+            FilterDefinition<BsonDocument> filter;
+            filter = Builders<BsonDocument>.Filter.Empty;
+            filter = filter & Builders<BsonDocument>.Filter.AnyIn("Categories.Type", param.ActivityTypes);
+            if (param.FilterBySuppliers != null)
+            {
+                if (param.FilterBySuppliers.Length > 0)
                 {
-                    resultList.Message = "Page Size shouldn't be greater than 100.";
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, resultList);
+                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
                 }
+            }
 
-                _database = MongoDBHandler.mDatabase();
+            var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
 
-                //get Activities
-                IMongoCollection<BsonDocument> collectionActivity = _database.GetCollection<BsonDocument>("ActivityDefinitions");
-                FilterDefinition<BsonDocument> filter;
-                filter = Builders<BsonDocument>.Filter.Empty;
-                filter = filter & Builders<BsonDocument>.Filter.AnyIn("Type", param.ActivityTypes);
-                if (param.FilterBySuppliers != null)
-                {
-                    if (param.FilterBySuppliers.Length > 0)
-                    {
-                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("SupplierCompanyCode", param.FilterBySuppliers.Select(s => s.Trim().ToLower()));
-                    }
-                }
+            List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
 
-                var TotalRecords = await collectionActivity.Find(filter).CountDocumentsAsync();
+            if (TotalRecords != 0 && param.PageSize != 0)
+            {
+                SortDefinition<BsonDocument> sortByPrices;
+                sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
 
-                List<ActivityDefinition> searchedData = new List<ActivityDefinition>();
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
 
-                if (TotalRecords != 0 && param.PageSize != 0)
-                {
-                    SortDefinition<BsonDocument> sortByPrices;
-                    sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
+                searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
-                    var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).ToListAsync(); //.Sort(sortByPrices)
-
-                    searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
-
-                    resultList.PageSize = param.PageSize;
-                    resultList.CurrentPage = param.PageNo;
-
-                    int remainder = (int)TotalRecords % param.PageSize;
-                    int quotient = (int)TotalRecords / param.PageSize;
-                    if (remainder > 0)
-                    {
-                        remainder = 1;
-                    }
-                    resultList.TotalPage = quotient + remainder;
-                }
-                else
-                {
-                    resultList.TotalPage = 0;
-                }
-
+                resultList.PageSize = param.PageSize;
                 resultList.CurrentPage = param.PageNo;
-                resultList.TotalNumberOfActivities = TotalRecords;
-                resultList.Activities = (from a in searchedData
-                                         select new Activity
-                                         {
-                                             ActivityCode = a.SystemActivityCode,
-                                             SupplierCompanyCode = a.SupplierCompanyCode,
-                                             SupplierProductCode = a.SupplierProductCode,
-                                             InterestType = a.InterestType,
-                                             Category = a.Category,
-                                             Type = a.Type,
-                                             SubType = a.SubType,
-                                             TLGXDisplaySubType = a.TLGXDisplaySubType,
-                                             Name = a.Name,
-                                             Description = a.Description,
-                                             DaysOfTheWeek = a.DaysOfTheWeek,
-                                             PhysicalIntensity = a.PhysicalIntensity,
-                                             Overview = a.Overview,
-                                             Recommended = a.Recommended,
-                                             CountryName = a.CountryName,
-                                             CountryCode = a.CountryCode,
-                                             CityName = a.CityName,
-                                             CityCode = a.CityCode,
-                                             StarRating = a.StarRating,
-                                             NumberOfReviews = a.NumberOfReviews,
-                                             NumberOfLikes = a.NumberOfLikes,
-                                             NumberOfViews = a.NumberOfViews,
-                                             ActivityMedia = a.ActivityMedia,
-                                             DeparturePoint = a.DeparturePoint,
-                                             ReturnDetails = a.ReturnDetails,
-                                             ProductOptions = a.ProductOptions,
-                                             NumberOfPassengers = a.NumberOfPassengers,
-                                             Prices = a.Prices,
-                                             SuitableFor = a.SuitableFor,
-                                             Specials = a.Specials,
-                                             SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
-                                         }).ToList();
 
-                foreach (var activity in searchedData)
+                int remainder = (int)TotalRecords % param.PageSize;
+                int quotient = (int)TotalRecords / param.PageSize;
+                if (remainder > 0)
                 {
-                    var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
+                    remainder = 1;
+                }
+                resultList.TotalPage = quotient + remainder;
+            }
+            else
+            {
+                resultList.TotalPage = 0;
+            }
 
-                    FilterDefinition<BsonDocument> filterForSimilarProducts;
-                    filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
+            resultList.CurrentPage = param.PageNo;
+            resultList.TotalNumberOfActivities = TotalRecords;
+            resultList.Activities = (from a in searchedData
+                                     select new Activity
+                                     {
+                                         ActivityCode = a.SystemActivityCode,
+                                         SupplierCompanyCode = a.SupplierCompanyCode,
+                                         SupplierProductCode = a.SupplierProductCode,
+                                         InterestType = a.InterestType,
+                                         Category = a.Category,
+                                         Type = a.Type,
+                                         SubType = a.SubType,
+                                         CategoryGroup = a.CategoryGroup,
+                                         TLGXDisplaySubType = a.TLGXDisplaySubType,
+                                         Name = a.Name,
+                                         Description = a.Description,
+                                         DaysOfTheWeek = a.DaysOfTheWeek,
+                                         PhysicalIntensity = a.PhysicalIntensity,
+                                         Overview = a.Overview,
+                                         Recommended = a.Recommended,
+                                         CountryName = a.CountryName,
+                                         CountryCode = a.CountryCode,
+                                         CityName = a.CityName,
+                                         CityCode = a.CityCode,
+                                         StarRating = a.StarRating,
+                                         NumberOfReviews = a.NumberOfReviews,
+                                         NumberOfLikes = a.NumberOfLikes,
+                                         NumberOfViews = a.NumberOfViews,
+                                         ActivityMedia = a.ActivityMedia,
+                                         DeparturePoint = a.DeparturePoint,
+                                         ReturnDetails = a.ReturnDetails,
+                                         ProductOptions = a.ProductOptions,
+                                         NumberOfPassengers = a.NumberOfPassengers,
+                                         Prices = a.Prices,
+                                         SuitableFor = a.SuitableFor,
+                                         Specials = a.Specials,
+                                         SupplierCityDepartureCodes = a.SupplierCityDepartureCodes
+                                     }).ToList();
 
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
-                    filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
+            foreach (var activity in searchedData)
+            {
+                var loadedActivity = resultList.Activities.Where(w => w.ActivityCode == activity.SystemActivityCode).First();
 
-                    ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
-                    project = project.Include("Name");
-                    project = project.Include("SubType");
-                    project = project.Include("Prices");
-                    project = project.Include("ProductOptions");
+                FilterDefinition<BsonDocument> filterForSimilarProducts;
+                filterForSimilarProducts = Builders<BsonDocument>.Filter.Empty;
 
-                    var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Ne("_id", activity.SystemActivityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.Eq("CityCode", activity.CityCode);
+                filterForSimilarProducts = filterForSimilarProducts & Builders<BsonDocument>.Filter.AnyIn("ProductSubTypeId", activity.ProductSubTypeId);
 
-                    List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+                ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("_id");
+                project = project.Include("Name");
+                project = project.Include("Categories");
+                project = project.Include("Prices");
+                project = project.Include("ProductOptions");
 
-                    if (SimilarProdSearchResultObj != null)
+                var SimilarProdSearchResult = await collectionActivity.Find(filterForSimilarProducts).Project(project).ToListAsync();
+
+                List<ActivityDefinition> SimilarProdSearchResultObj = JsonConvert.DeserializeObject<List<ActivityDefinition>>(SimilarProdSearchResult.ToJson());
+
+                if (SimilarProdSearchResultObj != null)
+                {
+                    loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
                     {
-                        loadedActivity.SimliarProducts = SimilarProdSearchResultObj.Select(s => new SimliarProducts
-                        {
-                            SystemActivityCode = s.SystemActivityCode.ToString(),
-                            SystemActivityName = s.Name,
-                            ActivityType = s.SubType,
-                            Options = s.ProductOptions,
-                            Prices = s.Prices
-                        }).ToList();
-                    }
-
+                        SystemActivityCode = s.SystemActivityCode.ToString(),
+                        SystemActivityName = s.Name,
+                        //ActivityType = s.SubType,
+                        CategoryGroup = s.CategoryGroup,
+                        Options = s.ProductOptions,
+                        Prices = s.Prices
+                    }).ToList();
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK, resultList);
             }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, resultList);
         }
 
         /// <summary>
@@ -554,29 +531,19 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(ActivityDefinition))]
         public async Task<HttpResponseMessage> GetActivityDetailsByCode(int Code)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
+            _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
+            IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
 
-                FilterDefinition<ActivityDefinition> filter;
-                filter = Builders<ActivityDefinition>.Filter.Empty;
+            FilterDefinition<ActivityDefinition> filter;
+            filter = Builders<ActivityDefinition>.Filter.Empty;
 
-                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SystemActivityCode, Code);
+            filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SystemActivityCode, Code);
 
-                var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
+            var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
@@ -593,30 +560,20 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(ActivityDefinition))]
         public async Task<HttpResponseMessage> GetActivityDetailsBySupplierAndProductCode(string SupplierCode, string ProductCode)
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
+            _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
+            IMongoCollection<ActivityDefinition> collectionActivity = _database.GetCollection<ActivityDefinition>("ActivityDefinitions");
 
-                FilterDefinition<ActivityDefinition> filter;
-                filter = Builders<ActivityDefinition>.Filter.Empty;
+            FilterDefinition<ActivityDefinition> filter;
+            filter = Builders<ActivityDefinition>.Filter.Empty;
 
-                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierCompanyCode, SupplierCode.Trim().ToLower());
-                filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierProductCode, ProductCode.Trim().ToUpper());
+            filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierCompanyCode, SupplierCode.Trim().ToLower());
+            filter = filter & Builders<ActivityDefinition>.Filter.Eq(x => x.SupplierProductCode, ProductCode.Trim().ToUpper());
 
-                var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
+            var searchResult = await collectionActivity.Find(filter).FirstOrDefaultAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
         /// <summary>
@@ -628,24 +585,14 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(List<ActivityMasters>))]
         public async Task<HttpResponseMessage> GetActivityMasters()
         {
-            try
-            {
-                _database = MongoDBHandler.mDatabase();
+            _database = MongoDBHandler.mDatabase();
 
-                IMongoCollection<ActivityMasters> collectionActivity = _database.GetCollection<ActivityMasters>("ActivityMasters");
+            IMongoCollection<ActivityMasters> collectionActivity = _database.GetCollection<ActivityMasters>("ActivityMasters");
 
-                var searchResult = await collectionActivity.Find(s => true).SortBy(s => s.Type).ToListAsync();
+            var searchResult = await collectionActivity.Find(s => true).SortBy(s => s.Type).ToListAsync();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
-                return response;
-
-            }
-            catch (Exception ex)
-            {
-                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
-                return response;
-            }
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, searchResult);
+            return response;
         }
 
     }

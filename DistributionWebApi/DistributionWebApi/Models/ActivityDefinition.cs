@@ -133,6 +133,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
+        /// Activity category classification
+        /// </summary>
+        public List<ActivityCategory> CategoryGroup { get; set; }
+
+        /// <summary>
         /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
         /// </summary>
         public string InterestType { get; set; }
@@ -145,13 +150,14 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string Type { get; set; }
         /// <summary>
-        /// Mapping System TLGXDisplaySubType master
-        /// </summary>
-        public string TLGXDisplaySubType { get; set; }
-        /// <summary>
         /// Mapping System Activity Category for Product Classification. THis is the third level of classification.
         /// </summary>
         public string SubType { get; set; }
+
+        /// <summary>
+        /// Mapping System TLGXDisplaySubType master
+        /// </summary>
+        public string TLGXDisplaySubType { get; set; }
         /// <summary>
         /// The Name of the Activity Product as per the End Supplier
         /// </summary>
@@ -387,6 +393,11 @@ namespace DistributionWebApi.Models.Activity
         /// </summary>
         public string SupplierProductCode { get; set; }
         /// <summary>
+        /// Activity category classification
+        /// </summary>
+        public List<ActivityCategory> CategoryGroup { get; set; }
+
+        /// <summary>
         /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
         /// </summary>
         public string InterestType { get; set; }
@@ -402,6 +413,7 @@ namespace DistributionWebApi.Models.Activity
         /// Mapping System Activity Category for Product Classification. THis is the third level of classification.
         /// </summary>
         public string SubType { get; set; }
+
         /// <summary>
         /// Mapping System Activity TLGXDisplaySubType for Product Classification. 
         /// </summary>
@@ -1098,10 +1110,16 @@ namespace DistributionWebApi.Models.Activity
         /// Mapping system internal activity name
         /// </summary>
         public string SystemActivityName { get; set; }
+        ///// <summary>
+        ///// Product category type for this activity
+        ///// </summary>
+        //public string ActivityType { get; set; }
+
         /// <summary>
-        /// Product category type for this activity
+        /// Activity category classification
         /// </summary>
-        public string ActivityType { get; set; }
+        public List<ActivityCategory> CategoryGroup { get; set; }
+
         /// <summary>
         /// This field specifies the list of flavour options that are linked with this activity
         /// </summary>
@@ -1112,5 +1130,26 @@ namespace DistributionWebApi.Models.Activity
         public List<Prices> Prices { get; set; }
     }
 
-
+    /// <summary>
+    /// Activity category, subcategory, type and interest type
+    /// </summary>
+    public class ActivityCategory
+    {
+        /// <summary>
+        /// Mapping System Activity Interest Type for Product Classification. This is the highest level of classification.
+        /// </summary>
+        public string InterestType { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification.
+        /// </summary>
+        public string Category { get; set; }
+        /// <summary>
+        /// Mapping System Activity Product Type Category for Product Classification. This is the second level of classification
+        /// </summary>
+        public string Type { get; set; }
+        /// <summary>
+        /// Mapping System Activity Category for Product Classification. THis is the third level of classification.
+        /// </summary>
+        public string SubType { get; set; }
+    }
 }

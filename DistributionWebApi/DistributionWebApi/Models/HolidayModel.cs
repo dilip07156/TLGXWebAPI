@@ -1,5 +1,6 @@
 ﻿using DistributionWebApi.Models;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,10 +16,21 @@ namespace DistributionWebApi.Models
     public class HolidayModel
     {
         /// <summary>
-        /// Unique Id for each Tour.
+        /// Unique Supplier Holiday Id for each Tour.
         /// </summary>
         [Required]
-        public string Id { get; set; }
+        public string SupplierHolidayId { get; set; }
+        /// <summary>
+        /// Call Type Like HotelMapping
+        /// </summary>
+        public string CallType { get; set; }
+
+        /// <summary>
+        /// Unique Supplier Holiday Id for each Tour.
+        /// </summary>
+        [Required]
+        public string NakshatraHolidayId { get; set; }
+
         /// <summary>
         /// Name of the supplier providing this holiday.
         /// </summary>
@@ -31,12 +43,17 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Holiday is effective from this date.
         /// </summary>
-        public string EffectiveFromDate { get; set; }
+        [JsonIgnore]
+        public DateTime? EffectiveFromDate { get; set; }
+        /// <summary>
+        /// Holiday is effective To this date.
+        /// </summary>
+        public DateTime? EffectiveToDate { get; set; }
         /// <summary>
         /// Date on which Holiday is created on system.
         /// </summary>
         [Required]
-        public DateTime? CreateDate { get; set; }
+        // public DateTime? CreateDate { get; set; }
         /// <summary>
         /// The user who created the product.
         /// </summary>
@@ -50,6 +67,18 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string EditUser { get; set; }
         /// <summary>
+        /// is active or not
+        /// </summary>
+        public bool IsActive { get; set; }
+        /// <summary>
+        /// The user review status.
+        /// </summary>
+        public string UserReviewStatus { get; set; }
+        /// <summary>
+        /// The user Remarks if any
+        /// </summary>
+        public string UserRemarks { get; set; }
+        /// <summary>
         /// The Product category for this Holiday.Master values may be retrived from a Master Service.
         /// </summary>
         public string ProductCategory { get; set; }
@@ -58,17 +87,41 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string ProductCategorySubtype { get; set; }
         /// <summary>
+        /// The group of company name.
+        /// </summary>
+        public string GroupOfCompany { get; set; }
+        /// <summary>
+        /// The group of company.
+        /// </summary>
+        public string GroupCompany { get; set; }
+        /// <summary>
+        /// contains the company name 
+        /// </summary>
+        public string Company { get; set; }
+        /// <summary>
+        /// contains the SBU 
+        /// </summary>
+        public string SBU { get; set; }
+        /// <summary>
+        /// contains the BU 
+        /// </summary>
+        public string BU { get; set; }
+        /// <summary>
+        /// contains the Company Product Id 
+        /// </summary>
+        public string CompanyProductId { get; set; }
+        /// <summary>
+        /// Name of the Product
+        /// </summary>
+        public string ProductName { get; set; }
+        /// <summary>
         /// Name of the Holiday
         /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        /// Short Description for the holiday.
-        /// </summary>
-        public string ShortDescription { get; set; }
-        /// <summary>
-        /// Long Description for the holiday.
-        /// </summary>
-        public string LongDescription { get; set; }
+        public string Overview { get; set; }
+        ///// <summary>
+        ///// Name of the Holiday
+        ///// </summary>
+        //public string Name { get; set; }
         /// <summary>
         /// Holiday Type can be all,group,Individual.Master values may be retrived from a Master Service.
         /// </summary>
@@ -90,6 +143,14 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string FlavorType { get; set; }
         /// <summary>
+        /// It is a Date from which flavour is valid.
+        /// </summary>
+        public DateTime? FlavourValidFrom { get; set; }
+        /// <summary>
+        /// It is a Date To which flavour is valid.
+        /// </summary>
+        public DateTime? FlavourValidTo { get; set; }
+        /// <summary>
         /// This will have value either FIT(Fully Independant Traveller) or Group
         /// </summary>
         public string ProductType { get; set; }
@@ -104,7 +165,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Collection is a name of Supplier providing holiday.
         /// </summary>
-        public HolidayCollections Collections { get; set; }
+        public List<HolidayCollections> Collections { get; set; }
         /// <summary>
         /// Biforgation of Holiday by types of traveller such as Couple ,Men,Women etc..Values may be retrived from Master Service.   
         /// </summary>
@@ -116,7 +177,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Biforgation of Holiday by Frequency of travel  such as First Time ,Been there before etc..Values may be retrived from Master Service. 
         /// </summary>
-        public List<string> TravelFrequency { get; set; }
+        public List<TravelFrequency> TravelFrequency { get; set; }
         /// <summary>
         /// Rating based on entire holiday.
         /// </summary>
@@ -124,19 +185,23 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// This field gives you pace of holiday such as Relaxing,Moderate etc..
         /// </summary>
-        public List<string> PaceofHoliday { get; set; }
+        public List<PaceOfHoliday> PaceOfHoliday { get; set; }
         /// <summary>
-        /// This field gives you different stay Types available for holiday.e.g Hotels,Villas,Homestays etc..
+        /// Should not be mandatory as this data point will not come via API in most cases 
         /// </summary>
-        public List<string> StayType { get; set; }
+        public string StayType { get; set; }
         /// <summary>
         /// Number of days included in holiday.( e.g 3 days)
         /// </summary>
-        public string Days { get; set; }
+        public int Days { get; set; }
         /// <summary>
         /// Number of nights included in holiday.(e.g 2 Nights)
         /// </summary>
-        public string Nights { get; set; }
+        public int Nights { get; set; }
+        /// <summary>
+        /// hold a list of Per Person Structure
+        /// </summary>
+        public List<HolidayPerPersonPrice> PerPersonPrice { get; set; }
         /// <summary>
         /// Total duration of holiday( e.g 3 days this field takes the total no. of days of Holiday as duration).
         /// </summary>
@@ -148,11 +213,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Comfort level of the holiday.
         /// </summary>
-        public string ComfortLevel { get; set; }
+        public List<ComfortLevel> ComfortLevel { get; set; }
         /// <summary>
         /// Is this Holiday recommended.
         /// </summary>
-        public string IsRecommended { get; set; }
+        public bool IsRecommended { get; set; }
         /// <summary>
         /// Different destinations included in holiday.
         /// </summary>
@@ -160,11 +225,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// what is included in the holiday. values are'Y' /'N'.
         /// </summary>
-        public HolidayIncludes HolidayIncludes { get; set; }
+        public List<HolidayIncludes> HolidayIncludes { get; set; }
         /// <summary>
         /// Main attractions for holiday.
         /// </summary>
-        public List<HolidayUniqueSellingPoints> UniqueSellingPoints { get; set; }
+        public HolidayUniqueSellingPoints UniqueSellingPoints { get; set; }
         /// <summary>
         /// Information about Highlights of the holiday.
         /// </summary>
@@ -172,7 +237,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Brand information of holiday.
         /// </summary>
-        public HolidayBrandsAndBrochures Brands { get; set; }
+        public List<HolidayBrandsAndBrochures> Brands { get; set; }
         /// <summary>
         /// Documment of details of holiday
         /// </summary>
@@ -201,10 +266,10 @@ namespace DistributionWebApi.Models
         /// Key notes about holiday.
         /// </summary>
         public List<HolidayTermsConditions> TourNotes { get; set; }
-        /// <summary>
-        /// Information about Starting cities for holiday
-        /// </summary>
-        public List<HolidayHubDetails> HubDetails { get; set; }
+        ///// <summary>
+        ///// Information about Starting cities for holiday
+        ///// </summary>
+        //public List<HolidayHubDetails> HubDetails { get; set; }
         /// <summary>
         /// Day wise itinerary information.
         /// </summary>
@@ -220,7 +285,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Flight Details for Holiday.
         /// </summary>
-        public List<HolidayFlights> Flights { get; set; }
+        //public List<HolidayFlights> Flights { get; set; }
         /// <summary>
         /// Departure Details for Holiday.
         /// </summary>
@@ -228,28 +293,47 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Pre Tour Details.
         /// </summary>
-        public List<HolidayPrePost> Pre { get; set; }
+        public List<PreTourStructure> PreTour { get; set; }
         /// <summary>
         /// Post Tour Details.
         /// </summary>
-        public List<HolidayPrePost> Post { get; set; }
+        public List<PreTourStructure> PostTour { get; set; }
+
         /// <summary>
-        /// Post Tour Details.
+        /// Holds list of PackagePrice
         /// </summary>
-        public List<HolidayOptionals> Optionals { get; set; }
+        public List<PackagePrice> PackagePrice { get; set; }
+
         /// <summary>
-        /// Informatio about Extension to holiday.
+        /// Holds list of PreTourPrice
         /// </summary>
-        public List<HolidayExtension> Extension { get; set; }
+        public List<PreTourPrice> PreTourPrice { get; set; }
+
         /// <summary>
-        /// Information about Extension to holiday.
+        /// Holds list of PostTourPrice
         /// </summary>
-        public List<HolidayReview> Review { get; set; }
+        public List<PreTourPrice> PostTourPrice { get; set; }
+
+        /// <summary>
+        /// Holds list of ClassificationAttributes
+        /// </summary>
+        public List<ClassificationAttributes> ClassificationAttributes { get; set; }
+
+        ///// <summary>
+        ///// Post Tour Details.
+        ///// </summary>
+        //public List<HolidayOptionals> Optionals { get; set; }
+        ///// <summary>
+        ///// Informatio about Extension to holiday.
+        ///// </summary>
+        //public List<HolidayExtension> Extension { get; set; }
+        ///// <summary>
+        ///// Information about Extension to holiday.
+        ///// </summary>
+        //public List<HolidayReview> Review { get; set; }
         ///// <summary>
         ///// Detailed information about Price  for holiday.
         ///// </summary>
         //public List<Price> Price { get; set; }
-
-
     }
 }
