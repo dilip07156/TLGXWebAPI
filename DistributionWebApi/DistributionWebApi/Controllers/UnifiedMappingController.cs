@@ -518,7 +518,7 @@ namespace DistributionWebApi.Controllers
                                 else
                                 {
                                     mappingResponse.TlgxCompanyCode = mappingRequest.TLGXCompanyCode;
-                                    mappingResponse.TlgxCommonProductId = Convert.ToString(Acco.CommonHotelId);
+                                    mappingResponse.TlgxCommonProductId = (Acco == null ? string.Empty : Convert.ToString(Acco.CommonHotelId));
                                     mappingResponse.TlgxCompanyProductId = (Acco == null ? string.Empty : Acco.TLGXAccoId);
                                     mappingResponse.ProductName = (Acco == null ? string.Empty : Acco.HotelName);
                                     mappingResponse.ProductCategorySubType = (Acco == null ? string.Empty : Acco.ProductCategorySubType);
