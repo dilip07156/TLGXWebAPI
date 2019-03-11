@@ -25,6 +25,8 @@ namespace DistributionWebApi.Models
         public List<UnifiedHotelAndRoomMapping_Request> MappingRequests { get; set; }
     }
 
+
+
     public class UnifiedHotelAndRoomMapping_Request
     {
         /// <summary>
@@ -50,11 +52,13 @@ namespace DistributionWebApi.Models
         [Required]
         public string SupplierProductCode { get; set; }
 
-        /// <summary>
-        /// Supplier Product Company Id received in the Supplier Availability Response.
-        /// </summary>
-        [Required]
-        public string TLGXCompanyId { get; set; }
+        //Need to remove once it is Confirm
+        ///// <summary>
+        ///// Supplier Product Company Id received in the Supplier Availability Response.
+        ///// </summary>
+        //[Required]
+        //public string TLGXCompanyId { get; set; }
+        //Need to remove once it is Confirm
 
         /// <summary>
         /// Collection of Supplier Room Types
@@ -229,11 +233,13 @@ namespace DistributionWebApi.Models
         [Required]
         public string SupplierProductCode { get; set; }
 
+        //Need to remove once it is Confirm
         /// <summary>
         /// Tlgx Specified Unique Company Id
         /// </summary>
-        [Required]
-        public string TlgxCompanyId { get; set; }
+        //[Required]
+        //public string TlgxCompanyId { get; set; }
+        //Need to remove once it is Confirm
 
         /// <summary>
         /// Tlgx Specified Unique Company Id
@@ -373,6 +379,301 @@ namespace DistributionWebApi.Models
         /// Nakshatra room type mapping id.
         /// </summary>
         public Int64 RoomMapId { get; set; }
+    }
+
+    //GAURAV_TMAP_1035
+
+    /// <summary>
+    /// Request structure for unified hotel and room mapping
+    /// </summary>
+    public class UnifiedHotelAndRoomMapping_RQ1
+    {
+        /// <summary>
+        /// Session Id from Booking Engine for the originating Search Response that is to be mapped. 
+        /// This field is designed to be used to interrogate original Supplier Static calls should a map not be found within the TLGX Mapping Database
+        /// </summary>
+        [Required]
+        public string SessionId { get; set; }
+
+        /// <summary>
+        /// Mapping requests
+        /// </summary>
+        [Required]
+        public List<UnifiedHotelAndRoomMapping_Request1> MappingRequests { get; set; }
+    }
+
+    public class UnifiedHotelAndRoomMapping_Request1
+    {
+        /// <summary>
+        /// Sequence Number for the individual mapping requirement within the overall request
+        /// </summary>
+        [Required]
+        public string SequenceNumber { get; set; }
+
+        /// <summary>
+        /// TLGX Supplier Master Code. These can be retrieved using Supplier Master API Framework.
+        /// </summary>
+        [Required]
+        public string SupplierCode { get; set; }
+
+        /// <summary>
+        /// Supplier Product Code received in the Supplier Availability Response.
+        /// </summary>
+        [Required]
+        public string SupplierProductCode { get; set; }
+
+        /// <summary>
+        /// Supplier Product Company Code received in the Supplier Availability Response.
+        /// </summary>
+        [Required]
+        public string TLGXCompanyCode { get; set; }
+
+        /// <summary>
+        /// Collection of Supplier Room Types
+        /// </summary>
+        public List<UnifiedHotelAndRoomMapping_RoomTypeRequest1> SupplierRoomTypes { get; set; }
+    }
+
+
+    public class UnifiedHotelAndRoomMapping_RoomTypeRequest1
+    {
+
+        /// <summary>
+        /// Supplier system room id.
+        /// </summary>
+        [Required]
+        public string SupplierRoomId { get; set; }
+        /// <summary>
+        /// Supplier room type code. Certain suppliers use both id and code values.
+        /// </summary>
+        public string SupplierRoomTypeCode { get; set; }
+        /// <summary>
+        /// Supplier room type name.
+        /// </summary>
+        [Required]
+        public string SupplierRoomName { get; set; }
+        /// <summary>
+        /// Supplier room category name. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategory { get; set; }
+        /// <summary>
+        ///  Supplier room category id. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategoryId { get; set; }
+
+    }
+
+    /// <summary>
+    /// Response structure for unified hotel and room mapping
+    /// </summary>
+    public class UnifiedHotelAndRoomMapping_RS1
+    {
+        /// <summary>
+        /// Session Id from Booking Engine for the originating Search Response that is to be mapped. 
+        /// This field is designed to be used to interrogate original Supplier Static calls should a map not be found within the TLGX Mapping Database
+        /// </summary>
+        [Required]
+        public string SessionId { get; set; }
+
+        /// <summary>
+        /// Mapping responses
+        /// </summary>
+        [Required]
+        public List<UnifiedHotelAndRoomMapping_Response1> MappingResponses { get; set; }
+    }
+
+    public class UnifiedHotelAndRoomMapping_Response1
+    {
+        /// <summary>
+        /// Sequence Number for the individual mapping requirement within the overall request
+        /// </summary>
+        [Required]
+        public string SequenceNumber { get; set; }
+
+        /// <summary>
+        /// TLGX Supplier Master Code. These can be retrieved using Supplier Master API Framework.
+        /// </summary>
+        [Required]
+        public string SupplierCode { get; set; }
+
+        /// <summary>
+        /// Supplier Product Code received in the Supplier Availability Response.
+        /// </summary>
+        [Required]
+        public string SupplierProductCode { get; set; }
+
+        /// <summary>
+        /// Tlgx Specified Unique Company Id
+        /// </summary>
+        [Required]
+        public string TlgxCompanyCode { get; set; } //Filter by Company Code in Version Tables
+
+        /// <summary>
+        /// System Mapping Id
+        /// </summary>
+        public int NakshatraMappingId { get; set; }
+
+
+        /// <summary>
+        /// Tlgx Specified Unique Company Id
+        /// </summary>
+        //[Required]
+        //public string TlgxCompanyHotelId { get; set; }
+
+        /// <summary>
+        /// System Product Code / Common product code
+        /// </summary>
+        public string TlgxCommonProductId { get; set; } //Master Acco CommonProductId
+
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// </summary>
+        public string TlgxCompanyProductId { get; set; } //TLGX Acco Id
+
+        /// <summary>
+        /// Hotel property name
+        /// </summary>
+        public string ProductName { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Product Category Type
+        /// </summary>
+        public string ProductCategory { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Product Category Sub Type
+        /// </summary>
+        public string ProductCategorySubType { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Brand
+        /// </summary>
+        public string Brand { get; set; }
+
+        /// <summary>
+        /// TLGX MDM hotel Chain
+        /// </summary>
+        public string Chain { get; set; }
+
+        /// <summary>
+        /// System Country Code
+        /// </summary>
+        public string SystemCountryCode { get; set; }
+
+        /// <summary>
+        /// System Country Name
+        /// </summary>
+        public string SystemCountryName { get; set; }
+
+        /// <summary>
+        /// System City Code
+        /// </summary>
+        public string SystemCityCode { get; set; }
+
+        /// <summary>
+        /// System City Name
+        /// </summary>
+        public string SystemCityName { get; set; }
+
+        /// <summary>
+        /// System State Code
+        /// </summary>
+        public string SystemStateCode { get; set; }
+
+        /// <summary>
+        /// System State Name
+        /// </summary>
+        public string SystemStateName { get; set; }
+
+
+        /// <summary>
+        /// Hotel Overview
+        /// </summary>
+        public List<string> Interests { get; set; }
+
+        /// <summary>
+        /// Hotel Rating
+        /// </summary>
+        public string Rating { get; set; }
+
+        /// <summary>
+        /// This field will indicate whether the hotel have any room mapping attached to it or not
+        /// </summary>
+        public bool ContainsRoomMappings { get; set; }
+
+        /// <summary>
+        /// This field will indicate whether the hotel have any direct contract or not 
+        /// </summary>
+        public bool DirectContract { get; set; }
+
+        /// <summary>
+        /// Collection of Supplier Room Types
+        /// </summary>
+        public List<UnifiedHotelAndRoomMapping_RoomTypeResponse1> SupplierRoomTypes { get; set; }
+   
+    }
+
+    public class UnifiedHotelAndRoomMapping_RoomTypeResponse1
+    {
+        /// <summary>
+        /// Supplier system room id.
+        /// </summary>
+        [Required]
+        public string SupplierRoomId { get; set; }
+
+        /// <summary>
+        /// Supplier room type code. Certain suppliers use both id and code values.
+        /// </summary>
+        public string SupplierRoomTypeCode { get; set; }
+
+        /// <summary>
+        /// Supplier room type name.
+        /// </summary>
+        [Required]
+        public string SupplierRoomName { get; set; }
+
+        /// <summary>
+        /// Supplier room category name. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategory { get; set; }
+
+        /// <summary>
+        ///  Supplier room category id. Certain suppliers use both room type and category.
+        /// </summary>
+        public string SupplierRoomCategoryId { get; set; }
+
+        /// <summary>
+        /// List of mapped rooms to supplier room.
+        /// </summary>
+        public List<UnifiedHotelAndRoomMapping_MappedRoomType1> MappedRooms { get; set; }
+    }
+
+    public class UnifiedHotelAndRoomMapping_MappedRoomType1
+    {
+        /// <summary>
+        /// TLGX Accommodation Room Info Id.
+        /// </summary>
+        public string TlgxCompanyRoomId { get; set; }//TlgxAccoRoomId
+
+        /// <summary>
+        /// TLGX Accommodation Common Room Id.
+        /// </summary>
+        public string TlgxCommonRoomId { get; set; }
+
+        /// <summary>
+        /// TLGX Accommodation Room Type Name.
+        /// </summary>
+        public string CompanyRoomName { get; set; }
+
+        /// <summary>
+        /// TLGX Accommodation Room Type Category.
+        /// </summary>
+        public string CompanyRoomCategory{ get; set; }//TlgxAccoRoomCategory 
+
+        /// <summary>
+        /// Nakshatra room type mapping id.
+        /// </summary>
+        public Int64 NakshatraRoomMappingId { get; set; }
     }
 
 }

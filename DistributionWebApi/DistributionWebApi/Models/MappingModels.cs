@@ -25,6 +25,7 @@ namespace DistributionWebApi.Models
         public string SupplierCode { get; set; }
         public string SupplierCountryCode { get; set; }
         public string SupplierCountryName { get; set; }
+        public string Status { get; set; }
         public int MapId { get; set; }
     }
 
