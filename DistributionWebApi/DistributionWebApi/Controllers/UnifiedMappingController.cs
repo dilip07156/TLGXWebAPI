@@ -111,6 +111,7 @@ namespace DistributionWebApi.Controllers
                         projectAccoMaster = projectAccoMaster.Include("Brand");
                         projectAccoMaster = projectAccoMaster.Include("Chain");
                         projectAccoMaster = projectAccoMaster.Include("AccomodationCompanyVersions");
+                        projectAccoMaster = projectAccoMaster.Include("TLGXAccoId");
                         var searchAccoMasterResult = collectionAccommodationMaster.Find(filterAccoMaster).Project(projectAccoMaster).ToList();
                         searchedAccomodationSearchData = JsonConvert.DeserializeObject<List<DC_AccomodationMasterMapping>>(searchAccoMasterResult.ToJson());
                         #endregion Fetch Accommodation Master
@@ -158,7 +159,7 @@ namespace DistributionWebApi.Controllers
                             mappingResponse.SupplierCode = mappingRequest.SupplierCode;
                             mappingResponse.SupplierProductCode = mappingRequest.SupplierProductCode;
 
-                            var HotelMapping = searchedHotelMappingData.Where(w => w.SupplierCode == mappingRequest.SupplierCode && w.SupplierProductCode == mappingRequest.SupplierProductCode).OrderByDescending(o => o.MapId).Select(s => s).FirstOrDefault();
+                            var HotelMapping = searchedHotelMappingData.Where(w => w.SupplierCode == mappingRequest.SupplierCode.ToUpper() && w.SupplierProductCode == mappingRequest.SupplierProductCode.ToUpper()).OrderByDescending(o => o.MapId).Select(s => s).FirstOrDefault();
 
                             if (HotelMapping != null)
                             {
