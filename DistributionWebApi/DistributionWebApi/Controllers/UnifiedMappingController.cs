@@ -606,7 +606,7 @@ namespace DistributionWebApi.Controllers
                                         if (string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomId) && !string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomTypeCode))
                                         {
 
-                                   
+
 
                                             RoomMappingResponse.MappedRooms = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode)
                                               .Select(s => new UnifiedHotelAndRoomMapping_MappedRoomType1
@@ -656,13 +656,13 @@ namespace DistributionWebApi.Controllers
                                     else
                                     {
                                         //checking if data bot exists for field AccomodationRoomInfoCompanyVersions then it will retrive data from adminRoomInfo
-
+                                        //var room = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).FirstOrDefault();
 
                                         //if SupplierRoomTypeCode data is exists in request
                                         if (string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomId) && !string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomTypeCode))
                                         {
 
-                                            var room = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).FirstOrDefault();
+
                                             RoomMappingResponse.SupplierRoomCategory = room.SupplierRoomCategory;
                                             RoomMappingResponse.SupplierRoomCategoryId = room.SupplierRoomCategoryId;
                                             RoomMappingResponse.SupplierRoomId = room.SupplierRoomId;
