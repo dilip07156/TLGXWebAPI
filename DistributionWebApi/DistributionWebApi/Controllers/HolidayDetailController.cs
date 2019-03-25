@@ -32,10 +32,11 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Fetch supplier details
+        /// This API is used for returning colletions all supplier responses whether it will be XML or JSON for given filters as 
+        /// Supplier Name and tourID.
         /// </summary>
-        /// <param name="supplierName">Supplier name</param>
-        /// <param name="tourID">Supplier product code</param>
+        /// <param name="supplierName">Supplier name is first filter mandatory Criteria</param>
+        /// <param name="tourID">Supplier product code is second filter mandatory criteria.</param>
         /// <returns>list of supplier response</returns>
         [HttpGet]
         [Route("Get/{supplierName}/{tourID}")]

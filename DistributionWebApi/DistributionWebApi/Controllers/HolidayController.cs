@@ -66,10 +66,11 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Get Holiday Search details 
+        /// Retrieves a Search Result List of based on a Collection of All Holiday Model filter like Country,City Code, Holiday Name,Holiday Flavour, 
+        /// Suppliers and various Key facet mapping parameters.  
         /// </summary>
         /// <param name="HolidaySearchRequestParams"></param>
-        /// <returns>Returns list of Holiday search response</returns>
+        /// <returns>Returns a Collection of Search Results. This is a actual Holiday mapping Data from supplier response.</returns>
         [HttpPost]
         [Route("Search")]
         [ResponseType(typeof(HolidayMappingSearchResult))]
@@ -202,10 +203,10 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Returns a single Holiday Object for nakshatra Holiday Id
+        /// Returns a single Holiday Mapping Object for Given nakshatra Holiday Id
         /// </summary>
         /// <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
-        /// <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
+        /// <returns>Returns single Holiday Model from Mongo DB for Nakshtra Holiday Id</returns>
         [HttpGet]
         [Route("Get/{NakshtraHolidayid}")]
         [ResponseType(typeof(HolidayModel))]
@@ -228,10 +229,10 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// Updates Holiday mapping model based on NakshatraHolidayId
+        /// This API is used for updating mandatory attributes after reviewing by user for supplier given response if anything missed from supplier side
         /// </summary>
         /// <param name="HolidayModel">Holiday mapping object</param>
-        /// <returns>Returns updated Holiday mapping model </returns>
+        /// <returns>This returns the updated Holiday Detail Model for given nakshtra holiday ID.</returns>
         [HttpPost]
         [Route("edit")]
         public async Task<HttpResponseMessage> updateHolidayMapping(HolidayModel HolidayModel)
