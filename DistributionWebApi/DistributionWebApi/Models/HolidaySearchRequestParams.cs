@@ -9,34 +9,77 @@ namespace DistributionWebApi.Models
 {
     public class HolidaySearchRequestParams
     {
-
+        /// <summary>
+        /// Supplier Name Unique For Filter
+        /// </summary>
         public string Supplier { get; set; }
+        /// <summary>
+        /// Unique Country Name For Filter
+        /// </summary>
 
         public string Country { get; set; }
+        /// <summary>
+        /// Unique City Code For Filter
+        /// </summary>
 
         public string CityCode { get; set; }
+        /// <summary>
+        /// Unique Holiday Name For Filter Criteria
+        /// </summary>
 
         public string HolidayName { get; set; }
+        /// <summary>
+        /// Holiday Flavour name For Filter
+        /// </summary>
 
         public string HolidayFlavour { get; set; }
+        /// <summary>
+        /// Checkbox for checking Is holiday having caustomized packages.
+        /// </summary>
 
         public bool CustomisedPackages { get; set; }
+        /// <summary>
+        /// Checkbox for checking is Holiday having prebuilt packages.
+        /// </summary>
 
         public bool PreBuiltPackages { get; set; }
+        /// <summary>
+        /// This Property used for checking mapping status for Holiday Mapping data.
+        /// </summary>
 
         public string MappingStatus { get; set; }
+        /// <summary>
+        /// This flag used for checking is holiday traveller type missing.
+        /// </summary>
 
         public bool IsTravellerTypeMissing { get; set; }
+        /// <summary>
+        /// This flag is used for checking is holiday Interest missing.
+        /// </summary>
 
         public bool IsInterestsMissing { get; set; }
+        /// <summary>
+        /// This flag is used for checking is holiday travel frequency missing.
+        /// </summary>
 
         public bool IsTravelFrequencyMissing { get; set; }
-
+        /// <summary>
+        /// This flag is used for is Holiday stay type missing.
+        /// </summary>
         public bool IsStayTypeMissing { get; set; }
+        /// <summary>
+        /// This flag is used for is holiday Comfort level Missing.
+        /// </summary>
 
         public bool IsComfortLevelMissing { get; set; }
+        /// <summary>
+        /// This flag is used for is holiday USP Missing.
+        /// </summary>
 
         public bool IsUSPMissing { get; set; }
+        /// <summary>
+        /// This flag is used for Is holiday Pacel of Holiday Missing.
+        /// </summary>
 
         public bool IsPaceOfHolidayMissing { get; set; }
 
