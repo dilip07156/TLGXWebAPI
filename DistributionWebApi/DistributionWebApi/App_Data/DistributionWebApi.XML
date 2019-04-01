@@ -764,24 +764,25 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.HolidayController.HolidaySearch(DistributionWebApi.Models.HolidaySearchRequestParams)">
             <summary>
-            Get Holiday Search details 
+            Retrieves a Search Result List of based on a Collection of All Holiday Model filter like Country,City Code, Holiday Name,Holiday Flavour, 
+            Suppliers and various Key facet mapping parameters.  
             </summary>
             <param name="HolidaySearchRequestParams"></param>
-            <returns>Returns list of Holiday search response</returns>
+            <returns>Returns a Collection of Search Results. This is a actual Holiday mapping Data from supplier response.</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.HolidayController.GetHolidayByNakshatraHolidayId(System.String)">
             <summary>
-            Returns a single Holiday Object for nakshatra Holiday Id
+            Returns a single Holiday Mapping Object for Given nakshatra Holiday Id
             </summary>
             <param name="NakshtraHolidayid">Nakshatra Unique Id for Holiday mapping</param>
-            <returns>Returns single Holiday Model for Nakshtra Holiday Id</returns>
+            <returns>Returns single Holiday Model from Mongo DB for Nakshtra Holiday Id</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.HolidayController.updateHolidayMapping(DistributionWebApi.Models.HolidayModel)">
             <summary>
-            Updates Holiday mapping model based on NakshatraHolidayId
+            This API is used for updating mandatory attributes after reviewing by user for supplier given response if anything missed from supplier side
             </summary>
             <param name="HolidayModel">Holiday mapping object</param>
-            <returns>Returns updated Holiday mapping model </returns>
+            <returns>This returns the updated Holiday Detail Model for given nakshtra holiday ID.</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.HolidayDetailController">
             <summary>
@@ -800,10 +801,11 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.HolidayDetailController.GetSupplierDeails(System.String,System.String)">
             <summary>
-            Fetch supplier details
+            This API is used for returning colletions all supplier responses whether it will be XML or JSON for given filters as 
+            Supplier Name and tourID.
             </summary>
-            <param name="supplierName">Supplier name</param>
-            <param name="tourID">Supplier product code</param>
+            <param name="supplierName">Supplier name is first filter mandatory Criteria</param>
+            <param name="tourID">Supplier product code is second filter mandatory criteria.</param>
             <returns>list of supplier response</returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
@@ -1616,6 +1618,81 @@
         <member name="P:DistributionWebApi.Models.HolidayModel.ClassificationAttributes">
             <summary>
             Holds list of ClassificationAttributes
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.Supplier">
+            <summary>
+            Supplier Name Unique For Filter
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.Country">
+            <summary>
+            Unique Country Name For Filter
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.CityCode">
+            <summary>
+            Unique City Code For Filter
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.HolidayName">
+            <summary>
+            Unique Holiday Name For Filter Criteria
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.HolidayFlavour">
+            <summary>
+            Holiday Flavour name For Filter
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.CustomisedPackages">
+            <summary>
+            Checkbox for checking Is holiday having caustomized packages.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PreBuiltPackages">
+            <summary>
+            Checkbox for checking is Holiday having prebuilt packages.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.MappingStatus">
+            <summary>
+            This Property used for checking mapping status for Holiday Mapping data.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsTravellerTypeMissing">
+            <summary>
+            This flag used for checking is holiday traveller type missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsInterestsMissing">
+            <summary>
+            This flag is used for checking is holiday Interest missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsTravelFrequencyMissing">
+            <summary>
+            This flag is used for checking is holiday travel frequency missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsStayTypeMissing">
+            <summary>
+            This flag is used for is Holiday stay type missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsComfortLevelMissing">
+            <summary>
+            This flag is used for is holiday Comfort level Missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsUSPMissing">
+            <summary>
+            This flag is used for is holiday USP Missing.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.IsPaceOfHolidayMissing">
+            <summary>
+            This flag is used for Is holiday Pacel of Holiday Missing.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.HolidaySearchRequestParams.PageSize">

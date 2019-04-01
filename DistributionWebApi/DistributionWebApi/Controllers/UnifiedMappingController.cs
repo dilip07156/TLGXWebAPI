@@ -111,6 +111,7 @@ namespace DistributionWebApi.Controllers
                         projectAccoMaster = projectAccoMaster.Include("Brand");
                         projectAccoMaster = projectAccoMaster.Include("Chain");
                         projectAccoMaster = projectAccoMaster.Include("AccomodationCompanyVersions");
+                        projectAccoMaster = projectAccoMaster.Include("TLGXAccoId");
                         var searchAccoMasterResult = collectionAccommodationMaster.Find(filterAccoMaster).Project(projectAccoMaster).ToList();
                         searchedAccomodationSearchData = JsonConvert.DeserializeObject<List<DC_AccomodationMasterMapping>>(searchAccoMasterResult.ToJson());
                         #endregion Fetch Accommodation Master
@@ -158,7 +159,7 @@ namespace DistributionWebApi.Controllers
                             mappingResponse.SupplierCode = mappingRequest.SupplierCode;
                             mappingResponse.SupplierProductCode = mappingRequest.SupplierProductCode;
 
-                            var HotelMapping = searchedHotelMappingData.Where(w => w.SupplierCode == mappingRequest.SupplierCode && w.SupplierProductCode == mappingRequest.SupplierProductCode).OrderByDescending(o => o.MapId).Select(s => s).FirstOrDefault();
+                            var HotelMapping = searchedHotelMappingData.Where(w => w.SupplierCode == mappingRequest.SupplierCode.ToUpper() && w.SupplierProductCode == mappingRequest.SupplierProductCode.ToUpper()).OrderByDescending(o => o.MapId).Select(s => s).FirstOrDefault();
 
                             if (HotelMapping != null)
                             {
@@ -590,12 +591,14 @@ namespace DistributionWebApi.Controllers
 
 
                                     var room = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).FirstOrDefault();
-                                    RoomMappingResponse.SupplierRoomCategory = room.SupplierRoomCategory;
-                                    RoomMappingResponse.SupplierRoomCategoryId = room.SupplierRoomCategoryId;
-                                    RoomMappingResponse.SupplierRoomId = room.SupplierRoomId;
-                                    RoomMappingResponse.SupplierRoomName = room.SupplierRoomName;
-                                    RoomMappingResponse.SupplierRoomTypeCode = room.SupplierRoomTypeCode;
-
+                                    if (room != null)
+                                    {
+                                        RoomMappingResponse.SupplierRoomCategory = room.SupplierRoomCategory;
+                                        RoomMappingResponse.SupplierRoomCategoryId = room.SupplierRoomCategoryId;
+                                        RoomMappingResponse.SupplierRoomId = room.SupplierRoomId;
+                                        RoomMappingResponse.SupplierRoomName = room.SupplierRoomName;
+                                        RoomMappingResponse.SupplierRoomTypeCode = room.SupplierRoomTypeCode;
+                                    }
 
 
                                     //checking if data exists for field AccomodationRoomInfoCompanyVersions in given searchedAccomodationRoomInfoSearchData
@@ -662,13 +665,14 @@ namespace DistributionWebApi.Controllers
                                         if (string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomId) && !string.IsNullOrWhiteSpace(mappingRoomRequest.SupplierRoomTypeCode))
                                         {
 
-
-                                            RoomMappingResponse.SupplierRoomCategory = room.SupplierRoomCategory;
-                                            RoomMappingResponse.SupplierRoomCategoryId = room.SupplierRoomCategoryId;
-                                            RoomMappingResponse.SupplierRoomId = room.SupplierRoomId;
-                                            RoomMappingResponse.SupplierRoomName = room.SupplierRoomName;
-                                            RoomMappingResponse.SupplierRoomTypeCode = room.SupplierRoomTypeCode;
-
+                                            if (room != null)
+                                            {
+                                                RoomMappingResponse.SupplierRoomCategory = room.SupplierRoomCategory;
+                                                RoomMappingResponse.SupplierRoomCategoryId = room.SupplierRoomCategoryId;
+                                                RoomMappingResponse.SupplierRoomId = room.SupplierRoomId;
+                                                RoomMappingResponse.SupplierRoomName = room.SupplierRoomName;
+                                                RoomMappingResponse.SupplierRoomTypeCode = room.SupplierRoomTypeCode;
+                                            }
 
 
                                             RoomMappingResponse.MappedRooms = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode)
