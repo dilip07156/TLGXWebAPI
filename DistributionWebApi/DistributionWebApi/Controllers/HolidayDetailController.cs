@@ -32,8 +32,8 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// This API is used for returning colletions all supplier responses whether it will be XML or JSON for given filters as 
-        /// Supplier Name and tourID.
+        /// This API is used for returning the collections for supplier given responses to check whether it will be in XML or JSON format for 
+        /// given filters like Supplier Name and tourID.
         /// </summary>
         /// <param name="supplierName">Supplier name is first filter mandatory Criteria</param>
         /// <param name="tourID">Supplier product code is second filter mandatory criteria.</param>

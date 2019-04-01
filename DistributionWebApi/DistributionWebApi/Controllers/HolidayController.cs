@@ -229,7 +229,7 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// This API is used for updating mandatory attributes after reviewing by user for supplier given response if anything missed from supplier side
+        /// This API is used for updating mandatory attributes after getting reviewed by user for the supplier given responses about if anything is missing from the supplier end.
         /// </summary>
         /// <param name="HolidayModel">Holiday mapping object</param>
         /// <returns>This returns the updated Holiday Detail Model for given nakshtra holiday ID.</returns>

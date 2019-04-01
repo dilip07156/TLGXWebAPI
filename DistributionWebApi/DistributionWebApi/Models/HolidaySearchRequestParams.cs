@@ -34,12 +34,12 @@ namespace DistributionWebApi.Models
 
         public string HolidayFlavour { get; set; }
         /// <summary>
-        /// Checkbox for checking Is holiday having caustomized packages.
+        /// Checkbox for checking IsHoliday having caustomized packages.
         /// </summary>
 
         public bool CustomisedPackages { get; set; }
         /// <summary>
-        /// Checkbox for checking is Holiday having prebuilt packages.
+        /// Checkbox for checking IsHoliday having prebuilt packages.
         /// </summary>
 
         public bool PreBuiltPackages { get; set; }
@@ -49,36 +49,36 @@ namespace DistributionWebApi.Models
 
         public string MappingStatus { get; set; }
         /// <summary>
-        /// This flag used for checking is holiday traveller type missing.
+        /// This flag used for checking IsHoliday traveller type missing.
         /// </summary>
 
         public bool IsTravellerTypeMissing { get; set; }
         /// <summary>
-        /// This flag is used for checking is holiday Interest missing.
+        /// This flag is used for checking IsHoliday Interest missing.
         /// </summary>
 
         public bool IsInterestsMissing { get; set; }
         /// <summary>
-        /// This flag is used for checking is holiday travel frequency missing.
+        /// This flag is used for checking IsHoliday travel frequency missing.
         /// </summary>
 
         public bool IsTravelFrequencyMissing { get; set; }
         /// <summary>
-        /// This flag is used for is Holiday stay type missing.
+        /// This flag is used for IsHoliday stay type missing.
         /// </summary>
         public bool IsStayTypeMissing { get; set; }
         /// <summary>
-        /// This flag is used for is holiday Comfort level Missing.
+        /// This flag is used for IsHoliday Comfort level Missing.
         /// </summary>
 
         public bool IsComfortLevelMissing { get; set; }
         /// <summary>
-        /// This flag is used for is holiday USP Missing.
+        /// This flag is used for IsHoliday USP Missing.
         /// </summary>
 
         public bool IsUSPMissing { get; set; }
         /// <summary>
-        /// This flag is used for Is holiday Pacel of Holiday Missing.
+        /// This flag is used for IsHoliday Pace of Holiday Missing.
         /// </summary>
 
         public bool IsPaceOfHolidayMissing { get; set; }
