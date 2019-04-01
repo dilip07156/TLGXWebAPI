@@ -1050,6 +1050,9 @@ namespace DistributionWebApi.Controllers
 
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
 
+                                mappingResponseList.Add(mappingResponse);
+                                mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
+
                             }
                             else
                             {
