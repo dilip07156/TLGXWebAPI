@@ -748,4 +748,89 @@ namespace DistributionWebApi.Models
         public string TlgxMdmHotelId { get; set; }
     }
 
+
+
+
+    [BsonIgnoreExtraElements]
+    public class DC_ConpanyAccommodationMapping
+    {
+        [BsonIgnore]
+        public Guid SupplierId { get; set; }
+
+        [BsonId]
+        [Newtonsoft.Json.JsonProperty("_id")]
+        public string _id { get; set; }
+
+        public String SupplierCode { get; set; }
+
+        public string SupplierProductCode { get; set; }
+
+        public string SupplierProductName { get; set; }
+
+        public string CompanyProductName { get; set; }
+
+        public string CompanyProductId { get; set; }
+
+        public string CommonProductId { get; set; }
+
+        public string TLGXCompanyId { get; set; }
+
+        public string Rating { get; set; }
+
+        public string TLGXCompanyName { get; set; }
+
+        public string CountryName { get; set; }
+
+        public string CityName { get; set; }
+
+        public string StateName { get; set; }
+
+        public string ProductCategorySubType { get; set; }
+
+        public string Brand { get; set; }
+
+        public string Chain { get; set; }
+
+        public string Interest { get; set; }
+
+        [BsonIgnore]
+        public Guid Accommodation_CompanyVersion_Id { get; set; }
+
+        public List<DC_ConpanyAccommodationRoomMapping> MappedRooms { get; set; }
+
+        //Collection of Room data from version data
+    }
+
+
+    [BsonIgnoreExtraElements]
+    public class DC_ConpanyAccommodationRoomMapping
+    {
+        public string SupplierRoomId { get; set; }
+
+        public string SupplierRoomTypeCode { get; set; }
+
+        public string SupplierRoomName { get; set; }
+
+        public string SupplierRoomCategory { get; set; }
+
+        public string SupplierRoomCategoryId { get; set; }
+
+        public string CompanyRoomId { get; set; }
+
+        public string CompanyRoomName { get; set; }
+
+        public string CompanyRoomCategory { get; set; }
+
+        public string NakshatraRoomMappingId { get; set; }
+
+        [BsonIgnore]
+        public Guid Accommodation_CompanyVersion_Id { get; set; }
+
+        [BsonIgnore]
+
+        public string SupplierProductId { get; set; }
+
+        [BsonIgnore]
+        public Guid Supplier_Id { get; set; }
+    }
 }

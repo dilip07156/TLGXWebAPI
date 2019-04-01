@@ -658,7 +658,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Accommodation Common Room Id.
         /// </summary>
-        public string TlgxCommonRoomId { get; set; }
+        //public string TlgxCommonRoomId { get; set; }
 
         /// <summary>
         /// TLGX Accommodation Room Type Name.

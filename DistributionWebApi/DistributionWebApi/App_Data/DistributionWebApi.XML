@@ -1196,6 +1196,16 @@
             <param name="RQ">Combination of Hotel and Room mapping request.</param>
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.GetSimplifiedUnifiedHotelAndRoomTypeMappingV2(DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1)">
+            <summary>
+            Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
+            API can handle single / multiple TLGX Common Hotel Ids at a time. 
+            API can return hotel mapping along with room type mappings where accommodation room info rows exists in MDM system and it has been processed.
+            Please note that not all suppliers provide static data for mapping and real time requests into the mapping engine are not permitted.
+            </summary>
+            <param name="RQ">Combination of Hotel and Room mapping request.</param>
+            <returns>Combination of Hotel and Room mapping response.</returns>
+        </member>
         <member name="F:DistributionWebApi.Controllers.VisaMappingController._database">
             <summary>
             static object of Mongo DB Class
@@ -8459,11 +8469,6 @@
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxCompanyRoomId">
             <summary>
             TLGX Accommodation Room Info Id.
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxCommonRoomId">
-            <summary>
-            TLGX Accommodation Common Room Id.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomName">
