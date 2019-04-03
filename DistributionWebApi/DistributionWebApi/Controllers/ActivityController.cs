@@ -95,14 +95,11 @@ namespace DistributionWebApi.Controllers
 
             if (TotalRecords != 0 && param.PageSize != 0)
             {
-                //SortDefinition<BsonDocument> sortByPrices;
-                //sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
+               
 
-                SortDefinition<BsonDocument> sortByid;
-                sortByid = Builders<BsonDocument>.Sort.Ascending("_id");
+                SortDefinition<BsonDocument> sortByid = Builders<BsonDocument>.Sort.Ascending("_id");
 
-                var searchResult = await collectionActivity.Find(filter)//.ToListAsync();
-                    .Skip(param.PageSize * param.PageNo).Limit(param.PageSize).Sort(sortByid).ToListAsync(); //.Sort(sortByPrices)
+                var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).Sort(sortByid).ToListAsync(); //.Sort(sortByPrices)
 
                 searchedData = JsonConvert.DeserializeObject<List<ActivityDefinition>>(searchResult.ToJson());
 
@@ -263,10 +260,8 @@ namespace DistributionWebApi.Controllers
 
             if (TotalRecords != 0 && param.PageSize != 0)
             {
-                //SortDefinition<BsonDocument> sortByPrices;
-                //sortByPrices = Builders<BsonDocument>.Sort.Ascending("Prices.Price");
-                SortDefinition<BsonDocument> sortByid;
-                sortByid = Builders<BsonDocument>.Sort.Ascending("_id");
+                
+                SortDefinition<BsonDocument> sortByid= Builders<BsonDocument>.Sort.Ascending("_id");
 
                 var searchResult = await collectionActivity.Find(filter).Skip(param.PageSize * param.PageNo).Limit(param.PageSize).Sort(sortByid).ToListAsync(); //.Sort(sortByPrices)
 
