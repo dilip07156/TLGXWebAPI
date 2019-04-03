@@ -330,28 +330,28 @@ namespace DistributionWebApi.Models
         /// </summary>
         [Required]
         public string SupplierRoomId { get; set; }
-        
+
         /// <summary>
         /// Supplier room type code. Certain suppliers use both id and code values.
         /// </summary>
         public string SupplierRoomTypeCode { get; set; }
-        
+
         /// <summary>
         /// Supplier room type name.
         /// </summary>
         [Required]
         public string SupplierRoomName { get; set; }
-        
+
         /// <summary>
         /// Supplier room category name. Certain suppliers use both room type and category.
         /// </summary>
         public string SupplierRoomCategory { get; set; }
-        
+
         /// <summary>
         ///  Supplier room category id. Certain suppliers use both room type and category.
         /// </summary>
         public string SupplierRoomCategoryId { get; set; }
-        
+
         /// <summary>
         /// List of mapped rooms to supplier room.
         /// </summary>
@@ -386,7 +386,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Request structure for unified hotel and room mapping
     /// </summary>
-    public class UnifiedHotelAndRoomMapping_RQ1
+    public class CompanySpecificHotelAndRoomType_Rq
     {
         /// <summary>
         /// Session Id from Booking Engine for the originating Search Response that is to be mapped. 
@@ -399,10 +399,10 @@ namespace DistributionWebApi.Models
         /// Mapping requests
         /// </summary>
         [Required]
-        public List<UnifiedHotelAndRoomMapping_Request1> MappingRequests { get; set; }
+        public List<CompanySpecificHotelAndRoomType_Request> MappingRequests { get; set; }
     }
 
-    public class UnifiedHotelAndRoomMapping_Request1
+    public class CompanySpecificHotelAndRoomType_Request
     {
         /// <summary>
         /// Sequence Number for the individual mapping requirement within the overall request
@@ -431,11 +431,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Collection of Supplier Room Types
         /// </summary>
-        public List<UnifiedHotelAndRoomMapping_RoomTypeRequest1> SupplierRoomTypes { get; set; }
+        public List<CompanySpecificHotelAndRoomType_RoomTypeRequest> SupplierRoomTypes { get; set; }
     }
 
 
-    public class UnifiedHotelAndRoomMapping_RoomTypeRequest1
+    public class CompanySpecificHotelAndRoomType_RoomTypeRequest
     {
 
         /// <summary>
@@ -466,7 +466,7 @@ namespace DistributionWebApi.Models
     /// <summary>
     /// Response structure for unified hotel and room mapping
     /// </summary>
-    public class UnifiedHotelAndRoomMapping_RS1
+    public class CompanySpecificHotelAndRoomType_RS
     {
         /// <summary>
         /// Session Id from Booking Engine for the originating Search Response that is to be mapped. 
@@ -479,10 +479,10 @@ namespace DistributionWebApi.Models
         /// Mapping responses
         /// </summary>
         [Required]
-        public List<UnifiedHotelAndRoomMapping_Response1> MappingResponses { get; set; }
+        public List<CompanySpecificHotelAndRoomType_Response> MappingResponses { get; set; }
     }
 
-    public class UnifiedHotelAndRoomMapping_Response1
+    public class CompanySpecificHotelAndRoomType_Response
     {
         /// <summary>
         /// Sequence Number for the individual mapping requirement within the overall request
@@ -502,153 +502,138 @@ namespace DistributionWebApi.Models
         [Required]
         public string SupplierProductCode { get; set; }
 
+
+        /// <summary>        
+        /// Supplier Product Name received in the Supplier Availability Response.
+        /// If data not found for requested SupplierProductCode then SupplierProductName field will be return blank/null value
+        /// </summary>
+        [Required]
+        public string SupplierProductName { get; set; }
+
         /// <summary>
         /// Tlgx Specified Unique Company Id
         /// </summary>
         [Required]
         public string TlgxCompanyCode { get; set; } //Filter by Company Code in Version Tables
 
-        /// <summary>
-        /// System Mapping Id
-        /// </summary>
-        public int NakshatraMappingId { get; set; }
-
-
-        /// <summary>
-        /// Tlgx Specified Unique Company Id
-        /// </summary>
-        //[Required]
-        //public string TlgxCompanyHotelId { get; set; }
 
         /// <summary>
         /// System Product Code / Common product code
+        /// If data not found for requested SupplierProductCode then TlgxCommonProductId field will be return blank/null value
         /// </summary>
         public string TlgxCommonProductId { get; set; } //Master Acco CommonProductId
 
         /// <summary>
         /// TLGX MDM Unique identifier for hotel property
+        /// If data not found for requested SupplierProductCode then TlgxCompanyProductId field will be return blank/null value
         /// </summary>
         public string TlgxCompanyProductId { get; set; } //TLGX Acco Id
 
         /// <summary>
         /// Hotel property name
+        /// If data not found for requested SupplierProductCode then ProductName field will be return blank/null value 
         /// </summary>
         public string ProductName { get; set; }
 
         /// <summary>
         /// TLGX MDM hotel Product Category Type
+        /// If data not found for requested SupplierProductCode then ProductCategory field will be return blank/null value
         /// </summary>
         public string ProductCategory { get; set; }
 
         /// <summary>
         /// TLGX MDM hotel Product Category Sub Type
+        /// If data not found for requested SupplierProductCode then ProductCategorySubType field will be return blank/null value
         /// </summary>
         public string ProductCategorySubType { get; set; }
 
         /// <summary>
         /// TLGX MDM hotel Brand
+        /// If data not found for requested SupplierProductCode then Brand field will be return blank/null value
         /// </summary>
         public string Brand { get; set; }
 
         /// <summary>
         /// TLGX MDM hotel Chain
+        /// If data not found for requested SupplierProductCode then Chain field will be return blank/null value
         /// </summary>
         public string Chain { get; set; }
-
-        /// <summary>
-        /// System Country Code
-        /// </summary>
-        public string SystemCountryCode { get; set; }
-
-        /// <summary>
-        /// System Country Name
-        /// </summary>
-        public string SystemCountryName { get; set; }
-
-        /// <summary>
-        /// System City Code
-        /// </summary>
-        public string SystemCityCode { get; set; }
-
-        /// <summary>
-        /// System City Name
-        /// </summary>
-        public string SystemCityName { get; set; }
-
-        /// <summary>
-        /// System State Code
-        /// </summary>
-        public string SystemStateCode { get; set; }
-
-        /// <summary>
-        /// System State Name
-        /// </summary>
-        public string SystemStateName { get; set; }
 
 
         /// <summary>
         /// Hotel Overview
+        /// If data not found for requested SupplierProductCode then Interests field will be return empty collection value
         /// </summary>
         public List<string> Interests { get; set; }
 
         /// <summary>
         /// Hotel Rating
+        /// If data not found for requested SupplierProductCode then Rating field will be return blank/null value
         /// </summary>
         public string Rating { get; set; }
 
-        /// <summary>
+        /// <summary>        
         /// This field will indicate whether the hotel have any room mapping attached to it or not
+        /// If data not found for requested SupplierProductCode then ContainsRoomMappings field will be return default false value
         /// </summary>
         public bool ContainsRoomMappings { get; set; }
 
         /// <summary>
         /// This field will indicate whether the hotel have any direct contract or not 
+        /// If data not found for requested SupplierProductCode then DirectContract field will be return default false value
         /// </summary>
         public bool DirectContract { get; set; }
 
         /// <summary>
         /// Collection of Supplier Room Types
+        /// If Supplier Room Type data is requested then SupplierRoomTypes will be not empty collection 
         /// </summary>
-        public List<UnifiedHotelAndRoomMapping_RoomTypeResponse1> SupplierRoomTypes { get; set; }
-   
+        public List<CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse> SupplierRoomTypes { get; set; }
+
     }
 
-    public class UnifiedHotelAndRoomMapping_RoomTypeResponse1
+    public class CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse
     {
         /// <summary>
         /// Supplier system room id.
+        /// if data is not found requested SupplierRoomTypes then SupplierRoomId field will return null or returns requested parameter value
         /// </summary>
         [Required]
         public string SupplierRoomId { get; set; }
 
         /// <summary>
         /// Supplier room type code. Certain suppliers use both id and code values.
+        /// if data is not found requested SupplierRoomTypes then SupplierRoomTypeCode field will return null or returns requested parameter value
         /// </summary>
         public string SupplierRoomTypeCode { get; set; }
 
         /// <summary>
         /// Supplier room type name.
+        /// if data is not found requested SupplierRoomTypes then SupplierRoomName field will return null or returns requested parameter value
         /// </summary>
         [Required]
         public string SupplierRoomName { get; set; }
 
         /// <summary>
         /// Supplier room category name. Certain suppliers use both room type and category.
+        /// if data is not found requested SupplierRoomTypes then SupplierRoomCategory field will return null or returns requested parameter value
         /// </summary>
         public string SupplierRoomCategory { get; set; }
 
         /// <summary>
         ///  Supplier room category id. Certain suppliers use both room type and category.
+        ///  if data is not found requested SupplierRoomTypes then SupplierRoomCategoryId field will return null or returns requested parameter value
         /// </summary>
         public string SupplierRoomCategoryId { get; set; }
 
         /// <summary>
         /// List of mapped rooms to supplier room.
+        /// if data is not found then MappedRooms field will return empty collection
         /// </summary>
-        public List<UnifiedHotelAndRoomMapping_MappedRoomType1> MappedRooms { get; set; }
+        public List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType> MappedRooms { get; set; }
     }
 
-    public class UnifiedHotelAndRoomMapping_MappedRoomType1
+    public class CompanySpecificHotelAndRoomTypeMapping_MappedRoomType
     {
         /// <summary>
         /// TLGX Accommodation Room Info Id.
@@ -656,9 +641,9 @@ namespace DistributionWebApi.Models
         public string TlgxCompanyRoomId { get; set; }//TlgxAccoRoomId
 
         /// <summary>
-        /// TLGX Accommodation Common Room Id.
+        /// TLGX Accommodation Room Common Room Id.
         /// </summary>
-        //public string TlgxCommonRoomId { get; set; }
+        public string TLGXCommonRoomId { get; set; }//TlgxAccoRoomCategory 
 
         /// <summary>
         /// TLGX Accommodation Room Type Name.
@@ -668,7 +653,8 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Accommodation Room Type Category.
         /// </summary>
-        public string CompanyRoomCategory{ get; set; }//TlgxAccoRoomCategory 
+        public string CompanyRoomCategory { get; set; }//TlgxAccoRoomCategory 
+
 
         /// <summary>
         /// Nakshatra room type mapping id.

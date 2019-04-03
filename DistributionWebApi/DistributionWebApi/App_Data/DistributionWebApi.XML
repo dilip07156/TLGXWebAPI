@@ -1188,17 +1188,7 @@
             <param name="RQ">Combination of Hotel and Room mapping request.</param>
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
-        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.GetUnifiedHotelAndRoomTypeMappingV2(DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1)">
-            <summary>
-            Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
-            API can handle single / multiple TLGX Common Hotel Ids at a time. 
-            API can return hotel mapping along with room type mappings where accommodation room info rows exists in MDM system and it has been processed.
-            Please note that not all suppliers provide static data for mapping and real time requests into the mapping engine are not permitted.
-            </summary>
-            <param name="RQ">Combination of Hotel and Room mapping request.</param>
-            <returns>Combination of Hotel and Room mapping response.</returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.GetSimplifiedUnifiedHotelAndRoomTypeMappingV2(DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1)">
+        <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.CompanySpecificHotelAndRoomTypeMapping(DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Rq)">
             <summary>
             Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
             API can handle single / multiple TLGX Common Hotel Ids at a time. 
@@ -8316,249 +8306,243 @@
             Nakshatra room type mapping id.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1">
+        <member name="T:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Rq">
             <summary>
             Request structure for unified hotel and room mapping
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1.SessionId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Rq.SessionId">
             <summary>
             Session Id from Booking Engine for the originating Search Response that is to be mapped. 
             This field is designed to be used to interrogate original Supplier Static calls should a map not be found within the TLGX Mapping Database
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RQ1.MappingRequests">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Rq.MappingRequests">
             <summary>
             Mapping requests
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request1.SequenceNumber">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SequenceNumber">
             <summary>
             Sequence Number for the individual mapping requirement within the overall request
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request1.SupplierCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SupplierCode">
             <summary>
             TLGX Supplier Master Code. These can be retrieved using Supplier Master API Framework.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request1.SupplierProductCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SupplierProductCode">
             <summary>
             Supplier Product Code received in the Supplier Availability Response.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request1.TLGXCompanyCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.TLGXCompanyCode">
             <summary>
             Supplier Product Company Code received in the Supplier Availability Response.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Request1.SupplierRoomTypes">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SupplierRoomTypes">
             <summary>
             Collection of Supplier Room Types
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeRequest1.SupplierRoomId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RoomTypeRequest.SupplierRoomId">
             <summary>
             Supplier system room id.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeRequest1.SupplierRoomTypeCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RoomTypeRequest.SupplierRoomTypeCode">
             <summary>
             Supplier room type code. Certain suppliers use both id and code values.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeRequest1.SupplierRoomName">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RoomTypeRequest.SupplierRoomName">
             <summary>
             Supplier room type name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeRequest1.SupplierRoomCategory">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RoomTypeRequest.SupplierRoomCategory">
             <summary>
             Supplier room category name. Certain suppliers use both room type and category.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeRequest1.SupplierRoomCategoryId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RoomTypeRequest.SupplierRoomCategoryId">
             <summary>
              Supplier room category id. Certain suppliers use both room type and category.
             </summary>
         </member>
-        <member name="T:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RS1">
+        <member name="T:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RS">
             <summary>
             Response structure for unified hotel and room mapping
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RS1.SessionId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RS.SessionId">
             <summary>
             Session Id from Booking Engine for the originating Search Response that is to be mapped. 
             This field is designed to be used to interrogate original Supplier Static calls should a map not be found within the TLGX Mapping Database
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RS1.MappingResponses">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_RS.MappingResponses">
             <summary>
             Mapping responses
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SequenceNumber">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.SequenceNumber">
             <summary>
             Sequence Number for the individual mapping requirement within the overall request
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SupplierCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.SupplierCode">
             <summary>
             TLGX Supplier Master Code. These can be retrieved using Supplier Master API Framework.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SupplierProductCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.SupplierProductCode">
             <summary>
             Supplier Product Code received in the Supplier Availability Response.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCompanyCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.SupplierProductName">
+            <summary>        
+            Supplier Product Name received in the Supplier Availability Response.
+            If data not found for requested SupplierProductCode then SupplierProductName field will be return blank/null value
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.TlgxCompanyCode">
             <summary>
             Tlgx Specified Unique Company Id
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.NakshatraMappingId">
-            <summary>
-            System Mapping Id
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCommonProductId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.TlgxCommonProductId">
             <summary>
             System Product Code / Common product code
+            If data not found for requested SupplierProductCode then TlgxCommonProductId field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.TlgxCompanyProductId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.TlgxCompanyProductId">
             <summary>
             TLGX MDM Unique identifier for hotel property
+            If data not found for requested SupplierProductCode then TlgxCompanyProductId field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.ProductName">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.ProductName">
             <summary>
             Hotel property name
+            If data not found for requested SupplierProductCode then ProductName field will be return blank/null value 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.ProductCategory">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.ProductCategory">
             <summary>
             TLGX MDM hotel Product Category Type
+            If data not found for requested SupplierProductCode then ProductCategory field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.ProductCategorySubType">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.ProductCategorySubType">
             <summary>
             TLGX MDM hotel Product Category Sub Type
+            If data not found for requested SupplierProductCode then ProductCategorySubType field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.Brand">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.Brand">
             <summary>
             TLGX MDM hotel Brand
+            If data not found for requested SupplierProductCode then Brand field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.Chain">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.Chain">
             <summary>
             TLGX MDM hotel Chain
+            If data not found for requested SupplierProductCode then Chain field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemCountryCode">
-            <summary>
-            System Country Code
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemCountryName">
-            <summary>
-            System Country Name
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemCityCode">
-            <summary>
-            System City Code
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemCityName">
-            <summary>
-            System City Name
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemStateCode">
-            <summary>
-            System State Code
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SystemStateName">
-            <summary>
-            System State Name
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.Interests">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.Interests">
             <summary>
             Hotel Overview
+            If data not found for requested SupplierProductCode then Interests field will be return empty collection value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.Rating">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.Rating">
             <summary>
             Hotel Rating
+            If data not found for requested SupplierProductCode then Rating field will be return blank/null value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.ContainsRoomMappings">
-            <summary>
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.ContainsRoomMappings">
+            <summary>        
             This field will indicate whether the hotel have any room mapping attached to it or not
+            If data not found for requested SupplierProductCode then ContainsRoomMappings field will be return default false value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.DirectContract">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.DirectContract">
             <summary>
             This field will indicate whether the hotel have any direct contract or not 
+            If data not found for requested SupplierProductCode then DirectContract field will be return default false value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_Response1.SupplierRoomTypes">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.SupplierRoomTypes">
             <summary>
             Collection of Supplier Room Types
+            If Supplier Room Type data is requested then SupplierRoomTypes will be not empty collection 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.SupplierRoomId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.SupplierRoomId">
             <summary>
             Supplier system room id.
+            if data is not found requested SupplierRoomTypes then SupplierRoomId field will return null or returns requested parameter value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.SupplierRoomTypeCode">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.SupplierRoomTypeCode">
             <summary>
             Supplier room type code. Certain suppliers use both id and code values.
+            if data is not found requested SupplierRoomTypes then SupplierRoomTypeCode field will return null or returns requested parameter value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.SupplierRoomName">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.SupplierRoomName">
             <summary>
             Supplier room type name.
+            if data is not found requested SupplierRoomTypes then SupplierRoomName field will return null or returns requested parameter value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.SupplierRoomCategory">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.SupplierRoomCategory">
             <summary>
             Supplier room category name. Certain suppliers use both room type and category.
+            if data is not found requested SupplierRoomTypes then SupplierRoomCategory field will return null or returns requested parameter value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.SupplierRoomCategoryId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.SupplierRoomCategoryId">
             <summary>
              Supplier room category id. Certain suppliers use both room type and category.
+             if data is not found requested SupplierRoomTypes then SupplierRoomCategoryId field will return null or returns requested parameter value
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_RoomTypeResponse1.MappedRooms">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse.MappedRooms">
             <summary>
             List of mapped rooms to supplier room.
+            if data is not found then MappedRooms field will return empty collection
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.TlgxCompanyRoomId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_MappedRoomType.TlgxCompanyRoomId">
             <summary>
             TLGX Accommodation Room Info Id.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomName">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_MappedRoomType.TLGXCommonRoomId">
+            <summary>
+            TLGX Accommodation Room Common Room Id.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_MappedRoomType.CompanyRoomName">
             <summary>
             TLGX Accommodation Room Type Name.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.CompanyRoomCategory">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_MappedRoomType.CompanyRoomCategory">
             <summary>
             TLGX Accommodation Room Type Category.
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.UnifiedHotelAndRoomMapping_MappedRoomType1.NakshatraRoomMappingId">
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomTypeMapping_MappedRoomType.NakshatraRoomMappingId">
             <summary>
             Nakshatra room type mapping id.
             </summary>

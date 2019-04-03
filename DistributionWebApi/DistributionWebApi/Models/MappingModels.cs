@@ -824,11 +824,12 @@ namespace DistributionWebApi.Models
 
         public string NakshatraRoomMappingId { get; set; }
 
+        public string TLGXCommonRoomId { get; set; }
+
         [BsonIgnore]
         public Guid Accommodation_CompanyVersion_Id { get; set; }
 
         [BsonIgnore]
-
         public string SupplierProductId { get; set; }
 
         [BsonIgnore]
