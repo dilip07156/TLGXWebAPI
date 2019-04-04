@@ -396,7 +396,7 @@ namespace DistributionWebApi.Models
         public string SessionId { get; set; }
 
         /// <summary>
-        /// Mapping requests
+        /// Contains an array of SupplierHotel and Room Type Mappings. It is important that the MULTIPLE ROOMS REQUESTS for a SUPPLIER/HOTEL are GROUPED TOGETHER in one MappingRequests item for best performance.
         /// </summary>
         [Required]
         public List<CompanySpecificHotelAndRoomType_Request> MappingRequests { get; set; }
@@ -411,7 +411,7 @@ namespace DistributionWebApi.Models
         public string SequenceNumber { get; set; }
 
         /// <summary>
-        /// TLGX Supplier Master Code. These can be retrieved using Supplier Master API Framework.
+        /// NAK Supplier Master Code. These can be retrieved using Supplier Master API Framework
         /// </summary>
         [Required]
         public string SupplierCode { get; set; }
@@ -441,7 +441,6 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Supplier system room id.
         /// </summary>
-        [Required]
         public string SupplierRoomId { get; set; }
         /// <summary>
         /// Supplier room type code. Certain suppliers use both id and code values.
@@ -450,7 +449,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Supplier room type name.
         /// </summary>
-        [Required]
+       
         public string SupplierRoomName { get; set; }
         /// <summary>
         /// Supplier room category name. Certain suppliers use both room type and category.
