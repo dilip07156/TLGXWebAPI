@@ -405,13 +405,13 @@ namespace DistributionWebApi.Models
     public class CompanySpecificHotelAndRoomType_Request
     {
         /// <summary>
-        /// Sequence Number for the individual mapping requirement within the overall request
+        /// Sequence Number for the individual mapping requirement within the overall request.
         /// </summary>
         [Required]
         public string SequenceNumber { get; set; }
 
         /// <summary>
-        /// NAK Supplier Master Code. These can be retrieved using Supplier Master API Framework
+        /// NAK Supplier Master Code. These can be retrieved using Supplier Master API Framework.
         /// </summary>
         [Required]
         public string SupplierCode { get; set; }

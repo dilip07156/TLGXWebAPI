@@ -774,9 +774,10 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// Retrieves the Company specifc Accommodation and Room Codes for the requested Supplier Product and Rooms. In addition to this mapping tasks it also rertieves a number of MDM attributes for the Accommodation Product.
-        ///If Mapped Rooms are found, they will be returned  in the mappedRooms mode of the mappingResponses
-        /// If the mappedRooms node is empty then no Rooms have been Mapped for this particular request
+        /// Retrieves the Company specifc Accommodation and Room Codes for the requested Supplier Product and Rooms. 
+        /// In addition to this mapping tasks, it also retrieves a number of MDM attributes for the Accommodation Product.
+        /// If Mapped Rooms are found, they will be returned  in the mappedRooms mode of the mappingResponses.
+        /// If the mappedRooms node is empty then no Rooms have been Mapped for this particular request.
         /// </summary>
         /// <param name="RQ">Combination of Hotel and Room mapping request.</param>
         /// <returns>Combination of Hotel and Room mapping response.</returns>
