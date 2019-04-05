@@ -774,16 +774,16 @@ namespace DistributionWebApi.Controllers
 
 
         /// <summary>
-        /// Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
-        /// API can handle single / multiple TLGX Common Hotel Ids at a time. 
-        /// API can return hotel mapping along with room type mappings where accommodation room info rows exists in MDM system and it has been processed.
-        /// Please note that not all suppliers provide static data for mapping and real time requests into the mapping engine are not permitted.
+        /// Retrieves the Company specifc Accommodation and Room Codes for the requested Supplier Product and Rooms. 
+        /// In addition to this mapping tasks, it also retrieves a number of MDM attributes for the Accommodation Product.
+        /// If Mapped Rooms are found, they will be returned  in the mappedRooms mode of the mappingResponses.
+        /// If the mappedRooms node is empty then no Rooms have been Mapped for this particular request.
         /// </summary>
         /// <param name="RQ">Combination of Hotel and Room mapping request.</param>
         /// <returns>Combination of Hotel and Room mapping response.</returns>
         [HttpPost]
         [Route("CompanySpecificHotelAndRoomTypeMapping")]
-        [ResponseType(typeof(CompanySpecificHotelAndRoomType_RS))]
+        [ResponseType(typeof(List<CompanySpecificHotelAndRoomType_RS>))]
         public async Task<HttpResponseMessage> CompanySpecificHotelAndRoomTypeMapping(CompanySpecificHotelAndRoomType_Rq RQ)
         {
             try
@@ -802,7 +802,7 @@ namespace DistributionWebApi.Controllers
                         // declaring instance of Mongo db                        
                         _database = MongoDBHandler.mDatabase();
                         // declaring objects of Mongo collection
-                        IMongoCollection<BsonDocument> collectionCompanyAccommodationProductMapping = _database.GetCollection<BsonDocument>("CompanyAccommodationProductMapping1");
+                        IMongoCollection<BsonDocument> collectionCompanyAccommodationProductMapping = _database.GetCollection<BsonDocument>("CompanyAccommodationProductMapping");
 
                         IMongoCollection<BsonDocument> collectionRoomTypeMapping = _database.GetCollection<BsonDocument>("RoomTypeMapping");
                         IMongoCollection<RoomTypeMappingOnline> collection_rto = _database.GetCollection<RoomTypeMappingOnline>("RoomTypeMappingOnline");
