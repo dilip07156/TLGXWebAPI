@@ -61,7 +61,14 @@ namespace DistributionWebApi
                 try
                 {
                     var token = JToken.Parse(nlog.Parameter);
-                    nlog.TotalRecords = token.SelectTokens("$.RQ.[*]").Count();
+                    if (filterContext.ActionDescriptor.ActionName == "CompanySpecificHotelAndRoomTypeMapping")
+                    {
+                        nlog.TotalRecords = token.SelectTokens("$.RQ.MappingRequests..SupplierRoomTypes").Count();
+                    }
+                    else
+                    {
+                        nlog.TotalRecords = token.SelectTokens("$.RQ.[*]").Count();
+                    }
                 }
                 catch
                 {
@@ -119,7 +126,15 @@ namespace DistributionWebApi
             try
             {
                 var token = JToken.Parse(nlog.Parameter);
-                nlog.TotalRecords = token.SelectTokens("$.[*]").Count();
+                if(((System.Web.Http.Controllers.ReflectedHttpActionDescriptor)filterContext.ActionContext.ActionDescriptor).ActionName == "CompanySpecificHotelAndRoomTypeMapping")
+                {
+                    nlog.TotalRecords = token.SelectTokens("$.MappingResponses..SupplierRoomTypes..MappedRooms").Count();
+                }
+                else
+                {
+                    nlog.TotalRecords = token.SelectTokens("$.[*]").Count();
+                }
+                
             }
             catch
             {

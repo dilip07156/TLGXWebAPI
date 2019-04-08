@@ -158,6 +158,11 @@ namespace DistributionWebApi.Models.Activity
         /// Mapping System TLGXDisplaySubType master
         /// </summary>
         public string TLGXDisplaySubType { get; set; }
+
+        /// <summary>
+        /// Mapping System DisplayName master
+        /// </summary>
+        public string DisplayName { get; set; }
         /// <summary>
         /// The Name of the Activity Product as per the End Supplier
         /// </summary>
@@ -418,6 +423,11 @@ namespace DistributionWebApi.Models.Activity
         /// Mapping System Activity TLGXDisplaySubType for Product Classification. 
         /// </summary>
         public string TLGXDisplaySubType { get; set; }
+
+        /// <summary>
+        /// Mapping System Activity DisplayName for Product Classification. 
+        /// </summary>
+        public string DisplayName { get; set; }
         /// <summary>
         /// The Name of the Activity Product as per the End Supplier
         /// </summary>
