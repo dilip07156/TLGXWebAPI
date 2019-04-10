@@ -149,7 +149,6 @@ namespace DistributionWebApi.Controllers
 
                         returnResult.SessionId = RQ.SessionId;
                         var mappingResponseList = new List<UnifiedHotelAndRoomMapping_Response>();
-                        var writeModelDetails = new List<WriteModel<RoomTypeMappingOnline>>();
 
                         foreach (var mappingRequest in RQ.MappingRequests)
                         {
@@ -231,8 +230,9 @@ namespace DistributionWebApi.Controllers
                                     }
 
                                     #region Insert into RoomType Mapping Online collection if mappings not found
-
-                                    writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                    RoomTypeMappingController _obj = new RoomTypeMappingController();
+                                    // Fire & Forget 
+                                    await Task.Run(() => _obj.InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
                                     {
                                         //_id = ObjectId.GenerateNewId(),
                                         Amenities = mappingRoomRequest.Amenities,
@@ -270,7 +270,6 @@ namespace DistributionWebApi.Controllers
                                         TLGXCommonHotelId = mappingResponse.TlgxAccoId,
                                         SystemProductCode = SystemProductCode
                                     }));
-
                                     #endregion
 
                                 }
@@ -282,11 +281,6 @@ namespace DistributionWebApi.Controllers
                         }
 
                         returnResult.MappingResponses = mappingResponseList;
-
-                        if (writeModelDetails.Any())
-                        {
-                            collection_rto.BulkWrite(writeModelDetails);
-                        }
 
                         #endregion Build Response
 
@@ -306,38 +300,6 @@ namespace DistributionWebApi.Controllers
 
         #region GetUnifiedHotelAndRoomTypeMappingV2 Not in Use for now 
 
-
-        private ReplaceOneModel<RoomTypeMappingOnline> InsertRoomTypeMappingOnline(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
-        {
-            var builder = Builders<RoomTypeMappingOnline>.Filter;
-            var filter = builder.Empty;
-
-            if (!string.IsNullOrWhiteSpace(rtmo.TLGXCommonHotelId))
-            {
-                filter = filter & builder.Eq(c => c.TLGXCommonHotelId, rtmo.TLGXCommonHotelId.ToUpper());
-            }
-
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierId, rtmo.SupplierId.ToUpper());
-            }
-
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierProductId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierProductId, rtmo.SupplierProductId.ToUpper());
-            }
-
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomTypeCode))
-            {
-                filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode);
-            }
-
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId);
-            }
-            return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
-        }
 
         /// <summary>
         /// Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
