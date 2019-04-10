@@ -61,7 +61,6 @@ namespace DistributionWebApi.Controllers
 
                     if (RQ.HotelRoomTypeMappingRequests != null)
                     {
-                        var writeModelDetails = new List<WriteModel<RoomTypeMappingOnline>>();
                         foreach (var hrtmrq in RQ.HotelRoomTypeMappingRequests)
                         {
                             var hrtmrs = new RoomTypeMapping_SIRS_HotelRoomTypeMappingResponses();
@@ -161,7 +160,7 @@ namespace DistributionWebApi.Controllers
                                             if (hrtmrs_srt.MapId == "0")
                                             {
                                                 // Fire & Forget 
-                                                writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                                Task.Run(() => InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
                                                 {
                                                     //_id = ObjectId.GenerateNewId(),
                                                     Amenities = hrtmrq_srt.Amenities,
@@ -212,11 +211,6 @@ namespace DistributionWebApi.Controllers
                             hrtmrs.SupplierData = hrtmrs_sdl;
                             hrtmrsl.Add(hrtmrs);
                         }
-
-                        if (writeModelDetails.Any())
-                        {
-                            collection_rto.BulkWrite(writeModelDetails);
-                        }
                     }
 
                     returnResult.HotelRoomTypeMappingResponses = hrtmrsl;
@@ -227,36 +221,45 @@ namespace DistributionWebApi.Controllers
             return response;
         }
 
-        private ReplaceOneModel<RoomTypeMappingOnline> InsertRoomTypeMappingOnline(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task InsertRoomTypeMappingOnline(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
         {
-            var builder = Builders<RoomTypeMappingOnline>.Filter;
-            var filter = builder.Empty;
-
-            if (!string.IsNullOrWhiteSpace(rtmo.TLGXCommonHotelId))
+            try
             {
-                filter = filter & builder.Eq(c => c.TLGXCommonHotelId, rtmo.TLGXCommonHotelId.ToUpper());
-            }
+                var builder = Builders<RoomTypeMappingOnline>.Filter;
+                var filter = builder.Empty;
 
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierId, rtmo.SupplierId.ToUpper());
-            }
+                if (!string.IsNullOrWhiteSpace(rtmo.TLGXCommonHotelId))
+                {
+                    filter = filter & builder.Eq(c => c.TLGXCommonHotelId, rtmo.TLGXCommonHotelId.ToUpper());
+                }
 
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierProductId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierProductId, rtmo.SupplierProductId.ToUpper());
-            }
+                if (!string.IsNullOrWhiteSpace(rtmo.SupplierId))
+                {
+                    filter = filter & builder.Eq(c => c.SupplierId, rtmo.SupplierId.ToUpper());
+                }
 
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomTypeCode))
-            {
-                filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode);
-            }
+                if (!string.IsNullOrWhiteSpace(rtmo.SupplierProductId))
+                {
+                    filter = filter & builder.Eq(c => c.SupplierProductId, rtmo.SupplierProductId.ToUpper());
+                }
 
-            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomId))
-            {
-                filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId);
+                if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomTypeCode))
+                {
+                    filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode);
+                }
+
+                if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomId))
+                {
+                    filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId);
+                }
+
+                collection.ReplaceOneAsync(filter, rtmo, new UpdateOptions { IsUpsert = true });
             }
-            return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
+            catch
+            {
+
+            }
         }
 
         //public async Task<HttpResponseMessage> GetBulkRoomTypeMapping(List<Models.RoomTypeMapping_RQ> RQ)
