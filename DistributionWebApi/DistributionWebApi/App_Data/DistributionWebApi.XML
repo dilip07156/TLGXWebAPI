@@ -5004,6 +5004,11 @@
             Mapping System TLGXDisplaySubType master
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.DisplayName">
+            <summary>
+            Mapping System DisplayName master
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Activity.ActivityDefinition.Name">
             <summary>
             The Name of the Activity Product as per the End Supplier
@@ -5281,6 +5286,11 @@
         <member name="P:DistributionWebApi.Models.Activity.Activity.TLGXDisplaySubType">
             <summary>
             Mapping System Activity TLGXDisplaySubType for Product Classification. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Activity.Activity.DisplayName">
+            <summary>
+            Mapping System Activity DisplayName for Product Classification. 
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Activity.Activity.Name">
