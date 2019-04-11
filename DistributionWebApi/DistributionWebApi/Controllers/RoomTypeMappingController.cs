@@ -215,7 +215,7 @@ namespace DistributionWebApi.Controllers
 
                         if (writeModelDetails.Any())
                         {
-                            collection_rto.BulkWrite(writeModelDetails);
+                            Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
                         }
                     }
 
