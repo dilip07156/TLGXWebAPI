@@ -1189,13 +1189,14 @@
             <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.UnifiedMappingController.CompanySpecificHotelAndRoomTypeMapping(DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Rq)">
-             <summary>
-             Retrieves the Company specifc Accommodation and Room Codes for the requested Supplier Product and Rooms. In addition to this mapping tasks it also rertieves a number of MDM attributes for the Accommodation Product.
-            If Mapped Rooms are found, they will be returned  in the mappedRooms mode of the mappingResponses
-             If the mappedRooms node is empty then no Rooms have been Mapped for this particular request
-             </summary>
-             <param name="RQ">Combination of Hotel and Room mapping request.</param>
-             <returns>Combination of Hotel and Room mapping response.</returns>
+            <summary>
+            Retrieves the Company specifc Accommodation and Room Codes for the requested Supplier Product and Rooms. 
+            In addition to this mapping tasks, it also retrieves a number of MDM attributes for the Accommodation Product.
+            If Mapped Rooms are found, they will be returned  in the mappedRooms mode of the mappingResponses.
+            If the mappedRooms node is empty then no Rooms have been Mapped for this particular request.
+            </summary>
+            <param name="RQ">Combination of Hotel and Room mapping request.</param>
+            <returns>Combination of Hotel and Room mapping response.</returns>
         </member>
         <member name="F:DistributionWebApi.Controllers.VisaMappingController._database">
             <summary>
@@ -8323,12 +8324,12 @@
         </member>
         <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SequenceNumber">
             <summary>
-            Sequence Number for the individual mapping requirement within the overall request
+            Sequence Number for the individual mapping requirement within the overall request.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SupplierCode">
             <summary>
-            NAK Supplier Master Code. These can be retrieved using Supplier Master API Framework
+            NAK Supplier Master Code. These can be retrieved using Supplier Master API Framework.
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Request.SupplierProductCode">

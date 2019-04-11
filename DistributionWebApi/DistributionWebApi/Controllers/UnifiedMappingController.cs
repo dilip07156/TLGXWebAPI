@@ -935,33 +935,7 @@ namespace DistributionWebApi.Controllers
 
                                         var rooms = RoomMappings;
 
-
-                                        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode))
-                                        {
-                                            rooms = rooms.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).ToList();
-                                        }
-
-                                        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId))
-                                        {
-                                            rooms = rooms.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId).ToList();
-                                        }
-
-                                        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName))
-                                        {
-                                            rooms = rooms.Where(w => w.SupplierRoomName == mappingRoomRequest.SupplierRoomName).ToList();
-                                        }
-
-                                        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
-                                        {
-                                            rooms = rooms.Where(w => w.SupplierRoomCategory == mappingRoomRequest.SupplierRoomCategory).ToList();
-                                        }
-
-                                        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategoryId))
-                                        {
-                                            rooms = rooms.Where(w => w.SupplierRoomCategoryId == mappingRoomRequest.SupplierRoomCategoryId).ToList();
-                                        }
-                                        //mahesh
-
+                                        rooms = RoomData(mappingRoomRequest, rooms, "SupplierRoomTypeCode");
 
                                         if (rooms != null && rooms.Any())
                                         {
@@ -990,6 +964,21 @@ namespace DistributionWebApi.Controllers
                                                 RoomMappingResponse.MappedRooms = mappnedRM;
                                                 RoomMappingResponseList.Add(RoomMappingResponse);
                                             }
+                                        }
+                                        else
+                                        {
+                                            mappingResponse.TlgxCompanyCode = mappingRequest.TLGXCompanyCode;
+                                            var RoomMappingResponseListRS = new List<CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse>();
+
+                                            var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
+                                            RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
+                                            RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
+                                            RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
+                                            RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
+                                            RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
+
+                                            RoomMappingResponseList.Add(RoomMappingResponse);
+
                                         }
 
                                     }
@@ -1040,6 +1029,133 @@ namespace DistributionWebApi.Controllers
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
                 return response;
             }
+
+
         }
+
+        private List<DC_ConpanyAccommodationRoomMapping> RoomData(CompanySpecificHotelAndRoomType_RoomTypeRequest mappingRoomRequest, List<DC_ConpanyAccommodationRoomMapping> RoomMappings, string FieldName)
+        {
+
+            var rooms = RoomMappings;
+
+
+            //if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode))
+            //{
+
+
+            //    if (rooms.Count == 0)
+            //    {
+
+            //        //rooms = RoomData(mappingRoomRequest, RoomMappings);
+
+            //        if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId))
+            //        {
+            //            rooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId).ToList();
+            //        }
+
+            //        else if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName))
+            //        {
+            //            rooms = RoomMappings.Where(w => w.SupplierRoomName == mappingRoomRequest.SupplierRoomName).ToList();
+            //        }
+
+            //        else if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
+            //        {
+            //            rooms = RoomMappings.Where(w => w.SupplierRoomCategory == mappingRoomRequest.SupplierRoomCategory).ToList();
+            //        }
+
+            //        else if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategoryId))
+            //        {
+            //            rooms = RoomMappings.Where(w => w.SupplierRoomCategoryId == mappingRoomRequest.SupplierRoomCategoryId).ToList();
+            //        }
+            //    }
+
+            //}
+
+
+
+            switch (FieldName)
+            {
+                case "SupplierRoomTypeCode":
+                    if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode))
+                    {
+                        rooms = RoomMappings.Where(w => w.SupplierRoomTypeCode == mappingRoomRequest.SupplierRoomTypeCode).ToList();
+                        if (rooms.Count == 0)
+                        {
+                            rooms = RoomData(mappingRoomRequest, RoomMappings, "SupplierRoomId");
+                        }
+
+                    }
+                    else
+                    {
+                        goto case "SupplierRoomId";
+                    }
+
+                    break;
+                case "SupplierRoomId":
+                    if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId))
+                    {
+                        rooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId).ToList();
+                        if (rooms.Count == 0)
+                        {
+                            rooms = RoomData(mappingRoomRequest, RoomMappings, "SupplierRoomName");
+                        }
+                    }
+                    else
+                    {
+                        goto case "SupplierRoomName";
+                    }
+                    break;
+                case "SupplierRoomName":
+                    if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName))
+                    {
+                        rooms = RoomMappings.Where(w => w.SupplierRoomName == mappingRoomRequest.SupplierRoomName).ToList();
+                        if (rooms.Count == 0)
+                        {
+                            RoomData(mappingRoomRequest, RoomMappings, "SupplierRoomCategory");
+                        }
+                    }
+                    else
+                    {
+                        goto case "SupplierRoomCategory";
+                    }
+                    break;
+                case "SupplierRoomCategory":
+                    if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
+                    {
+                        rooms = RoomMappings.Where(w => w.SupplierRoomCategory == mappingRoomRequest.SupplierRoomCategory).ToList();
+                        if (rooms.Count == 0)
+                        {
+                            rooms = RoomData(mappingRoomRequest, RoomMappings, "SupplierRoomCategoryId");
+                        }
+                    }
+                    else
+                    {
+                        goto case "SupplierRoomCategoryId";
+                    }
+                    break;
+                case "SupplierRoomCategoryId":
+                    if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
+                    {
+                        rooms = RoomMappings.Where(w => w.SupplierRoomCategoryId == mappingRoomRequest.SupplierRoomCategoryId).ToList();
+                    }
+
+                    break;
+
+                default:
+                    break;
+
+
+
+            }
+            //List<DC_ConpanyAccommodationRoomMapping> rooms = new List<DC_ConpanyAccommodationRoomMapping>();
+            //if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId))
+            //{
+            //    rooms = RoomMappings.Where(w => w.SupplierRoomId == mappingRoomRequest.SupplierRoomId).ToList();
+            //}
+            return rooms;
+        }
+
+
+
     }
 }
