@@ -441,23 +441,28 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Supplier system room id.
         /// </summary>
+        [Required]
         public string SupplierRoomId { get; set; }
         /// <summary>
         /// Supplier room type code. Certain suppliers use both id and code values.
         /// </summary>
+        [Required]
         public string SupplierRoomTypeCode { get; set; }
+        
         /// <summary>
         /// Supplier room type name.
         /// </summary>
-       
+        [Required]
         public string SupplierRoomName { get; set; }
         /// <summary>
         /// Supplier room category name. Certain suppliers use both room type and category.
         /// </summary>
+        [Required]
         public string SupplierRoomCategory { get; set; }
         /// <summary>
         ///  Supplier room category id. Certain suppliers use both room type and category.
         /// </summary>
+        [Required]
         public string SupplierRoomCategoryId { get; set; }
 
     }
