@@ -339,6 +339,56 @@ namespace DistributionWebApi.Controllers
             return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
         }
 
+
+        private ReplaceOneModel<RoomTypeMappingOnline> InsertRoomTypeMappingOnlineCompanySpecificRequest(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
+        {
+            var builder = Builders<RoomTypeMappingOnline>.Filter;
+            var filter = builder.Empty;
+
+            if (!string.IsNullOrWhiteSpace(rtmo.TLGXCommonHotelId))
+            {
+                filter = filter & builder.Eq(c => c.TLGXCommonHotelId, rtmo.TLGXCommonHotelId.ToUpper());
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierId))
+            {
+                filter = filter & builder.Eq(c => c.SupplierId, rtmo.SupplierId.ToUpper());
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierProductId))
+            {
+                filter = filter & builder.Eq(c => c.SupplierProductId, rtmo.SupplierProductId.ToUpper());
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomTypeCode))
+            {
+                filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode);
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomId))
+            {
+                filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomName))
+            {
+                filter = filter & builder.Eq(c => c.SupplierRoomName, rtmo.SupplierRoomName);
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomCategory))
+            {
+                filter = filter & builder.Eq(c => c.SupplierRoomCategory, rtmo.SupplierRoomCategory);
+            }
+
+            if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomCategoryId))
+            {
+                filter = filter & builder.Eq(c => c.SupplierRoomCategoryId, rtmo.SupplierRoomCategoryId);
+            }
+
+            return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
+        }
+
         /// <summary>
         /// Retrieves TLGX Acco Id, Common Hotel Id, TLGX Room Type Id for TLGX Common Hotel Ids, accepting multiple suppliers and multiple supplier room types.
         /// API can handle single / multiple TLGX Common Hotel Ids at a time. 
@@ -1014,58 +1064,60 @@ namespace DistributionWebApi.Controllers
                                         else
                                         {
                                             mappingResponse.TlgxCompanyCode = mappingRequest.TLGXCompanyCode;
-                                            var RoomMappingResponseListRS = new List<CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse>();
+                                            GetRoomTypeNotFoundRS(collection_rto, writeModelDetails, mappingRequest, mappingResponse, ref RoomMappingResponseList, mappingRoomRequest);
+                                            #region Included into new Method
+                                            //if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode)
+                                            //    || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName)
+                                            //    || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId)
+                                            //    || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategoryId)
+                                            //    || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
+                                            //{
+                                            //    var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
+                                            //    RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
+                                            //    RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
+                                            //    RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
+                                            //    RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
+                                            //    RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
+                                            //    RoomMappingResponse.MappedRooms =  new List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType>(); 
+                                            //    #region Roomtype Mapping Online data insert into Mongo
+                                            //    if (RoomMappingResponse.MappedRooms.Count == 0)
+                                            //    {
+                                            //        int? SystemProductCode = null;
+                                            //        if (int.TryParse(mappingResponse.TlgxCommonProductId, out int CommonHotelId))
+                                            //        {
+                                            //            SystemProductCode = CommonHotelId;
+                                            //        }
 
-                                            if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode)
-                                                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName)
-                                                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId)
-                                                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategoryId)
-                                                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
-                                            {
-                                                var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
-                                                RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
-                                                RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
-                                                RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
-                                                RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
-                                                RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
+                                            //        #region Insert into RoomType Mapping Online collection if mappings not found
 
-                                                #region Roomtype Mapping Online data insert into Mongo
-                                                if (RoomMappingResponse.MappedRooms.Count == 0)
-                                                {
-                                                    int? SystemProductCode = null;
-                                                    if (int.TryParse(mappingResponse.TlgxCommonProductId, out int CommonHotelId))
-                                                    {
-                                                        SystemProductCode = CommonHotelId;
-                                                    }
+                                            //        writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                            //        {
+                                            //            //_id = ObjectId.GenerateNewId(),
+                                            //            CreateDateTime = DateTime.Now,
 
-                                                    #region Insert into RoomType Mapping Online collection if mappings not found
+                                            //            Mode = "Online", //RQ.Mode,
 
-                                                    writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
-                                                    {
-                                                        //_id = ObjectId.GenerateNewId(),
-                                                        CreateDateTime = DateTime.Now,
-                                                        
-                                                        Mode = "Online", //RQ.Mode,
-                                                        
-                                                        SupplierId = mappingRequest.SupplierCode,
-                                                        SupplierProductId = mappingRequest.SupplierProductCode,
-                                                        SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
-                                                        SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
-                                                        SupplierRoomId = mappingRoomRequest.SupplierRoomId,
-                                                        SupplierRoomName = mappingRoomRequest.SupplierRoomName,
-                                                        SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode,
-                                                        TLGXCommonHotelId = mappingResponse.TlgxCompanyProductId,
-                                                        SystemProductCode = SystemProductCode
-                                                    }));
+                                            //            SupplierId = mappingRequest.SupplierCode,
+                                            //            SupplierProductId = mappingRequest.SupplierProductCode,
+                                            //            SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
+                                            //            SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
+                                            //            SupplierRoomId = mappingRoomRequest.SupplierRoomId,
+                                            //            SupplierRoomName = mappingRoomRequest.SupplierRoomName,
+                                            //            SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode,
+                                            //            TLGXCommonHotelId = mappingResponse.TlgxCompanyProductId,
+                                            //            SystemProductCode = SystemProductCode
+                                            //        }));
 
-                                                    #endregion
+                                            //        #endregion
 
-                                                }
-                                                #endregion
+                                            //    }
+                                            //    #endregion
 
 
-                                                RoomMappingResponseList.Add(RoomMappingResponse);
-                                            }
+                                            //    RoomMappingResponseList.Add(RoomMappingResponse);
+                                            //}
+                                            #endregion
+
                                         }
 
 
@@ -1073,11 +1125,17 @@ namespace DistributionWebApi.Controllers
 
                                     }
                                 }
+                                else
+                                {
+                                    foreach (var mappingRoomRequest in mappingRequest.SupplierRoomTypes)
+                                    {
+                                        GetRoomTypeNotFoundRS(collection_rto, writeModelDetails, mappingRequest, mappingResponse, ref RoomMappingResponseList, mappingRoomRequest);
+                                    }
+                                }
 
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
-
                                 mappingResponseList.Add(mappingResponse);
-                                mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
+
 
                             }
                             else
@@ -1086,49 +1144,49 @@ namespace DistributionWebApi.Controllers
                                 var RoomMappingResponseList = new List<CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse>();
                                 foreach (var mappingRoomRequest in mappingRequest.SupplierRoomTypes)
                                 {
+                                    GetRoomTypeNotFoundRS(collection_rto, writeModelDetails, mappingRequest, mappingResponse, ref RoomMappingResponseList, mappingRoomRequest);
+                                    //var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
+                                    //RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
+                                    //RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
+                                    //RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
+                                    //RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
+                                    //RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
 
-                                    var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
-                                    RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
-                                    RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
-                                    RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
-                                    RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
-                                    RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
+                                    //RoomMappingResponseList.Add(RoomMappingResponse);
 
-                                    RoomMappingResponseList.Add(RoomMappingResponse);
+                                    //#region Roomtype Mapping Online data insert into Mongo
+                                    //if (RoomMappingResponse.MappedRooms.Count == 0)
+                                    //{
+                                    //    int? SystemProductCode = null;
+                                    //    if (int.TryParse(mappingResponse.TlgxCommonProductId, out int CommonHotelId))
+                                    //    {
+                                    //        SystemProductCode = CommonHotelId;
+                                    //    }
 
-                                    #region Roomtype Mapping Online data insert into Mongo
-                                    if (RoomMappingResponse.MappedRooms.Count == 0)
-                                    {
-                                        int? SystemProductCode = null;
-                                        if (int.TryParse(mappingResponse.TlgxCommonProductId, out int CommonHotelId))
-                                        {
-                                            SystemProductCode = CommonHotelId;
-                                        }
+                                    //    #region Insert into RoomType Mapping Online collection if mappings not found
 
-                                        #region Insert into RoomType Mapping Online collection if mappings not found
+                                    //    writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
+                                    //    {
+                                    //        //_id = ObjectId.GenerateNewId(),
+                                    //        CreateDateTime = DateTime.Now,
 
-                                        writeModelDetails.Add(InsertRoomTypeMappingOnline(collection_rto, new RoomTypeMappingOnline
-                                        {
-                                            //_id = ObjectId.GenerateNewId(),
-                                            CreateDateTime = DateTime.Now,
+                                    //        Mode = "Online", //RQ.Mode,
 
-                                            Mode = "Online", //RQ.Mode,
+                                    //        SupplierId = mappingRequest.SupplierCode,
+                                    //        SupplierProductId = mappingRequest.SupplierProductCode,
+                                    //        SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
+                                    //        SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
+                                    //        SupplierRoomId = mappingRoomRequest.SupplierRoomId,
+                                    //        SupplierRoomName = mappingRoomRequest.SupplierRoomName,
+                                    //        SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode,
+                                    //        TLGXCommonHotelId = mappingResponse.TlgxCompanyProductId,
+                                    //        SystemProductCode = SystemProductCode
+                                    //    }));
 
-                                            SupplierId = mappingRequest.SupplierCode,
-                                            SupplierProductId = mappingRequest.SupplierProductCode,
-                                            SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
-                                            SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
-                                            SupplierRoomId = mappingRoomRequest.SupplierRoomId,
-                                            SupplierRoomName = mappingRoomRequest.SupplierRoomName,
-                                            SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode,
-                                            TLGXCommonHotelId = mappingResponse.TlgxCompanyProductId,
-                                            SystemProductCode = SystemProductCode
-                                        }));
+                                    //    #endregion
 
-                                        #endregion
-
-                                    }
-                                    #endregion
+                                    //}
+                                    //#endregion
                                 }
 
                                 mappingResponseList.Add(mappingResponse);
@@ -1163,6 +1221,61 @@ namespace DistributionWebApi.Controllers
 
 
         }
+
+        private void GetRoomTypeNotFoundRS(IMongoCollection<RoomTypeMappingOnline> collection_rto, List<WriteModel<RoomTypeMappingOnline>> writeModelDetails, CompanySpecificHotelAndRoomType_Request mappingRequest, CompanySpecificHotelAndRoomType_Response mappingResponse, ref List<CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse> RoomMappingResponseList, CompanySpecificHotelAndRoomType_RoomTypeRequest mappingRoomRequest)
+        {
+            if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode)
+                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName)
+                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId)
+                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategoryId)
+                || !string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
+            {
+                var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
+                RoomMappingResponse.SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory;
+                RoomMappingResponse.SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId;
+                RoomMappingResponse.SupplierRoomId = mappingRoomRequest.SupplierRoomId;
+                RoomMappingResponse.SupplierRoomName = mappingRoomRequest.SupplierRoomName;
+                RoomMappingResponse.SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode;
+                RoomMappingResponse.MappedRooms = new List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType>();
+                #region Roomtype Mapping Online data insert into Mongo
+                if (RoomMappingResponse.MappedRooms.Count == 0)
+                {
+                    int? SystemProductCode = null;
+                    if (int.TryParse(mappingResponse.TlgxCommonProductId, out int CommonHotelId))
+                    {
+                        SystemProductCode = CommonHotelId;
+                    }
+
+                    #region Insert into RoomType Mapping Online collection if mappings not found
+
+                    writeModelDetails.Add(InsertRoomTypeMappingOnlineCompanySpecificRequest(collection_rto, new RoomTypeMappingOnline
+                    {
+                        //_id = ObjectId.GenerateNewId(),
+                        CreateDateTime = DateTime.Now,
+
+                        Mode = "Online", //RQ.Mode,
+
+                        SupplierId = mappingRequest.SupplierCode,
+                        SupplierProductId = mappingRequest.SupplierProductCode,
+                        TLGXCommonHotelId = mappingResponse.TlgxCompanyProductId,
+                        SystemProductCode = SystemProductCode,
+                        SupplierRoomCategory = mappingRoomRequest.SupplierRoomCategory,
+                        SupplierRoomCategoryId = mappingRoomRequest.SupplierRoomCategoryId,
+                        SupplierRoomId = mappingRoomRequest.SupplierRoomId,
+                        SupplierRoomName = mappingRoomRequest.SupplierRoomName,
+                        SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode
+                    }));
+
+                    #endregion
+
+                }
+                #endregion
+
+
+                RoomMappingResponseList.Add(RoomMappingResponse);
+            }
+        }
+
 
         private List<DC_ConpanyAccommodationRoomMapping> RoomData(CompanySpecificHotelAndRoomType_RoomTypeRequest mappingRoomRequest, List<DC_ConpanyAccommodationRoomMapping> RoomMappings, string FieldName)
         {
