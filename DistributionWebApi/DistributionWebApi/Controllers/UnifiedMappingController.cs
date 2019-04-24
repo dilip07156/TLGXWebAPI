@@ -1149,10 +1149,10 @@ namespace DistributionWebApi.Controllers
                         }
                         returnResult.MappingResponses = mappingResponseList;
 
-                        if (writeModelDetails.Any())
-                        {
-                            Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
-                        }
+                        //if (writeModelDetails.Any())
+                        //{
+                        //    Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                        //}
 
                         #endregion Build Response
 
