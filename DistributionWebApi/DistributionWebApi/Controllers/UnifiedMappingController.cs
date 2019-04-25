@@ -441,7 +441,7 @@ namespace DistributionWebApi.Controllers
 
                             if (writeModelDetails.Any())
                             {
-                                await Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                                Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
                             }
                             #endregion Build Response
                         }
