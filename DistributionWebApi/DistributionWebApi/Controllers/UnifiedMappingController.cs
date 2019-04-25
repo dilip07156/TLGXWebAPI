@@ -395,8 +395,10 @@ namespace DistributionWebApi.Controllers
                                                 SupplierRoomCategoryId = room.SupplierRoomCategoryId,
                                                 SupplierRoomId = room.SupplierRoomId,
                                                 SupplierRoomName = room.SupplierRoomName,
-                                                SupplierRoomTypeCode = room.SupplierRoomTypeCode
+                                                SupplierRoomTypeCode = room.SupplierRoomTypeCode,
+                                                MappedRooms = new List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType>()
                                             };
+                                            
                                             RoomMappingResponse.MappedRooms.Add(new CompanySpecificHotelAndRoomTypeMapping_MappedRoomType()
                                             {
                                                 TlgxCompanyRoomId = room.CompanyRoomId,
