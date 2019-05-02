@@ -415,7 +415,7 @@ namespace DistributionWebApi.Controllers
                                             SystemProductCode = CommonHotelId;
                                         }
 
-                                        writeModelDetails.Add(InsertRoomTypeMappingOnlineCompanySpecificRequest(collection_rto, new RoomTypeMappingOnline
+                                        var rtmo = new RoomTypeMappingOnline
                                         {
                                             CreateDateTime = DateTime.Now,
                                             Mode = "Online",
@@ -428,7 +428,11 @@ namespace DistributionWebApi.Controllers
                                             SupplierRoomId = mappingRoomRequest.SupplierRoomId,
                                             SupplierRoomName = mappingRoomRequest.SupplierRoomName,
                                             SupplierRoomTypeCode = mappingRoomRequest.SupplierRoomTypeCode
-                                        }));
+                                        };
+                                        var filter = InsertRoomTypeMappingOnlineCompanySpecificRequest(collection_rto, rtmo);
+
+                                        writeModelDetails.Add(new DeleteManyModel<RoomTypeMappingOnline>(filter));
+                                        writeModelDetails.Add(new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true });
                                     }
                                 }
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
@@ -438,7 +442,7 @@ namespace DistributionWebApi.Controllers
 
                             if (writeModelDetails.Any())
                             {
-                                Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                                collection_rto.BulkWriteAsync(writeModelDetails);
                             }
                             #endregion Build Response
                         }
@@ -496,10 +500,10 @@ namespace DistributionWebApi.Controllers
         }
 
 
-        private ReplaceOneModel<RoomTypeMappingOnline> InsertRoomTypeMappingOnlineCompanySpecificRequest(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
+        private FilterDefinition<RoomTypeMappingOnline> InsertRoomTypeMappingOnlineCompanySpecificRequest(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
         {
             var builder = Builders<RoomTypeMappingOnline>.Filter;
-            var filter = builder.Empty;
+            FilterDefinition<RoomTypeMappingOnline> filter = builder.Empty;
 
             if (!string.IsNullOrWhiteSpace(rtmo.TLGXCommonHotelId))
             {
@@ -531,7 +535,6 @@ namespace DistributionWebApi.Controllers
                 filter = filter & builder.Eq(c => c.SupplierRoomName, rtmo.SupplierRoomName);
             }
 
-
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomCategory))
             {
                 filter = filter & builder.Eq(c => c.SupplierRoomCategory, rtmo.SupplierRoomCategory);
@@ -541,8 +544,8 @@ namespace DistributionWebApi.Controllers
             {
                 filter = filter & builder.Eq(c => c.SupplierRoomCategoryId, rtmo.SupplierRoomCategoryId);
             }
-
-            return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
+            return filter;
+            //return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
         }
 
         private List<DC_ConpanyAccommodationMapping> GetCompanyAccommodationProductMapping(List<string> SupplierCodes, List<string> SupplierProductCodes, List<string> TLGXCompanyId)
