@@ -431,8 +431,65 @@ namespace DistributionWebApi.Controllers
                                         };
                                         var filter = InsertRoomTypeMappingOnlineCompanySpecificRequest(collection_rto, rtmo);
 
-                                        writeModelDetails.Add(new DeleteManyModel<RoomTypeMappingOnline>(filter));
-                                        writeModelDetails.Add(new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true });
+                                        var update = Builders<RoomTypeMappingOnline>.Update.Set("CreateDateTime", rtmo.CreateDateTime)
+                                                    .Set("Mode", rtmo.Mode)
+                                                    .Set("SupplierId", rtmo.SupplierId)
+                                                    .Set("SupplierProductId", rtmo.SupplierProductId)
+                                                    .Set("TLGXCommonHotelId", rtmo.TLGXCommonHotelId)
+                                                    .Set("SystemProductCode", rtmo.SystemProductCode)
+                                                    .Set("SupplierRoomCategory", rtmo.SupplierRoomCategory)
+                                                    .Set("SupplierRoomCategoryId", rtmo.SupplierRoomCategoryId)
+                                                    .Set("SupplierRoomId", rtmo.SupplierRoomId)
+                                                    .Set("SupplierRoomName", rtmo.SupplierRoomName)
+                                                    .Set("SupplierRoomTypeCode", rtmo.SupplierRoomTypeCode)
+                                                    .Set("BatchId", rtmo.BatchId)
+                                                    .Set("MaxAdults", rtmo.MaxAdults)
+                                                    .Set("MaxChild", rtmo.MaxChild)
+                                                    .Set("MaxInfants", rtmo.MaxInfants)
+                                                    .Set("MaxGuestOccupancy", rtmo.MaxGuestOccupancy)
+                                                    .Set("Quantity", rtmo.Quantity)
+                                                    .Set("RatePlan", rtmo.RatePlan)
+                                                    .Set("RatePlanCode", rtmo.RatePlanCode)
+                                                    .Set("RoomSize", rtmo.RoomSize)
+                                                    .Set("BathRoomType", rtmo.BathRoomType)
+                                                    .Set("RoomView", rtmo.RoomView)
+                                                    .Set("FloorName", rtmo.FloorName)
+                                                    .Set("FloorNumber", rtmo.FloorNumber)
+                                                    .Set("Amenities", rtmo.Amenities)
+                                                    .Set("RoomLocationCode", rtmo.RoomLocationCode)
+                                                    .Set("ChildAge", rtmo.ChildAge)
+                                                    .Set("ExtraBed", rtmo.ExtraBed)
+                                                    .Set("Bedrooms", rtmo.Bedrooms)
+                                                    .Set("Smoking", rtmo.Smoking)
+                                                    .Set("BedType", rtmo.BedType)
+                                                    .Set("MinGuestOccupancy", rtmo.MinGuestOccupancy)
+                                                    .Set("PromotionalVendorCode", rtmo.PromotionalVendorCode)
+                                                    .Set("BeddingConfig", rtmo.BeddingConfig)
+                                                    .Set("CityCode", rtmo.CityCode)
+                                                    .Set("CityName", rtmo.CityName)
+                                                    .Set("CountryCode", rtmo.CountryCode)
+                                                    .Set("CountryName", rtmo.CountryName)
+                                                    .Set("StateCode", rtmo.StateCode)
+                                                    .Set("StateName", rtmo.StateName)
+                                                    .Set("RoomDescription", rtmo.RoomDescription)
+                                                    .Set("SupplierProductName", rtmo.SupplierProductName)
+                                                    .Set("SupplierProvider", rtmo.SupplierProvider)
+                                                    .Set("ProcessDateTime", rtmo.ProcessDateTime)
+                                                    .Set("ProcessBatchId", rtmo.ProcessBatchId)
+                                                    .Set("ProcessBatchNo", rtmo.ProcessBatchNo)
+                                                    .Set("Accommodation_SupplierRoomType_Id", rtmo.Accommodation_SupplierRoomType_Id)
+                                                    .Set("Accommodation_Id", rtmo.Accommodation_Id)
+                                                    .Set("Accommodation_RoomInfo_Id", rtmo.Accommodation_RoomInfo_Id)
+                                                    .Set("Status", rtmo.Status)
+                                                    .Set("SystemRoomTypeMapId", rtmo.SystemRoomTypeMapId)
+                                                    .Set("MatchingScore", rtmo.MatchingScore)
+                                                    .Set("SystemRoomTypeCode", rtmo.SystemRoomTypeCode)
+                                                    .Set("TLGXRoomTypeCode", rtmo.TLGXRoomTypeCode);
+
+                                        //var result = collection.UpdateOne(filter, update, new UpdateOptions { IsUpsert = true });
+                                        //writeModelDetails.Add(new DeleteManyModel<RoomTypeMappingOnline>(filter));
+                                        //writeModelDetails.Add(new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true });
+                                        writeModelDetails.Add(new UpdateOneModel<RoomTypeMappingOnline>(filter, update) { IsUpsert = true });
                                     }
                                 }
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
