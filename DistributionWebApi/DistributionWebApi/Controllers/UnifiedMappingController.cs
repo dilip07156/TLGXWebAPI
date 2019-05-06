@@ -490,7 +490,12 @@ namespace DistributionWebApi.Controllers
                                         //writeModelDetails.Add(new DeleteManyModel<RoomTypeMappingOnline>(filter));
                                         //writeModelDetails.Add(new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true });
                                         //writeModelDetails.Add(new UpdateOneModel<RoomTypeMappingOnline>(filter, update) { IsUpsert = true });
-                                        collection_rto.ReplaceOne(filter, rtmo, new UpdateOptions { IsUpsert = true });
+
+                                        var exitingData = collection_rto.Find(filter).ToList();
+                                        if (!exitingData.Any())
+                                        {
+                                            collection_rto.ReplaceOne(filter, rtmo, new UpdateOptions { IsUpsert = true });
+                                        }
                                     }
                                 }
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
@@ -580,27 +585,27 @@ namespace DistributionWebApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomTypeCode))
             {
-                filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode);
+                filter = filter & builder.Eq(c => c.SupplierRoomTypeCode, rtmo.SupplierRoomTypeCode.ToUpper());
             }
 
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomId))
             {
-                filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId);
+                filter = filter & builder.Eq(c => c.SupplierRoomId, rtmo.SupplierRoomId.ToUpper());
             }
 
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomName))
             {
-                filter = filter & builder.Eq(c => c.SupplierRoomName, rtmo.SupplierRoomName);
+                filter = filter & builder.Eq(c => c.SupplierRoomName, rtmo.SupplierRoomName.ToUpper());
             }
 
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomCategory))
             {
-                filter = filter & builder.Eq(c => c.SupplierRoomCategory, rtmo.SupplierRoomCategory);
+                filter = filter & builder.Eq(c => c.SupplierRoomCategory, rtmo.SupplierRoomCategory.ToUpper());
             }
 
             if (!string.IsNullOrWhiteSpace(rtmo.SupplierRoomCategoryId))
             {
-                filter = filter & builder.Eq(c => c.SupplierRoomCategoryId, rtmo.SupplierRoomCategoryId);
+                filter = filter & builder.Eq(c => c.SupplierRoomCategoryId, rtmo.SupplierRoomCategoryId.ToUpper());
             }
             return filter;
             //return new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true };
