@@ -489,7 +489,8 @@ namespace DistributionWebApi.Controllers
                                         //var result = collection.UpdateOne(filter, update, new UpdateOptions { IsUpsert = true });
                                         //writeModelDetails.Add(new DeleteManyModel<RoomTypeMappingOnline>(filter));
                                         //writeModelDetails.Add(new ReplaceOneModel<RoomTypeMappingOnline>(filter, rtmo) { IsUpsert = true });
-                                        writeModelDetails.Add(new UpdateOneModel<RoomTypeMappingOnline>(filter, update) { IsUpsert = true });
+                                        //writeModelDetails.Add(new UpdateOneModel<RoomTypeMappingOnline>(filter, update) { IsUpsert = true });
+                                        collection_rto.ReplaceOne(filter, rtmo, new UpdateOptions { IsUpsert = true });
                                     }
                                 }
                                 mappingResponse.SupplierRoomTypes = RoomMappingResponseList;
@@ -497,10 +498,10 @@ namespace DistributionWebApi.Controllers
                             }
                             returnResult.MappingResponses = mappingResponseList;
 
-                            if (writeModelDetails.Any())
-                            {
-                                collection_rto.BulkWriteAsync(writeModelDetails);
-                            }
+                            //if (writeModelDetails.Any())
+                            //{
+                            //    collection_rto.BulkWriteAsync(writeModelDetails);
+                            //}
                             #endregion Build Response
                         }
                         response = Request.CreateResponse(HttpStatusCode.OK, returnResult);
