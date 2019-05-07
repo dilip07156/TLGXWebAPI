@@ -344,6 +344,9 @@ namespace DistributionWebApi.Controllers
                             var mappingResponseList = new List<CompanySpecificHotelAndRoomType_Response>();
                             var writeModelDetails = new List<WriteModel<RoomTypeMappingOnline>>();
 
+                            // Retreiving the specific records from filtered results for hotel mapping(AccomodationProductMapping)
+                            List<DC_ConpanyAccommodationMapping> searchedConpanyAccommodationMapping = GetCompanyAccommodationProductMapping(SupplierCodes, SupplierProductCodes, TLGXCompanyId);
+
                             //Looping the requested object to create result
                             foreach (var mappingRequest in RQ.MappingRequests)
                             {
@@ -355,8 +358,7 @@ namespace DistributionWebApi.Controllers
                                     TlgxCompanyCode = mappingRequest.TLGXCompanyCode
                                 };
 
-                                // Retreiving the specific records from filtered results for hotel mapping(AccomodationProductMapping)
-                                List<DC_ConpanyAccommodationMapping> searchedConpanyAccommodationMapping = GetCompanyAccommodationProductMapping(SupplierCodes, SupplierProductCodes, TLGXCompanyId);
+
                                 var HotelMapping = searchedConpanyAccommodationMapping.Where(w => w.SupplierCode == mappingRequest.SupplierCode && w.SupplierProductCode == mappingRequest.SupplierProductCode && w.TLGXCompanyId == mappingRequest.TLGXCompanyCode).Select(s => s).FirstOrDefault();
 
                                 if (HotelMapping != null)
@@ -667,30 +669,30 @@ namespace DistributionWebApi.Controllers
 
         private List<DC_ConpanyAccommodationRoomMapping> RoomData(CompanySpecificHotelAndRoomType_RoomTypeRequest mappingRoomRequest, List<DC_ConpanyAccommodationRoomMapping> RoomMappings)
         {
-            var supplierFilter = new List<string>();
+            var supplierFilter = new Dictionary<string, string>();
             if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomTypeCode))
             {
-                supplierFilter.Add(mappingRoomRequest.SupplierRoomTypeCode);
+                supplierFilter.Add("SupplierRoomTypeCode", mappingRoomRequest.SupplierRoomTypeCode);
             }
 
             if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomId))
             {
-                supplierFilter.Add(mappingRoomRequest.SupplierRoomId);
+                supplierFilter.Add("SupplierRoomId", mappingRoomRequest.SupplierRoomId);
             }
 
             if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomName))
             {
-                supplierFilter.Add(mappingRoomRequest.SupplierRoomName);
+                supplierFilter.Add("SupplierRoomName", mappingRoomRequest.SupplierRoomName);
             }
 
             if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
             {
-                supplierFilter.Add(mappingRoomRequest.SupplierRoomCategory);
+                supplierFilter.Add("SupplierRoomCategory", mappingRoomRequest.SupplierRoomCategory);
             }
 
             if (!string.IsNullOrEmpty(mappingRoomRequest.SupplierRoomCategory))
             {
-                supplierFilter.Add(mappingRoomRequest.SupplierRoomCategory);
+                supplierFilter.Add("SupplierRoomCategoryId", mappingRoomRequest.SupplierRoomCategory);
             }
 
             var rooms = new List<DC_ConpanyAccommodationRoomMapping>();
@@ -698,12 +700,38 @@ namespace DistributionWebApi.Controllers
             {
                 foreach (var supplier in supplierFilter)
                 {
-                    rooms = RoomMappings.Where(w => w.SupplierRoomTypeCode == supplier).ToList();
+                    rooms = GetRoomMappingsDetails(supplier.Key, supplier.Value, RoomMappings);
                     if (rooms.Any())
                     {
                         break;
                     }
                 };
+            }
+            return rooms;
+        }
+
+        private List<DC_ConpanyAccommodationRoomMapping> GetRoomMappingsDetails(string supplierRoomType, string supplierRoomTypeValue, List<DC_ConpanyAccommodationRoomMapping> RoomMappings)
+        {
+            var rooms = new List<DC_ConpanyAccommodationRoomMapping>();
+            if (supplierRoomType == "SupplierRoomTypeCode")
+            {
+                rooms = RoomMappings.Where(w => w.SupplierRoomTypeCode == supplierRoomTypeValue).ToList();
+            }
+            else if (supplierRoomType == "SupplierRoomId")
+            {
+                rooms = RoomMappings.Where(w => w.SupplierRoomId == supplierRoomTypeValue).ToList();
+            }
+            else if (supplierRoomType == "SupplierRoomName")
+            {
+                rooms = RoomMappings.Where(w => w.SupplierRoomName == supplierRoomTypeValue).ToList();
+            }
+            else if (supplierRoomType == "SupplierRoomCategory")
+            {
+                rooms = RoomMappings.Where(w => w.SupplierRoomCategory == supplierRoomTypeValue).ToList();
+            }
+            else if (supplierRoomType == "SupplierRoomCategoryId")
+            {
+                rooms = RoomMappings.Where(w => w.SupplierRoomCategoryId == supplierRoomTypeValue).ToList();
             }
             return rooms;
         }
