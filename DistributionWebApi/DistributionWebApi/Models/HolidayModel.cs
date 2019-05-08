@@ -43,12 +43,11 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Holiday is effective from this date.
         /// </summary>
-        [JsonIgnore]
-        public DateTime? EffectiveFromDate { get; set; }
+        public string EffectiveFromDate { get; set; }
         /// <summary>
         /// Holiday is effective To this date.
         /// </summary>
-        public DateTime? EffectiveToDate { get; set; }
+        public string EffectiveToDate { get; set; }
         /// <summary>
         /// Date on which Holiday is created on system.
         /// </summary>
@@ -61,7 +60,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         ///Date on which Holiday was last edited.
         /// </summary>
-        public DateTime? EditDate { get; set; }
+        public string EditDate { get; set; }
         /// <summary>
         /// The user who edited Holiday.
         /// </summary>
