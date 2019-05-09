@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DistributionWebApi.Models
 {
@@ -10,14 +9,24 @@ namespace DistributionWebApi.Models
     public class Country
     {
         /// <summary>
+        /// Gets or sets the value of continent name
+        /// </summary>
+        public string ContinentName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of continent code
+        /// </summary>
+        public string ContinentCode { get; set; }
+
+        /// <summary>
         /// TLGX Country Name
         /// </summary>
         public string CountryName { get; set; }
+
         /// <summary>
         /// TLGX Country Code. This field should be unique.
         /// </summary>
         public string CountryCode { get; set; }
-
     }
 
     [BsonIgnoreExtraElements]
@@ -512,7 +521,7 @@ namespace DistributionWebApi.Models
         ///  List of Hotels within Zone matching the Search Request
         /// </summary>
         public List<Zone_ProductMapping> ZoneHotels { get; set; }
-       
+
     }
 
     /// <summary>

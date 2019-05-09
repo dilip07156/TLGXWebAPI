@@ -1,19 +1,15 @@
-﻿using System;
+﻿using DistributionWebApi.Models;
+using DistributionWebApi.Mongo;
+using MongoDB.Driver;
+using NLog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using System.Web;
-using MongoDB.Driver;
-using DistributionWebApi.Mongo;
-using DistributionWebApi.Models;
-using MongoDB.Bson;
-using System.Threading.Tasks;
-using System.Web.Http.Description;
-using NLog;
-using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace DistributionWebApi.Controllers
 {
@@ -41,8 +37,7 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(bson => true).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -58,8 +53,7 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(c => c.CountryCode == CountryCode.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -75,8 +69,7 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(c => c.CountryName == CountryName.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>

@@ -6767,6 +6767,16 @@
             TLGX MDM Unique identifier for hotel property
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Country.ContinentName">
+            <summary>
+            Gets or sets the value of continent name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Country.ContinentCode">
+            <summary>
+            Gets or sets the value of continent code
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Country.CountryName">
             <summary>
             TLGX Country Name
