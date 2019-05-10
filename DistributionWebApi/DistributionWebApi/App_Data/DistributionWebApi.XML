@@ -875,6 +875,20 @@
             Mongo database handler
             </summary>
         </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByCode(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
+            </summary>
+            <param name="ContinentCode">Passing continent code as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByName(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
+            </summary>
+            <param name="ContinentName">Passing continent name as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllContries">
             <summary>
             Retrieve all TLGX Master Countries

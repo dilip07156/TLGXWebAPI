@@ -26,6 +26,38 @@ namespace DistributionWebApi.Controllers
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
+        /// Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
+        /// </summary>
+        /// <param name="ContinentCode">Passing continent code as parameter</param>
+        /// <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Countries/ContinentCode/{ContinentCode}")]
+        [HttpGet]
+        [ResponseType(typeof(List<Country>))]
+        public async Task<HttpResponseMessage> GetContinentByCode(string ContinentCode)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Country>("CountryMaster");
+            var result = await collection.Find(c => c.ContinentCode == ContinentCode.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
+        /// </summary>
+        /// <param name="ContinentName">Passing continent name as parameter</param>
+        /// <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Countries/ContinentName/{ContinentName}")]
+        [HttpGet]
+        [ResponseType(typeof(List<Country>))]
+        public async Task<HttpResponseMessage> GetContinentByName(string ContinentName)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Country>("CountryMaster");
+            var result = await collection.Find(c => c.ContinentName == ContinentName.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        /// <summary>
         /// Retrieve all TLGX Master Countries
         /// </summary>
         /// <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
