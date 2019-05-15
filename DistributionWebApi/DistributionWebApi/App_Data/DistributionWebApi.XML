@@ -875,20 +875,6 @@
             Mongo database handler
             </summary>
         </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByCode(System.String)">
-            <summary>
-            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
-            </summary>
-            <param name="ContinentCode">Passing continent code as parameter</param>
-            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByName(System.String)">
-            <summary>
-            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
-            </summary>
-            <param name="ContinentName">Passing continent name as parameter</param>
-            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
-        </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllContries">
             <summary>
             Retrieve all TLGX Master Countries
@@ -909,6 +895,20 @@
             <param name="CountryName"></param>
             <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByContinentCode(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
+            </summary>
+            <param name="ContinentCode">Passing continent code as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByContinentName(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
+            </summary>
+            <param name="ContinentName">Passing continent name as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllCities">
             <summary>
             Retrieve all TLGX System Cities
@@ -927,6 +927,20 @@
             Retrieve all TLGX System Cities with StartsWith Filter on TLGX Country Name
             </summary>
             <param name="CountryName"></param>
+            <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetCityByContinentCode(System.String)">
+            <summary>
+            Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Code
+            </summary>
+            <param name="ContinentCode">Passing continent code as parameter</param>
+            <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetCityByContinentName(System.String)">
+            <summary>
+            Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Name
+            </summary>
+            <param name="ContinentName">Passing continent name as parameter</param>
             <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllStates">
@@ -6829,6 +6843,16 @@
         <member name="P:DistributionWebApi.Models.City.CountryCode">
             <summary>
             TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.City.ContinentName">
+            <summary>
+            Gets or sets the value of continent name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.City.ContinentCode">
+            <summary>
+            Gets or sets the value of continent code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Supplier.SupplierName">

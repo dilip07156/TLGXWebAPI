@@ -56,7 +56,16 @@ namespace DistributionWebApi.Models
         /// TLGX Country Code. This field should be unique.
         /// </summary>
         public string CountryCode { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the value of continent name
+        /// </summary>
+        public string ContinentName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of continent code
+        /// </summary>
+        public string ContinentCode { get; set; }
     }
 
     [BsonIgnoreExtraElements]
