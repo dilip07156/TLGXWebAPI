@@ -296,6 +296,10 @@ namespace DistributionWebApi.Controllers
                     {
                         filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.TLGXCountryCode, RQ.SystemCountryCode.Trim().ToUpper());
                     }
+                    if (!string.IsNullOrWhiteSpace(RQ.Zone_Code))
+                    {
+                        filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.Zone_Code, RQ.Zone_Code.Trim().ToUpper());
+                    }
                     var resultCount = await collection.Find(filterForZone).CountDocumentsAsync();
                     //TotalResultReturned
                     int TotalSearchedZone = (int)resultCount;
@@ -318,6 +322,7 @@ namespace DistributionWebApi.Controllers
                             Zone_Name = x.Zone_Name,
                             Zone_SubType = x.Zone_SubType,
                             Zone_Type = x.Zone_Type,
+                            Zone_Code=x.Zone_Code
                         }).Skip(RQ.PageNo * RQ.PageSize).Limit(RQ.PageSize).ToListAsync();
                         zoneResult.Zones = result;
                         HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
@@ -367,7 +372,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collection.Find(x => x._id == RQ.ZoneId.ToUpper()).ToListAsync();
                 if (searchResult != null && searchResult.Count > 0)
                 {
-                    var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius }).FirstOrDefault();
+                    var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius,z.Zone_Code }).FirstOrDefault();
                     if (details != null)
                     {
 
@@ -379,6 +384,7 @@ namespace DistributionWebApi.Controllers
                         resultList.Latitude = details.Latitude;
                         resultList.Longitude = details.Longitude;
                         resultList.Zone_Radius = details.Zone_Radius;
+                        resultList.Zone_Code = details.Zone_Code;
                     }
                     // For Zone-Hotels 
                     var SearchZoneProducts = (from m in searchResult select m.Zone_ProductMapping).ToList();

@@ -412,6 +412,10 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string TLGXCountryCode { get; set; }
         /// <summary>
+        /// Zone Code .This field is mandatory
+        /// </summary>
+        public string Zone_Code { get; set; }
+        /// <summary>
         /// List Of TLGX City Codes mapped to Zone
         /// </summary>
         public List<Zone_CityMapping> Zone_CityMapping { get; set; }
@@ -472,6 +476,10 @@ namespace DistributionWebApi.Models
         /// System Country code .
         /// </summary>
         public string TLGXCountryCode { get; set; }
+        /// <summary>
+        /// Zone Code .
+        /// </summary>
+        public string Zone_Code { get; set; }
     }
 
     /// <summary>
@@ -530,6 +538,10 @@ namespace DistributionWebApi.Models
         ///  List of Hotels within Zone matching the Search Request
         /// </summary>
         public List<Zone_ProductMapping> ZoneHotels { get; set; }
+        /// <summary>
+        /// Unique Code Of Zone
+        /// </summary>
+        public string Zone_Code { get; set; }
 
     }
 
@@ -609,6 +621,10 @@ namespace DistributionWebApi.Models
         /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
         /// </summary>
         public string Zone_SubType { get; set; }
+        /// <summary>
+        /// Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
+        /// </summary>        
+        public string Zone_Code { get; set; }
     }
     /// <summary>
     /// This is the request format for retriving ZoneDetails. 
