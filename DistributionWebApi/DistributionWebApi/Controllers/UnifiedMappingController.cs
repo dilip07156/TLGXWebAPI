@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using MongoDB.Driver.Linq;
 
 
 namespace DistributionWebApi.Controllers
@@ -57,7 +58,6 @@ namespace DistributionWebApi.Controllers
                         IMongoCollection<RoomTypeMappingOnline> collection_rto = _database.GetCollection<RoomTypeMappingOnline>("RoomTypeMappingOnline");
                         IMongoCollection<BsonDocument> collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMappingLite");
                         IMongoCollection<BsonDocument> collectionAccommodationMaster = _database.GetCollection<BsonDocument>("AccommodationMaster");
-
 
                         List<ProductMappingLite> searchedHotelMappingData = new List<ProductMappingLite>();
                         List<HotelRoomTypeMappingModel> searchedRoomMappingData = new List<HotelRoomTypeMappingModel>();
@@ -283,11 +283,33 @@ namespace DistributionWebApi.Controllers
 
                         returnResult.MappingResponses = mappingResponseList;
 
-                        if (writeModelDetails.Any())
-                        {
-                            Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
-                        }
+                        // getting code of supplier in string variable.
+                        string strSupplierCode = Convert.ToString(SupplierCodes[0]);
 
+                        // Making object of Supplier MCON data values from Supplier Document
+                        IMongoCollection<BsonDocument> collectionSupplierMaster = _database.GetCollection<BsonDocument>("Supplier");
+                        ProjectionDefinition<BsonDocument> SupplierField = Builders<BsonDocument>.Projection.Include("SupplierCode");
+                        SupplierField = SupplierField.Exclude("_id");
+                        var builder = Builders<BsonDocument>.Filter;
+
+                        //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
+                        // This query only checks the attribute "HoldInsertOnlineRoomTypeMapping" from Supplier document in MCON node.
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTrypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
+
+                        // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
+                        if (filteredSupplierList.Count > 0 || strSupplierCode == "")
+                        {
+                            // if count is greater than Zero, means this it should not be allowed to get written in database.
+                            // If SupplierCode is coming empty due to some data issues, it should not be allowed to get written in database.
+                        }
+                        else
+                        {
+                            if (writeModelDetails.Any())
+                            {
+                                Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                            }
+                        }
                         #endregion Build Response
 
                     }
@@ -304,7 +326,7 @@ namespace DistributionWebApi.Controllers
             }
         }
 
-        #region GetUnifiedHotelAndRoomTypeMappingV2 Not in Use for now 
+        #region GetUnifiedHotelAndRoomTypeMappingV2 Not in Use for now        
 
 
         private ReplaceOneModel<RoomTypeMappingOnline> InsertRoomTypeMappingOnline(IMongoCollection<RoomTypeMappingOnline> collection, RoomTypeMappingOnline rtmo)
@@ -1149,10 +1171,33 @@ namespace DistributionWebApi.Controllers
                         }
                         returnResult.MappingResponses = mappingResponseList;
 
-                        if (writeModelDetails.Any())
+                        // getting code of supplier in string variable.
+                        string strSupplierCode = Convert.ToString(SupplierCodes[0]);
+
+                        // Making object of Supplier MCON data values from Supplier Document
+                        IMongoCollection<BsonDocument> collectionSupplierMaster = _database.GetCollection<BsonDocument>("Supplier");
+                        ProjectionDefinition<BsonDocument> SupplierField = Builders<BsonDocument>.Projection.Include("SupplierCode");
+                        SupplierField = SupplierField.Exclude("_id");
+                        var builder = Builders<BsonDocument>.Filter;
+
+                        //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
+                        // This query only checks the attribute "HoldInsertOnlineRoomTypeMapping" from Supplier document in MCON node.
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTrypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
+
+                        // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
+                        if (filteredSupplierList.Count > 0 || strSupplierCode == "")
                         {
-                            Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                            // if count is greater than Zero, means this it should not be allowed to get written in database.
+                            // If SupplierCode is coming empty due to some data issues, it should not be allowed to get written in database.
                         }
+                        else
+                        {
+                            if (writeModelDetails.Any())
+                            {
+                                Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
+                            }
+                        }                       
 
                         #endregion Build Response
 
