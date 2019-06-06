@@ -294,7 +294,7 @@ namespace DistributionWebApi.Controllers
 
                         //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
                         // This query only checks the attribute "HoldInsertOnlineRoomTypeMapping" from Supplier document in MCON node.
-                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTrypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
                         var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
 
                         // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
@@ -1182,7 +1182,7 @@ namespace DistributionWebApi.Controllers
 
                         //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
                         // This query only checks the attribute "HoldInsertOnlineRoomTypeMapping" from Supplier document in MCON node.
-                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTrypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTypeMapping", "YES") & builder.Eq("SupplierCode", strSupplierCode);
                         var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
 
                         // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
