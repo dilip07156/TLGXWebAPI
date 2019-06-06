@@ -293,8 +293,8 @@ namespace DistributionWebApi.Controllers
                         var builder = Builders<BsonDocument>.Filter;
 
                         //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
-                        // This query only checks the attribute "MCON.HoldReadOnlineRoomTypeMappingData" from Supplier document in MCON node.
-                        var query = builder.Eq("MCON.HoldReadOnlineRoomTypeMappingData", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        // This query only checks the attribute "MCON.HoldInsertOnlineRoomTypeMappingData" from Supplier document in MCON node.
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTypeMappingData", "YES") & builder.Eq("SupplierCode", strSupplierCode);
                         var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
 
                         // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
@@ -1181,8 +1181,8 @@ namespace DistributionWebApi.Controllers
                         var builder = Builders<BsonDocument>.Filter;
 
                         //query to only bring data which is required and checking if related Supplier have MCON flag as YES or not and storing result in a variable.
-                        // This query only checks the attribute "MCON.HoldReadOnlineRoomTypeMappingData" from Supplier document in MCON node.
-                        var query = builder.Eq("MCON.HoldReadOnlineRoomTypeMappingData", "YES") & builder.Eq("SupplierCode", strSupplierCode);
+                        // This query only checks the attribute "MCON.HoldInsertOnlineRoomTypeMappingData" from Supplier document in MCON node.
+                        var query = builder.Eq("MCON.HoldInsertOnlineRoomTypeMappingData", "YES") & builder.Eq("SupplierCode", strSupplierCode);
                         var filteredSupplierList = await collectionSupplierMaster.Find(query).Project(SupplierField).ToListAsync();
 
                         // checking if variable "filteredSupplierList" is having some supplier and SupplierCode is not empty.
