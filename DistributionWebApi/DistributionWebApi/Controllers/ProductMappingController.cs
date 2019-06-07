@@ -47,195 +47,136 @@ namespace DistributionWebApi.Controllers
         [ResponseType(typeof(List<ProductMapping_RS>))]
         public async Task<HttpResponseMessage> GetBulkProductMapping(List<Models.ProductMapping_RQ> RQ)
         {
-            //_database = MongoDBHandler.mDatabase();
-            //var collection = _database.GetCollection<ProductMapping>("ProductMapping");
-            ////FilterDefinition<ProductMapping> filter;
-
-            //var resultList = new List<ProductMapping_RS>();
-
-            //foreach (var item in RQ)
-            //{
-            //    var result = new ProductMapping_RS();
-
-            //    result.ProductType = item.ProductType;
-            //    result.SequenceNumber = item.SequenceNumber;
-            //    result.SessionId = item.SessionId;
-            //    result.SupplierCityCode = item.SupplierCityCode;
-            //    result.SupplierCityName = item.SupplierCityName;
-            //    result.SupplierCode = item.SupplierCode;
-            //    result.SupplierCountryCode = item.SupplierCountryCode;
-            //    result.SupplierCountryName = item.SupplierCountryName;
-            //    result.SupplierProductCode = item.SupplierProductCode;
-            //    result.SupplierProductName = item.SupplierProductName;
-            //    result.Status = string.Empty;
-            //    result.SystemProductCode = string.Empty;
-
-            //    if (string.IsNullOrWhiteSpace(item.SupplierCode))
-            //    {
-            //        result.Status = "Supplier Code can't be blank.";
-            //    }
-
-            //    if (string.IsNullOrWhiteSpace(item.SupplierProductCode))
-            //    {
-            //        result.Status = "Supplier Product Code can't be blank.";
-            //    }
-
-            //    if (result.Status != string.Empty)
-            //    {
-            //        result.SystemProductCode = string.Empty;
-            //        resultList.Add(result);
-            //        result = null;
-            //        continue;
-            //    }
-            //    else
-            //    {
-            //        //filter = Builders<ProductMapping>.Filter.Empty;
-            //        //filter = filter & Builders<ProductMapping>.Filter.
-            //        //filter = filter & Builders<ProductMapping>.Filter.Regex(x => x.SupplierProductCode, new BsonRegularExpression(new Regex(item.SupplierProductCode, RegexOptions.IgnoreCase)));
-
-            //        var searchResult = await collection.Find(x => x.SupplierCode.ToLower() == item.SupplierCode.ToLower() && x.SupplierProductCode.ToLower() == item.SupplierProductCode.ToLower()).FirstOrDefaultAsync();
-            //        if (searchResult != null)
-            //        {
-            //            result.SystemProductCode = searchResult.SystemProductCode;
-            //            result.Status = "Mapped";
-            //            resultList.Add(result);
-            //            result = null;
-            //        }
-            //        else
-            //        {
-            //            result.SystemProductCode = string.Empty;
-            //            result.Status = "No results found.";
-            //            resultList.Add(result);
-            //            result = null;
-            //        }
-            //    }
-
-            //}
-
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-            //return response;
-
-            RQ = RQ.Where(w => w != null).ToList();
-
-            _database = MongoDBHandler.mDatabase();
-
-            IMongoCollection<BsonDocument> collectionProductMapping;
-            collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMapping");
-
-            IMongoCollection<BsonDocument> collectionActivityMapping;
-            collectionActivityMapping = _database.GetCollection<BsonDocument>("ActivityMapping");
-
-            FilterDefinition<BsonDocument> filter;
-            ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("SystemProductCode");
-            project = project.Exclude("_id");
-            project = project.Include("MapId");
-
-            var resultList = new List<ProductMapping_RS>();
-
-            foreach (var item in RQ)
+            try
             {
-                var result = new ProductMapping_RS();
+                RQ = RQ.Where(w => w != null).ToList();
 
-                result.ProductType = item.ProductType;
-                result.SequenceNumber = item.SequenceNumber;
-                result.SessionId = item.SessionId;
-                result.SupplierCityCode = item.SupplierCityCode;
-                result.SupplierCityName = item.SupplierCityName;
-                result.SupplierCode = item.SupplierCode;
-                result.SupplierCountryCode = item.SupplierCountryCode;
-                result.SupplierCountryName = item.SupplierCountryName;
-                result.SupplierProductCode = item.SupplierProductCode;
-                result.SupplierProductName = item.SupplierProductName;
-                result.Status = string.Empty;
-                result.SystemProductCode = string.Empty;
+                _database = MongoDBHandler.mDatabase();
 
-                if (string.IsNullOrWhiteSpace(item.SupplierCode))
+                IMongoCollection<BsonDocument> collectionProductMapping;
+                collectionProductMapping = _database.GetCollection<BsonDocument>("ProductMapping");
+
+                IMongoCollection<BsonDocument> collectionActivityMapping;
+                collectionActivityMapping = _database.GetCollection<BsonDocument>("ActivityMapping");
+
+                FilterDefinition<BsonDocument> filter;
+                ProjectionDefinition<BsonDocument> project = Builders<BsonDocument>.Projection.Include("SystemProductCode");
+                project = project.Exclude("_id");
+                project = project.Include("MapId");
+                var resultList = new List<ProductMapping_RS>();
+
+                foreach (var item in RQ)
                 {
-                    result.Status = "Supplier Code can't be blank.";
-                }
+                    var result = new ProductMapping_RS();
 
-                if (string.IsNullOrWhiteSpace(item.SupplierProductCode))
-                {
-                    result.Status = "Supplier Product Code can't be blank.";
-                }
-
-                if (result.Status != string.Empty)
-                {
+                    result.ProductType = item.ProductType;
+                    result.SequenceNumber = item.SequenceNumber;
+                    result.SessionId = item.SessionId;
+                    result.SupplierCityCode = item.SupplierCityCode;
+                    result.SupplierCityName = item.SupplierCityName;
+                    result.SupplierCode = item.SupplierCode;
+                    result.SupplierCountryCode = item.SupplierCountryCode;
+                    result.SupplierCountryName = item.SupplierCountryName;
+                    result.SupplierProductCode = item.SupplierProductCode;
+                    result.SupplierProductName = item.SupplierProductName;
+                    result.Status = string.Empty;
                     result.SystemProductCode = string.Empty;
-                    resultList.Add(result);
-                    result = null;
-                    continue;
-                }
-                else
-                {
-                    string[] statusToCheck = { "MAPPED", "AUTOMAPPED" };
-                    filter = Builders<BsonDocument>.Filter.Empty;
-                    filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(item.SupplierCode, RegexOptions.IgnoreCase)));
-                    filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierProductCode", new BsonRegularExpression(new Regex(item.SupplierProductCode, RegexOptions.IgnoreCase)));
-                    filter = filter & Builders<BsonDocument>.Filter.AnyIn("MappingStatus", statusToCheck);
 
-                    BsonDocument searchResult = null;
-                    if (item.ProductType.ToLower() == "hotel")
+                    if (string.IsNullOrWhiteSpace(item.SupplierCode))
                     {
-                        searchResult = await collectionProductMapping.Find(filter)
-                       .Project(project)
-                       .FirstOrDefaultAsync();
-
-                        if (searchResult != null)
-                        {
-                            result.SystemProductCode = searchResult["SystemProductCode"].AsString;
-                            result.TlgxMdmHotelId = searchResult["TlgxMdmHotelId"].AsString;
-                            result.MapId = searchResult["MapId"].AsInt32;
-                            result.Status = "Mapped";
-                            resultList.Add(result);
-                            result = null;
-                        }
-                        else
-                        {
-                            result.SystemProductCode = string.Empty;
-                            result.Status = "No results found.";
-                            resultList.Add(result);
-                            result = null;
-                        }
-
+                        result.Status = "Supplier Code can't be blank.";
                     }
-                    else if (item.ProductType.ToLower() == "activity")
+
+                    if (string.IsNullOrWhiteSpace(item.SupplierProductCode))
                     {
-                        searchResult = await collectionActivityMapping.Find(filter)
-                       .Project(project)
-                       .FirstOrDefaultAsync();
+                        result.Status = "Supplier Product Code can't be blank.";
+                    }
 
-                        if (searchResult != null)
-                        {
-                            result.SystemProductCode = searchResult["SystemProductCode"].AsString;
-                            result.MapId = searchResult["MapId"].AsInt32;
-                            result.Status = "Mapped";
-                            resultList.Add(result);
-                            result = null;
-                        }
-                        else
-                        {
-                            result.SystemProductCode = string.Empty;
-                            result.Status = "No results found.";
-                            resultList.Add(result);
-                            result = null;
-                        }
-
+                    if (result.Status != string.Empty)
+                    {
+                        result.SystemProductCode = string.Empty;
+                        resultList.Add(result);
+                        result = null;
+                        continue;
                     }
                     else
                     {
-                        result.SystemProductCode = string.Empty;
-                        result.Status = "Invalid Product Type.";
-                        resultList.Add(result);
-                        result = null;
+                        string[] statusToCheck = { "MAPPED", "AUTOMAPPED" };
+                        filter = Builders<BsonDocument>.Filter.Empty;
+                        filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierCode", new BsonRegularExpression(new Regex(item.SupplierCode, RegexOptions.IgnoreCase)));
+                        filter = filter & Builders<BsonDocument>.Filter.Regex("SupplierProductCode", new BsonRegularExpression(new Regex(item.SupplierProductCode, RegexOptions.IgnoreCase)));
+                        filter = filter & Builders<BsonDocument>.Filter.AnyIn("MappingStatus", statusToCheck);
+
+                        BsonDocument searchResult = null;
+                        if (item.ProductType.ToLower() == "hotel")
+                        {
+                            project = project.Include("TlgxMdmHotelId");
+                            searchResult = await collectionProductMapping.Find(filter)
+                           .Project(project)
+                           .FirstOrDefaultAsync();
+
+                            if (searchResult != null)
+                            {
+                                result.SystemProductCode = searchResult["SystemProductCode"].AsString;
+                                result.TlgxMdmHotelId = searchResult["TlgxMdmHotelId"].AsString;
+                                result.MapId = searchResult["MapId"].AsInt32;
+                                result.Status = "Mapped";
+                                resultList.Add(result);
+                                result = null;
+                            }
+                            else
+                            {
+                                result.SystemProductCode = string.Empty;
+                                result.Status = "No results found.";
+                                resultList.Add(result);
+                                result = null;
+                            }
+
+                        }
+                        else if (item.ProductType.ToLower() == "activity")
+                        {
+                            searchResult = await collectionActivityMapping.Find(filter)
+                           .Project(project)
+                           .FirstOrDefaultAsync();
+
+                            if (searchResult != null)
+                            {
+                                result.SystemProductCode = searchResult["SystemProductCode"].AsString;
+                                result.MapId = searchResult["MapId"].AsInt32;
+                                result.Status = "Mapped";
+                                resultList.Add(result);
+                                result = null;
+                            }
+                            else
+                            {
+                                result.SystemProductCode = string.Empty;
+                                result.Status = "No results found.";
+                                resultList.Add(result);
+                                result = null;
+                            }
+
+                        }
+                        else
+                        {
+                            result.SystemProductCode = string.Empty;
+                            result.Status = "Invalid Product Type.";
+                            resultList.Add(result);
+                            result = null;
+                        }
+
                     }
 
                 }
 
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
+                return response;
             }
-
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, resultList);
-            return response;
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
         }
 
         /// <summary>

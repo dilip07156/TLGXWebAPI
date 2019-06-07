@@ -1234,8 +1234,7 @@ namespace DistributionWebApi.Models
         ///// <summary>
         ///// contain start date
         ///// </summary>
-        [JsonIgnore]
-        public DateTime? StartDate { get; set; }
+        public string StartDate { get; set; }
         ///// <summary>
         ///// Tlgx Country code end
         ///// </summary>

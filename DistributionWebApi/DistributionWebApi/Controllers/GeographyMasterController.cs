@@ -1,19 +1,15 @@
-﻿using System;
+﻿using DistributionWebApi.Models;
+using DistributionWebApi.Mongo;
+using MongoDB.Driver;
+using NLog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using System.Web;
-using MongoDB.Driver;
-using DistributionWebApi.Mongo;
-using DistributionWebApi.Models;
-using MongoDB.Bson;
-using System.Threading.Tasks;
-using System.Web.Http.Description;
-using NLog;
-using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace DistributionWebApi.Controllers
 {
@@ -41,8 +37,7 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(bson => true).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -58,8 +53,7 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(c => c.CountryCode == CountryCode.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -75,8 +69,39 @@ namespace DistributionWebApi.Controllers
             _database = MongoDBHandler.mDatabase();
             var collection = _database.GetCollection<Country>("CountryMaster");
             var result = await collection.Find(c => c.CountryName == CountryName.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-            return response;
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
+        /// </summary>
+        /// <param name="ContinentCode">Passing continent code as parameter</param>
+        /// <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Countries/ContinentCode/{ContinentCode}")]
+        [HttpGet]
+        [ResponseType(typeof(List<Country>))]
+        public async Task<HttpResponseMessage> GetContinentByContinentCode(string ContinentCode)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Country>("CountryMaster");
+            var result = await collection.Find(c => c.ContinentCode == ContinentCode.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
+        /// </summary>
+        /// <param name="ContinentName">Passing continent name as parameter</param>
+        /// <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Countries/ContinentName/{ContinentName}")]
+        [HttpGet]
+        [ResponseType(typeof(List<Country>))]
+        public async Task<HttpResponseMessage> GetContinentByContinentName(string ContinentName)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<Country>("CountryMaster");
+            var result = await collection.Find(c => c.ContinentName == ContinentName.Trim().ToUpper()).SortBy(s => s.CountryName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         /// <summary>
@@ -129,6 +154,37 @@ namespace DistributionWebApi.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Code
+        /// </summary>
+        /// <param name="ContinentCode">Passing continent code as parameter</param>
+        /// <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Cities/ContinentCode/{ContinentCode}")]
+        [HttpGet]
+        [ResponseType(typeof(List<City>))]
+        public async Task<HttpResponseMessage> GetCityByContinentCode(string ContinentCode)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<City>("CityMaster");
+            var result = await collection.Find(c => c.ContinentCode == ContinentCode.Trim().ToUpper()).SortBy(s => s.CityName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        /// <summary>
+        /// Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Name
+        /// </summary>
+        /// <param name="ContinentName">Passing continent name as parameter</param>
+        /// <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        [Route("Cities/ContinentName/{ContinentName}")]
+        [HttpGet]
+        [ResponseType(typeof(List<City>))]
+        public async Task<HttpResponseMessage> GetCityByContinentName(string ContinentName)
+        {
+            _database = MongoDBHandler.mDatabase();
+            var collection = _database.GetCollection<City>("CityMaster");
+            var result = await collection.Find(c => c.ContinentName == ContinentName.Trim().ToUpper()).SortBy(s => s.CityName).ToListAsync();
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
 
         /// <summary>
         /// Retrieve all TLGX System States
@@ -240,6 +296,10 @@ namespace DistributionWebApi.Controllers
                     {
                         filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.TLGXCountryCode, RQ.SystemCountryCode.Trim().ToUpper());
                     }
+                    if (!string.IsNullOrWhiteSpace(RQ.Zone_Code))
+                    {
+                        filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.Zone_Code, RQ.Zone_Code.Trim().ToUpper());
+                    }
                     var resultCount = await collection.Find(filterForZone).CountDocumentsAsync();
                     //TotalResultReturned
                     int TotalSearchedZone = (int)resultCount;
@@ -262,6 +322,7 @@ namespace DistributionWebApi.Controllers
                             Zone_Name = x.Zone_Name,
                             Zone_SubType = x.Zone_SubType,
                             Zone_Type = x.Zone_Type,
+                            Zone_Code=x.Zone_Code
                         }).Skip(RQ.PageNo * RQ.PageSize).Limit(RQ.PageSize).ToListAsync();
                         zoneResult.Zones = result;
                         HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
@@ -311,7 +372,7 @@ namespace DistributionWebApi.Controllers
                 var searchResult = await collection.Find(x => x._id == RQ.ZoneId.ToUpper()).ToListAsync();
                 if (searchResult != null && searchResult.Count > 0)
                 {
-                    var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius }).FirstOrDefault();
+                    var details = (from z in searchResult select new { z._id, z.Zone_Name, z.Zone_Type, z.Zone_SubType, z.TLGXCountryCode, z.Latitude, z.Longitude, z.Zone_Radius,z.Zone_Code }).FirstOrDefault();
                     if (details != null)
                     {
 
@@ -323,6 +384,7 @@ namespace DistributionWebApi.Controllers
                         resultList.Latitude = details.Latitude;
                         resultList.Longitude = details.Longitude;
                         resultList.Zone_Radius = details.Zone_Radius;
+                        resultList.Zone_Code = details.Zone_Code;
                     }
                     // For Zone-Hotels 
                     var SearchZoneProducts = (from m in searchResult select m.Zone_ProductMapping).ToList();

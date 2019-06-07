@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DistributionWebApi.Models
 {
@@ -10,14 +9,24 @@ namespace DistributionWebApi.Models
     public class Country
     {
         /// <summary>
+        /// Gets or sets the value of continent name
+        /// </summary>
+        public string ContinentName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of continent code
+        /// </summary>
+        public string ContinentCode { get; set; }
+
+        /// <summary>
         /// TLGX Country Name
         /// </summary>
         public string CountryName { get; set; }
+
         /// <summary>
         /// TLGX Country Code. This field should be unique.
         /// </summary>
         public string CountryCode { get; set; }
-
     }
 
     [BsonIgnoreExtraElements]
@@ -47,7 +56,16 @@ namespace DistributionWebApi.Models
         /// TLGX Country Code. This field should be unique.
         /// </summary>
         public string CountryCode { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the value of continent name
+        /// </summary>
+        public string ContinentName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of continent code
+        /// </summary>
+        public string ContinentCode { get; set; }
     }
 
     [BsonIgnoreExtraElements]
@@ -394,6 +412,10 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string TLGXCountryCode { get; set; }
         /// <summary>
+        /// Zone Code .This field is mandatory
+        /// </summary>
+        public string Zone_Code { get; set; }
+        /// <summary>
         /// List Of TLGX City Codes mapped to Zone
         /// </summary>
         public List<Zone_CityMapping> Zone_CityMapping { get; set; }
@@ -454,6 +476,10 @@ namespace DistributionWebApi.Models
         /// System Country code .
         /// </summary>
         public string TLGXCountryCode { get; set; }
+        /// <summary>
+        /// Zone Code .
+        /// </summary>
+        public string Zone_Code { get; set; }
     }
 
     /// <summary>
@@ -512,7 +538,11 @@ namespace DistributionWebApi.Models
         ///  List of Hotels within Zone matching the Search Request
         /// </summary>
         public List<Zone_ProductMapping> ZoneHotels { get; set; }
-       
+        /// <summary>
+        /// Unique Code Of Zone
+        /// </summary>
+        public string Zone_Code { get; set; }
+
     }
 
     /// <summary>
@@ -591,6 +621,10 @@ namespace DistributionWebApi.Models
         /// Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
         /// </summary>
         public string Zone_SubType { get; set; }
+        /// <summary>
+        /// Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
+        /// </summary>        
+        public string Zone_Code { get; set; }
     }
     /// <summary>
     /// This is the request format for retriving ZoneDetails. 

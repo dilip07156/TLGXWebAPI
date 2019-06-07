@@ -895,6 +895,20 @@
             <param name="CountryName"></param>
             <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByContinentCode(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Code
+            </summary>
+            <param name="ContinentCode">Passing continent code as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetContinentByContinentName(System.String)">
+            <summary>
+            Retrieve all TLGX Master continent with StartsWith Filter on TLGX continent Name. 
+            </summary>
+            <param name="ContinentName">Passing continent name as parameter</param>
+            <returns>List of TLGX Country Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllCities">
             <summary>
             Retrieve all TLGX System Cities
@@ -913,6 +927,20 @@
             Retrieve all TLGX System Cities with StartsWith Filter on TLGX Country Name
             </summary>
             <param name="CountryName"></param>
+            <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetCityByContinentCode(System.String)">
+            <summary>
+            Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Code
+            </summary>
+            <param name="ContinentCode">Passing continent code as parameter</param>
+            <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetCityByContinentName(System.String)">
+            <summary>
+            Retrieve all TLGX System Cities with StartsWith Filter on TLGX continent Name
+            </summary>
+            <param name="ContinentName">Passing continent name as parameter</param>
             <returns>List of TLGX City Masters. Currently restricted to internal Name and Code data.</returns>
         </member>
         <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetAllStates">
@@ -6767,6 +6795,16 @@
             TLGX MDM Unique identifier for hotel property
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.Country.ContinentName">
+            <summary>
+            Gets or sets the value of continent name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Country.ContinentCode">
+            <summary>
+            Gets or sets the value of continent code
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.Country.CountryName">
             <summary>
             TLGX Country Name
@@ -6805,6 +6843,16 @@
         <member name="P:DistributionWebApi.Models.City.CountryCode">
             <summary>
             TLGX Country Code. This field should be unique.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.City.ContinentName">
+            <summary>
+            Gets or sets the value of continent name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.City.ContinentCode">
+            <summary>
+            Gets or sets the value of continent code
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Supplier.SupplierName">
@@ -7130,6 +7178,11 @@
             TLGX Country Code .This field is mandatory
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Code">
+            <summary>
+            Zone Code .This field is mandatory
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_CityMapping">
             <summary>
             List Of TLGX City Codes mapped to Zone
@@ -7200,6 +7253,11 @@
             System Country code .
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ZoneInfo.Zone_Code">
+            <summary>
+            Zone Code .
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.ZoneDetails">
             <summary>
              Response format for ZoneDetails.
@@ -7267,6 +7325,11 @@
         <member name="P:DistributionWebApi.Models.ZoneDetails.ZoneHotels">
             <summary>
              List of Hotels within Zone matching the Search Request
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneDetails.Zone_Code">
+            <summary>
+            Unique Code Of Zone
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Zone_CityMapping">
@@ -7348,6 +7411,11 @@
             <summary>
             Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneSearchRQ.Zone_Code">
+            <summary>
+            Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
+            </summary>        
         </member>
         <member name="T:DistributionWebApi.Models.ZoneDetailRQ">
             <summary>
