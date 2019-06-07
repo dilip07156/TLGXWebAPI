@@ -901,7 +901,7 @@ namespace DistributionWebApi.Controllers
                 var returnResult = new CompanySpecificHotelAndRoomType_RS();
 
                 string message = "";
-                if (!ValidateCompanySpecificHotelAndRoomTypeMappingRQ(RQ,ref message))
+                if (!ValidateCompanySpecificHotelAndRoomTypeMappingRQ(RQ, ref message))
                 {
                     HttpResponseMessage response1 = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message);
                     return response1;
@@ -1039,7 +1039,7 @@ namespace DistributionWebApi.Controllers
                                 //Check if Hotel contain Room Data
                                 if (RoomMappings != null && RoomMappings.Count > 0)
                                 {
-                                    
+
                                     //looping the requested object to create result for Room data
                                     foreach (var mappingRoomRequest in mappingRequest.SupplierRoomTypes)
                                     {
@@ -1051,31 +1051,44 @@ namespace DistributionWebApi.Controllers
                                         //Check the Room data is available in RT collection of object.
                                         rooms = RoomData(mappingRoomRequest, rooms, "SupplierRoomTypeCode");
 
-                                        if (rooms != null && rooms.Any())
+                                        //Group the Supplier Room data to consolidate Mapped Room data.
+                                        var dt = rooms.GroupBy(x =>
+                                        new
+                                        {
+                                            x.Accommodation_CompanyVersion_Id,
+                                            x.SupplierProductId,
+                                            x.SupplierRoomCategory,
+                                            x.SupplierRoomCategoryId,
+                                            x.SupplierRoomId,
+                                            x.SupplierRoomName,
+                                            x.SupplierRoomTypeCode
+                                        }).Select(gc => new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse
+                                        {
+                                            SupplierRoomTypeCode = gc.Key.SupplierRoomTypeCode,
+                                            SupplierRoomId = gc.Key.SupplierRoomId,
+                                            SupplierRoomName = gc.Key.SupplierRoomName,
+                                            SupplierRoomCategoryId = gc.Key.SupplierRoomCategoryId,
+                                            SupplierRoomCategory = gc.Key.SupplierRoomCategory,
+                                            MappedRooms = gc.Select(x => new CompanySpecificHotelAndRoomTypeMapping_MappedRoomType
+                                            {
+                                                TlgxCompanyRoomId = x.CompanyRoomId,
+                                                TLGXCommonRoomId = x.TLGXCommonRoomId,
+                                                CompanyRoomName = x.CompanyRoomName,
+                                                CompanyRoomCategory = x.CompanyRoomCategory,
+                                                NakshatraRoomMappingId = Convert.ToInt64(x.NakshatraRoomMappingId),
+
+                                            }).ToList()
+                                        });
+                                        //Group the Supplier Room data to consolidate Mapped Room data.
+
+                                        //Looping the to generate RS
+                                        if (dt != null && dt.Any())
                                         {
 
-                                            foreach (var room1 in rooms)
+                                            foreach (var room1 in dt)
                                             {
-                                                var RoomMappingResponse = new CompanySpecificHotelAndRoomTypeMapping_RoomTypeResponse();
-                                                List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType> mappnedRM = new List<CompanySpecificHotelAndRoomTypeMapping_MappedRoomType>();
-                                                RoomMappingResponse.SupplierRoomCategory = room1.SupplierRoomCategory;
-                                                RoomMappingResponse.SupplierRoomCategoryId = room1.SupplierRoomCategoryId;
-                                                RoomMappingResponse.SupplierRoomId = room1.SupplierRoomId;
-                                                RoomMappingResponse.SupplierRoomName = room1.SupplierRoomName;
-                                                RoomMappingResponse.SupplierRoomTypeCode = room1.SupplierRoomTypeCode;
-
-                                                mappnedRM.Add(
-
-                                                new CompanySpecificHotelAndRoomTypeMapping_MappedRoomType()
-                                                {
-                                                    TlgxCompanyRoomId = room1.CompanyRoomId,
-                                                    TLGXCommonRoomId = room1.TLGXCommonRoomId,
-                                                    CompanyRoomName = room1.CompanyRoomName,
-                                                    CompanyRoomCategory = room1.CompanyRoomCategory,
-                                                    NakshatraRoomMappingId = Convert.ToInt64(room1.NakshatraRoomMappingId),
-
-                                                });
-                                                RoomMappingResponse.MappedRooms = mappnedRM;
+                                                var RoomMappingResponse = room1;
+                                                RoomMappingResponse.MappedRooms = room1.MappedRooms;
                                                 RoomMappingResponseList.Add(RoomMappingResponse);
                                             }
                                         }
@@ -1137,7 +1150,7 @@ namespace DistributionWebApi.Controllers
                                             #endregion
 
                                         }
-                                        
+
                                     }
                                 }
                                 else
@@ -1160,7 +1173,7 @@ namespace DistributionWebApi.Controllers
                                 foreach (var mappingRoomRequest in mappingRequest.SupplierRoomTypes)
                                 {
                                     GetRoomTypeNotFoundRS(collection_rto, writeModelDetails, mappingRequest, mappingResponse, ref RoomMappingResponseList, mappingRoomRequest);
-                                    
+
                                 }
 
                                 mappingResponseList.Add(mappingResponse);
@@ -1197,7 +1210,7 @@ namespace DistributionWebApi.Controllers
                             {
                                 Task.Run(() => { collection_rto.BulkWrite(writeModelDetails); });
                             }
-                        }                       
+                        }
 
                         #endregion Build Response
 
@@ -1363,11 +1376,11 @@ namespace DistributionWebApi.Controllers
 
 
             }
-          
+
             return rooms;
         }
 
-        private bool ValidateCompanySpecificHotelAndRoomTypeMappingRQ(CompanySpecificHotelAndRoomType_Rq RQ, ref  string message)
+        private bool ValidateCompanySpecificHotelAndRoomTypeMappingRQ(CompanySpecificHotelAndRoomType_Rq RQ, ref string message)
         {
 
             bool isValid = false;
@@ -1380,7 +1393,7 @@ namespace DistributionWebApi.Controllers
             }
 
             if (!string.IsNullOrEmpty(RQ.SessionId) && RQ.MappingRequests != null)
-            {  
+            {
 
                 foreach (var mappingRequest in RQ.MappingRequests)
                 {
