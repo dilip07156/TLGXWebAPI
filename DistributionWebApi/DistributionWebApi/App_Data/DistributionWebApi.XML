@@ -993,6 +993,24 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneListByCharBasis(DistributionWebApi.ZoneModels.ZoneSearchRequest)">
+            <summary>
+            Retrive list of zones based on search parameters like Zone Name Char Basis,Zone Type,Zone Sub Type ,Zone Country Code or Cities Code.
+            </summary>
+            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>        
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneListByGeoPointBasis(DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint)">
+            <summary>
+            Retrive list of zones based on search parameters by Geo Point Basis
+            </summary>
+            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>      
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.LegacyProductDetailsController">
             <summary>
             Used to replicate EZ1 Legacy Product Distribution Web Services. 
@@ -7193,6 +7211,41 @@
             List Of Hotels within 10km range from  lat-Long of zone
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_GeographyMapping">
+            <summary>
+            List Of Hotels within 10km range from  lat-Long of zone
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone_GeographyMapping">
+            <summary>
+            This is the response format for ZoneGeography
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_GeographyMapping.TLGXCountryCode">
+            <summary>
+            NAK Country Code
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_GeographyMapping.TLGXStateCode">
+            <summary>
+            NAK State Code 
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_GeographyMapping.TLGXCityCode">
+            <summary>
+            NAK City Codes covered by this zone 
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_GeographyMapping.TLGXCityAreaCode">
+            <summary>
+            NAK CityArea Code (if zone at that level)
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_GeographyMapping.TLGXCityAreaLocationCode">
+            <summary>
+            NAK CityAreaLocation Code (if zone at that level)
+             </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.ZoneSearchRS">
             <summary>
             This is the Response format for ZoneSearch.
@@ -9441,6 +9494,201 @@
             <summary>
             parent attribute value if exists
             </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneSearchRequest">
+            <summary>
+            This is the request format for retriving Zones X char Basis. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.Zone_name">
+            <summary>
+            Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.PageSize">
+            <summary>
+             How many Search Results do you wish to receive per request? .This is mandatory field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.PageNo">
+            <summary>
+            Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.This is mandatory field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.ZoneTypes">
+            <summary>
+            Search Zone by its Type. This is optional field. To get ZoneTypes use "ZoneTypeMaster" API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.Zone_SubType">
+            <summary>
+            Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.ZoneGeoLocations">
+            <summary>
+            Lat/Lon based search to pull zones, to be used on mouse click on map if required
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.GeoDistance">
+            <summary>
+            Geo Distance based on Latitude/Longitude
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.SystemCountryCode">
+            <summary>
+            Search Zones by System CountryCode. This is optional field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.ZoneCities">
+            <summary>
+            Search Zones by System City Code. This is optional field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.Zone_Code">
+            <summary>
+            Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
+            </summary>        
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneTypes">
+            <summary>
+            This is the request format for Zone Types Master. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneTypes.Zone_Type">
+            <summary>
+            Search By Zone_Type will be from zone type master.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneCities">
+            <summary>
+            This is the request format for Zone City. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneCities.Zone_City">
+            <summary>
+            Search By Zone_Type will be from city master.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneSubTypes">
+            <summary>
+            This is the request format for ZoneSub Types. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSubTypes.ZoneSub_Type">
+            <summary>
+            Search By ZoneSub_Type.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneGeoLocation">
+            <summary>
+            This is the request format for Geo Location in the forms of LAT/LONG. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneGeoLocation.Zone_Latitude">
+            <summary>
+            Search By Zone Latitude should be in decimal format.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneGeoLocation.Zone_Longitude">
+            <summary>
+            Search by Zone Longitude should be in decimal format
+             </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint">
+            <summary>
+            This is the request format for retriving Zones in terms of geo point Basis. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.PageSize">
+            <summary>
+             How many Search Results do you wish to receive per request? .This is mandatory field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.PageNo">
+            <summary>
+            Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.This is mandatory field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.ZoneTypes">
+            <summary>
+            Search Zone by its Type. This is optional field. To get ZoneTypes use "ZoneTypeMaster" API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.Zone_SubType">
+            <summary>
+            Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.ZoneGeoLocations">
+            <summary>
+            Lat/Lon based search to pull zones, to be used on mouse click on map if required
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint.GeoDistance">
+            <summary>
+            Maximum Geo Distance based on Latitude/Longitude by which data will get from system.
+             </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneSearchResponse">
+            <summary>
+            This is the response format for retriving Zones. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneCode">
+            <summary>
+            NAK Zone Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneName">
+            <summary>
+            NAK Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneType">
+            <summary>
+            NAK Zone Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneSubType">
+            <summary>
+            NAK Zone Sub Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneLocationPoint">
+            <summary>
+            List of Central lat / lon for Zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.LocationBounding">
+            <summary>
+            For future use, should we require polygon binding instead of radius approach
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.ZoneVendorSpecificCode">
+            <summary>
+            NAK Supplier Code to denote if this is a vendor specific Location (such as a Hertz Pickup/DropOff)
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchResponse.Zone_GeographyMapping">
+            <summary>
+            NAK Geographical Hierarchy for the Zone.
+             </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneGeoLocationResponse">
+            <summary>
+            This is the response format for Geo Location. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneGeoLocationResponse.Zone_Latitude">
+            <summary>
+            Zone Latitude from Zone master.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneGeoLocationResponse.Zone_Longitude">
+            <summary>
+            Longitude from Zone master
+             </summary>
         </member>
         <member name="T:DistributionWebApi.NLogHelper.NLogger">
             <summary>

@@ -406,7 +406,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
         /// </summary>
-        public decimal? Zone_Radius { get; set; }
+        public string Zone_Radius { get; set; }
         /// <summary>
         /// TLGX Country Code .This field is mandatory
         /// </summary>
@@ -423,8 +423,39 @@ namespace DistributionWebApi.Models
         /// List Of Hotels within 10km range from  lat-Long of zone
         /// </summary>
         public List<Zone_ProductMapping> Zone_ProductMapping { get; set; }
+        /// <summary>
+        /// List Of Hotels within 10km range from  lat-Long of zone
+        /// </summary>
+        public List<Zone_GeographyMapping> Zone_GeographyMapping { get; set; }
 
     }
+    ///<summary>
+    ///This is the response format for ZoneGeography
+    /// </summary>
+    public class Zone_GeographyMapping
+    {
+        ///<summary>
+        ///NAK Country Code
+        /// </summary>
+        public string TLGXCountryCode { get; set; }
+        ///<summary>
+        ///NAK State Code 
+        /// </summary>
+        public string TLGXStateCode { get; set; }
+        ///<summary>
+        ///NAK City Codes covered by this zone 
+        /// </summary>
+        public string TLGXCityCode { get; set; }
+        ///<summary>
+        ///NAK CityArea Code (if zone at that level)
+        /// </summary>
+        public string TLGXCityAreaCode { get; set; }
+        ///<summary>
+        ///NAK CityAreaLocation Code (if zone at that level)
+        /// </summary>
+        public string TLGXCityAreaLocationCode { get; set; }
+    }
+
     /// <summary>
     /// This is the Response format for ZoneSearch.
     /// </summary>
@@ -517,7 +548,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone. As of now Hotels are searchable within 10km of range.
         /// </summary>
-        public decimal? Zone_Radius { get; set; }
+        public string Zone_Radius { get; set; }
         /// <summary>
         /// The Total Number of Hotels in system as per Search 
         /// </summary>
@@ -665,4 +696,8 @@ namespace DistributionWebApi.Models
         public List<string> Zone_SubType { get; set; }
     }
     #endregion
+
+
+
+
 }

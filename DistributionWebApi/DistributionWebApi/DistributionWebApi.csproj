@@ -306,6 +306,7 @@
     <Compile Include="Models\VisaDefinition2.cs" />
     <Compile Include="Models\Visamasters.cs" />
     <Compile Include="Models\WapiException.cs" />
+    <Compile Include="Models\ZoneMasterModels.cs" />
     <Compile Include="Mongo\MongoDBHandler.cs" />
     <Compile Include="NLogHelper\NLogger.cs" />
     <Compile Include="NLogHelper\Nlogger_Target.cs" />
