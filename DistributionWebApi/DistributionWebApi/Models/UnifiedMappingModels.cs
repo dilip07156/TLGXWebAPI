@@ -531,7 +531,15 @@ namespace DistributionWebApi.Models
         /// TLGX MDM Unique identifier for hotel property
         /// If data not found for requested SupplierProductCode then TlgxCompanyProductId field will be return blank/null value
         /// </summary>
-        public string TlgxCompanyProductId { get; set; } //TLGX Acco Id
+        public string TlgxCompanyProductId { get; set; }
+
+
+
+        /// <summary>
+        /// TLGX MDM Unique identifier for hotel property
+        /// If data not found for requested SupplierProductCode then TlgxProduct_Id field will be return blank/null value
+        /// </summary>
+        public string TlgxProduct_Id { get; set; } //TLGX Acco Id
 
         /// <summary>
         /// Hotel property name
