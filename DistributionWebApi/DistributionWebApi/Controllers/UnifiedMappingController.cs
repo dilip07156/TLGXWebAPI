@@ -972,6 +972,7 @@ namespace DistributionWebApi.Controllers
                         projectCompanyAccommodationProductMapping = projectCompanyAccommodationProductMapping.Include("Brand");
                         projectCompanyAccommodationProductMapping = projectCompanyAccommodationProductMapping.Include("Chain");
                         projectCompanyAccommodationProductMapping = projectCompanyAccommodationProductMapping.Include("Interest");
+                        projectCompanyAccommodationProductMapping = projectCompanyAccommodationProductMapping.Include("TLGXProduct_Id");
                         projectCompanyAccommodationProductMapping = projectCompanyAccommodationProductMapping.Include("MappedRooms");
 
 
@@ -1017,6 +1018,7 @@ namespace DistributionWebApi.Controllers
                                 mappingResponse.ProductCategorySubType = HotelMapping.ProductCategorySubType;
                                 mappingResponse.Chain = HotelMapping.Chain;
                                 mappingResponse.Brand = HotelMapping.Brand;
+                                mappingResponse.TlgxProduct_Id = HotelMapping.TLGXProduct_Id;
 
                                 List<string> lstInterest;
                                 if (!string.IsNullOrEmpty(HotelMapping.Interest))

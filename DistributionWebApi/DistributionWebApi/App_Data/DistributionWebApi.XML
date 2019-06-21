@@ -8504,6 +8504,12 @@
             If data not found for requested SupplierProductCode then TlgxCompanyProductId field will be return blank/null value
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.TlgxProduct_Id">
+            <summary>
+            TLGX MDM Unique identifier for hotel property
+            If data not found for requested SupplierProductCode then TlgxProduct_Id field will be return blank/null value
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.CompanySpecificHotelAndRoomType_Response.ProductName">
             <summary>
             Hotel property name
