@@ -776,6 +776,8 @@ namespace DistributionWebApi.Models
 
         public string TLGXCompanyId { get; set; }
 
+        public string TLGXProduct_Id { get; set; }
+
         public string Rating { get; set; }
 
         public string TLGXCompanyName { get; set; }
