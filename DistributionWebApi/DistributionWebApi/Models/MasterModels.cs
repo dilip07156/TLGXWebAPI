@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using DistributionWebApi.ZoneModels;
+using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -424,11 +425,170 @@ namespace DistributionWebApi.Models
         /// </summary>
         public List<Zone_ProductMapping> Zone_ProductMapping { get; set; }
         /// <summary>
-        /// List Of Hotels within 10km range from  lat-Long of zone
+        /// List Of Geography Hiearchy for zone
         /// </summary>
         public List<Zone_GeographyMapping> Zone_GeographyMapping { get; set; }
+        /// <summary>
+        /// List Of Location Mapping Data for Zone with in 10 KM Range
+        /// </summary>
+        public List<Zone_LocationMapping> Zone_LocationMapping { get; set; }
+        /// <summary>
+        /// Object Containg Data for finding Near Location For Given Distance.
+        /// </summary>
+        public Zone_Geometry loc { get; set; }
+        /// <summary>
+        /// House Number Of Zone Name
+        /// </summary>
+        public string Zone_House_Number { get; set; }
+        /// <summary>
+        /// Street One Part Of Address Of Zone Name
+        ///  </summary>
+        public string Zone_Street_One { get; set; }
+        /// <summary>
+        /// Street Two Part Of Address Of Zone Name
+        /// </summary>
+        public string Zone_Street_Two { get; set; }
+        /// <summary>
+        /// Street Three Part Of Address Of Zone Name
+        /// </summary>
+        public string Zone_Street_Three { get; set; }
+        /// <summary>
+        /// City Name Under which That Zone Exist
+        /// </summary>
+        public string Zone_City { get; set; }
+        /// <summary>
+        /// City Area Name Under which That Zone Exist
+        /// </summary>
+        public string Zone_City_Area { get; set; }
+        /// <summary>
+        /// City Area Location Name Under which That Zone Exist
+        /// </summary>
+        public string Zone_City_Area_Location { get; set; }
+        /// <summary>
+        /// Zonal Postal Code Zone Name
+        /// </summary>
+        public string Zone_Postal_Code { get; set; }
+        /// <summary>
+        /// Combined Full Address For Zone Name
+        /// </summary>
+        public string Zone_Full_Adress { get; set; }
 
     }
+    ///<summary>
+    ///This is the format for Mapping Locations
+    /// </summary>
+
+    public class Zone_Geometry
+    {
+        /// <summary>
+        /// Zone Supplier Zone Name
+        /// </summary>
+        
+        public string type { get; set; }
+        /// <summary>
+        /// Zone Supplier Zone Name
+        /// </summary>
+        
+        public List<double> coordinates { get; set; }
+    }
+    ///<summary>
+    ///This is the format for Mapping Locations
+    /// </summary>
+
+    public class Zone_LocationMapping
+    {
+        /// <summary>
+        /// Zone Supplier Zone Name
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Zone Supplier Zone Code
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
+        /// Distance between Zone master to its respective supplier Mapping Location
+        /// </summary>
+        public double Distance { get; set; }
+
+        /// <summary>
+        /// Zone Supplier Zone Type
+        /// </summary>
+        public string ZoneType { get; set; }
+
+        /// <summary>
+        /// Zone supplier Zone Sub Type 
+        /// </summary>
+        public string ZoneSubType { get; set; }
+        /// <summary>
+        /// House Number Part Zone Adress.
+        /// </summary>
+        public string House_Number { get; set; }
+        /// <summary>
+        /// Street One Part Of Zone Adress
+        /// </summary>
+        public string StreetName { get; set; }
+        /// <summary>
+        /// Street two Part Of Zone Adress
+        /// </summary>
+        public string Street2 { get; set; }
+        /// <summary>
+        /// Street three Part Of Zone Adress
+        /// </summary>
+        public string Street3 { get; set; }
+        /// <summary>
+        /// City Name Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string City { get; set; }
+        /// <summary>
+        /// City Area Name Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string CityArea { get; set; }
+        /// <summary>
+        /// City Area Location Name Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string CityAreaLocation { get; set; }
+        /// <summary>
+        /// State Code Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string StateCode { get; set; }
+        /// <summary>
+        /// State Name Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string StateName { get; set; }
+        /// <summary>
+        /// Country Code Under which That Zone Exist Of Zone Adress
+        /// </summary>
+        public string CountryCode { get; set; }
+        /// <summary>
+        /// Zone Postal Code Of Zone Adress
+        /// </summary>
+        public string PostalCode { get; set; }
+        /// <summary>
+        /// Zone Full Adress Part Of Zone Adress
+        /// </summary>
+        public string Full_Adress { get; set; }
+        /// <summary>
+        /// Latitude Of That Zone under which That Zone Exist.
+        /// </summary>
+        public double Latitude { get; set; }
+        /// <summary>
+        /// Longitude Of That Zone under which That Zone Exist.
+        /// </summary>
+        public double Longitude { get; set; }
+       
+        /// <summary>
+        /// Zone supplier Name for Which This Location is mapped
+        /// </summary>
+        public string Supplier_Name { get; set; }
+        /// <summary>
+        /// Zone supplier Code for which this location is mapped.
+        /// </summary>
+        public string Supplier_code { get; set; }
+    }
+
+
+
     ///<summary>
     ///This is the response format for ZoneGeography
     /// </summary>

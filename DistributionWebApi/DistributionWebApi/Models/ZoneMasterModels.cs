@@ -190,5 +190,101 @@ namespace DistributionWebApi.ZoneModels
     }
 
 
+    /// <summary>
+    /// This is the request format for retriving Location Mapping List With Zone codes. 
+    /// </summary>
+
+    public class ZoneMappingSearchRequest
+    {
+        /// <summary>
+        /// NAK Zone Code from Nakshtra Zone Master
+        /// </summary>
+        public List<string> ZoneCodes { get; set; }
+        /// <summary>
+        /// NAK Supplier Codes from Nakshtra Supplier Master
+        /// </summary>
+        public List<string> SupplierCodes { get; set; }
+
+        /// <summary>
+        ///  How many Search Results do you wish to receive per request? .This is mandatory field.
+        /// </summary>
+        [Required]
+        public int PageSize { get; set; }
+        /// <summary>
+        /// Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.This is mandatory field.
+        /// </summary>
+        [Required]
+        public int PageNo { get; set; }
+    }
+
+    /// <summary>
+    /// This is the response format for retriving Location Mapping List With Zone codes. 
+    /// </summary>
+
+    public class ZoneMappingSearchResponse
+    {
+        /// <summary>
+        /// NAK Zone Code from Nakshtra Zone Master
+        /// </summary>
+        public string ZoneCodes { get; set; }
+        /// <summary>
+        /// NAK Supplier Codes from Nakshtra Supplier Master
+        /// </summary>
+        public List<Zone_Supplier> SupplierCodes { get; set; }
+        /////<summary>
+        /////List of Supplier Mapping Locations
+        ///// </summary>
+        //public List<ZoneSupplierLocation> MappingLocations { get; set; }
+    }
+
+    /// <summary>
+    /// This is the response format for retriving Location Mapping List With Zone codes. 
+    /// </summary>
+
+    public class Zone_Supplier
+    {
+        /// <summary>
+        /// NAK Supplier Codes from Nakshtra Supplier Master
+        /// </summary>
+        public string SupplierCode { get; set; }
+        ///<summary>
+        ///List of Supplier Mapping Locations
+        /// </summary>
+        public List<ZoneSupplierLocation> MappingLocations { get; set; }
+
+    }
+
+
+        ///<summary>
+        ///This is the format for Mapping Locations
+        /// </summary>
+
+        public  class ZoneSupplierLocation
+    {
+        /// <summary>
+        /// Zone Supplier Zone Name
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Zone Supplier Zone Code
+        /// </summary>
+        public string Code { get; set; }
+        
+        /// <summary>
+        /// Distance between Zone master to its respective supplier Mapping Location
+        /// </summary>
+        public double Distance { get; set; }
+
+        /// <summary>
+        /// Zone Supplier Zone Type
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Zone supplier Zone Sub Type 
+        /// </summary>
+        public string SubType { get; set; }
+    }
+
 
 }

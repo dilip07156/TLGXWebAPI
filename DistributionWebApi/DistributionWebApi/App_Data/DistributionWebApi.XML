@@ -808,6 +808,67 @@
             <param name="tourID">Supplier product code is second filter mandatory criteria.</param>
             <returns>list of supplier response</returns>
         </member>
+        <member name="T:DistributionWebApi.Controllers.LocationMappingController">
+            <summary>
+            Used to retrieve TLGX Location Mapping Search Data.
+            </summary>
+        </member>
+        <member name="F:DistributionWebApi.Controllers.LocationMappingController._database">
+            <summary>
+            Mongo database handler
+            </summary>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetZones(DistributionWebApi.Models.ZoneSearchRQ)">
+            <summary>
+            Retrive list of zones based on search parameters
+            </summary>
+            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetZoneDetails(DistributionWebApi.Models.ZoneDetailRQ)">
+            <summary>
+            Retrieve Zone Details with filter on System specific ZoneId which is returned from ZoneSearch API.
+            </summary>
+            <param name="RQ"></param>
+            <returns>Details of Zone and Hotels within specified ZoneRange.
+            As of now we have included hotels within 10Km range. However, this may change in future.
+            </returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetZoneTypeMaster">
+            <summary>
+            Retrive all ZoneTypes and SubTypes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetZoneListByCharBasis(DistributionWebApi.ZoneModels.ZoneSearchRequest)">
+            <summary>
+            Retrive list of zones based on search parameters like Zone Name Char Basis,Zone Type,Zone Sub Type ,Zone Country Code or Cities Code.
+            </summary>
+            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>        
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetZoneListByGeoPointBasis(DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint)">
+            <summary>
+            Retrive list of zones based on search parameters by Geo Point Basis
+            </summary>
+            <param name="RQ">A minimum of one correct combination latitude and longitude is  required for successful search.</param>      
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.SearchbyZoneMasterCode(DistributionWebApi.ZoneModels.ZoneMappingSearchRequest)">
+            <summary>
+            Retrive list of zones based on search parameters by Zone Master Codes
+            </summary>
+            <param name="RQ">Zone Maaster Codes from Zone master and supplier Codes from Supplier Master Required.</param>      
+            <returns>
+            returns List of Zones.
+            </returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -968,48 +1029,6 @@
             </summary>
             <param name="CountryCode"></param>
             <returns>List of active OAG Port Masters.</returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZones(DistributionWebApi.Models.ZoneSearchRQ)">
-            <summary>
-            Retrive list of zones based on search parameters
-            </summary>
-            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>
-            <returns>
-            returns List of Zones.
-            </returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneDetails(DistributionWebApi.Models.ZoneDetailRQ)">
-            <summary>
-            Retrieve Zone Details with filter on System specific ZoneId which is returned from ZoneSearch API.
-            </summary>
-            <param name="RQ"></param>
-            <returns>Details of Zone and Hotels within specified ZoneRange.
-            As of now we have included hotels within 10Km range. However, this may change in future.
-            </returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneTypeMaster">
-            <summary>
-            Retrive all ZoneTypes and SubTypes
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneListByCharBasis(DistributionWebApi.ZoneModels.ZoneSearchRequest)">
-            <summary>
-            Retrive list of zones based on search parameters like Zone Name Char Basis,Zone Type,Zone Sub Type ,Zone Country Code or Cities Code.
-            </summary>
-            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>        
-            <returns>
-            returns List of Zones.
-            </returns>
-        </member>
-        <member name="M:DistributionWebApi.Controllers.GeographyMasterController.GetZoneListByGeoPointBasis(DistributionWebApi.ZoneModels.ZoneSearchRequestForGeoPoint)">
-            <summary>
-            Retrive list of zones based on search parameters by Geo Point Basis
-            </summary>
-            <param name="RQ">A minimum of 3 lettered Zone name is required for successful search.</param>      
-            <returns>
-            returns List of Zones.
-            </returns>
         </member>
         <member name="T:DistributionWebApi.Controllers.LegacyProductDetailsController">
             <summary>
@@ -7213,7 +7232,187 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_GeographyMapping">
             <summary>
-            List Of Hotels within 10km range from  lat-Long of zone
+            List Of Geography Hiearchy for zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_LocationMapping">
+            <summary>
+            List Of Location Mapping Data for Zone with in 10 KM Range
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.loc">
+            <summary>
+            Object Containg Data for finding Near Location For Given Distance.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_House_Number">
+            <summary>
+            House Number Of Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Street_One">
+            <summary>
+            Street One Part Of Address Of Zone Name
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Street_Two">
+            <summary>
+            Street Two Part Of Address Of Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Street_Three">
+            <summary>
+            Street Three Part Of Address Of Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_City">
+            <summary>
+            City Name Under which That Zone Exist
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_City_Area">
+            <summary>
+            City Area Name Under which That Zone Exist
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_City_Area_Location">
+            <summary>
+            City Area Location Name Under which That Zone Exist
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Postal_Code">
+            <summary>
+            Zonal Postal Code Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMaster.Zone_Full_Adress">
+            <summary>
+            Combined Full Address For Zone Name
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone_Geometry">
+            <summary>
+            This is the format for Mapping Locations
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_Geometry.type">
+            <summary>
+            Zone Supplier Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_Geometry.coordinates">
+            <summary>
+            Zone Supplier Zone Name
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.Models.Zone_LocationMapping">
+            <summary>
+            This is the format for Mapping Locations
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Name">
+            <summary>
+            Zone Supplier Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Code">
+            <summary>
+            Zone Supplier Zone Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Distance">
+            <summary>
+            Distance between Zone master to its respective supplier Mapping Location
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.ZoneType">
+            <summary>
+            Zone Supplier Zone Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.ZoneSubType">
+            <summary>
+            Zone supplier Zone Sub Type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.House_Number">
+            <summary>
+            House Number Part Zone Adress.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.StreetName">
+            <summary>
+            Street One Part Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Street2">
+            <summary>
+            Street two Part Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Street3">
+            <summary>
+            Street three Part Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.City">
+            <summary>
+            City Name Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.CityArea">
+            <summary>
+            City Area Name Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.CityAreaLocation">
+            <summary>
+            City Area Location Name Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.StateCode">
+            <summary>
+            State Code Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.StateName">
+            <summary>
+            State Name Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.CountryCode">
+            <summary>
+            Country Code Under which That Zone Exist Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.PostalCode">
+            <summary>
+            Zone Postal Code Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Full_Adress">
+            <summary>
+            Zone Full Adress Part Of Zone Adress
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Latitude">
+            <summary>
+            Latitude Of That Zone under which That Zone Exist.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Longitude">
+            <summary>
+            Longitude Of That Zone under which That Zone Exist.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Supplier_Name">
+            <summary>
+            Zone supplier Name for Which This Location is mapped
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Supplier_code">
+            <summary>
+            Zone supplier Code for which this location is mapped.
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Zone_GeographyMapping">
@@ -9525,16 +9724,6 @@
             Zone Sub types are dependant on ZoneTypes. This is optional field. To get ZoneSubTypes use "ZoneTypeMaster" API
             </summary>
         </member>
-        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.ZoneGeoLocations">
-            <summary>
-            Lat/Lon based search to pull zones, to be used on mouse click on map if required
-             </summary>
-        </member>
-        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.GeoDistance">
-            <summary>
-            Geo Distance based on Latitude/Longitude
-             </summary>
-        </member>
         <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.SystemCountryCode">
             <summary>
             Search Zones by System CountryCode. This is optional field.
@@ -9544,11 +9733,6 @@
             <summary>
             Search Zones by System City Code. This is optional field.
             </summary>
-        </member>
-        <member name="P:DistributionWebApi.ZoneModels.ZoneSearchRequest.Zone_Code">
-            <summary>
-            Search by Zone Name.This is mandatory field. Name Should be atleast 3 letters.
-            </summary>        
         </member>
         <member name="T:DistributionWebApi.ZoneModels.ZoneTypes">
             <summary>
@@ -9689,6 +9873,91 @@
             <summary>
             Longitude from Zone master
              </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneMappingSearchRequest">
+            <summary>
+            This is the request format for retriving Location Mapping List With Zone codes. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchRequest.ZoneCodes">
+            <summary>
+            NAK Zone Code from Nakshtra Zone Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchRequest.SupplierCodes">
+            <summary>
+            NAK Supplier Codes from Nakshtra Supplier Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchRequest.PageSize">
+            <summary>
+             How many Search Results do you wish to receive per request? .This is mandatory field.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchRequest.PageNo">
+            <summary>
+            Which Page Number you wish to retrieve from the Search Results set. Page no starts From 0.This is mandatory field.
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneMappingSearchResponse">
+            <summary>
+            This is the response format for retriving Location Mapping List With Zone codes. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchResponse.ZoneCodes">
+            <summary>
+            NAK Zone Code from Nakshtra Zone Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneMappingSearchResponse.SupplierCodes">
+            <summary>
+            NAK Supplier Codes from Nakshtra Supplier Master
+            </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.Zone_Supplier">
+            <summary>
+            This is the response format for retriving Location Mapping List With Zone codes. 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.Zone_Supplier.SupplierCode">
+            <summary>
+            NAK Supplier Codes from Nakshtra Supplier Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.Zone_Supplier.MappingLocations">
+            <summary>
+            List of Supplier Mapping Locations
+             </summary>
+        </member>
+        <member name="T:DistributionWebApi.ZoneModels.ZoneSupplierLocation">
+            <summary>
+            This is the format for Mapping Locations
+             </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Name">
+            <summary>
+            Zone Supplier Zone Name
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Code">
+            <summary>
+            Zone Supplier Zone Code
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Distance">
+            <summary>
+            Distance between Zone master to its respective supplier Mapping Location
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Type">
+            <summary>
+            Zone Supplier Zone Type
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.SubType">
+            <summary>
+            Zone supplier Zone Sub Type 
+            </summary>
         </member>
         <member name="T:DistributionWebApi.NLogHelper.NLogger">
             <summary>
