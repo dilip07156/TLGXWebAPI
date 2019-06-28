@@ -284,6 +284,21 @@ namespace DistributionWebApi.ZoneModels
         /// Zone supplier Zone Sub Type 
         /// </summary>
         public string SubType { get; set; }
+
+        /// <summary>
+        /// Zone supplier Zone Sub Type 
+        /// </summary>
+        public double Latitude { get; set; }
+
+        /// <summary>
+        /// Zone supplier Zone Sub Type 
+        /// </summary>
+        public double Longitude { get; set; }
+
+        /// <summary>
+        /// Zone supplier Zone Sub Type 
+        /// </summary>
+        public string Full_Address { get; set; }
     }
 
 

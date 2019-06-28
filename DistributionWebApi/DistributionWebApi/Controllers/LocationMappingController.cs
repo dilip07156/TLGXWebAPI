@@ -470,6 +470,9 @@ namespace DistributionWebApi.Controllers
                                 ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
                                 ZoneSupplierLocation.Type = Zone_LocationMapping.ZoneType;
                                 ZoneSupplierLocation.SubType = Zone_LocationMapping.ZoneSubType;
+                                ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
+                                ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
+                                ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Adress;
                                 ZoneSupplierLocationList.Add(ZoneSupplierLocation);
                             }
                             zone_Sup.MappingLocations = ZoneSupplierLocationList;
@@ -505,6 +508,189 @@ namespace DistributionWebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieves System City Mapping for Supplier City Code and Supplier Code
+        /// </summary>
+        /// <param name="ZoneCode">Supplier City Code</param>
+        /// <param name="SupplierCode">Supplier Code</param>
+        /// <returns>System City Mapping</returns>
+        [HttpGet]
+        [Route("Zone/SearchbyZoneMasterCode/ZoneCode/{ZoneCode}/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<ZoneMappingSearchResponse>))]
+        public async Task<HttpResponseMessage> GetLocationMappingByCode(string ZoneCode, string SupplierCode)
+        {
+            try
+            {
+                List<ZoneMappingSearchResponse> zoneMappingSearchResponses = new List<ZoneMappingSearchResponse>();
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
+                FilterDefinition<ZoneMaster> filterForZone;
+                filterForZone = Builders<ZoneMaster>.Filter.Empty;
+                if (!string.IsNullOrWhiteSpace(ZoneCode))
+                {
+                    filterForZone = filterForZone & Builders<ZoneMaster>.Filter.Eq(b => b.Zone_Code,ZoneCode);                   
+                }
+
+                var zoneMasters = await collection.Find(filterForZone).ToListAsync();
+                if (!string.IsNullOrWhiteSpace(SupplierCode))
+                {
+                    zoneMasters.ForEach(a => a.Zone_LocationMapping.RemoveAll(d => !(d.Supplier_code==SupplierCode)));
+                }
+
+                foreach (ZoneMaster zm in zoneMasters)
+                {
+                    ZoneMappingSearchResponse zoneMappingSearchResponse = new ZoneMappingSearchResponse();
+                    zoneMappingSearchResponse.ZoneCodes = zm.Zone_Code;
+                    List<string> SupplierCodes = zm.Zone_LocationMapping.Select(x => x.Supplier_code).Distinct().ToList();
+                    List<Zone_Supplier> zone_Suppliers = new List<Zone_Supplier>();
+                    foreach (string SupCode in SupplierCodes)
+                    {
+                        Zone_Supplier zone_Sup = new Zone_Supplier();
+                        zone_Sup.SupplierCode = SupCode;
+                        List<Zone_LocationMapping> zone_LocationMappings = zm.Zone_LocationMapping.Where(x => x.Supplier_code == SupCode).ToList();
+                        List<ZoneSupplierLocation> ZoneSupplierLocationList = new List<ZoneSupplierLocation>();
+                        foreach (Zone_LocationMapping Zone_LocationMapping in zone_LocationMappings)
+                        {
+                            ZoneSupplierLocation ZoneSupplierLocation = new ZoneSupplierLocation();
+                            ZoneSupplierLocation.Name = Zone_LocationMapping.Name;
+                            ZoneSupplierLocation.Code = Zone_LocationMapping.Code;
+                            ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
+                            ZoneSupplierLocation.Type = Zone_LocationMapping.ZoneType;
+                            ZoneSupplierLocation.SubType = Zone_LocationMapping.ZoneSubType;
+                            ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
+                            ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
+                            ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Adress;
+                            ZoneSupplierLocationList.Add(ZoneSupplierLocation);
+                        }
+                        zone_Sup.MappingLocations = ZoneSupplierLocationList;
+                        zone_Suppliers.Add(zone_Sup);
+                    }
+                    zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
+                    zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
+                }
+                int TotalSearchedZone = (int)zoneMappingSearchResponses.Count;
+                if (TotalSearchedZone > 0)
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses);
+                    return response;
+                }
+                else
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
+                    return response;
+                }                
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
+
+
+        /// <summary>
+        /// Retrieves System City Mapping for Supplier City Code and Supplier Code
+        /// </summary>
+        /// <param name="ZoneCode">Supplier City Code</param>
+        /// <param name="SupplierCode">Supplier Code</param>
+        /// <returns>System City Mapping</returns>
+        [HttpGet]
+        [Route("Zone/SearchbyZoneMasterCode/SupplierCode/{SupplierCode}")]
+        [ResponseType(typeof(List<ZoneMappingSearchResponse>))]
+        public async Task<HttpResponseMessage> GetLocationMappingBySupplierCode(string SupplierCode)
+        {
+            try
+            {
+                List<ZoneMappingSearchResponse> zoneMappingSearchResponses = new List<ZoneMappingSearchResponse>();
+                _database = MongoDBHandler.mDatabase();
+                var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
+
+                if (!string.IsNullOrWhiteSpace(SupplierCode))
+                {
+                            var pipeline = new[] { new BsonDocument()
+                        {
+                            {"$unwind","$Zone_LocationMapping" }
+                        },new BsonDocument()
+                        {
+                            {"$match",new BsonDocument()
+                            {
+                                {"Zone_LocationMapping.Supplier_code",SupplierCode }
+                            } }
+                        },new BsonDocument()
+                        {
+                            {"$project",new BsonDocument(){
+                            {"_id",0 },
+                            {"Zone_Code","$Zone_Code" },
+                            {"Supplier_code","$Zone_LocationMapping.Supplier_code" },
+                            {"Name","$Zone_LocationMapping.Name" },
+                            {"Code","$Zone_LocationMapping.Code" },
+                            {"Type","$Zone_LocationMapping.ZoneType" },
+                            {"SubType","$Zone_LocationMapping.ZoneSubType" },
+                            {"Distance","$Zone_LocationMapping.Distance" },
+                            {"Latitude","$Zone_LocationMapping.Latitude" },
+                            {"Longitude","$Zone_LocationMapping.Longitude" },
+                            {"Full_Address","$Zone_LocationMapping.Full_Adress" }
+                            }
+                            }
+                        } };
+
+                            var ZoneMappingLocationResponseList = await collection.Aggregate<ZoneMappingLocationResponse>(pipeline).ToListAsync();
+
+                            List<string> ZoneCodes = ZoneMappingLocationResponseList.Select(x => x.Zone_Code).Distinct().ToList();
+
+                            foreach (string zonecode in ZoneCodes)
+                            {
+                                ZoneMappingSearchResponse zoneMappingSearchResponse = new ZoneMappingSearchResponse();
+                                zoneMappingSearchResponse.ZoneCodes = zonecode;
+                                List<string> SupplierCodes = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode).Select(x => x.Supplier_code).Distinct().ToList();
+                                foreach (string SupCode in SupplierCodes)
+                                {
+                                    Zone_Supplier zone_Sup = new Zone_Supplier();
+                                    zone_Sup.SupplierCode = SupCode;
+                                    List<ZoneMappingLocationResponse> zone_LocationMappings = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode && x.Supplier_code == SupCode).ToList();
+                                    List<ZoneSupplierLocation> ZoneSupplierLocationList = new List<ZoneSupplierLocation>();
+                                    List<Zone_Supplier> zone_Suppliers = new List<Zone_Supplier>();
+                                    foreach (ZoneMappingLocationResponse Zone_LocationMapping in zone_LocationMappings)
+                                    {
+                                        ZoneSupplierLocation ZoneSupplierLocation = new ZoneSupplierLocation();
+                                        ZoneSupplierLocation.Name = Zone_LocationMapping.Name;
+                                        ZoneSupplierLocation.Code = Zone_LocationMapping.Code;
+                                        ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
+                                        ZoneSupplierLocation.Type = Zone_LocationMapping.Type;
+                                        ZoneSupplierLocation.SubType = Zone_LocationMapping.SubType;
+                                        ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
+                                        ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
+                                        ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Address;
+                                        ZoneSupplierLocationList.Add(ZoneSupplierLocation);
+                                    }
+                                    zone_Sup.MappingLocations = ZoneSupplierLocationList;
+                                    zone_Suppliers.Add(zone_Sup);
+                                    zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
+                                }
+                                zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
+                            }
+                }
+                
+                int TotalSearchedZone = (int)zoneMappingSearchResponses.Count;
+                if (TotalSearchedZone > 0)
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses);
+                    return response;
+                }
+                else
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
+                    return response;
+                }
+            }
+            catch (Exception ex)
+            {
+                NLogHelper.Nlogger_LogError.LogError(ex, this.GetType().FullName, Request.GetActionDescriptor().ActionName, Request.RequestUri.PathAndQuery);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Server Error. Contact Admin. Error Date : " + DateTime.Now.ToString());
+                return response;
+            }
+        }
 
     }
 }

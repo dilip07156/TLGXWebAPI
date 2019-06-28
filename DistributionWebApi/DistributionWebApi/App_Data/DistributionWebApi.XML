@@ -869,6 +869,22 @@
             returns List of Zones.
             </returns>
         </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetLocationMappingByCode(System.String,System.String)">
+            <summary>
+            Retrieves System City Mapping for Supplier City Code and Supplier Code
+            </summary>
+            <param name="ZoneCode">Supplier City Code</param>
+            <param name="SupplierCode">Supplier Code</param>
+            <returns>System City Mapping</returns>
+        </member>
+        <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetLocationMappingBySupplierCode(System.String)">
+            <summary>
+            Retrieves System City Mapping for Supplier City Code and Supplier Code
+            </summary>
+            <param name="ZoneCode">Supplier City Code</param>
+            <param name="SupplierCode">Supplier Code</param>
+            <returns>System City Mapping</returns>
+        </member>
         <member name="T:DistributionWebApi.Controllers.CountryMappingController">
             <summary>
             Used to retrieve Supplier Country Mapping Data. 
@@ -7290,6 +7306,61 @@
             Combined Full Address For Zone Name
             </summary>
         </member>
+        <member name="T:DistributionWebApi.Models.ZoneMappingLocationResponse">
+            <summary>
+            structure of Zone Master
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Zone_Code">
+            <summary>
+            unique id of Zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Supplier_code">
+            <summary>
+            Type of the Zone.This field is mandatory.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Name">
+            <summary>
+            Sub Type Of the Zone.This field is optional.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Code">
+            <summary>
+            Name of the zone.This field is mandatory.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Type">
+            <summary>
+            Sub Type Of the Zone.This field is optional.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.SubType">
+            <summary>
+            Sub Type Of the Zone.This field is optional.
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Distance">
+            <summary>
+            Latitude of Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Latitude">
+            <summary>
+            Longitude of Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Longitude">
+            <summary>
+            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Full_Address">
+            <summary>
+            TLGX Country Code .This field is mandatory
+            </summary>
+        </member>
         <member name="T:DistributionWebApi.Models.Zone_Geometry">
             <summary>
             This is the format for Mapping Locations
@@ -9961,6 +10032,21 @@
             </summary>
         </member>
         <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.SubType">
+            <summary>
+            Zone supplier Zone Sub Type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Latitude">
+            <summary>
+            Zone supplier Zone Sub Type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Longitude">
+            <summary>
+            Zone supplier Zone Sub Type 
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Full_Address">
             <summary>
             Zone supplier Zone Sub Type 
             </summary>

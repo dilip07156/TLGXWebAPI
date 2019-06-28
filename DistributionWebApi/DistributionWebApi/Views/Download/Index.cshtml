@@ -183,32 +183,69 @@
                 </button>
             </td>
         </tr>
-        @*<tr>
-                <td class="col-md-7">
-                    <div class="input-group">
-                        <label class="control-label input-group-addon"><strong>Hotels By Country&nbsp</strong></label>
-                        <select id="ddlHotelByCountry" class="form-control"></select>
+        <tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon"><strong>ZoneMapping By SupplierCode</strong></div>
                     </div>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="hotelcsv" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>CSV</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="hoteljson" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>JSON</strong>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button type="button" id="hotelxml" class="btn btn-default">
-                        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-                        <strong>XML</strong>
-                    </button>
-                </td>
-            </tr>*@
+                    <select id="ddlSuppliers" class="form-control"></select>
+                </div>
+
+            </td>
+            <td class="text-center">
+                <button type="button" id="zonecsv" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="zonepipe" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>PIPE</strong>
+                </button>
+            </td>
+
+            <td class="text-center">
+                <button type="button" id="zonejson" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="zonexml" class="btn btn-outline-dark">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>
+
+        @*<tr>
+            <td class="col-md-7">
+                <div class="input-group">
+                    <label class="control-label input-group-addon"><strong>Hotels By Country&nbsp</strong></label>
+                    <select id="ddlHotelByCountry" class="form-control"></select>
+                </div>
+            </td>
+            <td class="text-center">
+                <button type="button" id="hotelcsv" class="btn btn-default">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>CSV</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="hoteljson" class="btn btn-default">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>JSON</strong>
+                </button>
+            </td>
+            <td class="text-center">
+                <button type="button" id="hotelxml" class="btn btn-default">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    <strong>XML</strong>
+                </button>
+            </td>
+        </tr>*@
 
     </table>
 </div>
@@ -218,6 +255,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var url = '@System.Configuration.ConfigurationManager.AppSettings["AllCountries"].ToString()';
+            
             $.ajax({
                 url: url,
                 type: "get",
@@ -230,8 +268,7 @@
                     $('#ddlCityByCountry').append($('<option></option>').val('').html('-- All --'));
                     $('#ddlStatesByCountry').append($('<option></option>').val('').html('-- All --'));
                     $('#ddlPortByCountry').append($('<option></option>').val('').html('-- All --'));
-                    $('#ddlAccommodationByCountry').append($('<option></option>').val('').html('-- All --'));
-
+                    $('#ddlAccommodationByCountry').append($('<option></option>').val('').html('-- All --'));                    
 
                     $.each(result, function (i) {
                         $('#ddlHotelByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
@@ -239,11 +276,35 @@
                         $('#ddlStatesByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
                         $('#ddlPortByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
                         $('#ddlAccommodationByCountry').append($('<option></option>').val(result[i].countryCode).html(result[i].countryName));
+                        
 
                     });
                         //$("#ddlHotelByCountry").prepend("<option></option>").val('');
                         //$("#ddlStatesByCountry").prepend("<option></option>").val('');
                         //$("#ddlPortByCountry").prepend("<option></option>").val('');
+                },
+
+                failure: function () {
+                    alert("Error");
+                }
+            });
+
+            var url_sup = '@System.Configuration.ConfigurationManager.AppSettings["AllSuppliers"].ToString()';
+            
+            $.ajax({
+                url: url_sup,
+                type: "get",
+                Accept: "application/json",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    $('#ddlSuppliers').append($('<option></option>').val('').html('-- All --'));
+                    $.each(result, function (i) {                       
+                        $('#ddlSuppliers').append($('<option></option>').val(result[i].supplierCode).html(result[i].supplierName));
+
+                    });
+                       
                 },
 
                 failure: function () {
@@ -466,6 +527,49 @@
                 var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllAccommodations_XML"].ToString()';
                 if (countryText != undefined && countryText != null && countryText != '' && countryText != '-- All --') {
                     url = url.replace('?format=xml', '') + '/CountryName/' + countryText + '?format=xml';
+                }
+
+                window.location.href = url;
+            });
+
+            $('#zonecsv').click(function () {               
+                var supplierText = $("#ddlSuppliers option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllZone_CSV"].ToString()';
+                if (supplierText != undefined && supplierText != null && supplierText != '' && supplierText != '-- All --') {
+                    url = url.replace('?format=csv', '') + '/SupplierCode/' + supplierText + '?format=csv';
+                }
+
+                window.location.href = url;
+            });
+
+            $('#zonepipe').click(function () {
+              
+                var supplierText = $("#ddlSuppliers option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllZone_PIPE"].ToString()';
+                if (supplierText != undefined && supplierText != null && supplierText != '' && supplierText != '-- All --') {
+                    url = url.replace('?format=pipe', '') + '/SupplierCode/' + supplierText + '?format=pipe';
+                }
+
+                window.location.href = url;
+            });
+
+            $('#zonejson').click(function () {
+                
+                var supplierText = $("#ddlSuppliers option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllZone_JSON"].ToString()';
+                if (supplierText != undefined && supplierText != null && supplierText != '' && supplierText != '-- All --') {
+                    url = url.replace('?format=json', '') + '/SupplierCode/' + supplierText + '?format=json';
+                }
+
+                window.location.href = url;
+            });
+
+            $('#zonexml').click(function () {
+               
+                var supplierText = $("#ddlSuppliers option:selected").text();
+                var url = window.location.origin + '@System.Configuration.ConfigurationManager.AppSettings["Download_AllZone_XML"].ToString()';
+                if (supplierText != undefined && supplierText != null && supplierText != '' && supplierText != '-- All --') {
+                    url = url.replace('?format=xml', '') + '/SupplierCode/' + supplierText + '?format=xml';
                 }
 
                 window.location.href = url;

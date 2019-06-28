@@ -474,6 +474,56 @@ namespace DistributionWebApi.Models
         public string Zone_Full_Adress { get; set; }
 
     }
+
+    /// <summary>
+    /// structure of Zone Master
+    /// </summary>
+    public class ZoneMappingLocationResponse
+    {
+        /// <summary>
+        /// unique id of Zone
+        /// </summary>
+        public string Zone_Code { get; set; }
+        /// <summary>
+        /// Type of the Zone.This field is mandatory.
+        /// </summary>
+        public string Supplier_code { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Name of the zone.This field is mandatory.
+        /// </summary>
+        public string Code { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string Type { get; set; }
+        /// <summary>
+        /// Sub Type Of the Zone.This field is optional.
+        /// </summary>
+        public string SubType { get; set; }
+        /// <summary>
+        /// Latitude of Zone.This field is mandatory
+        /// </summary>
+        public double Distance { get; set; }
+        /// <summary>
+        /// Longitude of Zone.This field is mandatory
+        /// </summary>
+        public double Latitude { get; set; }
+        /// <summary>
+        /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+        /// </summary>
+        public double Longitude { get; set; }
+        /// <summary>
+        /// TLGX Country Code .This field is mandatory
+        /// </summary>
+        public string Full_Address { get; set; }
+
+    }
+
+
     ///<summary>
     ///This is the format for Mapping Locations
     /// </summary>
