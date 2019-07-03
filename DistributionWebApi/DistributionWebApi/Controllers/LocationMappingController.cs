@@ -388,19 +388,9 @@ namespace DistributionWebApi.Controllers
                     Zone_GeographyMapping = x.Zone_GeographyMapping
                 }).Skip((RQ.PageNo - 1) * RQ.PageSize).Limit(RQ.PageSize).ToListAsync();
 
-                //TotalResultReturned
-                int TotalSearchedZone = (int)result.Count;
-                if (TotalSearchedZone > 0)
-                {
-                    zoneResult = result;
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
-                    return response;
-                }
-                else
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
-                    return response;
-                }
+                zoneResult = result;
+
+                return zoneResult.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, zoneResult) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
             }
             catch (Exception ex)
             {
@@ -461,38 +451,25 @@ namespace DistributionWebApi.Controllers
                             Zone_Supplier zone_Sup = new Zone_Supplier();
                             zone_Sup.SupplierCode = SupCode;
                             List<Zone_LocationMapping> zone_LocationMappings= zm.Zone_LocationMapping.Where(x=>x.Supplier_code== SupCode).ToList();
-                            List<ZoneSupplierLocation> ZoneSupplierLocationList = new List<ZoneSupplierLocation>();
-                            foreach (Zone_LocationMapping Zone_LocationMapping in zone_LocationMappings)
+                            List<ZoneSupplierLocation> ZoneSupplierLocationList = zone_LocationMappings.ConvertAll(x => new ZoneSupplierLocation
                             {
-                                ZoneSupplierLocation ZoneSupplierLocation = new ZoneSupplierLocation();
-                                ZoneSupplierLocation.Name = Zone_LocationMapping.Name;
-                                ZoneSupplierLocation.Code = Zone_LocationMapping.Code;
-                                ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
-                                ZoneSupplierLocation.Type = Zone_LocationMapping.ZoneType;
-                                ZoneSupplierLocation.SubType = Zone_LocationMapping.ZoneSubType;
-                                ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
-                                ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
-                                ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Adress;
-                                ZoneSupplierLocationList.Add(ZoneSupplierLocation);
-                            }
+                                Name = x.Name ?? string.Empty,
+                                Code = x.Code ?? string.Empty,
+                                Distance = x.Distance,
+                                Type = x.ZoneType ?? string.Empty,
+                                SubType = x.ZoneSubType ?? string.Empty,
+                                Latitude = x.Latitude,
+                                Longitude = x.Longitude,
+                                FullAddress = x.FullAdress
+                            });
                             zone_Sup.MappingLocations = ZoneSupplierLocationList;
                             zone_Suppliers.Add(zone_Sup);
                         }
                         zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
                         zoneResult.Add(zoneMappingSearchResponse);
-                    }
-                    //TotalResultReturned
-                    int TotalSearchedZone = (int)zoneResult.Count;
-                    if (TotalSearchedZone > 0)
-                    {
-                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneResult);
-                        return response;
-                    }
-                    else
-                    {
-                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
-                        return response;
-                    }
+                    }                  
+
+                    return zoneResult.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, zoneResult) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");                   
                 }
                 else
                 {
@@ -548,37 +525,24 @@ namespace DistributionWebApi.Controllers
                         Zone_Supplier zone_Sup = new Zone_Supplier();
                         zone_Sup.SupplierCode = SupCode;
                         List<Zone_LocationMapping> zone_LocationMappings = zm.Zone_LocationMapping.Where(x => x.Supplier_code == SupCode).ToList();
-                        List<ZoneSupplierLocation> ZoneSupplierLocationList = new List<ZoneSupplierLocation>();
-                        foreach (Zone_LocationMapping Zone_LocationMapping in zone_LocationMappings)
+                        List<ZoneSupplierLocation> ZoneSupplierLocationList = zone_LocationMappings.ConvertAll(x => new ZoneSupplierLocation
                         {
-                            ZoneSupplierLocation ZoneSupplierLocation = new ZoneSupplierLocation();
-                            ZoneSupplierLocation.Name = Zone_LocationMapping.Name;
-                            ZoneSupplierLocation.Code = Zone_LocationMapping.Code;
-                            ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
-                            ZoneSupplierLocation.Type = Zone_LocationMapping.ZoneType;
-                            ZoneSupplierLocation.SubType = Zone_LocationMapping.ZoneSubType;
-                            ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
-                            ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
-                            ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Adress;
-                            ZoneSupplierLocationList.Add(ZoneSupplierLocation);
-                        }
+                            Name = x.Name ?? string.Empty,
+                            Code = x.Code ?? string.Empty,
+                            Distance = x.Distance,
+                            Type = x.ZoneType ?? string.Empty,
+                            SubType = x.ZoneSubType ?? string.Empty,
+                            Latitude = x.Latitude,
+                            Longitude = x.Longitude,
+                            FullAddress = x.FullAdress
+                        });
                         zone_Sup.MappingLocations = ZoneSupplierLocationList;
                         zone_Suppliers.Add(zone_Sup);
                     }
                     zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
                     zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
                 }
-                int TotalSearchedZone = (int)zoneMappingSearchResponses.Count;
-                if (TotalSearchedZone > 0)
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses);
-                    return response;
-                }
-                else
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
-                    return response;
-                }                
+                return zoneMappingSearchResponses.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
             }
             catch (Exception ex)
             {
@@ -591,8 +555,7 @@ namespace DistributionWebApi.Controllers
 
         /// <summary>
         /// Retrieves System City Mapping for Supplier City Code and Supplier Code
-        /// </summary>
-        /// <param name="ZoneCode">Supplier City Code</param>
+        /// </summary>        
         /// <param name="SupplierCode">Supplier Code</param>
         /// <returns>System City Mapping</returns>
         [HttpGet]
@@ -608,81 +571,71 @@ namespace DistributionWebApi.Controllers
 
                 if (!string.IsNullOrWhiteSpace(SupplierCode))
                 {
-                            var pipeline = new[] { new BsonDocument()
+                    var pipeline = new[] { new BsonDocument()
+                {
+                    {"$unwind","$Zone_LocationMapping" }
+                },new BsonDocument()
+                {
+                    {"$match",new BsonDocument()
+                    {
+                        {"Zone_LocationMapping.Supplier_code",SupplierCode }
+                    } }
+                },new BsonDocument()
+                {
+                    {"$project",new BsonDocument(){
+                    {"_id",0 },
+                    {"Zone_Code","$Zone_Code" },
+                    {"Supplier_code","$Zone_LocationMapping.Supplier_code" },
+                    {"Name","$Zone_LocationMapping.Name" },
+                    {"Code","$Zone_LocationMapping.Code" },
+                    {"Type","$Zone_LocationMapping.ZoneType" },
+                    {"SubType","$Zone_LocationMapping.ZoneSubType" },
+                    {"Distance","$Zone_LocationMapping.Distance" },
+                    {"Latitude","$Zone_LocationMapping.Latitude" },
+                    {"Longitude","$Zone_LocationMapping.Longitude" },
+                    {"FullAddress","$Zone_LocationMapping.Full_Adress" }
+                    }
+                    }
+                } };
+
+                    var ZoneMappingLocationResponseList = await collection.Aggregate<ZoneMappingLocationResponse>(pipeline).ToListAsync();
+                    if (ZoneMappingLocationResponseList.Any())
+                    {
+                        List<string> ZoneCodes = ZoneMappingLocationResponseList.Select(x => x.Zone_Code).Distinct().ToList();
+
+                        foreach (string zonecode in ZoneCodes)
                         {
-                            {"$unwind","$Zone_LocationMapping" }
-                        },new BsonDocument()
-                        {
-                            {"$match",new BsonDocument()
+                            ZoneMappingSearchResponse zoneMappingSearchResponse = new ZoneMappingSearchResponse();
+                            zoneMappingSearchResponse.ZoneCodes = zonecode;
+                            List<string> SupplierCodes = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode).Select(x => x.Supplier_code).Distinct().ToList();
+                            foreach (string SupCode in SupplierCodes)
                             {
-                                {"Zone_LocationMapping.Supplier_code",SupplierCode }
-                            } }
-                        },new BsonDocument()
-                        {
-                            {"$project",new BsonDocument(){
-                            {"_id",0 },
-                            {"Zone_Code","$Zone_Code" },
-                            {"Supplier_code","$Zone_LocationMapping.Supplier_code" },
-                            {"Name","$Zone_LocationMapping.Name" },
-                            {"Code","$Zone_LocationMapping.Code" },
-                            {"Type","$Zone_LocationMapping.ZoneType" },
-                            {"SubType","$Zone_LocationMapping.ZoneSubType" },
-                            {"Distance","$Zone_LocationMapping.Distance" },
-                            {"Latitude","$Zone_LocationMapping.Latitude" },
-                            {"Longitude","$Zone_LocationMapping.Longitude" },
-                            {"Full_Address","$Zone_LocationMapping.Full_Adress" }
-                            }
-                            }
-                        } };
-
-                            var ZoneMappingLocationResponseList = await collection.Aggregate<ZoneMappingLocationResponse>(pipeline).ToListAsync();
-
-                            List<string> ZoneCodes = ZoneMappingLocationResponseList.Select(x => x.Zone_Code).Distinct().ToList();
-
-                            foreach (string zonecode in ZoneCodes)
-                            {
-                                ZoneMappingSearchResponse zoneMappingSearchResponse = new ZoneMappingSearchResponse();
-                                zoneMappingSearchResponse.ZoneCodes = zonecode;
-                                List<string> SupplierCodes = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode).Select(x => x.Supplier_code).Distinct().ToList();
-                                foreach (string SupCode in SupplierCodes)
+                                Zone_Supplier zone_Sup = new Zone_Supplier();
+                                zone_Sup.SupplierCode = SupCode;
+                                List<ZoneMappingLocationResponse> zone_LocationMappings = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode && x.Supplier_code == SupCode).ToList();
+                                
+                                List<Zone_Supplier> zone_Suppliers = new List<Zone_Supplier>();
+                                List<ZoneSupplierLocation> ZoneSupplierLocationList = zone_LocationMappings.ConvertAll(x => new ZoneSupplierLocation
                                 {
-                                    Zone_Supplier zone_Sup = new Zone_Supplier();
-                                    zone_Sup.SupplierCode = SupCode;
-                                    List<ZoneMappingLocationResponse> zone_LocationMappings = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode && x.Supplier_code == SupCode).ToList();
-                                    List<ZoneSupplierLocation> ZoneSupplierLocationList = new List<ZoneSupplierLocation>();
-                                    List<Zone_Supplier> zone_Suppliers = new List<Zone_Supplier>();
-                                    foreach (ZoneMappingLocationResponse Zone_LocationMapping in zone_LocationMappings)
-                                    {
-                                        ZoneSupplierLocation ZoneSupplierLocation = new ZoneSupplierLocation();
-                                        ZoneSupplierLocation.Name = Zone_LocationMapping.Name;
-                                        ZoneSupplierLocation.Code = Zone_LocationMapping.Code;
-                                        ZoneSupplierLocation.Distance = Zone_LocationMapping.Distance;
-                                        ZoneSupplierLocation.Type = Zone_LocationMapping.Type;
-                                        ZoneSupplierLocation.SubType = Zone_LocationMapping.SubType;
-                                        ZoneSupplierLocation.Latitude = Zone_LocationMapping.Latitude;
-                                        ZoneSupplierLocation.Longitude = Zone_LocationMapping.Longitude;
-                                        ZoneSupplierLocation.Full_Address = Zone_LocationMapping.Full_Address;
-                                        ZoneSupplierLocationList.Add(ZoneSupplierLocation);
-                                    }
-                                    zone_Sup.MappingLocations = ZoneSupplierLocationList;
-                                    zone_Suppliers.Add(zone_Sup);
-                                    zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
-                                }
-                                zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
+                                    Name = x.Name ?? string.Empty,
+                                    Code = x.Code ?? string.Empty,
+                                    Distance = x.Distance,
+                                    Type = x.Type ?? string.Empty,
+                                    SubType = x.SubType ?? string.Empty,
+                                    Latitude = x.Latitude,
+                                    Longitude = x.Longitude,
+                                    FullAddress = x.FullAddress
+                                });
+                                zone_Sup.MappingLocations = ZoneSupplierLocationList;
+                                zone_Suppliers.Add(zone_Sup);
+                                zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
                             }
+                            zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
+                        }
+                    }
                 }
-                
-                int TotalSearchedZone = (int)zoneMappingSearchResponses.Count;
-                if (TotalSearchedZone > 0)
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses);
-                    return response;
-                }
-                else
-                {
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
-                    return response;
-                }
+
+                return zoneMappingSearchResponses.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
             }
             catch (Exception ex)
             {

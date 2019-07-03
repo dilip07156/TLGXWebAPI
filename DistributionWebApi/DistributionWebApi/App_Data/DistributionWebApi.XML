@@ -880,8 +880,7 @@
         <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetLocationMappingBySupplierCode(System.String)">
             <summary>
             Retrieves System City Mapping for Supplier City Code and Supplier Code
-            </summary>
-            <param name="ZoneCode">Supplier City Code</param>
+            </summary>        
             <param name="SupplierCode">Supplier Code</param>
             <returns>System City Mapping</returns>
         </member>
@@ -7356,7 +7355,7 @@
             Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Full_Address">
+        <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.FullAddress">
             <summary>
             TLGX Country Code .This field is mandatory
             </summary>
@@ -7406,7 +7405,7 @@
             Zone supplier Zone Sub Type 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.House_Number">
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.HouseNumber">
             <summary>
             House Number Part Zone Adress.
             </summary>
@@ -7461,7 +7460,7 @@
             Zone Postal Code Of Zone Adress
             </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Full_Adress">
+        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.FullAdress">
             <summary>
             Zone Full Adress Part Of Zone Adress
             </summary>
@@ -10046,7 +10045,7 @@
             Zone supplier Zone Sub Type 
             </summary>
         </member>
-        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.Full_Address">
+        <member name="P:DistributionWebApi.ZoneModels.ZoneSupplierLocation.FullAddress">
             <summary>
             Zone supplier Zone Sub Type 
             </summary>

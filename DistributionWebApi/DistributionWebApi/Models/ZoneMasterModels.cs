@@ -230,11 +230,7 @@ namespace DistributionWebApi.ZoneModels
         /// <summary>
         /// NAK Supplier Codes from Nakshtra Supplier Master
         /// </summary>
-        public List<Zone_Supplier> SupplierCodes { get; set; }
-        /////<summary>
-        /////List of Supplier Mapping Locations
-        ///// </summary>
-        //public List<ZoneSupplierLocation> MappingLocations { get; set; }
+        public List<Zone_Supplier> SupplierCodes { get; set; }       
     }
 
     /// <summary>
@@ -260,46 +256,46 @@ namespace DistributionWebApi.ZoneModels
         /// </summary>
 
         public  class ZoneSupplierLocation
-    {
-        /// <summary>
-        /// Zone Supplier Zone Name
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        /// Zone Supplier Zone Code
-        /// </summary>
-        public string Code { get; set; }
+        {
+            /// <summary>
+            /// Zone Supplier Zone Name
+            /// </summary>
+            public string Name { get; set; }
+            /// <summary>
+            /// Zone Supplier Zone Code
+            /// </summary>
+            public string Code { get; set; }
         
-        /// <summary>
-        /// Distance between Zone master to its respective supplier Mapping Location
-        /// </summary>
-        public double Distance { get; set; }
+            /// <summary>
+            /// Distance between Zone master to its respective supplier Mapping Location
+            /// </summary>
+            public double Distance { get; set; }
 
-        /// <summary>
-        /// Zone Supplier Zone Type
-        /// </summary>
-        public string Type { get; set; }
+            /// <summary>
+            /// Zone Supplier Zone Type
+            /// </summary>
+            public string Type { get; set; }
 
-        /// <summary>
-        /// Zone supplier Zone Sub Type 
-        /// </summary>
-        public string SubType { get; set; }
+            /// <summary>
+            /// Zone supplier Zone Sub Type 
+            /// </summary>
+            public string SubType { get; set; }
 
-        /// <summary>
-        /// Zone supplier Zone Sub Type 
-        /// </summary>
-        public double Latitude { get; set; }
+            /// <summary>
+            /// Zone supplier Zone Sub Type 
+            /// </summary>
+            public double Latitude { get; set; }
 
-        /// <summary>
-        /// Zone supplier Zone Sub Type 
-        /// </summary>
-        public double Longitude { get; set; }
+            /// <summary>
+            /// Zone supplier Zone Sub Type 
+            /// </summary>
+            public double Longitude { get; set; }
 
-        /// <summary>
-        /// Zone supplier Zone Sub Type 
-        /// </summary>
-        public string Full_Address { get; set; }
-    }
+            /// <summary>
+            /// Zone supplier Zone Sub Type 
+            /// </summary>
+            public string FullAddress { get; set; }
+        }
 
 
 }

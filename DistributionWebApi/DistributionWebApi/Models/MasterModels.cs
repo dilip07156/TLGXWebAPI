@@ -519,7 +519,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// TLGX Country Code .This field is mandatory
         /// </summary>
-        public string Full_Address { get; set; }
+        public string FullAddress { get; set; }
 
     }
 
@@ -573,7 +573,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// House Number Part Zone Adress.
         /// </summary>
-        public string House_Number { get; set; }
+        public string HouseNumber { get; set; }
         /// <summary>
         /// Street One Part Of Zone Adress
         /// </summary>
@@ -617,7 +617,7 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// Zone Full Adress Part Of Zone Adress
         /// </summary>
-        public string Full_Adress { get; set; }
+        public string FullAdress { get; set; }
         /// <summary>
         /// Latitude Of That Zone under which That Zone Exist.
         /// </summary>
