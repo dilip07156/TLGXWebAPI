@@ -593,7 +593,7 @@ namespace DistributionWebApi.Controllers
                     {"Distance","$Zone_LocationMapping.Distance" },
                     {"Latitude","$Zone_LocationMapping.Latitude" },
                     {"Longitude","$Zone_LocationMapping.Longitude" },
-                    {"FullAddress","$Zone_LocationMapping.Full_Adress" }
+                    {"FullAddress","$Zone_LocationMapping.FullAdress" }
                     }
                     }
                 } };
