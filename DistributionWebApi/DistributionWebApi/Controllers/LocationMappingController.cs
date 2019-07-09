@@ -553,6 +553,8 @@ namespace DistributionWebApi.Controllers
         }
 
 
+       
+
         /// <summary>
         /// Retrieves System City Mapping for Supplier City Code and Supplier Code
         /// </summary>        
@@ -560,82 +562,26 @@ namespace DistributionWebApi.Controllers
         /// <returns>System City Mapping</returns>
         [HttpGet]
         [Route("Zone/SearchbyZoneMasterCode/SupplierCode/{SupplierCode}")]
-        [ResponseType(typeof(List<ZoneMappingSearchResponse>))]
+        [ResponseType(typeof(List<SupplierZoneMaster>))]
+        
         public async Task<HttpResponseMessage> GetLocationMappingBySupplierCode(string SupplierCode)
         {
             try
             {
-                List<ZoneMappingSearchResponse> zoneMappingSearchResponses = new List<ZoneMappingSearchResponse>();
+                List<SupplierZoneMaster> zoneMappingSearchResponses = new List<SupplierZoneMaster>();
                 _database = MongoDBHandler.mDatabase();
-                var collection = _database.GetCollection<ZoneMaster>("ZoneMaster");
+                var collection = _database.GetCollection<SupplierZoneMaster>("SupplierZoneMaster");
+                FilterDefinition<SupplierZoneMaster> filterForZone;
+                filterForZone = Builders<SupplierZoneMaster>.Filter.Empty;               
 
                 if (!string.IsNullOrWhiteSpace(SupplierCode))
                 {
-                    var pipeline = new[] { new BsonDocument()
-                {
-                    {"$unwind","$Zone_LocationMapping" }
-                },new BsonDocument()
-                {
-                    {"$match",new BsonDocument()
-                    {
-                        {"Zone_LocationMapping.Supplier_code",SupplierCode }
-                    } }
-                },new BsonDocument()
-                {
-                    {"$project",new BsonDocument(){
-                    {"_id",0 },
-                    {"Zone_Code","$Zone_Code" },
-                    {"Supplier_code","$Zone_LocationMapping.Supplier_code" },
-                    {"Name","$Zone_LocationMapping.Name" },
-                    {"Code","$Zone_LocationMapping.Code" },
-                    {"Type","$Zone_LocationMapping.ZoneType" },
-                    {"SubType","$Zone_LocationMapping.ZoneSubType" },
-                    {"Distance","$Zone_LocationMapping.Distance" },
-                    {"Latitude","$Zone_LocationMapping.Latitude" },
-                    {"Longitude","$Zone_LocationMapping.Longitude" },
-                    {"FullAddress","$Zone_LocationMapping.FullAdress" }
-                    }
-                    }
-                } };
+                    filterForZone = filterForZone & Builders<SupplierZoneMaster>.Filter.Eq(b => b.Supplier_code, SupplierCode);
+                }               
+                               
+                List<SupplierZoneMaster> ZoneMappingLocationResponseList = await collection.Find(filterForZone).ToListAsync();
+                return ZoneMappingLocationResponseList.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, ZoneMappingLocationResponseList) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
 
-                    var ZoneMappingLocationResponseList = await collection.Aggregate<ZoneMappingLocationResponse>(pipeline).ToListAsync();
-                    if (ZoneMappingLocationResponseList.Any())
-                    {
-                        List<string> ZoneCodes = ZoneMappingLocationResponseList.Select(x => x.Zone_Code).Distinct().ToList();
-
-                        foreach (string zonecode in ZoneCodes)
-                        {
-                            ZoneMappingSearchResponse zoneMappingSearchResponse = new ZoneMappingSearchResponse();
-                            zoneMappingSearchResponse.ZoneCodes = zonecode;
-                            List<string> SupplierCodes = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode).Select(x => x.Supplier_code).Distinct().ToList();
-                            foreach (string SupCode in SupplierCodes)
-                            {
-                                Zone_Supplier zone_Sup = new Zone_Supplier();
-                                zone_Sup.SupplierCode = SupCode;
-                                List<ZoneMappingLocationResponse> zone_LocationMappings = ZoneMappingLocationResponseList.Where(x => x.Zone_Code == zonecode && x.Supplier_code == SupCode).ToList();
-                                
-                                List<Zone_Supplier> zone_Suppliers = new List<Zone_Supplier>();
-                                List<ZoneSupplierLocation> ZoneSupplierLocationList = zone_LocationMappings.ConvertAll(x => new ZoneSupplierLocation
-                                {
-                                    Name = x.Name ?? string.Empty,
-                                    Code = x.Code ?? string.Empty,
-                                    Distance = x.Distance,
-                                    Type = x.Type ?? string.Empty,
-                                    SubType = x.SubType ?? string.Empty,
-                                    Latitude = x.Latitude,
-                                    Longitude = x.Longitude,
-                                    FullAddress = x.FullAddress
-                                });
-                                zone_Sup.MappingLocations = ZoneSupplierLocationList;
-                                zone_Suppliers.Add(zone_Sup);
-                                zoneMappingSearchResponse.SupplierCodes = zone_Suppliers;
-                            }
-                            zoneMappingSearchResponses.Add(zoneMappingSearchResponse);
-                        }
-                    }
-                }
-
-                return zoneMappingSearchResponses.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, zoneMappingSearchResponses) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
             }
             catch (Exception ex)
             {

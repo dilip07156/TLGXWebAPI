@@ -476,6 +476,104 @@ namespace DistributionWebApi.Models
     }
 
     /// <summary>
+    /// structure of Zone Location Master
+    /// </summary>
+    public class SupplierZoneMaster
+    {
+        /// <summary>
+        /// unique id of Zone
+        /// </summary>
+        public object _id { get; set; }      
+        /// <summary>
+        /// Name of supplier Zone
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// Code of supplier Zone
+        /// </summary>
+        public string Code { get; set; }
+        /// <summary>
+        /// Zone Type of supplier Zone
+        /// </summary>
+        public string ZoneType { get; set; }
+        /// <summary>
+        /// Zone sub Type of supplier Zone
+        /// </summary>
+        public string ZoneSubType { get; set; }
+        /// <summary>
+        /// House no of Address part  of supplier Zone
+        /// </summary>
+        public string HouseNumber { get; set; }
+        /// <summary>
+        /// StreetName of Address part  of supplier Zone
+        /// </summary>
+        public string StreetName { get; set; }
+        /// <summary>
+        /// Street2 of Address part  of supplier Zone
+        /// </summary>
+        public string Street2 { get; set; }
+        /// <summary>
+        /// Street3 of Address part  of supplier Zone
+        /// </summary>
+        public string Street3 { get; set; }
+        /// <summary>
+        /// CityName of Address part  of supplier Zone
+        /// </summary>
+        public string City { get; set; }
+        /// <summary>
+        /// CityAreaName of Address part  of supplier Zone
+        /// </summary>
+        public string CityArea { get; set; }
+        /// <summary>
+        /// CityAreaLocationName of Address part  of supplier Zone
+        /// </summary>
+        public string CityAreaLocation { get; set; }
+        /// <summary>
+        /// stateCode of Address part  of supplier Zone
+        /// </summary>
+        public string StateCode { get; set; }
+        /// <summary>
+        /// StateName of Address part  of supplier Zone
+        /// </summary>
+        public string StateName { get; set; }
+        /// <summary>
+        /// CountryCode of Address part  of supplier Zone
+        /// </summary>
+        public string CountryCode { get; set; }
+        /// <summary>
+        /// PostalCode of Address part  of supplier Zone
+        /// </summary>
+        public string PostalCode { get; set; }
+        /// <summary>
+        /// FullAdress of Address part  of supplier Zone
+        /// </summary>
+        public string FullAdress { get; set; }
+        /// <summary>
+        /// Latitude of Address part  of supplier Zone
+        /// </summary>
+        public double Latitude { get; set; }
+        /// <summary>
+        /// Longitude of Address part  of supplier Zone
+        /// </summary>
+        public double Longitude { get; set; }
+        /// <summary>
+        /// Distance Between LAT/LONG of SupplierZone and ZoneMaster
+        /// </summary>
+        public double Distance { get; set; }
+        /// <summary>
+        /// SupplierName for Zone Supplier
+        /// </summary>
+        public string Supplier_Name { get; set; }
+        /// <summary>
+        /// SupplierCode for Zone Supplier
+        /// </summary>
+        public string Supplier_code { get; set; }
+
+    }
+
+
+
+    /// <summary>
     /// structure of Zone Master
     /// </summary>
     public class ZoneMappingLocationResponse
@@ -547,6 +645,7 @@ namespace DistributionWebApi.Models
 
     public class Zone_LocationMapping
     {
+        
         /// <summary>
         /// Zone Supplier Zone Name
         /// </summary>
