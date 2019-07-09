@@ -7315,6 +7315,16 @@
             unique id of Zone
             </summary>
         </member>
+        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_Name">
+            <summary>
+            SupplierName for Zone Supplier
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_code">
+            <summary>
+            SupplierCode for Zone Supplier
+            </summary>
+        </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Name">
             <summary>
             Name of supplier Zone
@@ -7333,6 +7343,16 @@
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.ZoneSubType">
             <summary>
             Zone sub Type of supplier Zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Latitude">
+            <summary>
+            Latitude of Address part  of supplier Zone
+            </summary>
+        </member>
+        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Longitude">
+            <summary>
+            Longitude of Address part  of supplier Zone
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.HouseNumber">
@@ -7393,31 +7413,6 @@
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.FullAdress">
             <summary>
             FullAdress of Address part  of supplier Zone
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Latitude">
-            <summary>
-            Latitude of Address part  of supplier Zone
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Longitude">
-            <summary>
-            Longitude of Address part  of supplier Zone
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Distance">
-            <summary>
-            Distance Between LAT/LONG of SupplierZone and ZoneMaster
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_Name">
-            <summary>
-            SupplierName for Zone Supplier
-            </summary>
-        </member>
-        <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_code">
-            <summary>
-            SupplierCode for Zone Supplier
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneMappingLocationResponse">

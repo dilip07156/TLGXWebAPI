@@ -483,7 +483,15 @@ namespace DistributionWebApi.Models
         /// <summary>
         /// unique id of Zone
         /// </summary>
-        public object _id { get; set; }      
+        public object _id { get; set; }
+        /// <summary>
+        /// SupplierName for Zone Supplier
+        /// </summary>
+        public string Supplier_Name { get; set; }
+        /// <summary>
+        /// SupplierCode for Zone Supplier
+        /// </summary>
+        public string Supplier_code { get; set; }
         /// <summary>
         /// Name of supplier Zone
         /// </summary>
@@ -500,6 +508,14 @@ namespace DistributionWebApi.Models
         /// Zone sub Type of supplier Zone
         /// </summary>
         public string ZoneSubType { get; set; }
+        /// <summary>
+        /// Latitude of Address part  of supplier Zone
+        /// </summary>
+        public double Latitude { get; set; }
+        /// <summary>
+        /// Longitude of Address part  of supplier Zone
+        /// </summary>
+        public double Longitude { get; set; }
         /// <summary>
         /// House no of Address part  of supplier Zone
         /// </summary>
@@ -548,27 +564,6 @@ namespace DistributionWebApi.Models
         /// FullAdress of Address part  of supplier Zone
         /// </summary>
         public string FullAdress { get; set; }
-        /// <summary>
-        /// Latitude of Address part  of supplier Zone
-        /// </summary>
-        public double Latitude { get; set; }
-        /// <summary>
-        /// Longitude of Address part  of supplier Zone
-        /// </summary>
-        public double Longitude { get; set; }
-        /// <summary>
-        /// Distance Between LAT/LONG of SupplierZone and ZoneMaster
-        /// </summary>
-        public double Distance { get; set; }
-        /// <summary>
-        /// SupplierName for Zone Supplier
-        /// </summary>
-        public string Supplier_Name { get; set; }
-        /// <summary>
-        /// SupplierCode for Zone Supplier
-        /// </summary>
-        public string Supplier_code { get; set; }
-
     }
 
 
