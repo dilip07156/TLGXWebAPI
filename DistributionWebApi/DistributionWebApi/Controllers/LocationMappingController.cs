@@ -579,8 +579,9 @@ namespace DistributionWebApi.Controllers
                     filterForZone = filterForZone & Builders<SupplierZoneMaster>.Filter.Eq(b => b.Supplier_code, SupplierCode);
                 }               
                                
-                List<SupplierZoneMaster> ZoneMappingLocationResponseList = await collection.Find(filterForZone).ToListAsync();
-                return ZoneMappingLocationResponseList.Count > 0 ? Request.CreateResponse(HttpStatusCode.OK, ZoneMappingLocationResponseList) : Request.CreateResponse(HttpStatusCode.BadRequest, "Data Not Available for request");
+                var result = await collection.Find(filterForZone).ToListAsync();                
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                return response;
 
             }
             catch (Exception ex)

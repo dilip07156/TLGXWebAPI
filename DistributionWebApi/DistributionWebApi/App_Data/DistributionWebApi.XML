@@ -7495,11 +7495,6 @@
             This is the format for Mapping Locations
              </summary>
         </member>
-        <member name="P:DistributionWebApi.Models.Zone_LocationMapping.ZoneCode">
-            <summary>
-            Zone Supplier Zone Code
-            </summary>
-        </member>
         <member name="P:DistributionWebApi.Models.Zone_LocationMapping.Name">
             <summary>
             Zone Supplier Zone Name
