@@ -871,7 +871,7 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetLocationMappingByCode(System.String,System.String)">
             <summary>
-            Retrieves System City Mapping for Supplier City Code and Supplier Code
+            Retrieves List of Zone Supplier Mapping Based on ZoneCode and SupplierCode
             </summary>
             <param name="ZoneCode">Supplier City Code</param>
             <param name="SupplierCode">Supplier Code</param>
@@ -879,7 +879,7 @@
         </member>
         <member name="M:DistributionWebApi.Controllers.LocationMappingController.GetLocationMappingBySupplierCode(System.String)">
             <summary>
-            Retrieves System City Mapping for Supplier City Code and Supplier Code
+            Retrieves ZoneSupplier Master Based On Supplier Code 
             </summary>        
             <param name="SupplierCode">Supplier Code</param>
             <returns>System City Mapping</returns>
@@ -7312,107 +7312,107 @@
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster._id">
             <summary>
-            unique id of Zone
+            unique id of ZoneSupplier
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_Name">
             <summary>
-            SupplierName for Zone Supplier
+            SupplierName for ZoneSupplier Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Supplier_code">
             <summary>
-            SupplierCode for Zone Supplier
+            SupplierCode for ZoneSupplier Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Name">
             <summary>
-            Name of supplier Zone
+            Name of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Code">
             <summary>
-            Code of supplier Zone
+            Code of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.ZoneType">
             <summary>
-            Zone Type of supplier Zone
+            Zone Type of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.ZoneSubType">
             <summary>
-            Zone sub Type of supplier Zone
+            Zone sub Type of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Latitude">
             <summary>
-            Latitude of Address part  of supplier Zone
+            Latitude of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Longitude">
             <summary>
-            Longitude of Address part  of supplier Zone
+            Longitude of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.HouseNumber">
             <summary>
-            House no of Address part  of supplier Zone
+            House no of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.StreetName">
             <summary>
-            StreetName of Address part  of supplier Zone
+            StreetName of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Street2">
             <summary>
-            Street2 of Address part  of supplier Zone
+            Street2 of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.Street3">
             <summary>
-            Street3 of Address part  of supplier Zone
+            Street3 of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.City">
             <summary>
-            CityName of Address part  of supplier Zone
+            CityName of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.CityArea">
             <summary>
-            CityAreaName of Address part  of supplier Zone
+            CityAreaName of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.CityAreaLocation">
             <summary>
-            CityAreaLocationName of Address part  of supplier Zone
+            CityAreaLocationName of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.StateCode">
             <summary>
-            stateCode of Address part  of supplier Zone
+            stateCode of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.StateName">
             <summary>
-            StateName of Address part  of supplier Zone
+            StateName of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.CountryCode">
             <summary>
-            CountryCode of Address part  of supplier Zone
+            CountryCode of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.PostalCode">
             <summary>
-            PostalCode of Address part  of supplier Zone
+            PostalCode of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.SupplierZoneMaster.FullAdress">
             <summary>
-            FullAdress of Address part  of supplier Zone
+            FullAdress of Address part  of supplierZone Master
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.ZoneMappingLocationResponse">
@@ -7452,37 +7452,37 @@
         </member>
         <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Distance">
             <summary>
-            Latitude of Zone.This field is mandatory
+            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Latitude">
             <summary>
-            Longitude of Zone.This field is mandatory
+            Latitude of Zone.This field is mandatory
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.Longitude">
             <summary>
-            Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+            Longitude of Zone.This field is mandatory
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.ZoneMappingLocationResponse.FullAddress">
             <summary>
-            TLGX Country Code .This field is mandatory
+            FullAddress For SupplierZone Master
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Zone_Geometry">
             <summary>
-            This is the format for Mapping Locations
+            This is the format for Zone Geometry
              </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Zone_Geometry.type">
             <summary>
-            Zone Supplier Zone Name
+            type part of Geometry Column
             </summary>
         </member>
         <member name="P:DistributionWebApi.Models.Zone_Geometry.coordinates">
             <summary>
-            Zone Supplier Zone Name
+            Zone Coordinates In form longtitude and latitude in decimals in Array
             </summary>
         </member>
         <member name="T:DistributionWebApi.Models.Zone_LocationMapping">
