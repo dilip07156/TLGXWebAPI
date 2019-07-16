@@ -486,7 +486,7 @@ namespace DistributionWebApi.Controllers
         }
 
         /// <summary>
-        /// Retrieves System City Mapping for Supplier City Code and Supplier Code
+        /// Retrieves List of Zone Supplier Mapping Based on ZoneCode and SupplierCode
         /// </summary>
         /// <param name="ZoneCode">Supplier City Code</param>
         /// <param name="SupplierCode">Supplier Code</param>
@@ -556,7 +556,7 @@ namespace DistributionWebApi.Controllers
        
 
         /// <summary>
-        /// Retrieves System City Mapping for Supplier City Code and Supplier Code
+        /// Retrieves ZoneSupplier Master Based On Supplier Code 
         /// </summary>        
         /// <param name="SupplierCode">Supplier Code</param>
         /// <returns>System City Mapping</returns>

@@ -481,87 +481,87 @@ namespace DistributionWebApi.Models
     public class SupplierZoneMaster
     {
         /// <summary>
-        /// unique id of Zone
+        /// unique id of ZoneSupplier
         /// </summary>
         public object _id { get; set; }
         /// <summary>
-        /// SupplierName for Zone Supplier
+        /// SupplierName for ZoneSupplier Master
         /// </summary>
         public string Supplier_Name { get; set; }
         /// <summary>
-        /// SupplierCode for Zone Supplier
+        /// SupplierCode for ZoneSupplier Master
         /// </summary>
         public string Supplier_code { get; set; }
         /// <summary>
-        /// Name of supplier Zone
+        /// Name of supplierZone Master
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Code of supplier Zone
+        /// Code of supplierZone Master
         /// </summary>
         public string Code { get; set; }
         /// <summary>
-        /// Zone Type of supplier Zone
+        /// Zone Type of supplierZone Master
         /// </summary>
         public string ZoneType { get; set; }
         /// <summary>
-        /// Zone sub Type of supplier Zone
+        /// Zone sub Type of supplierZone Master
         /// </summary>
         public string ZoneSubType { get; set; }
         /// <summary>
-        /// Latitude of Address part  of supplier Zone
+        /// Latitude of Address part  of supplierZone Master
         /// </summary>
         public double Latitude { get; set; }
         /// <summary>
-        /// Longitude of Address part  of supplier Zone
+        /// Longitude of Address part  of supplierZone Master
         /// </summary>
         public double Longitude { get; set; }
         /// <summary>
-        /// House no of Address part  of supplier Zone
+        /// House no of Address part  of supplierZone Master
         /// </summary>
         public string HouseNumber { get; set; }
         /// <summary>
-        /// StreetName of Address part  of supplier Zone
+        /// StreetName of Address part  of supplierZone Master
         /// </summary>
         public string StreetName { get; set; }
         /// <summary>
-        /// Street2 of Address part  of supplier Zone
+        /// Street2 of Address part  of supplierZone Master
         /// </summary>
         public string Street2 { get; set; }
         /// <summary>
-        /// Street3 of Address part  of supplier Zone
+        /// Street3 of Address part  of supplierZone Master
         /// </summary>
         public string Street3 { get; set; }
         /// <summary>
-        /// CityName of Address part  of supplier Zone
+        /// CityName of Address part  of supplierZone Master
         /// </summary>
         public string City { get; set; }
         /// <summary>
-        /// CityAreaName of Address part  of supplier Zone
+        /// CityAreaName of Address part  of supplierZone Master
         /// </summary>
         public string CityArea { get; set; }
         /// <summary>
-        /// CityAreaLocationName of Address part  of supplier Zone
+        /// CityAreaLocationName of Address part  of supplierZone Master
         /// </summary>
         public string CityAreaLocation { get; set; }
         /// <summary>
-        /// stateCode of Address part  of supplier Zone
+        /// stateCode of Address part  of supplierZone Master
         /// </summary>
         public string StateCode { get; set; }
         /// <summary>
-        /// StateName of Address part  of supplier Zone
+        /// StateName of Address part  of supplierZone Master
         /// </summary>
         public string StateName { get; set; }
         /// <summary>
-        /// CountryCode of Address part  of supplier Zone
+        /// CountryCode of Address part  of supplierZone Master
         /// </summary>
         public string CountryCode { get; set; }
         /// <summary>
-        /// PostalCode of Address part  of supplier Zone
+        /// PostalCode of Address part  of supplierZone Master
         /// </summary>
         public string PostalCode { get; set; }
         /// <summary>
-        /// FullAdress of Address part  of supplier Zone
+        /// FullAdress of Address part  of supplierZone Master
         /// </summary>
         public string FullAdress { get; set; }
     }
@@ -598,19 +598,19 @@ namespace DistributionWebApi.Models
         /// </summary>
         public string SubType { get; set; }
         /// <summary>
-        /// Latitude of Zone.This field is mandatory
+        /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
         /// </summary>
         public double Distance { get; set; }
         /// <summary>
-        /// Longitude of Zone.This field is mandatory
+        /// Latitude of Zone.This field is mandatory
         /// </summary>
         public double Latitude { get; set; }
         /// <summary>
-        /// Radius(in km) for zone from LatLong. Upto this range,Hotels are included in Zone.This field is mandatory
+        /// Longitude of Zone.This field is mandatory
         /// </summary>
         public double Longitude { get; set; }
         /// <summary>
-        /// TLGX Country Code .This field is mandatory
+        /// FullAddress For SupplierZone Master
         /// </summary>
         public string FullAddress { get; set; }
 
@@ -618,18 +618,18 @@ namespace DistributionWebApi.Models
 
 
     ///<summary>
-    ///This is the format for Mapping Locations
+    ///This is the format for Zone Geometry
     /// </summary>
 
     public class Zone_Geometry
     {
         /// <summary>
-        /// Zone Supplier Zone Name
+        /// type part of Geometry Column
         /// </summary>
         
         public string type { get; set; }
         /// <summary>
-        /// Zone Supplier Zone Name
+        /// Zone Coordinates In form longtitude and latitude in decimals in Array
         /// </summary>
         
         public List<double> coordinates { get; set; }
@@ -1000,8 +1000,4 @@ namespace DistributionWebApi.Models
         public List<string> Zone_SubType { get; set; }
     }
     #endregion
-
-
-
-
 }
